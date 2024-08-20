@@ -10,7 +10,7 @@
     "format": "prettier --cache --check \"src/**/*.ts*\"",
     "format:fix": "prettier --cache --write \"src/**/*.ts*\"",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.24",
@@ -31,7 +31,6 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^8.49.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.1.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",
@@ -45,7 +44,7 @@
     "lint-staged": "^15.2.9",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.3",
+    "typescript": "^5",
     "vite": "^5.4.1"
   },
   "lint-staged": {
