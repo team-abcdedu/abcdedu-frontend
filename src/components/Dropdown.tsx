@@ -13,7 +13,7 @@ function Dropdown(props: propsType) {
   return (
     <>
       <div
-        className={`container overflow-hidden ${containerClassName}`}
+        className={`overflow-hidden ${containerClassName}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
