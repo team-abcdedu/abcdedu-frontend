@@ -1,9 +1,9 @@
-export interface HeaderMenuNavItem {
+export interface MobileMenuNavItem {
   to: string;
   text: string;
 }
 
-export interface HeaderNavItem extends HeaderMenuNavItem {
+export interface HeaderNavItem extends MobileMenuNavItem {
   type: 'link' | 'dropdown';
   list?: {
     to: string;

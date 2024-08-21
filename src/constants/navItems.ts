@@ -1,4 +1,4 @@
-import { HeaderMenuNavItem, HeaderNavItem } from '@/types/navTypes';
+import { MobileMenuNavItem, HeaderNavItem } from '@/types/navTypes';
 
 export const headerNavItems: HeaderNavItem[] = [
   {
@@ -82,7 +82,7 @@ export const headerNavItems: HeaderNavItem[] = [
   },
 ];
 
-export const headerMenuNavItems: HeaderMenuNavItem[] = [
+export const mobileMenuNavItems: MobileMenuNavItem[] = [
   {
     to: '/',
     text: '홈',
