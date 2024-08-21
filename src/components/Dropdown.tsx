@@ -19,14 +19,14 @@ function Dropdown(props: propsType) {
   return (
     <>
       <div
-        className={`w-100 ${containerClassName}`}
+        className={`w-100 overflow-hidden ${containerClassName}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         {defaultDisplay}
-        <div className={'overflow-hidden'}>
+        <div className={'overflow-hidden absolute'}>
           <li
-            className={`flex flex-col justify-center overflow-hidden ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerClassName}`}
+            className={`flex flex-col justify-center ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerClassName}`}
           >
             {isHovering && children}
           </li>
