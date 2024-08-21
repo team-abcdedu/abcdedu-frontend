@@ -16,6 +16,15 @@ export default {
       minWidth: px0_300,
       minHeight: px0_300,
       spacing: px0_300,
+      keyframes: {
+        'drop-down': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        dropdown: 'drop-down 0.5s ease-out',
+      },
     },
   },
   plugins: [],
