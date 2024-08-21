@@ -1,9 +1,9 @@
+import { List } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-import HeaderMenu from '@/components/header/HeaderMenu';
-import HeaderNav from '@/components/header/HeaderNav';
+import HeaderMenu from '@/components/Header/HeaderMenu';
+import HeaderNav from '@/components/Header/HeaderNav';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +45,7 @@ function Header() {
         <div className={'md:hidden flex flex-col flex-end '}>
           <div>
             <div className={`grid place-items-center`}>
-              <FaBars size={24} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+              <List size={24} onClick={() => setIsMenuOpen(!isMenuOpen)} />
             </div>
             {isMenuOpen && <HeaderMenu />}
           </div>
