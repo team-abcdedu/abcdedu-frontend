@@ -1,13 +1,13 @@
 import { ReactNode, useState } from 'react';
 
-interface propsType {
+interface PropsType {
   defaultDisplay: ReactNode;
   children: ReactNode;
   defaultDisplayClassName?: string;
   contentsContainerClassName?: string;
 }
 
-function Dropdown(props: propsType) {
+function Dropdown(props: PropsType) {
   const {
     defaultDisplay,
     children,
