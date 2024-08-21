@@ -25,12 +25,12 @@ function HeaderNav() {
           return (
             <Dropdown
               key={item.to}
-              defaultDisplay={
+              defaultLabel={
                 <Link to={item.to} className={'px-12'}>
                   {item.text}
                 </Link>
               }
-              defaultDisplayClassName={'min-h-40 max-h-46 hover:bg-slate-200'}
+              defaultLabelStyle={'min-h-40 max-h-46 hover:bg-slate-200'}
             >
               {item.list?.map(listItem => {
                 return (
