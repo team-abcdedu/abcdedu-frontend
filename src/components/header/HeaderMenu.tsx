@@ -1,34 +1,15 @@
 import { Link } from 'react-router-dom';
 
+import { headerMenuNavItems } from '@/constants/navItems';
+import { HeaderMenuNavItem } from '@/types/navTypes';
+
 function HeaderMenu() {
   const menuButtonStyle = 'min-w-218 min-h-40 w-auto text-15 px-12 rounded';
-  const navItems = [
-    {
-      to: '/',
-      text: '홈',
-    },
-    {
-      to: '/about_us',
-      text: '회사소개',
-    },
-    {
-      to: '/classes',
-      text: '클래스',
-    },
-    {
-      to: '/community',
-      text: '커뮤니티',
-    },
-    {
-      to: '/contact',
-      text: '문의',
-    },
-  ];
 
   return (
     <div className={'absolute bg-white right-16 rounded-md'}>
       <li className={`flex flex-col gap-8 px-16 py-8 my-12 bg-white`}>
-        {navItems.map(item => {
+        {headerMenuNavItems.map((item: HeaderMenuNavItem) => {
           return (
             <Link
               key={item.to}
