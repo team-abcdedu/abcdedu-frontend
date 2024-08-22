@@ -1,38 +1,38 @@
 import { ReactNode, useState } from 'react';
 
-interface propsType {
-  defaultDisplay: ReactNode;
+interface PropsType {
+  defaultLabel: ReactNode;
   children: ReactNode;
-  containerClassName?: string;
-  contentsContainerClassName?: string;
+  defaultLabelStyle?: string;
+  contentsContainerStyle?: string;
 }
 
-function Dropdown(props: propsType) {
-  const {
-    defaultDisplay,
-    children,
-    containerClassName,
-    contentsContainerClassName,
-  } = props;
+function Dropdown(props: PropsType) {
+  const { defaultLabel, children, defaultLabelStyle, contentsContainerStyle } =
+    props;
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <>
+    <div className={'grid place-items-center'}>
       <div
-        className={`w-100 ${containerClassName}`}
+        className={`overflow-hidden`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        {defaultDisplay}
-        <div className={'overflow-hidden'}>
-          <li
-            className={`flex flex-col justify-center overflow-hidden ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerClassName}`}
-          >
-            {isHovering && children}
-          </li>
+        <div className={`grid place-items-center ${defaultLabelStyle}`}>
+          {defaultLabel}
         </div>
+        {isHovering && (
+          <div className={'overflow-hidden absolute'}>
+            <li
+              className={`flex flex-col gap-3 bg-white ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerStyle}`}
+            >
+              {children}
+            </li>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
