@@ -34,6 +34,17 @@ export default {
       animation: {
         dropdown: 'drop-down 0.5s ease-out',
       },
+      zIndex: {
+        backdrop: 100,
+        modal: 101,
+      },
+      screens: {
+        xs: { min: '480px' },
+        'max-xs': { max: '480px' },
+        'min-400': { min: '400px' },
+        'max-400': { max: '400px' },
+        'max-md': { max: '768px' },
+      },
     },
   },
   plugins: [],
