@@ -14,7 +14,7 @@ function HeaderNav() {
               key={item.to}
               to={item.to}
               className={
-                'px-12 grid place-items-center min-h-40 max-h-46 hover:bg-slate-200'
+                'px-12 grid place-items-center min-h-40 max-h-46 hover:bg-primary-50'
               }
             >
               {item.text}
@@ -30,7 +30,7 @@ function HeaderNav() {
                   {item.text}
                 </Link>
               }
-              defaultLabelStyle={'min-h-40 max-h-46 hover:bg-slate-200'}
+              defaultLabelStyle={'min-h-40 max-h-46 hover:bg-primary-50'}
             >
               {item.list?.map(listItem => {
                 return (

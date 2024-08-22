@@ -12,7 +12,7 @@ function HeaderButtons(props: HeaderButtonsProps) {
   return (
     <>
       <button
-        className={`${headerBtnStyle} border-1 border-blue-800 text-blue-800 hover:bg-slate-200`}
+        className={`${headerBtnStyle} border-1 border-blue-800 text-blue-800 hover:bg-primary-50`}
       >
         로그인
       </button>

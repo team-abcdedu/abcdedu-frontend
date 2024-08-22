@@ -7,7 +7,7 @@ function Header() {
   return (
     <header
       className={
-        'w-screen h-72 flex justify-between items-center text-15 border-b-1 border-b-blue-800 px-16 md:px-24'
+        'w-full h-72 flex justify-between items-center text-15 border-b-1 border-b-primary-300 px-16 md:px-24'
       }
     >
       <div className={'grid place-items-center'}>
