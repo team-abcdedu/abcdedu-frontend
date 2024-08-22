@@ -5,18 +5,18 @@ export default function useScrollLock(isLock: boolean) {
     if (!isLock) return;
 
     document.body.style.cssText = `
-      position: fixed;
+      position: fixed; 
       top: -${window.scrollY}px;
       overflow-y: ${
         window.innerWidth - document.body.clientWidth > 0 ? 'scroll' : 'hidden'
       };
       width: 100%;
-  `;
+    `;
 
     return () => {
       const scrollY = document.body.style.top;
       document.body.style.cssText = '';
-      window.scrollTo(0, Number(scrollY || '0') * -1);
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
   }, [isLock]);
 }
