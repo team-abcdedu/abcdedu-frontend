@@ -1,7 +1,7 @@
-import { FaInstagram, FaYoutube } from 'react-icons/fa';
-import { RiKakaoTalkFill } from 'react-icons/ri';
+import { InstagramLogo, YoutubeLogo } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
+import kakaoTalk from '../../assets/kakaotalk.svg';
 import naverBand from '../../assets/naver band.png';
 import naverBlog from '../../assets/naver blog.png';
 
@@ -12,11 +12,11 @@ function FooterSns() {
         to='https://www.instagram.com/abcd_education/'
         className='text-black'
       >
-        <FaInstagram className='h-20 w-20' />
+        <InstagramLogo size={20} />
       </Link>
 
       <Link to='https://www.youtube.com/@abcd_edu' className='text-black'>
-        <FaYoutube className='h-20 w-20' />
+        <YoutubeLogo size={20} weight='fill' />
       </Link>
 
       <Link to='https://band.us/@abcdedu' className='text-black'>
@@ -35,8 +35,12 @@ function FooterSns() {
         />
       </Link>
 
-      <Link to='https://blog.naver.com/abcdedu' className='text-black'>
-        <RiKakaoTalkFill className='h-20 w-20' />
+      <Link to='https://pf.kakao.com/_rtaxoG' className='text-black'>
+        <img
+          src={kakaoTalk}
+          alt='Naver Band'
+          className='h-20 w-20 object-contain'
+        />
       </Link>
     </div>
   );
