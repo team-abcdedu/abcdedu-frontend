@@ -4,12 +4,21 @@ const px0_10 = { ...Array.from(Array(11)).map((_, i) => `${i}px`) };
 const px0_100 = { ...Array.from(Array(101)).map((_, i) => `${i}px`) };
 const px0_300 = { ...Array.from(Array(301)).map((_, i) => `${i}px`) };
 
-/** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      // TODO: color, font ...
+      colors: {
+        'primary-300': '#1f3c9c', // color-primary-default
+        'primary-200': '#465ba0',
+        'primary-100': '#6674a1',
+        'neutral-600': '#02081b', // text-default
+        'neutral-500': '#7a7c82',
+        'neutral-400': '#808080',
+        'neutral-300': '#aaaaaa',
+        'neutral-200': '#e0e0e0',
+        'neutral-100': '#f5f5f5',
+      },
       borderWidth: px0_10,
       fontSize: px0_100,
       lineHeight: px0_100,
