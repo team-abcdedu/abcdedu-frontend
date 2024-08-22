@@ -25,7 +25,7 @@ function Dropdown(props: PropsType) {
         {isHovering && (
           <div className={'overflow-hidden absolute'}>
             <li
-              className={`flex flex-col gap-3 bg-white ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerStyle}`}
+              className={`flex flex-col gap-7 bg-white py-7 ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerStyle}`}
             >
               {children}
             </li>

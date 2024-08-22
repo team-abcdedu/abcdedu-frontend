@@ -12,6 +12,7 @@ export default {
         'primary-300': '#1f3c9c', // color-primary-default
         'primary-200': '#465ba0',
         'primary-100': '#6674a1',
+        'primary-50': '#e9ebf5',
         'neutral-600': '#02081b', // text-default
         'neutral-500': '#7a7c82',
         'neutral-400': '#808080',
