@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'; // React Router를 사용한다면 import 필요
+import { Link } from 'react-router-dom';
 
 import { HeaderNavItem } from '@/types/navTypes';
 
@@ -34,7 +34,7 @@ function FooterNav() {
   return (
     <div className='footer-nav'>
       {footerNavItems.map(item => (
-        <Link key={item.to} href={item.to} className='px-7'>
+        <Link key={item.to} to={item.to} className='px-7'>
           {item.text}
         </Link>
       ))}
