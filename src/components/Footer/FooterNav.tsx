@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'; // React Router를 사용한다면 import 필요
+
 import { HeaderNavItem } from '@/types/navTypes';
 
 export const footerNavItems: HeaderNavItem[] = [
@@ -31,10 +33,10 @@ export const footerNavItems: HeaderNavItem[] = [
 function FooterNav() {
   return (
     <div className='footer-nav'>
-      {footerNavItems.map((item, index) => (
-        <a key={index} href={item.to} className='px-7'>
+      {footerNavItems.map(item => (
+        <Link key={item.to} href={item.to} className='px-7'>
           {item.text}
-        </a>
+        </Link>
       ))}
     </div>
   );
