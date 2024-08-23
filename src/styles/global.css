@@ -34,7 +34,7 @@ body {
   }
   /* border color primary, bg-white, hover 시 배경이 primary/8 */
   .btn-white-pb {
-    @apply border-solid border-1 border-white bg-white hover:bg-transparent hover:text-white;transition: background-color 0.2s, color 0.2s;
+    @apply border-solid border-1 border-primary-300 bg-white hover:bg-primary-300/8;transition: background-color 0.2s;
   }
 }
 
