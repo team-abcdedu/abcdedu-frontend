@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
 }
@@ -16,6 +16,9 @@ html, body {
 @layer utilities {
   .position-center {
     @apply left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .input-primary {
+    @apply px-6 text-14 h-48 rounded-md border-1 border-[#bdbdbd] focus:border-primary-300 transition duration-200
   }
 }
 
@@ -38,4 +41,8 @@ html, body {
     background: #d0d0d0;
     border-radius: 10px;
   }
+}
+
+input {
+  outline: none;
 }
