@@ -57,8 +57,7 @@ export default function Information() {
       </div>
       <Link
         to='/classes'
-        className='flex-row-center mt-30 w-144 h-48 px-8 py-16 rounded-[20px] border-solid
-         border-1 border-primary-300 transistion duration-200 hover:bg-primary-300/8'
+        className='flex-row-center mt-30 w-144 h-48 px-8 py-16 rounded-[20px] btn-white-pb'
       >
         <span className='text-primary-300 font-semibold'>강의 바로가기</span>
       </Link>
