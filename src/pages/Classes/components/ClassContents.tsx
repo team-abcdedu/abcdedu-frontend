@@ -32,7 +32,7 @@ function ClassContents({ classInfo }: { classInfo: ClassInfo }) {
                 {lesson.title}
               </h5>
               <Link
-                to={'/classes'}
+                to={lesson.to}
                 className={'pt-10 flex items-center self-end'}
               >
                 <span className={'text-15 underline'}>바로가기</span>

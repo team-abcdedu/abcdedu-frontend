@@ -4,6 +4,7 @@ export interface ClassInfo {
   lessons: {
     code: string;
     title: string;
+    to: string;
   }[];
 }
 
