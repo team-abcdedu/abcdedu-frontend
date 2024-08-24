@@ -1,4 +1,4 @@
-import Envelop from '@/assets/envelope.svg?react';
+import Envelop from '@/assets/images/envelope.svg?react';
 
 export default function Inquiry() {
   return (
