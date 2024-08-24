@@ -9,24 +9,24 @@ function Hero() {
     <section>
       <div
         className={
-          'min-w-0 min-h-[600px] h-max flex flex-col justify-center px-24'
+          'min-w-0 min-h-[600px] h-max px-24 flex flex-col justify-center'
         }
       >
         <div
           className={
-            'flex flex-col w-auto self-center justify-start gap-y-12 max-w-[800px]'
+            'max-w-[800px] w-auto flex flex-col self-center justify-start gap-y-12'
           }
         >
-          <p className={'text-18 text-neutral-400 text-center'}>
+          <p className={'text-18 text-center text-neutral-400'}>
             AI & Data 사회에서 진로를 준비하기 위한 ABCDEdu만의 특별한 수업!
           </p>
-          <h1 className={'text-80 font-bold text-primary-300 text-center'}>
+          <h1 className={'text-80 font-bold text-center text-primary-300 '}>
             ABCD CLASSES
           </h1>
         </div>
         <button
           className={
-            'w-auto min-w-[100px] min-h-[50px] self-center text-18 text-primary-300 font-medium text-center border-2 rounded-[10px] border-primary-300 py-8 px-16 mt-40 hover:bg-primary-50'
+            'w-auto min-w-[100px] min-h-[50px] mt-40 px-16 py-8 self-center text-18 font-medium text-center text-primary-300 btn-white-pb !border-2 rounded-[10px]'
           }
           onClick={() => setShowCurriculum(!showCurriculum)}
         >
@@ -34,7 +34,7 @@ function Hero() {
         </button>
       </div>
       {showCurriculum && (
-        <div className={'h-min grid place-items-center py-100 px-50'}>
+        <div className={'h-min py-100 px-50 grid place-items-center'}>
           <div className={'max-w-[800px]'}>
             <img src={curriculumImgUrl} className={''} alt={'Curriculum'} />
           </div>

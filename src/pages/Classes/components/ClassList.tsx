@@ -21,7 +21,7 @@ function ClassList() {
         return (
           <section
             key={title}
-            className={`flex flex-col lg:flex-row items-center gap-70 min-h-[60px] p-50 sm:py-100 sm:px-70 ${bgColors[index]}`}
+            className={`min-h-[60px] p-50 sm:py-100 sm:px-70 flex flex-col lg:flex-row items-center gap-70 ${bgColors[index]}`}
           >
             <div
               className={
@@ -29,7 +29,7 @@ function ClassList() {
               }
             >
               <span
-                className={`text-80 text-center font-bold ${textColors[index]}`}
+                className={`text-80 font-bold text-center ${textColors[index]}`}
               >
                 {title}
               </span>

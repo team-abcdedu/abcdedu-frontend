@@ -4,7 +4,7 @@ function MediaContents() {
   return (
     <section
       className={
-        'flex flex-col lg:flex-row justify-between gap-10 p-50 bg-neutral-200'
+        'p-50 flex flex-col lg:flex-row justify-between gap-10 bg-neutral-200'
       }
     >
       <h3
@@ -22,7 +22,7 @@ function MediaContents() {
             <button
               key={media}
               className={
-                'w-full lg:w-150 h-60 text-15 text-primary-300 font-medium border-2 border-primary-300 bg-white rounded-[10px] py-8 px-16 hover:bg-neutral-200'
+                'w-full lg:w-150 h-60 px-16 py-8 text-15 font-medium text-primary-300 btn-white-pb !border-2 rounded-[10px]'
               }
             >
               {media}
