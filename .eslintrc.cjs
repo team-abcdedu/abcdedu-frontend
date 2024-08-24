@@ -25,10 +25,6 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'import/no-named-as-default': 'off',
@@ -64,6 +60,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'consistent-return': 'off',
+    'react-refresh/only-export-components': 'off',
     camelcase: 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
