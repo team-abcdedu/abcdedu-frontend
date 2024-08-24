@@ -1,80 +1,22 @@
 /* Pretendard */
 
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 900;
-    font-display: swap;
-    src: local('Pretendard Black'), url(../assets/fonts/pretendard/woff2/Pretendard-Black.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-Black.woff) format('woff');
-}
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 800;
-    font-display: swap;
-    src: local('Pretendard ExtraBold'), url(../assets/fonts/pretendard/woff2/Pretendard-ExtraBold.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-ExtraBold.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 700;
-    font-display: swap;
-    src: local('Pretendard Bold'), url(../assets/fonts/pretendard/woff2/Pretendard-Bold.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-Bold.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 600;
-    font-display: swap;
-    src: local('Pretendard SemiBold'), url(../assets/fonts/pretendard/woff2/Pretendard-SemiBold.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-SemiBold.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 500;
-    font-display: swap;
-    src: local('Pretendard Medium'), url(../assets/fonts/pretendard/woff2/Pretendard-Medium.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-Medium.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-display: swap;
-    src: local('Pretendard Regular'), url(../assets/fonts/pretendard/woff2/Pretendard-Regular.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-Regular.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 300;
-    font-display: swap;
-    src: local('Pretendard Light'), url(../assets/fonts/pretendard/woff2/Pretendard-Light.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-Light.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 200;
-    font-display: swap;
-    src: local('Pretendard ExtraLight'), url(../assets/fonts/pretendard/woff2/Pretendard-ExtraLight.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-ExtraLight.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Pretendard';
-    font-weight: 100;
-    font-display: swap;
-    src: local('Pretendard Thin'), url(../assets/fonts/pretendard/woff2/Pretendard-Thin.woff2) format('woff2'), url(../assets/fonts/pretendard/woff/Pretendard-Thin.woff) format('woff');
-}
 
 /* 학교안심 가을소풍 */
 
 @font-face {
-    font-family: 'Hakgyoansim';
-    font-weight: 700;
+    font-family: 'HakgyoansimGaeulsopungL';
+    src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Keris/HakgyoansimGaeulsopungL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
     font-display: swap;
-    src: url(../assets/fonts/hakgyoansim/HakgyoansimGaeulsopungB.ttf) format('ttf'), url(../assets/fonts/hakgyoansim/HakgyoansimGaeulsopungB.otf) format('otf');
 }
 
 @font-face {
-    font-family: 'Hakgyoansim';
-    font-weight: 300;
+    font-family: 'HakgyoansimGaeulsopungB';
+    src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Keris/HakgyoansimGaeulsopungB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
     font-display: swap;
-    src: url(../assets/fonts/hakgyoansim/HakgyoansimGaeulsopungL.ttf) format('ttf'), url(../assets/fonts/hakgyoansim/HakgyoansimGaeulsopungL.otf) format('otf');
 }
