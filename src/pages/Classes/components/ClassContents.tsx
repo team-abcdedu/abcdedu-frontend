@@ -15,32 +15,25 @@ function ClassContents({ classInfo }: { classInfo: ClassInfo }) {
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 grid-flow-row lg:flex gap-20`}
       >
-        {classInfo.lessons.map(lesson => {
-          return (
-            <div
-              key={lesson.code}
-              className={
-                'min-w-[50px] min-h-[60px] p-15 flex-col-center sm:items-start grow basis-0 bg-white rounded-[20px] leading-[1.4]'
-              }
-            >
-              <h5 className={'text-20 font-semibold text-primary-300'}>
-                {lesson.code}
-              </h5>
-              <h5
-                className={'h-full text-20 font-semibold whitespace-pre-wrap'}
-              >
-                {lesson.title}
-              </h5>
-              <Link
-                to={lesson.to}
-                className={'pt-10 flex items-center self-end'}
-              >
-                <span className={'text-15 underline'}>바로가기</span>
-                <ArrowRight size={15} weight='bold' />
-              </Link>
-            </div>
-          );
-        })}
+        {classInfo.lessons.map(lesson => (
+          <div
+            key={lesson.code}
+            className={
+              'min-w-[50px] min-h-[60px] p-15 flex-col-center sm:items-start grow basis-0 bg-white rounded-[20px] leading-[1.4]'
+            }
+          >
+            <h5 className={'text-20 font-semibold text-primary-300'}>
+              {lesson.code}
+            </h5>
+            <h5 className={'h-full text-20 font-semibold whitespace-pre-wrap'}>
+              {lesson.title}
+            </h5>
+            <Link to={lesson.to} className={'pt-10 flex items-center self-end'}>
+              <span className={'text-15 underline'}>바로가기</span>
+              <ArrowRight size={15} weight='bold' />
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
