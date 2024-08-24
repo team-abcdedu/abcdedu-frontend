@@ -16,7 +16,7 @@ function Boards() {
         </h5>
         <div className='h-5 bg-primary-300 flex-grow ml-30'></div>
       </div>
-      <p className='text-xl font-bold'>
+      <p className='text-xl font-medium pb-50'>
         함께 모여 지식을 공유하고 경험을 나눌 수 있는 ABCDEdu의 커뮤니티에 오신
         것을 환영합니다!
         <br />
@@ -29,6 +29,15 @@ function Boards() {
         ABCDEdu는 학생들이 직접 공유하는 다양한 학교의 수업 정보를 빠르게 받아볼
         수 있습니다.
       </p>
+
+      <p className='text-xl text-gray-500 font-medium pt-80 pb-30'>
+        아직 씨앗 등급이신가요? <br />
+        새싹 등급 이상 회원만 수업 자료를 다운받을 수 있습니다. <br />
+        게시물을 작성하고 새싹으로 등업하세요!
+      </p>
+      <button className='py-8 px-30 rounded-2xl bg-primary-300 text-white hover:opacity-80`'>
+        등업 게시판 바로가기
+      </button>
     </section>
   );
 }
