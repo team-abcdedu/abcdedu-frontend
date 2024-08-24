@@ -4,7 +4,7 @@ import { snsItems } from '@/constants/snsItems';
 
 function FooterSns() {
   return (
-    <div className='flex justify-center space-x-20 my-8'>
+    <div className='flex justify-center space-x-16 mb-55'>
       {snsItems.map(item => (
         <Link key={item.to} to={item.to} className='text-black'>
           {item.icon}
