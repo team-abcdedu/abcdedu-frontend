@@ -1,3 +1,6 @@
+// import Test from '@/pages/Community/components/Test'
+import CommunityContents from '@/pages/Community/components/CommunityContents';
+
 function Boards() {
   return (
     <section
@@ -29,6 +32,8 @@ function Boards() {
         ABCDEdu는 학생들이 직접 공유하는 다양한 학교의 수업 정보를 빠르게 받아볼
         수 있습니다.
       </p>
+
+      <CommunityContents />
 
       <p className='text-xl text-gray-500 font-medium pt-80 pb-30'>
         아직 씨앗 등급이신가요? <br />

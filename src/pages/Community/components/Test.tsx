@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { communityInfoMap } from '@/pages/Community/constants/communityInfo';
 
-function CommunityContents() {
+function test() {
   return (
     <div>
       {Object.keys(communityInfoMap).map(key => {
@@ -36,4 +36,4 @@ function CommunityContents() {
   );
 }
 
-export default CommunityContents;
+export default test;
