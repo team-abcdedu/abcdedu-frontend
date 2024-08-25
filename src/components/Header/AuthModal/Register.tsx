@@ -1,13 +1,10 @@
 import { X } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
 
+import Modal from '@/components/Modal';
 import { AuthModalActions } from '@/types/auth';
 
-import Modal from '../Modal';
-
-export default function Login({ onClose, onToggle }: AuthModalActions) {
+export default function Register({ onClose, onToggle }: AuthModalActions) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
-
   return (
     <>
       <Modal.Content>
@@ -19,8 +16,17 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
           >
             <X size={24} />
           </button>
-          <h2 className='text-24 font-semibold mb-24'>로그인</h2>
-          <form className='flex flex-col gap-12 mb-4'>
+          <h2 className='text-24 font-semibold mb-24'>회원가입</h2>
+          <form className='flex flex-col gap-12'>
+            <div className={fieldStyle}>
+              <label htmlFor='name'>이름</label>
+              <input
+                id='name'
+                type='text'
+                className='input-primary'
+                placeholder='John Doe'
+              />
+            </div>
             <div className={fieldStyle}>
               <label htmlFor='email'>이메일</label>
               <input
@@ -39,10 +45,16 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
                 placeholder='********'
               />
             </div>
+            <div className={fieldStyle}>
+              <label htmlFor='confrimPw'>비밀번호 확인</label>
+              <input
+                id='confrimPw'
+                type='password'
+                className='input-primary'
+                placeholder='********'
+              />
+            </div>
           </form>
-          <Link className='flex justify-end text-14 text-primary-300' to='/'>
-            비밀번호 찾기
-          </Link>
         </div>
       </Modal.Content>
       <Modal.Actions>
@@ -51,14 +63,14 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
           className='w-full h-45 px-24 bg-primary-300 text-15 
         text-white font-semibold rounded-md'
         >
-          로그인
+          가입하기
         </button>
         <button
           type='button'
           className='w-full text-14 text-primary-300'
           onClick={onToggle}
         >
-          계정 생성하기
+          이미 계정이 있으신가요? 로그인하기
         </button>
       </Modal.Actions>
     </>

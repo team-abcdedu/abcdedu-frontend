@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useModal from '@/hooks/useModal';
 import { AuthModalType } from '@/types/auth';
 
-import AuthModal from '../AuthModal';
+import AuthModal from './AuthModal';
 
 interface HeaderButtonsProps {
   mobile: boolean;

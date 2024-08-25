@@ -1,6 +1,5 @@
+import Modal from '@/components/Modal';
 import { AuthModalProps } from '@/types/auth';
-
-import Modal from '../Modal';
 
 import Login from './Login';
 import Register from './Register';
