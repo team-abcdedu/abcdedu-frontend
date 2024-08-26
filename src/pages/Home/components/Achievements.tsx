@@ -15,15 +15,15 @@ export default function Achievements() {
       {achievements.map((a, i) => (
         <div key={a.label} className={cardContainerStyle(i)}>
           <div
-            className={`flex ${i === 2 ? 'items-center' : 'items-end'} gap-12`}
+            className={`flex items-end ${i === 2 && 'md:items-center'} gap-12`}
           >
             <div
-              className={`flex-row-center rounded-full bg-white 
-              ${i !== 2 ? 'w-46 h-46 mb-10' : 'w-64 h-64'}`}
+              className={`flex-row-center rounded-full bg-white w-46 h-46 mb-10
+              ${i === 2 && 'md:w-64 md:h-64 md:mb-0'}`}
             >
               <img
                 src={a.imgUrl}
-                alt='clock'
+                alt={`icon-${i + 1}`}
                 className={`${i === 2 ? 'w-36' : 'w-18'}`}
               />
             </div>
