@@ -1,4 +1,4 @@
-import UserLogin from '@/assets/user-login.svg?react';
+import UserLogin from '@/assets/icons/user-login.svg?react';
 
 function HeaderButtons() {
   const btnStyle =

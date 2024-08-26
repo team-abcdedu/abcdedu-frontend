@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import MenuIcon from '@/assets/menu.svg?react';
+import MenuIcon from '@/assets/icons/menu.svg?react';
 import MobileNav from '@/components/Header/MobileNav';
 
 function MobileMenu() {
