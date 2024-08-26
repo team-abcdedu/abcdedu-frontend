@@ -46,7 +46,7 @@ export default function AboutUs() {
         <img
           src={SNUImage}
           className='lg:w-fit md:w-180 max-md:w-115'
-          alt='snu'
+          alt='snu-img'
         />
       </div>
       <div className='w-full sm:h-[900px] h-[528px] flex-col-center sm:gap-60 gap-40 '>
@@ -62,7 +62,7 @@ export default function AboutUs() {
         </p>
         <img
           src={Handshake}
-          alt='about-us-img'
+          alt='handshake-img'
           className='w-full max-w-[490px] px-45'
         />
       </div>
