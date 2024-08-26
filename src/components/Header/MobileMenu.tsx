@@ -1,6 +1,6 @@
-import { List } from '@phosphor-icons/react';
 import { useEffect, useRef, useState } from 'react';
 
+import MenuIcon from '@/assets/menu.svg?react';
 import MobileNav from '@/components/Header/MobileNav';
 
 function MobileMenu() {
@@ -20,10 +20,13 @@ function MobileMenu() {
   }, []);
 
   return (
-    <div className={'md:hidden flex flex-end'} ref={menuRef}>
+    <div className={'sm:hidden flex flex-end'} ref={menuRef}>
       <div>
         <div className={'grid place-items-center'}>
-          <List size={24} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+          <MenuIcon
+            className={'w-[32px] h-[32px]'}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          />
         </div>
         {isMenuOpen && <MobileNav />}
       </div>
