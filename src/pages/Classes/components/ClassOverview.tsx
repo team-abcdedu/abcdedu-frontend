@@ -22,7 +22,9 @@ function ClassOverview(props: ClassOverviewProps) {
         >
           {title}
         </h1>
-        <h4 className={'text-25 font-semibold'}>{subTitle}</h4>
+        <h4 className={'text-25 font-semibold whitespace-pre-wrap'}>
+          {subTitle}
+        </h4>
         <h1 className={'text-18 text-neutral-400'}>{description}</h1>
       </div>
     </div>
