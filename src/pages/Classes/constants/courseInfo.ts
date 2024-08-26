@@ -1,4 +1,4 @@
-import { ClassInfoMap } from '@/types/classTypes';
+import { CourseInfoMap } from '@/types/classTypes';
 
 export const mediaList = [
   '인공지능 눈길',
@@ -8,13 +8,13 @@ export const mediaList = [
   'Atari Games',
 ];
 
-export const classInfoMap: ClassInfoMap = {
+export const courseInfoMap: CourseInfoMap = {
   A: {
-    label: 'Class A',
-    title: '인공지능 강의',
+    title: 'Class A',
+    subTitle: '인공지능 강의',
     description:
       '인공지능에게 대체되지 않는 인간지능이 되기 위해 인공지능에 대한 기본 원리를 학습하는 수업',
-    lessons: [
+    classes: [
       { code: 'A-1', title: '인공지능의\n수학적 기초', to: '/class_a_1' },
       { code: 'A-2', title: 'ChatGPT의\n수학적 기초', to: '/class_a_2' },
       { code: 'A-3', title: '눈으로 이해하는\n인공신경망', to: '/class_a_3' },
@@ -22,10 +22,10 @@ export const classInfoMap: ClassInfoMap = {
     ],
   },
   B: {
-    label: 'Class B',
-    title: '',
+    title: 'Class B',
+    subTitle: '',
     description: '',
-    lessons: [
+    classes: [
       { code: 'B-1', title: '빅데이터', to: '/class_b_1' },
       { code: 'B-2', title: '데이터베이스', to: '/class_b_2' },
       { code: 'B-3', title: '데이터 분석', to: '/class_b_3' },
@@ -33,10 +33,10 @@ export const classInfoMap: ClassInfoMap = {
     ],
   },
   C: {
-    label: 'Class C',
-    title: '인공지능 강의',
+    title: 'Class C',
+    subTitle: '인공지능 강의',
     description: '',
-    lessons: [
+    classes: [
       {
         code: 'C-1',
         title: '눈으로 이해하는 인공신경망\n(코드 없이 인공신경망 설계하기)',
@@ -50,10 +50,10 @@ export const classInfoMap: ClassInfoMap = {
     ],
   },
   D: {
-    label: 'Class D',
-    title: '',
+    title: 'Class D',
+    subTitle: '',
     description: '',
-    lessons: [
+    classes: [
       { code: 'D-1', title: '첨단 융합', to: '/class_d_1' },
       { code: 'D-2', title: '인문 ・ 사회', to: '/class_d_2' },
       { code: 'D-3', title: '수리 ・ 과학', to: '/class_d_3' },
