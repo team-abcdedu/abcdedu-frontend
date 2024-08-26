@@ -13,8 +13,8 @@ export default {
         HakgyoansimGaeulsopungB: ['HakgyoansimGaeulsopungB'],
       },
       colors: {
-        'primary-400': '#000080',
-        'primary-300': '#1f3c9c', // color-primary-default
+        'primary-400': '#000080', // color-primary-default
+        'primary-300': '#1f3c9c',
         'primary-300/8': 'rgba(31, 60, 156, 0.08)',
         'primary-200': '#465ba0',
         'primary-100': '#6674a1',
@@ -23,7 +23,7 @@ export default {
         'neutral-600': '#02081b', // text-default
         'neutral-500': '#7a7c82',
         'neutral-400': '#808080',
-        'neutral-300': '#aaaaaa',
+        'neutral-300': '#a7a7a7',
         'neutral-200': '#e0e0e0',
         'neutral-100': '#f5f5f5',
         orange: '#ff6427',

@@ -1,24 +1,29 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import Dropdown from '@/components/Dropdown';
 import { headerNavItems } from '@/constants/navItems';
 import { HeaderNavItem } from '@/types/navTypes';
 
 function HeaderNav() {
+  const linkStyle = 'text-13 font-bold';
+  const navLinkStyle = (isActive: boolean) => {
+    return isActive
+      ? `${linkStyle} text-black`
+      : `${linkStyle} text-neutral-300`;
+  };
+
   return (
-    <>
+    <div className={'flex items-center gap-40'}>
       {headerNavItems.map((item: HeaderNavItem) => {
         if (item.type === 'link') {
           return (
-            <Link
+            <NavLink
               key={item.to}
               to={item.to}
-              className={
-                'px-12 grid place-items-center min-h-40 max-h-46 hover:bg-primary-50'
-              }
+              className={({ isActive }) => navLinkStyle(isActive)}
             >
               {item.text}
-            </Link>
+            </NavLink>
           );
         }
         if (item.type === 'dropdown') {
@@ -26,15 +31,21 @@ function HeaderNav() {
             <Dropdown
               key={item.to}
               defaultLabel={
-                <Link to={item.to} className={'px-12'}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) => navLinkStyle(isActive)}
+                >
                   {item.text}
-                </Link>
+                </NavLink>
               }
-              defaultLabelStyle={'min-h-40 max-h-46 hover:bg-primary-50'}
             >
               {item.list?.map(listItem => {
                 return (
-                  <Link key={listItem.to} to={listItem.to} className={'px-12'}>
+                  <Link
+                    key={listItem.to}
+                    to={listItem.to}
+                    className={`${linkStyle}`}
+                  >
                     {listItem.text}
                   </Link>
                 );
@@ -44,7 +55,7 @@ function HeaderNav() {
         }
         return null;
       })}
-    </>
+    </div>
   );
 }
 
