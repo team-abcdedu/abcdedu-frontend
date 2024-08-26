@@ -1,3 +1,4 @@
+import Head from '@/components/Head';
 import CourseList from '@/pages/Classes/components/CourseList';
 import Hero from '@/pages/Classes/components/Hero';
 import MediaContents from '@/pages/Classes/components/MediaContents';
@@ -5,6 +6,10 @@ import MediaContents from '@/pages/Classes/components/MediaContents';
 function Classes() {
   return (
     <>
+      <Head
+        title='ABCD CLASSES'
+        description='AI & Data 사회에서 진로를 준비하기 위한 ABCDEdu만의 특별한 수업!'
+      />
       <Hero />
       <MediaContents />
       <CourseList />
