@@ -7,8 +7,10 @@ function Layout() {
   return (
     <>
       <Header />
-      <Outlet />
-      <Footer />
+      <section className={'relative sm:top-[100px]'}>
+        <Outlet />
+        <Footer />
+      </section>
     </>
   );
 }
