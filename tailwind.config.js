@@ -14,6 +14,7 @@ export default {
         'primary-300/8': 'rgba(31, 60, 156, 0.08)',
         'primary-200': '#465ba0',
         'primary-100': '#6674a1',
+        'primary-75': '#868ea5',
         'primary-50': '#e9ebf5',
         'neutral-600': '#02081b', // text-default
         'neutral-500': '#7a7c82',

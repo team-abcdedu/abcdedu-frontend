@@ -19,7 +19,7 @@ interface ModalProps {
 
 export default function Modal({
   isVisible,
-  size = 'sm',
+  size = 'md',
   showBackdrop = true,
   onClose,
   children,
