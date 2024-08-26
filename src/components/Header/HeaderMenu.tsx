@@ -3,9 +3,9 @@ import HeaderNav from '@/components/Header/HeaderNav';
 
 function HeaderMenu() {
   return (
-    <div className={'hidden md:flex flex-end gap-12'}>
+    <div className={'hidden sm:flex justify-between items-end'}>
       <HeaderNav />
-      <HeaderButtons mobile={false} />
+      <HeaderButtons />
     </div>
   );
 }
