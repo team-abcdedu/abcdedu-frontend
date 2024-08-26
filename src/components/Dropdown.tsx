@@ -3,35 +3,31 @@ import { ReactNode, useState } from 'react';
 interface PropsType {
   defaultLabel: ReactNode;
   children: ReactNode;
-  defaultLabelStyle?: string;
-  contentsContainerStyle?: string;
+  listContainerStyle?: string;
 }
 
 function Dropdown(props: PropsType) {
-  const { defaultLabel, children, defaultLabelStyle, contentsContainerStyle } =
-    props;
+  const { defaultLabel, children, listContainerStyle } = props;
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div className={'grid place-items-center'}>
-      <div
-        className={`overflow-hidden`}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <div className={`grid place-items-center ${defaultLabelStyle}`}>
-          {defaultLabel}
-        </div>
-        {isHovering && (
-          <div className={'overflow-hidden absolute'}>
-            <li
-              className={`flex flex-col gap-7 bg-white py-7 ${isHovering ? 'animate-dropdown' : ''} ${contentsContainerStyle}`}
-            >
-              {children}
-            </li>
-          </div>
-        )}
-      </div>
+    <div
+      className={'relative grid place-items-center bg-black'}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      <div className={`grid place-items-center`}>{defaultLabel}</div>
+      {isHovering && (
+        <ul
+          className={`top-full absolute min-w-max overflow-hidden ${listContainerStyle}`}
+        >
+          <li
+            className={`py-7 px-10 flex flex-col-center gap-7 bg-white ${isHovering ? 'animate-dropdown' : ''}`}
+          >
+            {children}
+          </li>
+        </ul>
+      )}
     </div>
   );
 }
