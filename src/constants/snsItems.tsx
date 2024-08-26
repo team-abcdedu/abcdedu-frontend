@@ -1,28 +1,17 @@
 import { InstagramLogo, YoutubeLogo } from '@phosphor-icons/react';
-// import { Link } from 'react-router-dom';
 
-import kakaoTalk from '@/assets/kakaotalk.svg';
-import naverBand from '@/assets/naver band.png';
-import naverBlog from '@/assets/naver blog.png';
+import kakaoTalk from '@/assets/icons/kakaotalk.svg';
+import naverBand from '@/assets/icons/naver band.png';
+import naverBlog from '@/assets/icons/naver blog.jpg';
 
 export const snsItems = [
   {
     to: 'https://www.instagram.com/abcd_education/',
-    icon: <InstagramLogo size={20} />,
+    icon: <InstagramLogo size={44} weight='fill' />,
   },
   {
     to: 'https://www.youtube.com/@abcd_edu',
-    icon: <YoutubeLogo size={20} weight='fill' />,
-  },
-  {
-    to: 'https://band.us/@abcdedu',
-    icon: (
-      <img
-        src={naverBand}
-        alt='Naver Band'
-        className='h-20 w-20 object-contain'
-      />
-    ),
+    icon: <YoutubeLogo size={44} weight='fill' />,
   },
   {
     to: 'https://blog.naver.com/abcdedu',
@@ -30,7 +19,17 @@ export const snsItems = [
       <img
         src={naverBlog}
         alt='Naver Blog'
-        className='h-20 w-20 object-contain'
+        className='h-44 w-44 object-contain'
+      />
+    ),
+  },
+  {
+    to: 'https://band.us/@abcdedu',
+    icon: (
+      <img
+        src={naverBand}
+        alt='Naver Band'
+        className='h-44 w-44 object-contain'
       />
     ),
   },
@@ -40,7 +39,7 @@ export const snsItems = [
       <img
         src={kakaoTalk}
         alt='KakaoTalk'
-        className='h-20 w-20 object-contain'
+        className='h-44 w-44 object-contain'
       />
     ),
   },
