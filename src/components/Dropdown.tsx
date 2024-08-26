@@ -12,14 +12,14 @@ function Dropdown(props: PropsType) {
 
   return (
     <div
-      className={'relative grid place-items-center bg-black'}
+      className={'relative grid place-items-center'}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       <div className={`grid place-items-center`}>{defaultLabel}</div>
       {isHovering && (
         <ul
-          className={`top-full absolute min-w-max overflow-hidden ${listContainerStyle}`}
+          className={`top-full absolute min-w-max mt-3 overflow-hidden ${listContainerStyle}`}
         >
           <li
             className={`py-7 px-10 flex flex-col-center gap-7 bg-white ${isHovering ? 'animate-dropdown' : ''}`}
