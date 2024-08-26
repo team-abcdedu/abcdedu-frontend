@@ -5,7 +5,7 @@ import { communityInfoMap } from '@/pages/Community/constants/communityInfo';
 
 function CommunityContents() {
   return (
-    <div className='flex flex-row px-50 gap-20'>
+    <div className='flex flex-col lg:flex-row px-50 gap-20'>
       {Object.keys(communityInfoMap).map(key => {
         const communityInfo = communityInfoMap[key];
         return (
