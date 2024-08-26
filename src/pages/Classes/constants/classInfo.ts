@@ -11,8 +11,9 @@ export const mediaList = [
 export const classInfoMap: ClassInfoMap = {
   A: {
     label: 'Class A',
+    title: '인공지능 강의',
     description:
-      '인공지능 강의: 인공지능에게 대체되지 않는 인간지능이 되기 위해 인공지능에 대한 기본 원리를 학습하는 수업',
+      '인공지능에게 대체되지 않는 인간지능이 되기 위해 인공지능에 대한 기본 원리를 학습하는 수업',
     lessons: [
       { code: 'A-1', title: '인공지능의\n수학적 기초', to: '/class_a_1' },
       { code: 'A-2', title: 'ChatGPT의\n수학적 기초', to: '/class_a_2' },
@@ -22,6 +23,7 @@ export const classInfoMap: ClassInfoMap = {
   },
   B: {
     label: 'Class B',
+    title: '',
     description: '',
     lessons: [
       { code: 'B-1', title: '빅데이터', to: '/class_b_1' },
@@ -32,6 +34,7 @@ export const classInfoMap: ClassInfoMap = {
   },
   C: {
     label: 'Class C',
+    title: '인공지능 강의',
     description: '',
     lessons: [
       {
@@ -48,6 +51,7 @@ export const classInfoMap: ClassInfoMap = {
   },
   D: {
     label: 'Class D',
+    title: '',
     description: '',
     lessons: [
       { code: 'D-1', title: '첨단 융합', to: '/class_d_1' },

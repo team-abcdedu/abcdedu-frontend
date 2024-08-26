@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { ClassInfo } from '@/types/classTypes';
 
 function ClassContents({ classInfo }: { classInfo: ClassInfo }) {
+  const description =
+    classInfo.title && classInfo.description
+      ? `${classInfo.title}: ${classInfo.description}`
+      : '';
+
   return (
     <div
       className={
@@ -11,7 +16,7 @@ function ClassContents({ classInfo }: { classInfo: ClassInfo }) {
       }
     >
       <h3 className={'text-30 font-semibold text-white'}>{classInfo.label}</h3>
-      <p className={'mt-5 mb-20 text-20 text-white'}>{classInfo.description}</p>
+      <p className={'mt-5 mb-20 text-20 text-white'}>{description}</p>
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 grid-flow-row lg:flex gap-20`}
       >

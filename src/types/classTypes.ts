@@ -1,5 +1,6 @@
 export interface ClassInfo {
   label: string;
+  title: string;
   description: string;
   lessons: {
     code: string;

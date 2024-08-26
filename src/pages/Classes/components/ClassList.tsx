@@ -17,10 +17,10 @@ function ClassList() {
 
   return (
     <>
-      {Object.entries(classInfoMap).map(([title, classInfo], index) => {
+      {Object.entries(classInfoMap).map(([id, classInfo], index) => {
         return (
           <section
-            key={title}
+            key={id}
             className={`min-h-[60px] p-50 sm:py-100 sm:px-70 flex flex-col lg:flex-row items-center gap-70 ${bgColors[index]}`}
           >
             <div
@@ -31,7 +31,7 @@ function ClassList() {
               <span
                 className={`text-80 font-bold text-center ${textColors[index]}`}
               >
-                {title}
+                {id}
               </span>
             </div>
             <ClassContents classInfo={classInfo} />
