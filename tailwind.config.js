@@ -8,7 +8,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        HakgyoansimGaeulsopungL: ['HakgyoansimGaeulsopungL'],
+        HakgyoansimGaeulsopungB: ['HakgyoansimGaeulsopungB'],
+      },
       colors: {
+        'primary-400': '#000080',
         'primary-300': '#1f3c9c', // color-primary-default
         'primary-300/8': 'rgba(31, 60, 156, 0.08)',
         'primary-200': '#465ba0',
@@ -21,6 +26,7 @@ export default {
         'neutral-300': '#aaaaaa',
         'neutral-200': '#e0e0e0',
         'neutral-100': '#f5f5f5',
+        orange: '#ff6427',
       },
       borderWidth: px0_10,
       fontSize: px0_100,
@@ -46,13 +52,17 @@ export default {
         'max-xs': { max: '480px' },
         'min-400': { min: '400px' },
         'max-400': { max: '400px' },
+        'max-sm': { max: '640px' },
         'max-md': { max: '768px' },
         'max-800': { max: '800px' },
         'max-900': { max: '900px' },
+        'max-lg': { max: '1024px' },
       },
       boxShadow: {
         lg: '2px 2px 4px 0px rgb(170, 170, 170)',
         'btn-primary': '0px 7px 30px -10px #1f3c9c',
+        'card-lg': '0px 12px 40px 2px rgba(0,0,0,0.08);',
+        'card-md': '0px 20.98px 41.96px -10.49px rgba(41, 37, 110, 0.1);',
       },
     },
   },
