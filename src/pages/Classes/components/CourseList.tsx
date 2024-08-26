@@ -1,4 +1,4 @@
-import CourseContents from '@/pages/Classes/components/CourseContents';
+import CourseOverview from '@/pages/Classes/components/CourseOverview';
 import { courseInfoMap } from '@/pages/Classes/constants/courseInfo';
 
 function CourseList() {
@@ -21,7 +21,7 @@ function CourseList() {
         return (
           <section
             key={id}
-            className={`min-h-[60px] p-50 sm:py-100 sm:px-70 flex flex-col lg:flex-row items-center gap-70 ${bgColors[index]}`}
+            className={`min-h-60 p-50 sm:py-100 sm:px-70 flex flex-col lg:flex-row items-center gap-70 ${bgColors[index]}`}
           >
             <div
               className={
@@ -34,7 +34,7 @@ function CourseList() {
                 {id}
               </span>
             </div>
-            <CourseContents courseInfo={courseInfo} />
+            <CourseOverview courseInfo={courseInfo} />
           </section>
         );
       })}
