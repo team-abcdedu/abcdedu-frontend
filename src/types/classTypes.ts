@@ -1,6 +1,7 @@
 export interface ClassInfo {
   code: string;
   title: string;
+  description?: string;
   to: string;
 }
 
