@@ -7,7 +7,22 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
 }
 
 * {
@@ -19,27 +34,30 @@ body {
   color: #02081b; /* text-default */
 }
 
-
 @layer utilities {
   .position-center {
     @apply left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
   }
   .flex-row-center {
-    @apply flex justify-center items-center;
+    @apply flex flex-row justify-center items-center;
   }
   .flex-col-center {
     @apply flex flex-col justify-center items-center;
   }
   /* border-white, bg-white, hover 시 배경이 투명해지는 버튼 */
   .btn-white-wb {
-    @apply border-solid border-1 border-white bg-white hover:bg-transparent hover:text-white;transition: background-color 0.2s, color 0.2s;
+    @apply border-solid border-1 border-white bg-white hover:bg-transparent hover:text-white;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
   }
   /* border color primary, bg-white, hover 시 배경이 primary/8 */
   .btn-white-pb {
-    @apply border-solid border-1 border-primary-300 bg-white hover:bg-primary-300/8;transition: background-color 0.2s;
+    @apply border-solid border-1 border-primary-300 bg-white hover:bg-primary-300/8;
+    transition: background-color 0.2s;
   }
   .input-primary {
-    @apply px-6 text-14 h-48 rounded-md border-1 border-[#bdbdbd] focus:border-primary-300 transition duration-200
+    @apply px-6 text-14 h-48 rounded-md border-1 border-[#bdbdbd] focus:border-primary-300 transition duration-200;
   }
 }
 
@@ -66,4 +84,14 @@ body {
 
 input {
   outline: none;
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    #e9eeff 0%,
+    #fcfdff 14%,
+    #fcfdff 65%,
+    #ffffff 100%
+  );
 }
