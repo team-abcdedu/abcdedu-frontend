@@ -16,11 +16,13 @@ export default function Curriculum() {
       <h2 className='md:text-48 text-28 leading-[1.3] font-extrabold tracking-tight'>
         커리큘럼 소개
       </h2>
-      <p className='md:text-18 text-center leading-[1.3] text-[#bbb] font-medium'>
+      <p
+        className='md:text-18 max-w-[680px] break-keep text-center leading-[1.3]
+      text-[#bbb] font-medium'
+      >
         ABCDEdu는 미래 사회에 꼭 필요하지만 학교에서 제공하기 어려운 데이터
-        사이언스 교육을 <br />
-        Ai(인공지능), Bigdata(빅데이터), Coding(코딩), Domain(관심분야)으로
-        나누어 제공합니다.
+        사이언스 교육을 Ai(인공지능), Bigdata(빅데이터), Coding(코딩),
+        Domain(관심분야)으로 나누어 제공합니다.
       </p>
       <div className='max-md:hidden flex-row-center flex-wrap gap-24 mt-40 mb-70'>
         {subjectKeys.map(key => (
@@ -48,7 +50,8 @@ export default function Curriculum() {
             ${subject.key === selected && 'md:shadow-card-lg'}`}
           >
             <span
-              className={`block w-full text-right text-[1em] text-primary-400 mb-4 font-semibold
+              className={`block w-full text-right text-[1em] text-primary-400 
+              mb-4 font-semibold
               ${
                 subject.key === selected &&
                 'md:underline underline-offset-4 decoration-4 md:font-extrabold'

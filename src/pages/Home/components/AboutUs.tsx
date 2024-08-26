@@ -55,7 +55,8 @@ export default function AboutUs() {
         </h2>
         <p
           className='w-full max-w-[1193px] text-center px-2 sm:text-15 text-9 bg-gradient-to-r 
-        from-[#bbb] via-[#6e6e6e] to-[#bbb] bg-clip-text text-transparent tracking-[0.11em]'
+        from-[#bbb] via-[#6e6e6e] to-[#bbb] bg-clip-text text-transparent 
+          tracking-[0.11em] break-keep'
         >
           {schools}
         </p>

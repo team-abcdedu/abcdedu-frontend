@@ -14,13 +14,12 @@ export default function ContentInfo() {
         </h2>
         <LaurelWreath className='-scale-x-100' />
       </div>
-      <p className='text-18 text-[#bbb] font-medium max-sm:text-16'>
+      <p></p>
+      <p className='text-18 text-[#bbb] font-medium max-w-[630px] break-keep max-sm:text-16'>
         저희가 만든 교육 콘텐츠들은 최고의 수학교육 전문가와 인공지능 전문가들이
-        만나 치열한 <br />
-        고민 끝에 탄생한 콘텐츠입니다. <br /> <br />
+        만나 치열한 고민 끝에 탄생한 콘텐츠입니다. <br /> <br />
         2022년부터 연간 30회 이상씩 누적된 강의를 통해 계속해서 다듬어지고,
-        업데이트되어 <br />
-        최상의 퀄리티를 유지하고 있습니다.
+        업데이트되어 최상의 퀄리티를 유지하고 있습니다.
       </p>
     </section>
   );
