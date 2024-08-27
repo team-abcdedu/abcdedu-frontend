@@ -1,4 +1,4 @@
-import { mediaList } from '@/pages/Classes/constants/classInfo';
+import { mediaList } from '@/pages/Classes/constants/courseInfo';
 
 function MediaContents() {
   return (

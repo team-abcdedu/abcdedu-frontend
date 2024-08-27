@@ -1,4 +1,4 @@
-import { CommunityInfoMap } from '@/types/communityTypes';
+import { CommunityInfoMap } from '@/types/CommunityTypes';
 
 export const communityInfoMap: CommunityInfoMap = {
   abcdProject: {

@@ -26,7 +26,7 @@ function Hero() {
         </div>
         <button
           className={
-            'w-auto min-w-[100px] min-h-[50px] mt-40 px-16 py-8 self-center text-18 font-medium text-center text-primary-300 btn-white-pb !border-2 rounded-[10px]'
+            'w-auto min-w-100 min-h-50 mt-40 px-16 py-8 self-center text-18 font-medium text-center text-primary-300 btn-white-pb !border-2 rounded-[10px]'
           }
           onClick={() => setShowCurriculum(!showCurriculum)}
         >

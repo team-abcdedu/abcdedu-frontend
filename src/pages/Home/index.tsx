@@ -1,24 +1,20 @@
 import Head from '@/components/Head';
 
-import Classes from './components/Classes';
+import AboutUs from './components/AboutUs';
 import ContentInfo from './components/ContentInfo';
+import Curriculum from './components/Curriculum';
 import Hero from './components/Hero';
-import Inquiry from './components/Inquiry';
-import Introduce from './components/Introduce';
 import Message from './components/Message';
-import Reviews from './components/Reviews';
 
 export default function Home() {
   return (
     <div>
       <Head />
       <Hero />
-      <Introduce />
-      <Message />
+      <AboutUs />
+      <Curriculum />
       <ContentInfo />
-      <Reviews />
-      <Classes />
-      <Inquiry />
+      <Message />
     </div>
   );
 }

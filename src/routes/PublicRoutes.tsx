@@ -1,5 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 
+import Layout from '@/components/Layout';
+import Classes from '@/pages/Classes';
+import Course from '@/pages/Classes/[courseId]';
+import Class from '@/pages/Classes/[courseId]/[classCode]';
 import Community from '@/pages/Community';
 import Board from '@/pages/Community/Board';
 import LevelUp from '@/pages/Community/LevelUp';
@@ -11,31 +15,48 @@ import Home from '@/pages/Home';
 export const publicRoutes: RouteObject[] = [
   {
     path: '/',
-    index: true,
-    element: <Home />,
-  },
-  {
-    path: '/community',
-    element: <Community />,
-  },
-  {
-    path: '/community_levelup',
-    element: <LevelUp />,
-  },
-  {
-    path: '/community_project',
-    element: <Project />,
-  },
-  {
-    path: '/community_qna',
-    element: <Qna />,
-  },
-  {
-    path: '/community_submit_assignment',
-    element: <Submit />,
-  },
-  {
-    path: '/community_bulletin_board',
-    element: <Board />,
+    element: <Layout />, // 부모 컴포넌트
+    children: [
+      {
+        index: true, // 기본적으로 렌더링되는 컴포넌트
+        element: <Home />,
+      },
+      {
+        path: '/classes',
+        element: <Classes />,
+      },
+      {
+        path: '/classes/:courseId',
+        element: <Course />,
+      },
+      {
+        path: '/classes/:courseId/:classCode',
+        element: <Class />,
+      },
+      {
+        path: '/community',
+        element: <Community />,
+      },
+      {
+        path: '/community_levelup',
+        element: <LevelUp />,
+      },
+      {
+        path: '/community_project',
+        element: <Project />,
+      },
+      {
+        path: '/community_qna',
+        element: <Qna />,
+      },
+      {
+        path: '/community_submit_assignment',
+        element: <Submit />,
+      },
+      {
+        path: '/community_bulletin_board',
+        element: <Board />,
+      },
+    ],
   },
 ];
