@@ -1,5 +1,40 @@
 import { SortAscending } from '@phosphor-icons/react';
 
+// import Modal from '@/components/Modal';
+// import { useState } from 'react';
+import { posts } from '@/mock/Community';
+
+const PostTable: React.FC = () => {
+  return (
+    <table className='post-table'>
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>제목</th>
+          <th>글쓴이</th>
+          <th>작성시간</th>
+          <th>조회수</th>
+          <th>댓글</th>
+          <th>좋아요</th>
+        </tr>
+      </thead>
+      <tbody>
+        {posts.map(post => (
+          <tr key={post.id}>
+            <td>{post.id}</td>
+            <td>{post.title}</td>
+            <td>{post.author}</td>
+            <td>{post.timestamp}</td>
+            <td>{post.views}</td>
+            <td>{post.comments}</td>
+            <td>{post.likes}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
 function LevelUp() {
   return (
     <div className='flex flex-col text-center mt-20'>
@@ -23,6 +58,7 @@ function LevelUp() {
           글쓰기
         </button>
       </div>
+      <PostTable />
     </div>
   );
 }
