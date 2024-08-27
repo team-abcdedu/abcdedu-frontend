@@ -88,7 +88,7 @@ export default function Curriculum() {
               </span>
             )}
             <Link
-              to={subject.link}
+              to={`/classes/${subject.key.toLowerCase()}`}
               className={`text-[0.465em] font-medium absolute md:right-40 right-30 bottom-20 
             text-neutral-400 ${subject.key === selected && 'md:text-primary-400'}`}
             >
