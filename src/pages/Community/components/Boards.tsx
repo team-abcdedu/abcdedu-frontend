@@ -9,7 +9,11 @@ function Boards() {
         'flex flex-col items-center justify-center text-center bg-neutral-100 pt-100 pb-150'
       }
     >
-      <h3 className={'text-5xl font-bold pb-50 grid place-items-center'}>
+      <h3
+        className={
+          'font-bold pb-50 grid place-items-center text-40 md:text-50 px-30'
+        }
+      >
         ABCDEdu의 커뮤니티에 오신 것을 환영합니다!
       </h3>
       <div className='flex flex-row items-center justify-center w-full pb-50 gap-4 sm:gap-20 md:gap-50 lg:gap-100 xl:gap-300'>

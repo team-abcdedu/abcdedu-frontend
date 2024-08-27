@@ -15,19 +15,22 @@ function CommunityContents() {
           >
             <div
               className={
-                'flex flex-col border-2 border-white rounded-[20px] w-full'
+                'flex flex-col h-full border-2 border-white rounded-[20px] w-full'
               }
             >
-              <h3 className={'text-20 text-primary-300 font-semibold'}>
-                {communityInfo.label}
-              </h3>
-              <div className=' text-gray-500'>_______________________</div>
-              <h5 className={'mt-10 text-18 text-gray-500 font-bold mb-20'}>
-                {communityInfo.description}
-              </h5>
+              <div>
+                <h3 className={'text-20 text-primary-300 font-semibold'}>
+                  {communityInfo.label}
+                </h3>
+                <div className='text-gray-500'>_______________________</div>
+                <h5 className={'mt-10 text-18 text-gray-500 font-bold mb-20'}>
+                  {communityInfo.description}
+                </h5>
+              </div>
+              <div className='flex-grow'></div>
               <Link
                 to={communityInfo.to}
-                className={'flex items-center pt-10 self-end'}
+                className={'flex items-center self-end pt-10'}
               >
                 <span className={'text-15 underline text-gray-500 font-bold'}>
                   바로가기
