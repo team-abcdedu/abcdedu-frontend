@@ -1,13 +1,17 @@
 export interface ClassInfo {
-  label: string;
-  description: string;
-  lessons: {
-    code: string;
-    title: string;
-    to: string;
-  }[];
+  code: string;
+  title: string;
+  description?: string;
+  to: string;
 }
 
-export interface ClassInfoMap {
-  [title: string]: ClassInfo;
+export interface CourseInfo {
+  title: string;
+  subTitle: string;
+  description: string;
+  classes: ClassInfo[];
+}
+
+export interface CourseInfoMap {
+  [title: string]: CourseInfo;
 }
