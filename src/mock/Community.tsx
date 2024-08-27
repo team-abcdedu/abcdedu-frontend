@@ -1,5 +1,6 @@
 // 게시글 타입 정의
 interface Post {
+  id: number;
   title: string;
   author: string;
   timestamp: string;
@@ -12,6 +13,7 @@ interface Post {
 // 목업 데이터
 export const posts: Post[] = [
   {
+    id: 1,
     title: '여름휴가 추천 여행지',
     author: '여행러버',
     timestamp: '2024-08-25 14:30',
@@ -22,6 +24,7 @@ export const posts: Post[] = [
     likes: 150,
   },
   {
+    id: 2,
     title: '신제품 리뷰: 최신 스마트폰',
     author: '기술덕후',
     timestamp: '2024-08-26 09:45',
@@ -32,6 +35,7 @@ export const posts: Post[] = [
     likes: 75,
   },
   {
+    id: 3,
     title: '집에서 만드는 간단한 디저트 레시피',
     author: '요리왕',
     timestamp: '2024-08-27 08:20',
@@ -41,6 +45,7 @@ export const posts: Post[] = [
     likes: 60,
   },
   {
+    id: 4,
     title: '2024년 주목해야 할 투자 트렌드',
     author: '투자전문가',
     timestamp: '2024-08-24 11:10',
@@ -51,6 +56,7 @@ export const posts: Post[] = [
     likes: 200,
   },
   {
+    id: 5,
     title: '요가로 건강 지키기: 초보자를 위한 팁',
     author: '헬시라이프',
     timestamp: '2024-08-22 18:00',
@@ -61,6 +67,7 @@ export const posts: Post[] = [
     likes: 80,
   },
   {
+    id: 6,
     title: '비건 식단의 장점과 단점',
     author: '비건러',
     timestamp: '2024-08-21 16:45',
@@ -71,6 +78,7 @@ export const posts: Post[] = [
     likes: 70,
   },
   {
+    id: 7,
     title: '영화 리뷰: 이번 주말 꼭 봐야 할 영화',
     author: '무비홀릭',
     timestamp: '2024-08-26 13:50',
@@ -81,6 +89,7 @@ export const posts: Post[] = [
     likes: 85,
   },
   {
+    id: 8,
     title: '효율적인 시간 관리 방법',
     author: '타임매니저',
     timestamp: '2024-08-23 10:00',
@@ -91,6 +100,7 @@ export const posts: Post[] = [
     likes: 120,
   },
   {
+    id: 9,
     title: '가을철 피부 관리 팁',
     author: '뷰티매니아',
     timestamp: '2024-08-20 12:30',
@@ -101,6 +111,7 @@ export const posts: Post[] = [
     likes: 65,
   },
   {
+    id: 10,
     title: '온라인 강의로 공부하기: 성공적인 학습 전략',
     author: '공부왕',
     timestamp: '2024-08-25 17:15',
@@ -111,6 +122,7 @@ export const posts: Post[] = [
     likes: 90,
   },
   {
+    id: 11,
     title: '새로운 취미로 배운 기타 연주 후기',
     author: '음악초보',
     timestamp: '2024-08-27 09:40',
@@ -121,6 +133,7 @@ export const posts: Post[] = [
     likes: 50,
   },
   {
+    id: 12,
     title: '환경을 위한 작은 실천들',
     author: '에코워리어',
     timestamp: '2024-08-24 15:50',
@@ -130,6 +143,7 @@ export const posts: Post[] = [
     likes: 95,
   },
   {
+    id: 13,
     title: '효율적인 재택근무를 위한 공간 정리법',
     author: '워크홈러',
     timestamp: '2024-08-26 11:00',
