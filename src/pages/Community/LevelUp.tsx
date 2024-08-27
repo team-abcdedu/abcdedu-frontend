@@ -6,28 +6,33 @@ import { posts } from '@/mock/Community';
 
 const PostTable: React.FC = () => {
   return (
-    <table className='post-table'>
+    <table className='py-10 px-20'>
       <thead>
-        <tr>
-          <th>No.</th>
-          <th>제목</th>
-          <th>글쓴이</th>
-          <th>작성시간</th>
-          <th>조회수</th>
-          <th>댓글</th>
-          <th>좋아요</th>
+        <tr className='border-t-2 border-t border-t-gray-400 border-b-2 border-b border-b-primary-400'>
+          <th className='px-20 py-10'>No.</th>
+          <th className='px-20 py-10'>제목</th>
+          <th className='px-20 py-10'>글쓴이</th>
+          <th className='px-20 py-10'>작성시간</th>
+          <th className='px-20 py-10'>조회수</th>
+          <th className='px-20 py-10'>댓글</th>
+          <th className='px-20 py-10'>좋아요</th>
         </tr>
       </thead>
       <tbody>
         {posts.map(post => (
-          <tr key={post.id}>
-            <td>{post.id}</td>
-            <td>{post.title}</td>
-            <td>{post.author}</td>
-            <td>{post.timestamp}</td>
-            <td>{post.views}</td>
-            <td>{post.comments}</td>
-            <td>{post.likes}</td>
+          <tr
+            key={post.id}
+            className='space-x-5 border-b-1 border-b border-b-gray-400'
+          >
+            {/* <div className='flex flex-row py-10'> */}
+            <td className='px-20 py-10'>{post.id}</td>
+            <td className='px-20 py-10'>{post.title}</td>
+            <td className='px-20 py-10'>{post.author}</td>
+            <td className='px-20 py-10'>{post.timestamp}</td>
+            <td className='px-20 py-10'>{post.views}</td>
+            <td className='px-20 py-10'>{post.comments}</td>
+            <td className='px-20 py-10'>{post.likes}</td>
+            {/* </div> */}
           </tr>
         ))}
       </tbody>
@@ -54,7 +59,7 @@ function LevelUp() {
             className='border-3 rounded-lg p-6 pr-50'
           />
         </div>
-        <button className='py-8 px-50 rounded-3xl bg-primary-300 text-white hover:opacity-80`'>
+        <button className='py-8 px-50 rounded-3xl bg-primary-400 text-white hover:opacity-80`'>
           글쓰기
         </button>
       </div>
