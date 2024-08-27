@@ -2,7 +2,7 @@ import Clock from '@/assets/icons/clock.png';
 import School from '@/assets/icons/school.png';
 import Students from '@/assets/icons/students.png';
 
-import { Achievement, Review, Subject } from '../types';
+import { Achievement, Review, ClassType } from '../types';
 
 // Hero review data
 export const reviews: Review[] = [
@@ -52,7 +52,7 @@ export const achievements: Achievement[] = [
 ];
 
 // Curriculum
-export const subjects: Subject[] = [
+export const classes: ClassType[] = [
   {
     key: 'A',
     name: '인공지능',
@@ -89,4 +89,4 @@ export const subjects: Subject[] = [
   },
 ];
 
-export const subjectKeys = subjects.map(subject => subject.key);
+export const classKeys = classes.map(c => c.key);

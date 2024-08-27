@@ -5,7 +5,7 @@ export interface Review {
   content: string;
 }
 
-export interface Subject {
+export interface ClassType {
   key: string;
   name: string;
   engName: string;

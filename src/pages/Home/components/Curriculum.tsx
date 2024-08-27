@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { subjectKeys, subjects } from '../constants';
+import { classKeys, classes } from '../constants';
 
 export default function Curriculum() {
-  const [selected, setSelected] = useState(subjectKeys[0]);
+  const [selected, setSelected] = useState(classKeys[0]);
 
   const active = 'bg-primary-400 text-white';
 
@@ -25,7 +25,7 @@ export default function Curriculum() {
         Domain(관심분야)으로 나누어 제공합니다.
       </p>
       <div className='max-md:hidden flex-row-center flex-wrap gap-24 mt-40 mb-70'>
-        {subjectKeys.map(key => (
+        {classKeys.map(key => (
           <button
             type='button'
             key={key}
@@ -42,29 +42,29 @@ export default function Curriculum() {
         className='w-full max-w-[720px] grid md:grid-cols-2 grid-cols-1 justify-items-center 
         md:gap-40 gap-32 max-md:mt-60 max-md:px-30'
       >
-        {subjects.map(subject => (
+        {classes.map(c => (
           <div
-            key={subject.key}
+            key={c.key}
             className={`relative md:text-28 text-22 bg-white rounded-[10px] 
             w-full max-w-[340px] md:h-[400px] h-[320px] pr-24 pl-50 max-400:pl-40 pt-14
-            ${subject.key === selected && 'md:shadow-card-lg'}`}
+            ${c.key === selected && 'md:shadow-card-lg'}`}
           >
             <span
               className={`block w-full text-right text-[1em] text-primary-400 
               mb-4 font-semibold
               ${
-                subject.key === selected &&
+                c.key === selected &&
                 'md:underline underline-offset-4 decoration-4 md:font-extrabold'
               }`}
             >
-              {subject.key}
+              {c.key}
             </span>
             <div className='flex items-center gap-10 text-primary-400 mb-22'>
-              <span className='text-[1em] font-semibold'>{subject.name}</span>
-              <span className='text-[0.5em]'>{subject.engName}</span>
+              <span className='text-[1em] font-semibold'>{c.name}</span>
+              <span className='text-[0.5em]'>{c.engName}</span>
             </div>
             <div className='flex flex-col gap-10'>
-              {subject.chapters.map((chapter, i) => (
+              {c.chapters.map((chapter, i) => (
                 <div
                   key={chapter}
                   className='flex items-center gap-12 font-medium'
@@ -73,24 +73,24 @@ export default function Curriculum() {
                     className='flex-row-center w-40 h-26 text-center py-3 rounded 
                   bg-primary-400/10 text-[0.465em] text-primary-400'
                   >
-                    {subject.key}-{i + 1}
+                    {c.key}-{i + 1}
                   </span>
                   <span className='text-[0.5em] text-[#4f4f4f]'>{chapter}</span>
                 </div>
               ))}
             </div>
-            {subject.key === selected && (
+            {c.key === selected && (
               <span
                 className='max-md:hidden absolute left-18 -bottom-28 text-[120px] 
                 font-extrabold text-primary-400/5'
               >
-                {subject.key}
+                {c.key}
               </span>
             )}
             <Link
-              to={`/classes/${subject.key.toLowerCase()}`}
+              to={`/classes/${c.key.toLowerCase()}`}
               className={`text-[0.465em] font-medium absolute md:right-40 right-30 bottom-20 
-            text-neutral-400 ${subject.key === selected && 'md:text-primary-400'}`}
+            text-neutral-400 ${c.key === selected && 'md:text-primary-400'}`}
             >
               클래스 들어가기
             </Link>
