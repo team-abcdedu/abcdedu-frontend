@@ -10,7 +10,6 @@ export interface Subject {
   name: string;
   engName: string;
   chapters: string[];
-  link: string;
 }
 
 export interface Achievement {

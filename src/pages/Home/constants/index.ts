@@ -63,14 +63,12 @@ export const subjects: Subject[] = [
       '머신러닝과 딥러닝',
       '창의 수학 연구소',
     ],
-    link: '/class_a',
   },
   {
     key: 'B',
     name: '빅데이터',
     engName: 'Bigdata',
     chapters: ['빅데이터', '데이터베이스', '데이터 분석', '데이터 관리 도구'],
-    link: '/class_b',
   },
   {
     key: 'C',
@@ -82,14 +80,12 @@ export const subjects: Subject[] = [
       '눈으로 이해하는 인공신경망',
       '파이썬으로 이해하는 인공신경망',
     ],
-    link: '/class_c',
   },
   {
     key: 'D',
     name: '관심분야',
     engName: 'Domain',
     chapters: ['첨단 융합', '인문·사회', '수리·과학', '창의·예술'],
-    link: '/class_d',
   },
 ];
 
