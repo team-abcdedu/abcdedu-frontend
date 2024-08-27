@@ -14,14 +14,14 @@ function MobileNav() {
               key={item.to}
               to={item.to}
               className={
-                'min-w-218 min-h-32 grid place-items-center text-15 px-12 hover:bg-primary-50'
+                'min-w-200 min-h-32 grid place-items-center text-15 px-12 hover:bg-primary-50'
               }
             >
               {item.text}
             </Link>
           );
         })}
-        <HeaderButtons mobile={true} />
+        <HeaderButtons />
       </li>
     </div>
   );

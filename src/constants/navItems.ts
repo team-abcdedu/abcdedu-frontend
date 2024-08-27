@@ -8,25 +8,6 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'dropdown',
-    to: '/about_us',
-    text: '회사소개',
-    list: [
-      {
-        to: '/about_us',
-        text: '비즈니스',
-      },
-      {
-        to: '/about_us_gallery',
-        text: '갤러리',
-      },
-      {
-        to: '/about_us_history',
-        text: '히스토리',
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
     to: '/classes',
     text: '클래스',
     list: [
@@ -78,7 +59,12 @@ export const headerNavItems: HeaderNavItem[] = [
   {
     type: 'link',
     to: '/contact',
-    text: '문의',
+    text: '과제',
+  },
+  {
+    type: 'link',
+    to: '/contact',
+    text: '설문',
   },
 ];
 
@@ -86,10 +72,6 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
   {
     to: '/',
     text: '홈',
-  },
-  {
-    to: '/about_us',
-    text: '회사소개',
   },
   {
     to: '/classes',
@@ -100,7 +82,11 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     text: '커뮤니티',
   },
   {
-    to: '/contact',
-    text: '문의',
+    to: '/',
+    text: '과제',
+  },
+  {
+    to: '/',
+    text: '설문',
   },
 ];

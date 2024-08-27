@@ -1,54 +1,32 @@
-import { useState } from 'react';
+import UserLogin from '@/assets/icons/user-login.svg?react';
 
-import useModal from '@/hooks/useModal';
-import { AuthModalType } from '@/types/auth';
-
-import AuthModal from './AuthModal';
-
-interface HeaderButtonsProps {
-  mobile: boolean;
-}
-
-function HeaderButtons(props: HeaderButtonsProps) {
-  const { mobile } = props;
-
-  const headerBtnStyle = mobile
-    ? 'min-w-218 min-h-40 w-auto text-15 px-12 rounded'
-    : 'px-24 min-h-40 max-h-46 grid place-items-center rounded-md';
-
-  const { isVisible, toggleModal } = useModal();
-  const [modalType, setModalType] = useState<AuthModalType>('register');
-
-  const handleClick = (type: AuthModalType) => {
-    toggleModal();
-    setModalType(type);
-  };
-
-  const toggleModalType = () => {
-    setModalType(modalType === 'login' ? 'register' : 'login');
-  };
+function HeaderButtons() {
+  const btnStyle =
+    'w-[100px] h-[36px] px-20 py-4 flex-row-center rounded-[20px] text-14';
 
   return (
-    <>
+    <div className={'flex flex-col items-center sm:flex-row gap-10'}>
       <button
-        onClick={() => handleClick('login')}
-        className={`${headerBtnStyle} border-1 border-blue-800 text-blue-800 hover:bg-primary-50`}
+        className={
+          'hidden sm:flex w-[100px] h-[36px] text-14 items-center gap-4'
+        }
       >
+        <UserLogin className={'w-30 h-30'} />
+        <div
+          className={
+            'w-[64px] h-[36px] flex-row-center text-14 font-semibold text-primary-400'
+          }
+        >
+          로그인
+        </div>
+      </button>
+      <button className={`block sm:hidden ${btnStyle} btn-white-pb`}>
         로그인
       </button>
-      <button
-        onClick={() => handleClick('register')}
-        className={`${headerBtnStyle} bg-blue-800 text-white hover:opacity-80`}
-      >
+      <button className={`${btnStyle} bg-primary-400 text-white`}>
         회원가입
       </button>
-      <AuthModal
-        type={modalType}
-        isVisible={isVisible}
-        onClose={toggleModal}
-        onToggle={toggleModalType}
-      />
-    </>
+    </div>
   );
 }
 
