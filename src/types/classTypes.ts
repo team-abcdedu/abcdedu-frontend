@@ -15,3 +15,12 @@ export interface CourseInfo {
 export interface CourseInfoMap {
   [title: string]: CourseInfo;
 }
+
+export interface ExamInfo {
+  title: string;
+  questions: string[];
+}
+
+export interface ExamInfoMap {
+  [classCode: string]: ExamInfo;
+}
