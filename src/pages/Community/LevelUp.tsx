@@ -1,9 +1,11 @@
 import { SortAscending } from '@phosphor-icons/react';
 
-// import Modal from '@/components/Modal';
-// import { useState } from 'react';
+import useModal from '@/hooks/useModal';
 import { posts } from '@/mock/Community';
 
+import WritePostModal from './components/WirtePostModal'; // 경로에 맞게 수정
+
+// 차후 백에서 데이터 받아오기
 const PostTable: React.FC = () => {
   return (
     <table className='py-10 px-20'>
@@ -41,6 +43,8 @@ const PostTable: React.FC = () => {
 };
 
 function LevelUp() {
+  const { isVisible, toggleModal } = useModal();
+
   return (
     <div className='flex flex-col text-center mt-20'>
       <div className='py-30'>
@@ -49,7 +53,7 @@ function LevelUp() {
       </div>
 
       <div className='flex flex-row justify-between px-20 py-10'>
-        <div className='flex items-center'>
+        <div className='flex items-center flex-grow'>
           <button>
             <SortAscending size={32} className='text-gray-400' />
           </button>
@@ -59,9 +63,17 @@ function LevelUp() {
             className='border-3 rounded-lg p-6 pr-50'
           />
         </div>
-        <button className='py-8 px-50 rounded-3xl bg-primary-400 text-white hover:opacity-80`'>
+        <button
+          onClick={toggleModal}
+          className='py-8 px-50 rounded-3xl bg-primary-400 text-white hover:opacity-80`'
+        >
           글쓰기
         </button>
+
+        {/* WritePostModal 렌더링 */}
+        {isVisible && (
+          <WritePostModal isVisible={isVisible} onClose={toggleModal} />
+        )}
       </div>
       <PostTable />
     </div>
