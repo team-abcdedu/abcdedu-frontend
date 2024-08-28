@@ -95,3 +95,15 @@ input {
     #ffffff 100%
   );
 }
+
+/* quill */
+.ql-toolbar.ql-snow {
+  background-color: white;
+}
+
+.ql-container.ql-snow {
+  min-height: 250px;
+  height: auto;
+  border: none !important;
+  background-color: white;
+}
