@@ -61,7 +61,7 @@ body {
   }
 
   .transition-2 {
-    @apply transition duration-200
+    @apply transition duration-200;
   }
 }
 
