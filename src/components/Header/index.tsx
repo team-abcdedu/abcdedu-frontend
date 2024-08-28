@@ -9,7 +9,7 @@ function Header() {
   return (
     <header
       className={
-        'top-0 fixed w-full h-114 sm:h-100 pl-26 pr-17 sm:px-43 md:px-73 lg:px-103 pt-61 pb-17 sm:pt-22 sm:pb-10 flex justify-between items-center sm:flex-col sm:items-stretch bg-white z-10'
+        'top-0 fixed w-full h-70 sm:h-100 pl-26 pr-17 sm:px-43 md:px-73 lg:px-103 py-17 sm:pt-22 sm:pb-10 flex justify-between items-center sm:flex-col sm:items-stretch bg-white z-10'
       }
     >
       <Link to={'/'} className={'flex items-center'}>
