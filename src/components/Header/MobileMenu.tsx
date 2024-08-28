@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 import MenuIcon from '@/assets/icons/menu.svg?react';
-import MobileNav from '@/components/Header/MobileNav';
+
+import MobileNav from './MobileNav';
 
 function MobileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ function MobileMenu() {
       <div>
         <div className={'grid place-items-center'}>
           <MenuIcon
-            className={'w-[32px] h-[32px]'}
+            className={'w-32 h-32'}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           />
         </div>

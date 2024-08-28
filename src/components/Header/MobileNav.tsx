@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import HeaderButtons from '@/components/Header/HeaderButtons';
 import { mobileMenuNavItems } from '@/constants/navItems';
 import { MobileMenuNavItem } from '@/types/navTypes';
+
+import HeaderButtons from './HeaderButtons';
 
 function MobileNav() {
   return (

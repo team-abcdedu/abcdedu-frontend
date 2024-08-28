@@ -19,7 +19,7 @@ function Dropdown(props: PropsType) {
       <div className={`grid place-items-center`}>{defaultLabel}</div>
       {isHovering && (
         <ul
-          className={`top-full absolute min-w-max mt-3 overflow-hidden ${listContainerStyle}`}
+          className={`top-full absolute min-w-max pt-3 overflow-hidden ${listContainerStyle}`}
         >
           <li
             className={`py-7 px-10 flex flex-col-center gap-7 bg-white ${isHovering ? 'animate-dropdown' : ''}`}
