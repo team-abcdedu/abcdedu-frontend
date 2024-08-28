@@ -1,4 +1,4 @@
-import { SortAscending } from '@phosphor-icons/react';
+import { SortAscending, DownloadSimple } from '@phosphor-icons/react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -50,22 +50,41 @@ PostTable.propTypes = {
   onSelectPost: PropTypes.func.isRequired,
 };
 
-const PostDetails = ({ post, onClose }) => {
+const PostDetails = ({ post }) => {
   if (!post) return null;
 
   return (
-    <div className='p-10 border border-gray-300 rounded-lg mt-10'>
-      <h2 className='text-20 font-bold'>{post.title}</h2>
-      <p className='text-gray-500'>{`글쓴이: ${post.author}`}</p>
-      <p className='text-gray-500'>{`작성시간: ${post.timestamp}`}</p>
-      <p className='mt-10'>{post.content}</p>{' '}
-      {/* Assume post has a content field */}
-      <button
+    <div className='text-left border-1 border-gray-300 mt-10'>
+      <hr className='border-1 border-black w-full' />
+
+      <p className='flex flex-row justify-between px-20 py-10 bg-gray-100'>
+        <h2 className='text-20 font-bold'>{post.title}</h2>
+        {/* 클릭하면 파일 다운 받을 수 있게 로직 추가 */}
+        <button>
+          <p className='flex flex-row text-sm text-gray-500'>
+            파일 다운받기
+            <DownloadSimple size={17} />
+          </p>
+        </button>
+      </p>
+      <hr className='border-1 border-gray-300 w-full' />
+
+      <div className='flex flex-row px-20 py-10 space-x-10'>
+        <p className=' text-primary-400 text-sm'>{post.author}</p>
+        <p className='text-gray-400 text-sm'>{`등록일: ${post.timestamp}`}</p>
+        <p className='text-gray-400 text-sm'>{`조회수: ${post.views}`}</p>
+      </div>
+      <hr className='border-1 border-gray-300 w-full' />
+
+      <div className='flex flex-col'>
+        <p className='px-20 my-100'>{post.content}</p>
+      </div>
+      {/* <button
         onClick={onClose}
         className='mt-10 py-5 px-10 bg-gray-200 rounded'
       >
         닫기
-      </button>
+      </button> */}
     </div>
   );
 };
