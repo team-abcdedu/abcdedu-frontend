@@ -24,5 +24,3 @@ export type ProfileEditProps = Pick<
   ProfileEditModalProps,
   'onClose' | 'onToggle'
 >;
-
-export type AccountEditProps = Pick<ProfileEditModalProps, 'onToggle'>;

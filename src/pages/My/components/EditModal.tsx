@@ -18,7 +18,7 @@ export default function EditModal({
       {IS_PROFILE_MODAL ? (
         <EditProfile onClose={onClose} onToggle={onToggle} />
       ) : (
-        <EditAccount onToggle={onToggle} />
+        <EditAccount onClose={onClose} onToggle={onToggle} />
       )}
     </Modal>
   );
