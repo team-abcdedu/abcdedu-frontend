@@ -5,6 +5,7 @@ import {
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
+  useMemo,
   useRef,
 } from 'react';
 import 'quill/dist/quill.snow.css';
@@ -31,6 +32,7 @@ function QuillEditor(
     (delta: DeltaOperation, oldDelta: DeltaOperation, source: string) => void
   >(onTextChange || (() => {}));
   const quillRef = useRef<Quill | null>(null);
+  const editorModule = useMemo(() => modules, []);
 
   useImperativeHandle(ref, () => {
     return {
@@ -50,7 +52,7 @@ function QuillEditor(
       container.ownerDocument.createElement('div'),
     );
     const quill = new Quill(editorContainer, {
-      modules,
+      modules: editorModule,
       theme: 'snow',
       placeholder,
     });
