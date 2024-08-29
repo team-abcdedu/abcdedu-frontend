@@ -107,3 +107,9 @@ input {
   border: none !important;
   background-color: white;
 }
+
+.ql-editor {
+  max-width: 100%;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
