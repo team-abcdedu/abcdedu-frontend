@@ -71,7 +71,7 @@ function QuillEditor(
       if (quillRef.current) quillRef.current = null;
       container.innerHTML = '';
     };
-  }, [ref, placeholder, defaultValue]);
+  }, [ref, placeholder, defaultValue, editorModule]);
 
   return <div ref={containerRef}></div>;
 }
