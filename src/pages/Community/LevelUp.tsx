@@ -5,8 +5,10 @@ import { useState } from 'react';
 import useModal from '@/hooks/useModal';
 import { posts as initialPosts } from '@/mock/Community';
 
-import WritePostModal from './components/WirtePostModal'; // 경로에 맞게 수정
+import WritePostModal from './components/WirtePostModal';
 
+// 추후 백에서 받아올 예정
+// 임시 데이터
 const PostTable = ({ posts, onSelectPost }) => {
   return (
     <div className='overflow-x-auto'>
@@ -128,8 +130,8 @@ function LevelUp() {
     setSelectedPost(post);
   };
 
-  const handleSearch = event => {
-    if (event.key === 'Enter') {
+  const handleSearch = e => {
+    if (e.key === 'Enter') {
       const filtered = initialPosts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()),
       );
