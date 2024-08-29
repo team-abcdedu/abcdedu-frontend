@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
-import { posts } from '@/mock/Community';
+import { posts as initialPosts } from '@/mock/Community';
 
 import WritePostModal from './components/WirtePostModal'; // 경로에 맞게 수정
 
-const PostTable = ({ onSelectPost }) => {
+const PostTable = ({ posts, onSelectPost }) => {
   return (
     <div className='overflow-x-auto'>
       <table className='w-full text-sm sm:text-base'>
@@ -32,7 +32,7 @@ const PostTable = ({ onSelectPost }) => {
               <td className='px-20 py-10'>{post.id}</td>
               <td className='px-20 py-10'>
                 <p>{post.title}</p>
-                <div className='block md:hidden text-xs  text-gray-500'>
+                <div className='block md:hidden text-xs text-gray-500'>
                   <p>
                     {post.author} | {post.timestamp}
                   </p>
@@ -58,10 +58,20 @@ const PostTable = ({ onSelectPost }) => {
 };
 
 PostTable.propTypes = {
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      timestamp: PropTypes.string.isRequired,
+      views: PropTypes.number.isRequired,
+      comments: PropTypes.number.isRequired,
+      likes: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
   onSelectPost: PropTypes.func.isRequired,
 };
 
-// 상세 글 보기
 const PostDetails = ({ post }) => {
   if (!post) return null;
 
@@ -71,7 +81,6 @@ const PostDetails = ({ post }) => {
 
       <p className='flex flex-col sm:flex-row justify-between px-4 sm:px-20 py-4 sm:py-10 bg-gray-100'>
         <h2 className='text-20 font-bold'>{post.title}</h2>
-        {/* 클릭하면 파일 다운 받을 수 있게 로직 추가 */}
         <button>
           <p className='flex flex-row text-sm text-gray-500'>
             파일 다운받기
@@ -91,12 +100,6 @@ const PostDetails = ({ post }) => {
       <div className='flex flex-col'>
         <p className='px-20 my-100'>{post.content}</p>
       </div>
-      {/* <button
-        onClick={onClose}
-        className='mt-10 py-5 px-10 bg-gray-200 rounded'
-      >
-        목록 전체 보기
-      </button> */}
     </div>
   );
 };
@@ -118,9 +121,20 @@ PostDetails.propTypes = {
 function LevelUp() {
   const { isVisible, toggleModal } = useModal();
   const [selectedPost, setSelectedPost] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredPosts, setFilteredPosts] = useState(initialPosts);
 
   const handleSelectPost = post => {
     setSelectedPost(post);
+  };
+
+  const handleSearch = event => {
+    if (event.key === 'Enter') {
+      const filtered = initialPosts.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setFilteredPosts(filtered);
+    }
   };
 
   const handleCloseDetails = () => {
@@ -146,12 +160,15 @@ function LevelUp() {
           <input
             type='text'
             placeholder='제목으로 게시물 검색하기'
-            className='border-3 rounded-lg pr-2 md: p-6 md:pr-50'
+            className='border-3 rounded-lg pr-2 md:p-6 md:pr-50'
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            onKeyDown={handleSearch}
           />
         </div>
         <button
           onClick={toggleModal}
-          className='text-sm py-2 px-10  md:py-8 md:px-30 rounded-3xl bg-primary-400 text-white hover:opacity-80`'
+          className='text-sm py-2 px-10 md:py-8 md:px-30 rounded-3xl bg-primary-400 text-white hover:opacity-80'
         >
           글쓰기
         </button>
@@ -159,7 +176,7 @@ function LevelUp() {
       {isVisible && (
         <WritePostModal isVisible={isVisible} onClose={toggleModal} />
       )}
-      <PostTable onSelectPost={handleSelectPost} />
+      <PostTable posts={filteredPosts} onSelectPost={handleSelectPost} />
     </div>
   );
 }
