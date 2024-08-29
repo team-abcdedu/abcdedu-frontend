@@ -1,14 +1,35 @@
-import { ExamInfo } from '@/types/classTypes';
+import DOMPurify from 'dompurify';
+import Quill from 'quill';
+import { FormEvent, useRef } from 'react';
 
-import Editor from './Editor';
+import QuillEditor from '@/components/QuillEditor';
+import { ExamInfo } from '@/types/classTypes';
 
 function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
   const { title, questions } = examInfo;
+  const quillRefs = useRef<({ getQuill: () => Quill | null } | null)[]>([]);
+
+  const setQuillRef =
+    (index: number) => (el: { getQuill: () => Quill | null }) => {
+      quillRefs.current[index] = el;
+    };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    quillRefs.current.map((quillRef, index) => {
+      const rawAnswer = quillRef?.getQuill()?.getSemanticHTML() || '';
+      const clean = DOMPurify.sanitize(rawAnswer || '');
+      console.log(index, 'rawAnswer: ', rawAnswer, ' / clean: ', clean);
+      return null;
+    });
+  };
+
   return (
     <form
       className={
         'w-full h-max py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-30 self-center bg-neutral-100'
       }
+      onSubmit={handleSubmit}
     >
       <h2
         className={
@@ -31,7 +52,7 @@ function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
           >
             {index + 1}. {question}
           </div>
-          <Editor />
+          <QuillEditor ref={setQuillRef(index)} placeholder={'답안 입력하기'} />
         </div>
       ))}
       <button
