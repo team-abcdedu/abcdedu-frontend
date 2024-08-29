@@ -7,23 +7,6 @@ import { posts as initialPosts } from '@/mock/Community';
 import WritePostModal from './components/WirtePostModal';
 import { Post, PostTableProps, PostDetailsProps } from './types/index';
 
-// Post 타입 정의
-// interface Post {
-//   id: number;
-//   title: string;
-//   author: string;
-//   timestamp: string;
-//   views: number;
-//   comments: number;
-//   likes: number;
-//   content?: string; // content는 PostDetails에서만 사용되므로 optional로 지정
-// }
-
-// interface PostTableProps {
-//   posts: Post[];
-//   onSelectPost: (post: Post) => void;
-// }
-
 const PostTable: React.FC<PostTableProps> = ({ posts, onSelectPost }) => {
   return (
     <div className='overflow-x-auto'>
@@ -73,11 +56,6 @@ const PostTable: React.FC<PostTableProps> = ({ posts, onSelectPost }) => {
     </div>
   );
 };
-
-// interface PostDetailsProps {
-//   post: Post;
-//   onClose: () => void;
-// }
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
   if (!post) return null;
