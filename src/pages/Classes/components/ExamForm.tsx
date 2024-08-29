@@ -1,9 +1,10 @@
-import DOMPurify from 'dompurify';
+// import DOMPurify from 'dompurify';
 import Quill from 'quill';
 import { FormEvent, useRef } from 'react';
 
 import QuillEditor from '@/components/QuillEditor';
 import { ExamInfo } from '@/types/classTypes';
+import base64ToFile from '@/utils/base64ToFile';
 
 function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
   const { title, questions } = examInfo;
@@ -14,12 +15,25 @@ function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
       quillRefs.current[index] = el;
     };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    quillRefs.current.map((quillRef, index) => {
+    quillRefs.current.map(async (quillRef, index) => {
       const rawAnswer = quillRef?.getQuill()?.getSemanticHTML() || '';
-      const clean = DOMPurify.sanitize(rawAnswer || '');
-      console.log(index, 'rawAnswer: ', rawAnswer, ' / clean: ', clean);
+
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = rawAnswer;
+      const imgTags = tempDiv.getElementsByTagName('img');
+
+      const imgPromises = Array.from(imgTags).map(async (imgTag, imgIndex) => {
+        return base64ToFile(imgTag.src, `image${imgIndex}.webp`);
+      });
+
+      const imgFiles = await Promise.all(imgPromises);
+      console.log(index, '답변', rawAnswer);
+      console.log(index, '이미지 파일', imgFiles);
+      // 이미지 파일들 서버로 전송하고 응답받은 이미지 URL로 교체
+
+      // const clean = DOMPurify.sanitize(rawAnswer || '');
       return null;
     });
   };
