@@ -7,57 +7,69 @@ import { posts } from '@/mock/Community';
 
 import WritePostModal from './components/WirtePostModal'; // 경로에 맞게 수정
 
-// 차후 백에서 데이터 받아오기
-const PostTable: React.FC = ({ onSelectPost }) => {
+const PostTable = ({ onSelectPost }) => {
   return (
-    <table className='py-10 px-20'>
-      <thead>
-        <tr className='border-t-2 border-t border-t-gray-400 border-b-2 border-b border-b-primary-400'>
-          <th className='px-20 py-10'>No.</th>
-          <th className='px-20 py-10'>제목</th>
-          <th className='px-20 py-10'>글쓴이</th>
-          <th className='px-20 py-10'>작성시간</th>
-          <th className='px-20 py-10'>조회수</th>
-          <th className='px-20 py-10'>댓글</th>
-          <th className='px-20 py-10'>좋아요</th>
-        </tr>
-      </thead>
-      <tbody>
-        {posts.map(post => (
-          <tr
-            key={post.id}
-            className='space-x-5 border-b-1 border-b border-b-gray-400'
-            onClick={() => onSelectPost(post)}
-          >
-            {/* <div className='flex flex-row py-10'> */}
-            <td className='px-20 py-10'>{post.id}</td>
-            <td className='px-20 py-10'>{post.title}</td>
-            <td className='px-20 py-10'>{post.author}</td>
-            <td className='px-20 py-10'>{post.timestamp}</td>
-            <td className='px-20 py-10'>{post.views}</td>
-            <td className='px-20 py-10'>{post.comments}</td>
-            <td className='px-20 py-10'>{post.likes}</td>
-            {/* </div> */}
+    <div className='overflow-x-auto'>
+      <table className='w-full text-sm sm:text-base'>
+        <thead>
+          <tr className='border-t-2 border-t-gray-400 border-b-2 border-b-primary-400'>
+            <th className='px-20 py-10'>No.</th>
+            <th className='px-20 py-10'>제목</th>
+            <th className='hidden md:table-cell px-20 py-10'>글쓴이</th>
+            <th className='hidden md:table-cell px-20 py-10'>작성시간</th>
+            <th className='hidden md:table-cell px-20 py-10'>조회수</th>
+            <th className='hidden md:table-cell px-20 py-10'>댓글</th>
+            <th className='hidden md:table-cell px-20 py-10'>좋아요</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {posts.map(post => (
+            <tr
+              key={post.id}
+              className='space-x-5 border-b border-b-gray-400 cursor-pointer'
+              onClick={() => onSelectPost(post)}
+            >
+              <td className='px-20 py-10'>{post.id}</td>
+              <td className='px-20 py-10'>
+                <p>{post.title}</p>
+                <div className='block md:hidden text-xs  text-gray-500'>
+                  <p>
+                    {post.author} | {post.timestamp}
+                  </p>
+                </div>
+              </td>
+              <td className='hidden md:table-cell px-20 py-10'>
+                {post.author}
+              </td>
+              <td className='hidden md:table-cell px-20 py-10'>
+                {post.timestamp}
+              </td>
+              <td className='hidden md:table-cell px-20 py-10'>{post.views}</td>
+              <td className='hidden md:table-cell px-20 py-10'>
+                {post.comments}
+              </td>
+              <td className='hidden md:table-cell px-20 py-10'>{post.likes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
-// PropTypes를 PostTable에 추가
 PostTable.propTypes = {
   onSelectPost: PropTypes.func.isRequired,
 };
 
+// 상세 글 보기
 const PostDetails = ({ post }) => {
   if (!post) return null;
 
   return (
-    <div className='text-left border-1 border-gray-300 mt-10'>
+    <div className='text-left border border-gray-300 mt-10'>
       <hr className='border-1 border-black w-full' />
 
-      <p className='flex flex-row justify-between px-20 py-10 bg-gray-100'>
+      <p className='flex flex-col sm:flex-row justify-between px-4 sm:px-20 py-4 sm:py-10 bg-gray-100'>
         <h2 className='text-20 font-bold'>{post.title}</h2>
         {/* 클릭하면 파일 다운 받을 수 있게 로직 추가 */}
         <button>
@@ -83,13 +95,12 @@ const PostDetails = ({ post }) => {
         onClick={onClose}
         className='mt-10 py-5 px-10 bg-gray-200 rounded'
       >
-        닫기
+        목록 전체 보기
       </button> */}
     </div>
   );
 };
 
-// PropTypes를 PostDetails에 추가
 PostDetails.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -123,12 +134,11 @@ function LevelUp() {
         <h3 className='text-primary-400 text-30 font-bold'>등업 게시판</h3>
       </div>
 
-      {/* 이 사이에 글 누르면 상세페이지 */}
       {selectedPost && (
         <PostDetails post={selectedPost} onClose={handleCloseDetails} />
       )}
 
-      <div className='flex flex-row justify-between px-20 py-10'>
+      <div className='flex flex-row w-full justify-between px-20 py-10'>
         <div className='flex items-center flex-grow'>
           <button>
             <SortAscending size={32} className='text-gray-400' />
@@ -136,21 +146,19 @@ function LevelUp() {
           <input
             type='text'
             placeholder='제목으로 게시물 검색하기'
-            className='border-3 rounded-lg p-6 pr-50'
+            className='border-3 rounded-lg pr-2 md: p-6 md:pr-50'
           />
         </div>
         <button
           onClick={toggleModal}
-          className='py-8 px-50 rounded-3xl bg-primary-400 text-white hover:opacity-80`'
+          className='text-sm py-2 px-10  md:py-8 md:px-30 rounded-3xl bg-primary-400 text-white hover:opacity-80`'
         >
           글쓰기
         </button>
-
-        {/* WritePostModal 렌더링 */}
-        {isVisible && (
-          <WritePostModal isVisible={isVisible} onClose={toggleModal} />
-        )}
       </div>
+      {isVisible && (
+        <WritePostModal isVisible={isVisible} onClose={toggleModal} />
+      )}
       <PostTable onSelectPost={handleSelectPost} />
     </div>
   );
