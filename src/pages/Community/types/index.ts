@@ -1,21 +1,21 @@
-export interface PostData {
+export interface Post {
   id: number;
   title: string;
   author: string;
   timestamp: string;
-  content: string;
-  // onclose: boolean;
   views: number;
   comments: number;
   likes: number;
+  content?: string; // content는 PostDetails에서만 사용되므로 optional로 지정
 }
 
 export interface PostTableProps {
-  onSelectPost: (post: PostData) => void;
+  posts: Post[];
+  onSelectPost: (post: Post) => void;
 }
 
 export interface PostDetailsProps {
-  post: PostData | null;
+  post: Post;
   onClose: () => void;
 }
 
