@@ -81,7 +81,7 @@ const PostDetails = ({ post }) => {
       </p>
       <hr className='border-1 border-gray-300 w-full' />
 
-      <div className='flex flex-row px-20 py-10 space-x-10'>
+      <div className='flex flex-row px-10 md:px-20 py-10 space-x-10'>
         <p className=' text-primary-400 text-sm'>{post.author}</p>
         <p className='text-gray-400 text-sm'>{`등록일: ${post.timestamp}`}</p>
         <p className='text-gray-400 text-sm'>{`조회수: ${post.views}`}</p>
