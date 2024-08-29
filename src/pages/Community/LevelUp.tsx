@@ -1,15 +1,29 @@
 import { SortAscending, DownloadSimple } from '@phosphor-icons/react';
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
 import { posts as initialPosts } from '@/mock/Community';
 
 import WritePostModal from './components/WirtePostModal';
 
-// 추후 백에서 받아올 예정
-// 임시 데이터
-const PostTable = ({ posts, onSelectPost }) => {
+// Post 타입 정의
+interface Post {
+  id: number;
+  title: string;
+  author: string;
+  timestamp: string;
+  views: number;
+  comments: number;
+  likes: number;
+  content?: string; // content는 PostDetails에서만 사용되므로 optional로 지정
+}
+
+interface PostTableProps {
+  posts: Post[];
+  onSelectPost: (post: Post) => void;
+}
+
+const PostTable: React.FC<PostTableProps> = ({ posts, onSelectPost }) => {
   return (
     <div className='overflow-x-auto'>
       <table className='w-full text-sm sm:text-base'>
@@ -59,22 +73,12 @@ const PostTable = ({ posts, onSelectPost }) => {
   );
 };
 
-PostTable.propTypes = {
-  posts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      timestamp: PropTypes.string.isRequired,
-      views: PropTypes.number.isRequired,
-      comments: PropTypes.number.isRequired,
-      likes: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-  onSelectPost: PropTypes.func.isRequired,
-};
+interface PostDetailsProps {
+  post: Post;
+  onClose: () => void;
+}
 
-const PostDetails = ({ post }) => {
+const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
   if (!post) return null;
 
   return (
@@ -106,31 +110,17 @@ const PostDetails = ({ post }) => {
   );
 };
 
-PostDetails.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    views: PropTypes.number.isRequired,
-    comments: PropTypes.number.isRequired,
-    likes: PropTypes.number.isRequired,
-  }),
-  onClose: PropTypes.func.isRequired,
-};
-
-function LevelUp() {
+const LevelUp: React.FC = () => {
   const { isVisible, toggleModal } = useModal();
-  const [selectedPost, setSelectedPost] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState(initialPosts);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
 
-  const handleSelectPost = post => {
+  const handleSelectPost = (post: Post) => {
     setSelectedPost(post);
   };
 
-  const handleSearch = e => {
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const filtered = initialPosts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -181,6 +171,6 @@ function LevelUp() {
       <PostTable posts={filteredPosts} onSelectPost={handleSelectPost} />
     </div>
   );
-}
+};
 
 export default LevelUp;
