@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 import { StrictPropsWithChildren } from '@/types';
 
@@ -17,6 +17,11 @@ interface ModalProps {
   size?: ModalSize;
 }
 
+const variants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 export default function Modal({
   isVisible,
   size = 'md',
@@ -32,35 +37,29 @@ export default function Modal({
     return `min-w-[480px] max-xs:w-[calc(100vw_-_16px)] max-xs:min-w-0`;
   };
 
-  const variants = {
-    visible: { opacity: 1 },
-    hidden: { opacity: 0 },
-  };
-
   return (
-    <Portal>
-      <AnimatePresence>
-        {isVisible && (
-          <motion.div
-            id='modal'
-            variants={variants}
-            transition={{ duration: 0.2 }}
-            initial='hidden'
-            animate='visible'
-            exit='hidden'
-          >
+    <AnimatePresence>
+      {isVisible && (
+        <Portal>
+          <div id='modal'>
             {showBackdrop && <Backdrop onClick={onClose} />}
-            <div
+            <motion.div
+              role='dialog'
               className={`fixed z-modal bg-white position-center rounded-md 
                 max-h-[calc(100dvh_-_16px)] flex flex-col ${getSizingStyle()}`}
               onClick={e => e.stopPropagation()}
+              initial='hidden'
+              animate='visible'
+              exit='hidden'
+              variants={variants}
+              transition={{ duration: 0.2 }}
             >
               {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Portal>
+            </motion.div>
+          </div>
+        </Portal>
+      )}
+    </AnimatePresence>
   );
 }
 

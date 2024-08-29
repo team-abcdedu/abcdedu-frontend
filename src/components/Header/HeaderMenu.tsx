@@ -1,5 +1,5 @@
-import HeaderButtons from '@/components/Header/HeaderButtons';
-import HeaderNav from '@/components/Header/HeaderNav';
+import HeaderButtons from './HeaderButtons';
+import HeaderNav from './HeaderNav';
 
 function HeaderMenu() {
   return (

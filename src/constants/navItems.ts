@@ -58,12 +58,12 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
-    to: '/contact',
+    to: '/assignment',
     text: '과제',
   },
   {
     type: 'link',
-    to: '/contact',
+    to: '/survey',
     text: '설문',
   },
 ];

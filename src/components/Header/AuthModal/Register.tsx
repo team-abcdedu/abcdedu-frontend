@@ -1,10 +1,14 @@
 import { X } from '@phosphor-icons/react';
 
 import Modal from '@/components/Modal';
+import useRegisterForm from '@/hooks/auth/useRegisterForm';
 import { AuthModalActions } from '@/types/auth';
 
 export default function Register({ onClose, onToggle }: AuthModalActions) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
+
+  const { errors, fieldRules, register, onSubmit } = useRegisterForm();
+
   return (
     <>
       <Modal.Content>
@@ -21,38 +25,58 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
             <div className={fieldStyle}>
               <label htmlFor='name'>이름</label>
               <input
-                id='name'
+                {...register('name', fieldRules.name)}
                 type='text'
                 className='input-primary'
                 placeholder='John Doe'
               />
+              {errors.name && (
+                <span className='text-12 text-red-500'>
+                  {errors.name.message}
+                </span>
+              )}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='email'>이메일</label>
               <input
-                id='email'
+                {...register('email', fieldRules.email)}
                 type='text'
                 className='input-primary'
                 placeholder='johndoe@gmail.com'
               />
+              {errors.email && (
+                <span className='text-12 text-red-500'>
+                  {errors.email.message}
+                </span>
+              )}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='password'>비밀번호</label>
               <input
-                id='password'
+                {...register('password', fieldRules.password)}
                 type='password'
                 className='input-primary'
                 placeholder='********'
               />
+              {errors.password && (
+                <span className='text-12 text-red-500'>
+                  {errors.password.message}
+                </span>
+              )}
             </div>
             <div className={fieldStyle}>
-              <label htmlFor='confrimPw'>비밀번호 확인</label>
+              <label htmlFor='confirmPw'>비밀번호 확인</label>
               <input
-                id='confrimPw'
+                {...register('confirmPw', fieldRules.confirmPw)}
                 type='password'
                 className='input-primary'
                 placeholder='********'
               />
+              {errors.confirmPw && (
+                <span className='text-12 text-red-500'>
+                  {errors.confirmPw.message}
+                </span>
+              )}
             </div>
           </form>
         </div>
@@ -62,6 +86,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
           type='submit'
           className='w-full h-45 px-24 bg-primary-300 text-15 
         text-white font-semibold rounded-md'
+          onClick={onSubmit}
         >
           가입하기
         </button>
