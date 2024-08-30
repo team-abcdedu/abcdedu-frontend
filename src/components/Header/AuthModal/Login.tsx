@@ -26,6 +26,7 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
               <label htmlFor='email'>이메일</label>
               <input
                 {...register('email', { required: true })}
+                id='email'
                 type='text'
                 className='input-primary'
                 placeholder='johndoe@gmail.com'
@@ -35,6 +36,7 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
               <label htmlFor='password'>비밀번호</label>
               <input
                 {...register('password', { required: true })}
+                id='password'
                 type='password'
                 className='input-primary'
                 placeholder='********'
