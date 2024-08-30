@@ -56,10 +56,10 @@ export function PostDetails({ post }: PostDetailsProps) {
   if (!post) return null;
 
   return (
-    <div className='text-left border border-gray-300 mt-10'>
-      <hr className='border-1 border-black w-full' />
+    <div className='text-left mt-10 '>
+      <hr className='border-1 border-black w-full h-full' />
 
-      <p className='flex flex-col sm:flex-row justify-between px-4 sm:px-20 py-4 sm:py-10 bg-gray-100'>
+      <p className='flex flex-col md:flex-row justify-between px-4 md:px-20 py-4 md:py-10 bg-gray-100'>
         <h2 className='text-20 font-bold'>{post.title}</h2>
         <button>
           <p className='flex flex-row text-sm text-gray-500'>
@@ -80,6 +80,7 @@ export function PostDetails({ post }: PostDetailsProps) {
       <div className='flex flex-col'>
         <p className='px-20 my-100'>{post.content}</p>
       </div>
+      <hr className='border-1 border-gray-300 w-full' />
     </div>
   );
 }
