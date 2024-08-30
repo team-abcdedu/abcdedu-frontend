@@ -61,6 +61,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'consistent-return': 'off',
     'react-refresh/only-export-components': 'off',
+    'class-methods-use-this': 'off',
     camelcase: 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
