@@ -1,16 +1,11 @@
-// WritePostModal.tsx
 import { X } from '@phosphor-icons/react';
 import React, { useState } from 'react';
 
 import Modal from '@/components/Modal';
 
-import { WritePostModalProps, WritePostFormData } from '../types/index';
+import { WritePostModalProps, WritePostFormData } from '../types/WriteModal';
 
-const WritePostModal: React.FC<WritePostModalProps> = ({
-  isVisible,
-  onClose,
-}) => {
-  // 값 설정
+function WritePostModal({ isVisible, onClose }: WritePostModalProps) {
   const [formData, setFormData] = useState<WritePostFormData>({
     title: '',
     content: '',
@@ -29,7 +24,6 @@ const WritePostModal: React.FC<WritePostModalProps> = ({
     }));
   };
 
-  // 파일 변경
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : undefined;
     setFormData(prevData => ({
@@ -38,9 +32,7 @@ const WritePostModal: React.FC<WritePostModalProps> = ({
     }));
   };
 
-  // 글 쓰고 게시판에 등록
   const handleSubmit = () => {
-    // 추후 폼 제출 로직 추가
     console.log('Form submitted:', formData);
     onClose();
   };
@@ -139,6 +131,6 @@ const WritePostModal: React.FC<WritePostModalProps> = ({
       </Modal.Content>
     </Modal>
   );
-};
+}
 
 export default WritePostModal;
