@@ -28,6 +28,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
               <label htmlFor='name'>이름</label>
               <input
                 {...register('name', fieldRules.name)}
+                id='name'
                 type='text'
                 className='input-primary'
                 placeholder='John Doe'
@@ -42,6 +43,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
               <label htmlFor='email'>이메일</label>
               <input
                 {...register('email', fieldRules.email)}
+                id='email'
                 type='text'
                 className='input-primary'
                 placeholder='johndoe@gmail.com'
@@ -56,6 +58,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
               <label htmlFor='password'>비밀번호</label>
               <input
                 {...register('password', fieldRules.password)}
+                id='password'
                 type='password'
                 className='input-primary'
                 placeholder='********'
@@ -71,6 +74,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
               <label htmlFor='confirmPw'>비밀번호 확인</label>
               <input
                 {...register('confirmPw', fieldRules.confirmPw)}
+                id='confirmPw'
                 type='password'
                 className='input-primary'
                 placeholder='********'
