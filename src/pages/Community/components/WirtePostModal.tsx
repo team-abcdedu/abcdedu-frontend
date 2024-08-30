@@ -46,7 +46,7 @@ const WritePostModal: React.FC<WritePostModalProps> = ({
   };
 
   return (
-    <Modal isVisible={isVisible} onClose={onClose}>
+    <Modal isVisible={isVisible} onClose={onClose} size='lg'>
       <Modal.Content>
         <div className='flex flex-col'>
           <div className='flex justify-between items-center'>
