@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import useModal from '@/hooks/useModal';
 import { posts as initialPosts } from '@/mock/Community';
 
-import { PostTable } from './components/TempData';
+import { PostTable } from './components/PostData';
 import WritePostModal from './components/WirtePostModal';
-import { Post } from './types/TempData';
+import { Post } from './types/PostData';
 
 function LevelUp() {
   const { isVisible, toggleModal } = useModal();

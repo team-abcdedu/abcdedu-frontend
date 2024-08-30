@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { posts } from '@/mock/Community';
 
-import { PostDetails } from './components/TempData';
+import { PostDetails } from './components/PostData';
 // import { Comment } from './types/Comment';
 
 function PostDetail() {

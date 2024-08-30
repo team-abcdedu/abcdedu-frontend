@@ -1,6 +1,6 @@
 import { DownloadSimple } from '@phosphor-icons/react';
 
-import { PostTableProps, PostDetailsProps } from '../types/TempData';
+import { PostTableProps, PostDetailsProps } from '../types/PostData';
 
 export function PostTable({ posts, onSelectPost }: PostTableProps) {
   return (
@@ -59,7 +59,7 @@ export function PostDetails({ post }: PostDetailsProps) {
     <div className='text-left mt-10'>
       <hr className='border-1 border-black w-full' />
 
-      <p className='flex flex-col sm:flex-row justify-between px-4 sm:px-20 py-4 sm:py-10 bg-gray-100'>
+      <p className='flex flex-col sm:flex-row justify-between px-20 py-4 sm:py-10 bg-gray-100'>
         <h2 className='text-20 font-bold'>{post.title}</h2>
         <button>
           <p className='flex flex-row text-sm text-gray-500'>
