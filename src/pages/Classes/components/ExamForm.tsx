@@ -41,13 +41,13 @@ function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
   return (
     <form
       className={
-        'w-full h-max py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-30 self-center bg-neutral-100'
+        'w-full h-max py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100'
       }
       onSubmit={handleSubmit}
     >
       <h2
         className={
-          'min-w-[350px] md:min-w-[700px] text-40 font-bold text-center md:text-start'
+          'min-w-[350px] md:min-w-[700px] text-30 md:text-40 font-bold text-center md:text-start'
         }
       >
         {title}
@@ -61,7 +61,7 @@ function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
         >
           <div
             className={
-              'pl-20 indent-[-20px] text-20 font-semibold whitespace-pre-wrap'
+              'pl-20 indent-[-20px] text-16 md:text-20 font-semibold md:whitespace-pre-wrap'
             }
           >
             {index + 1}. {question}
