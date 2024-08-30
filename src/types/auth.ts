@@ -12,3 +12,7 @@ export type AuthModalActions = Pick<AuthModalProps, 'onClose' | 'onToggle'>;
 export interface UseAuthFormProps {
   onSuccess: () => void;
 }
+
+export interface TokenResponse {
+  accessToken: string;
+}
