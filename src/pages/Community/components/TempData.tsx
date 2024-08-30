@@ -2,12 +2,7 @@ import { DownloadSimple } from '@phosphor-icons/react';
 
 import { PostTableProps, PostDetailsProps } from '../types/TempData';
 
-/* eslint-disable react/prop-types */ // 이 줄을 추가
-
-export const PostTable: React.FC<PostTableProps> = ({
-  posts,
-  onSelectPost,
-}) => {
+export function PostTable({ posts, onSelectPost }: PostTableProps) {
   return (
     <div className='overflow-x-auto'>
       <table className='w-full text-sm sm:text-base'>
@@ -55,9 +50,9 @@ export const PostTable: React.FC<PostTableProps> = ({
       </table>
     </div>
   );
-};
+}
 
-export const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
+export function PostDetails({ post }: PostDetailsProps) {
   if (!post) return null;
 
   return (
@@ -87,4 +82,4 @@ export const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
       </div>
     </div>
   );
-};
+}
