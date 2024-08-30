@@ -7,6 +7,7 @@ import Class from '@/pages/Classes/[courseId]/[classCode]';
 import Community from '@/pages/Community';
 import Board from '@/pages/Community/Board';
 import LevelUp from '@/pages/Community/LevelUp';
+import PostDetail from '@/pages/Community/PostDetail';
 import Project from '@/pages/Community/Project';
 import Qna from '@/pages/Community/Qna';
 import Submit from '@/pages/Community/Submit';
@@ -40,6 +41,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: '/community_levelup',
         element: <LevelUp />,
+      },
+      {
+        path: '/community_levelup/:postId',
+        element: <PostDetail />,
       },
       {
         path: '/community_project',
