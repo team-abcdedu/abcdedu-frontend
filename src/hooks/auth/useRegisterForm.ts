@@ -1,4 +1,8 @@
+import { isAxiosError } from 'axios';
 import { useForm, FieldValues, RegisterOptions } from 'react-hook-form';
+
+import auth from '@/services/auth';
+import { UseAuthFormProps } from '@/types/auth';
 
 interface IRegisterFormInput {
   name: string;
@@ -11,7 +15,7 @@ type FieldRules = {
   [K in keyof IRegisterFormInput]: RegisterOptions<IRegisterFormInput, K>;
 };
 
-export default function useRegisterForm() {
+export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
   const {
     register,
     formState: { errors },
@@ -46,12 +50,26 @@ export default function useRegisterForm() {
       },
     },
   };
-  const signUp = (data: FieldValues) => {
-    alert(JSON.stringify(data)); // 확인용, 추후 제거
-    // signup
+
+  const signUp = async (data: FieldValues) => {
+    const { name, email, password } = data;
+    try {
+      await auth.signUp(name, email, password);
+      alert('회원가입이 완료되었습니다.');
+      onSuccess();
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.status) {
+        const { status } = error.response;
+        const {
+          result: { message },
+        } = error.response.data;
+        if (status === 409) alert(message);
+      }
+      console.log(error);
+    }
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     handleSubmit(signUp)();
   };
 

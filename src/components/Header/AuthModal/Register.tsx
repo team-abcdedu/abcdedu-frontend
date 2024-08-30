@@ -7,7 +7,9 @@ import { AuthModalActions } from '@/types/auth';
 export default function Register({ onClose, onToggle }: AuthModalActions) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
 
-  const { errors, fieldRules, register, onSubmit } = useRegisterForm();
+  const { errors, fieldRules, register, onSubmit } = useRegisterForm({
+    onSuccess: onToggle,
+  });
 
   return (
     <>
