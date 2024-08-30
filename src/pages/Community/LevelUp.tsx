@@ -1,21 +1,23 @@
 import { SortAscending } from '@phosphor-icons/react';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import useModal from '@/hooks/useModal';
 import { posts as initialPosts } from '@/mock/Community';
 
-import { PostTable, PostDetails } from './components/TempData';
+import { PostTable } from './components/TempData';
 import WritePostModal from './components/WirtePostModal';
 import { Post } from './types/TempData';
 
 function LevelUp() {
   const { isVisible, toggleModal } = useModal();
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
+  const navigate = useNavigate();
 
   const handleSelectPost = (post: Post) => {
-    setSelectedPost(post);
+    // 게시글을 선택하면 해당 경로로 이동
+    navigate(`/community_levelup/${post.id}`);
   };
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -27,20 +29,12 @@ function LevelUp() {
     }
   };
 
-  const handleCloseDetails = () => {
-    setSelectedPost(null);
-  };
-
   return (
     <div className='flex flex-col text-center mt-20'>
       <div className='py-30'>
         <p className='text-gray-400'>ABCDEdu 커뮤니티</p>
         <h3 className='text-primary-400 text-30 font-bold'>등업 게시판</h3>
       </div>
-
-      {selectedPost && (
-        <PostDetails post={selectedPost} onClose={handleCloseDetails} />
-      )}
 
       <div className='flex flex-row w-full justify-between px-20 py-10'>
         <div className='flex items-center flex-grow'>
