@@ -1,7 +1,7 @@
 import { post } from '@/libs/api';
 
 class AuthApi {
-  async signUp(name: string, email: string, password: string) {
+  static async signUp(name: string, email: string, password: string) {
     return post('/auth/signup', {
       name,
       email,
@@ -10,4 +10,4 @@ class AuthApi {
   }
 }
 
-export default new AuthApi();
+export default AuthApi;
