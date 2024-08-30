@@ -59,6 +59,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
                 type='password'
                 className='input-primary'
                 placeholder='********'
+                autoComplete='false'
               />
               {errors.password && (
                 <span className='text-12 text-red-500'>
@@ -73,6 +74,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
                 type='password'
                 className='input-primary'
                 placeholder='********'
+                autoComplete='false'
               />
               {errors.confirmPw && (
                 <span className='text-12 text-red-500'>
