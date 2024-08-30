@@ -1,7 +1,8 @@
 import { isAxiosError } from 'axios';
-import { useForm, FieldValues, RegisterOptions } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 
 import auth from '@/services/auth';
+import { FieldRules } from '@/types';
 import { UseAuthFormProps } from '@/types/auth';
 
 interface IRegisterFormInput {
@@ -11,10 +12,6 @@ interface IRegisterFormInput {
   confirmPw: string;
 }
 
-type FieldRules = {
-  [K in keyof IRegisterFormInput]: RegisterOptions<IRegisterFormInput, K>;
-};
-
 export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
   const {
     register,
@@ -22,7 +19,7 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
     handleSubmit,
   } = useForm<IRegisterFormInput>({ mode: 'onBlur' }); // blur 시 유효성 검사, 재검증 onChange(default)
 
-  const fieldRules: FieldRules = {
+  const fieldRules: FieldRules<IRegisterFormInput> = {
     name: { required: '이름을 입력하세요.' },
     email: {
       required: '이메일을 입력하세요.',
