@@ -27,6 +27,11 @@ export default function MyPage() {
     setInfoType(infoType === 'profile' ? 'account' : 'profile');
   };
 
+  const handleClose = () => {
+    toggleModal();
+    setInfoType('profile'); // 프로필 수정 모달로 초기화
+  };
+
   const bgColor = !mockData.profileImg && 'bg-primary-300/5';
 
   return (
@@ -34,7 +39,7 @@ export default function MyPage() {
       <EditModal
         type={infoType}
         isVisible={isVisible}
-        onClose={toggleModal}
+        onClose={handleClose}
         onToggle={toggleModalType}
       />
       <div className='flex items-center gap-16'>
