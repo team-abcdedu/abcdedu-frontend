@@ -1,4 +1,4 @@
-import { CourseInfoMap } from '@/types/classTypes';
+import { CourseInfoMap, ExamInfoMap } from '@/types/classTypes';
 
 export const mediaList = [
   '인공지능 눈길',
@@ -62,6 +62,18 @@ export const courseInfoMap: CourseInfoMap = {
       { code: 'D-2', title: '인문 ・ 사회', to: '/classes/d/d-2' },
       { code: 'D-3', title: '수리 ・ 과학', to: '/classes/d/d-3' },
       { code: 'D-4', title: '창의 ・ 예술', to: '/classes/d/d-4' },
+    ],
+  },
+};
+
+export const examInfoMap: ExamInfoMap = {
+  'A-2': {
+    title: 'Chapter 5. ChatGPT의 수학적 기초의 이해',
+    questions: [
+      '인공지능, 머신러닝, 딥러닝의 관계를 설명해봅시다.',
+      '인공지능을 만들기 위해 우리가 배워야 하는 주요 수학의 분야는 무엇이 있는지 나열해보고, 각 분야에 대해 간단히 설명해봅시다.',
+      '텍스트 생성형 인공지능을 만들기 위한 핵심 수학적 개념이 무엇인가요?\n그리고 왜 그러한 수학적 개념을 사용하는지 이유를 설명해봅시다.',
+      'ChatGPT를 만들기 위한 핵심 원리 세 가지를 우리가 배운 수학 개념을 이용하여 설명해봅시다.',
     ],
   },
 };
