@@ -1,5 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { useForm, FieldValues } from 'react-hook-form';
 
+import auth from '@/services/auth';
+import useBoundStore from '@/stores';
 import { FieldRules } from '@/types';
 import { UseAuthFormProps } from '@/types/auth';
 
@@ -9,6 +13,8 @@ interface ILoginFormInput {
 }
 
 export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
+  const setIsAutoLogin = useBoundStore(state => state.setIsAutoLogin);
+
   const {
     formState: { errors },
     register,
@@ -36,10 +42,25 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
     },
   };
 
+  const loginMutation = useMutation({
+    mutationFn: ({ email, password }: ILoginFormInput) =>
+      auth.login(email, password),
+    onSuccess: () => {
+      setIsAutoLogin();
+      onSuccess();
+    },
+    onError: error => {
+      if (isAxiosError(error) && error.response?.status) {
+        const { status } = error.response;
+        if (status === 400) alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      }
+      console.log(error);
+    },
+  });
+
   const login = async (data: FieldValues) => {
     const { email, password } = data;
-    console.log(email, password);
-    onSuccess();
+    loginMutation.mutate({ email, password });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
