@@ -4,7 +4,7 @@ import Modal from '@/components/Modal';
 
 import { ProfileEditProps } from '../types';
 
-export default function EditProfile({ onClose, onToggle }: ProfileEditProps) {
+export default function EditProfile({ onClose }: ProfileEditProps) {
   const fieldStyle = 'flex flex-col focus-within:text-primary-300 transition-2';
   const inputStyle =
     'px-0 py-4 rounded-none border-b-1 border-zinc-300 border-neutral-500 focus:border-primary-300 text-neutral-600 transition-2';
@@ -14,7 +14,7 @@ export default function EditProfile({ onClose, onToggle }: ProfileEditProps) {
   return (
     <>
       <Modal.Content>
-        <div className='px-16'>
+        <div className='px-16 pb-12'>
           <button
             type='button'
             className='absolute top-12 right-12'
@@ -46,13 +46,13 @@ export default function EditProfile({ onClose, onToggle }: ProfileEditProps) {
               <input id='password' type='text' className={inputStyle} />
             </div>
           </form>
-          <button
+          {/* <button
             type='button'
             className='block mx-auto mt-20 text-14 font-bold underline text-neutral-500 underline-offset-2'
             onClick={onToggle}
           >
             이메일/비밀번호 변경하기(비밀번호 인증 필요)
-          </button>
+          </button> */}
         </div>
       </Modal.Content>
       <Modal.Actions direction='row'>
