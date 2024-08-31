@@ -29,7 +29,7 @@ function CommunityContents() {
               </div>
               <div className='flex-grow'></div>
               <Link
-                to={communityInfo.to}
+                to={communityInfo.to || ''}
                 className={'flex items-center self-end pt-10'}
               >
                 <span className={'text-15 underline text-gray-500 font-bold'}>

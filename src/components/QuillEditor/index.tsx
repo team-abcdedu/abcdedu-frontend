@@ -1,4 +1,5 @@
-import Quill, { DeltaOperation } from 'quill';
+import Quill from 'quill';
+import Delta from 'quill-delta';
 import {
   ForwardedRef,
   forwardRef,
@@ -15,11 +16,7 @@ import modules from './modules';
 // Define types for props
 interface EditorProps {
   defaultValue?: string; // Adjust type as needed (e.g., string or Quill Delta)
-  onTextChange?: (
-    delta: DeltaOperation,
-    oldDelta: DeltaOperation,
-    source: string,
-  ) => void; // Adjust type as needed
+  onTextChange?: (delta: Delta, oldDelta: Delta, source: string) => void; // Adjust type as needed
   placeholder?: string;
 }
 
@@ -29,7 +26,7 @@ function QuillEditor(
 ) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const onTextChangeRef = useRef<
-    (delta: DeltaOperation, oldDelta: DeltaOperation, source: string) => void
+    (delta: Delta, oldDelta: Delta, source: string) => void
   >(onTextChange || (() => {}));
   const quillRef = useRef<Quill | null>(null);
   const editorModule = useMemo(() => modules, []);
