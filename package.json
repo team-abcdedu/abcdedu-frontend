@@ -19,6 +19,7 @@
     "@types/dompurify": "^3.0.5",
     "@types/quill": "^2.0.14",
     "axios": "^1.7.4",
+    "compressorjs": "^1.2.1",
     "dompurify": "^3.1.6",
     "framer-motion": "^11.3.29",
     "quill": "^2.0.2",
