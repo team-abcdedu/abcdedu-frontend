@@ -17,7 +17,15 @@ function WritePostModal({ isVisible, onClose }: WritePostModalProps) {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value, type, checked } = e.target;
+    let type: string = '';
+    let checked: boolean = false;
+    const { name, value } = e.target;
+    const target = e.target as EventTarget;
+    if (target instanceof HTMLInputElement && target.type === 'checkbox') {
+      type = 'checkbox';
+      checked = target.checked;
+    }
+
     setFormData(prevData => ({
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
