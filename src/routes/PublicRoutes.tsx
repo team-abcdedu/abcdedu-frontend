@@ -11,6 +11,7 @@ import PostDetail from '@/pages/Community/PostDetail';
 import Project from '@/pages/Community/Project';
 import Qna from '@/pages/Community/Qna';
 import Submit from '@/pages/Community/Submit';
+import Contact from '@/pages/contact';
 import Home from '@/pages/Home';
 
 export const publicRoutes: RouteObject[] = [
@@ -61,6 +62,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: '/community_bulletin_board',
         element: <Board />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
       },
     ],
   },
