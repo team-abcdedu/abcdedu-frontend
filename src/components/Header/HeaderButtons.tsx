@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import UserLogin from '@/assets/icons/user-login.svg?react';
 import AuthModal from '@/components/Header/AuthModal';
+import useLogout from '@/hooks/auth/useLogout';
 import useModal from '@/hooks/useModal';
 import useBoundStore from '@/stores';
 import { AuthModalType } from '@/types/auth';
@@ -10,6 +11,7 @@ import { AuthModalType } from '@/types/auth';
 const btnStyle = 'w-100 h-36 px-20 py-4 flex-row-center rounded-[20px] text-14';
 
 function MemberButtons({ name }: { name: string }) {
+  const { handleLogout } = useLogout();
   return (
     <>
       <Link
@@ -27,7 +29,7 @@ function MemberButtons({ name }: { name: string }) {
       </Link>
       <button
         className={`${btnStyle} bg-primary-400 text-white`}
-        onClick={() => {}}
+        onClick={handleLogout}
       >
         로그아웃
       </button>
