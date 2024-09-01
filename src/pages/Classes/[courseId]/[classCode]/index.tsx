@@ -20,7 +20,7 @@ function Class() {
 
   useEffect(() => {
     if (!classInfo) {
-      navigate(`/classes/${courseId ?? ''}`);
+      navigate(`/classes/${courseId || ''}`);
     }
   }, [navigate, courseInfo]);
 
@@ -35,7 +35,7 @@ function Class() {
         subTitle={classTitle || ''}
         description={description}
       />
-      <ClassContent />
+      <ClassContent classCode={code || ''} />
       <ClassNavigationCardGroup courseInfo={courseInfo} />
     </div>
   );
