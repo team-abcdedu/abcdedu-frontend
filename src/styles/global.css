@@ -90,6 +90,21 @@ input {
   outline: none;
 }
 
+input::placeholder, textarea::placeholder {
+  color: #bdbdbd;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+}
+
 .hero-gradient {
   background: linear-gradient(
     180deg,
