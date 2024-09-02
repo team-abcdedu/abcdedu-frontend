@@ -38,3 +38,11 @@ export interface AssignmentInfo {
 export interface AssignmentInfoMap {
   [classCode: string]: AssignmentInfo;
 }
+
+export interface SurveyInfo {
+  index: string;
+  question: string;
+  type: string;
+  options?: string[];
+  required: boolean;
+}
