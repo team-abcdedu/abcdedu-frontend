@@ -1,6 +1,5 @@
 import { SortAscending } from '@phosphor-icons/react';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import useModal from '@/hooks/useModal';
 import { posts as initialPosts } from '@/mock/Community';
@@ -13,12 +12,6 @@ function Qna() {
   const { isVisible, toggleModal } = useModal();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
-  const navigate = useNavigate();
-
-  const handleSelectPost = (post: Post) => {
-    // 게시글을 선택하면 해당 경로로 이동
-    navigate(`/community_project/${post.id}`);
-  };
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -60,7 +53,7 @@ function Qna() {
       {isVisible && (
         <WritePostModal isVisible={isVisible} onClose={toggleModal} />
       )}
-      <PostTable posts={filteredPosts} onSelectPost={handleSelectPost} />
+      <PostTable posts={filteredPosts} />
     </div>
   );
 }
