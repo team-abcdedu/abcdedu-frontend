@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Book from '@/assets/icons/book.svg?react';
 import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
@@ -54,6 +54,12 @@ function ClassContent({
       setOpenSurvey(!openSurvey);
     }
   };
+
+  useEffect(() => {
+    setOpenAssignment(false);
+    setOpenExam(false);
+    setOpenSurvey(false);
+  }, [classCode, classTitle]);
 
   return (
     <>
