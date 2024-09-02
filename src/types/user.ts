@@ -6,7 +6,7 @@ export interface User {
 export interface UserInfo extends User {
   email: string;
   school: string | null;
-  studentId: string | null;
+  studentId: number | null;
   imageUrl: string | null;
   createdAt: string;
   createPostCount: number;
