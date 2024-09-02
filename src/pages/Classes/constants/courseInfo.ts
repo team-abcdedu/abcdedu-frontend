@@ -15,14 +15,14 @@ export const courseInfoMap: CourseInfoMap = {
     description:
       '인공지능에게 대체되지 않는 인간지능이 되기 위해 인공지능에 대한 기본 원리를 학습하는 수업',
     classes: [
-      { code: 'A-1', title: '인공지능의\n수학적 기초', to: '/classes/a/a-1' },
-      { code: 'A-2', title: 'ChatGPT의\n수학적 기초', to: '/classes/a/a-2' },
+      { code: 'A-1', title: '학생을 위한\n머신러닝', to: '/classes/a/a-1' },
+      { code: 'A-2', title: '학생을 위한\n딥러닝', to: '/classes/a/a-2' },
       {
         code: 'A-3',
-        title: '눈으로 이해하는\n인공신경망',
+        title: '인공지능의\n수학적 기초',
         to: '/classes/a/a-3',
       },
-      { code: 'A-4', title: '창의 수학\n연구소', to: '/classes/a/a-4' },
+      { code: 'A-4', title: 'ChatGPT의\n수학적 기초', to: '/classes/a/a-4' },
     ],
   },
   B: {
