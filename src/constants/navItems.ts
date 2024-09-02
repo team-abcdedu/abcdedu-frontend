@@ -58,14 +58,19 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
-    to: '/assignment',
-    text: '과제',
+    to: '/contact',
+    text: '문의',
   },
-  {
-    type: 'link',
-    to: '/survey',
-    text: '설문',
-  },
+  // {
+  //   type: 'link',
+  //   to: '/assignment',
+  //   text: '과제',
+  // },
+  // {
+  //   type: 'link',
+  //   to: '/survey',
+  //   text: '설문',
+  // },
 ];
 
 export const mobileMenuNavItems: MobileMenuNavItem[] = [
@@ -82,11 +87,15 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     text: '커뮤니티',
   },
   {
-    to: '/',
-    text: '과제',
+    to: '/contact',
+    text: '문의',
   },
-  {
-    to: '/',
-    text: '설문',
-  },
+  // {
+  //   to: '/',
+  //   text: '과제',
+  // },
+  // {
+  //   to: '/',
+  //   text: '설문',
+  // },
 ];

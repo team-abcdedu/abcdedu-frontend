@@ -1,8 +1,9 @@
 import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import useBoundStore from '@/stores';
+
 export default function PrivateRoute({ children }: PropsWithChildren) {
-  // TODO: 로그인 확인
-  const isLoggedIn = true; // 임시
-  return isLoggedIn ? children : <Navigate to='/' replace />;
+  const user = useBoundStore(state => state.user);
+  return user ? children : <Navigate to='/' replace />;
 }

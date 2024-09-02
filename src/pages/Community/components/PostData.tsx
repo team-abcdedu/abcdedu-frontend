@@ -1,8 +1,9 @@
 import { DownloadSimple } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 
 import { PostTableProps, PostDetailsProps } from '../types/PostData';
 
-export function PostTable({ posts, onSelectPost }: PostTableProps) {
+export function PostTable({ posts }: PostTableProps) {
   return (
     <div className='overflow-x-auto'>
       <table className='w-full text-sm sm:text-base'>
@@ -22,28 +23,45 @@ export function PostTable({ posts, onSelectPost }: PostTableProps) {
             <tr
               key={post.id}
               className='space-x-5 border-b border-b-gray-400 cursor-pointer'
-              onClick={() => onSelectPost(post)}
             >
               <td className='px-20 py-10'>{post.id}</td>
               <td className='px-20 py-10'>
-                <p>{post.title}</p>
+                <Link to={`/community_project/${post.id}`}>
+                  <p>{post.title}</p>
+                </Link>
                 <div className='block md:hidden text-xs text-gray-500'>
-                  <p>
-                    {post.author} | {post.timestamp}
-                  </p>
+                  <Link to={`/community_project/${post.id}`}>
+                    <p>
+                      {post.author} | {post.timestamp}
+                    </p>
+                  </Link>
                 </div>
               </td>
               <td className='hidden md:table-cell px-20 py-10'>
-                {post.author}
+                <Link to={`/community_project/${post.id}`}>
+                  <p>{post.author}</p>
+                </Link>
               </td>
               <td className='hidden md:table-cell px-20 py-10'>
-                {post.timestamp}
+                <Link to={`/community_project/${post.id}`}>
+                  <p>{post.timestamp}</p>
+                </Link>
               </td>
-              <td className='hidden md:table-cell px-20 py-10'>{post.views}</td>
               <td className='hidden md:table-cell px-20 py-10'>
-                {post.comments}
+                <Link to={`/community_project/${post.id}`}>
+                  <p>{post.views}</p>
+                </Link>
               </td>
-              <td className='hidden md:table-cell px-20 py-10'>{post.likes}</td>
+              <td className='hidden md:table-cell px-20 py-10'>
+                <Link to={`/community_project/${post.id}`}>
+                  <p>{post.comments}</p>
+                </Link>
+              </td>
+              <td className='hidden md:table-cell px-20 py-10'>
+                <Link to={`/community_project/${post.id}`}>
+                  <p>{post.likes}</p>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -11,7 +11,7 @@ export interface Post {
 
 export interface PostTableProps {
   posts: Post[];
-  onSelectPost: (post: Post) => void;
+  // onSelectPost: (post: Post) => void;
 }
 
 export interface PostDetailsProps {

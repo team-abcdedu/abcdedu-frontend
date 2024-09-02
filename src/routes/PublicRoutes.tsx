@@ -11,6 +11,7 @@ import PostDetail from '@/pages/Community/PostDetail';
 import Project from '@/pages/Community/Project';
 import Qna from '@/pages/Community/Qna';
 import Submit from '@/pages/Community/Submit';
+import Contact from '@/pages/contact';
 import Home from '@/pages/Home';
 
 export const publicRoutes: RouteObject[] = [
@@ -51,8 +52,16 @@ export const publicRoutes: RouteObject[] = [
         element: <Project />,
       },
       {
+        path: '/community_project/:postId',
+        element: <PostDetail />,
+      },
+      {
         path: '/community_qna',
         element: <Qna />,
+      },
+      {
+        path: '/community_qna/:postId',
+        element: <PostDetail />,
       },
       {
         path: '/community_submit_assignment',
@@ -61,6 +70,14 @@ export const publicRoutes: RouteObject[] = [
       {
         path: '/community_bulletin_board',
         element: <Board />,
+      },
+      {
+        path: '/community_bulletin_board/:popstId',
+        element: <PostDetail />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
       },
     ],
   },
