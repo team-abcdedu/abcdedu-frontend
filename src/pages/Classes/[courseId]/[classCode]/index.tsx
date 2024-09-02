@@ -35,7 +35,7 @@ function Class() {
         subTitle={classTitle || ''}
         description={description}
       />
-      <ClassContent classCode={code || ''} />
+      <ClassContent classCode={code || ''} classTitle={classTitle || ''} />
       <ClassNavigationCardGroup courseInfo={courseInfo} />
     </div>
   );

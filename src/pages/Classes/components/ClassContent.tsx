@@ -12,7 +12,13 @@ import AssignmentForm from './AssignmentForm';
 import ExamForm from './ExamForm';
 import SurveyForm from './SurveyForm';
 
-function ClassContent({ classCode }: { classCode: string }) {
+function ClassContent({
+  classCode,
+  classTitle,
+}: {
+  classCode: string;
+  classTitle: string;
+}) {
   const buttonStyle =
     'w-100 min-h-[140px] flex flex-col justify-start items-center place-self-center';
   const iconWrapperStyle = 'w-100 h-100 flex-row-center';
@@ -42,9 +48,11 @@ function ClassContent({ classCode }: { classCode: string }) {
   };
 
   const handleSurveyClick = () => {
-    setOpenAssignment(false);
-    setOpenExam(false);
-    setOpenSurvey(!openSurvey);
+    if (classTitle) {
+      setOpenAssignment(false);
+      setOpenExam(false);
+      setOpenSurvey(!openSurvey);
+    }
   };
 
   return (
@@ -87,7 +95,7 @@ function ClassContent({ classCode }: { classCode: string }) {
       {openAssignment && (
         <AssignmentForm assignmentInfo={assingmentInfo} readOnly={true} />
       )}
-      {openSurvey && <SurveyForm />}
+      {openSurvey && <SurveyForm classTitle={classTitle} />}
     </>
   );
 }
