@@ -41,7 +41,7 @@ function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
   return (
     <form
       className={
-        'w-full h-max py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100'
+        'w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100'
       }
       onSubmit={handleSubmit}
     >
