@@ -1,27 +1,38 @@
 import axios from 'axios';
 
 import { BASE_URL } from '@/config';
+import useBoundStore from '@/stores';
 
 const instance = axios.create({
   baseURL: BASE_URL,
+  // baseURL: '/api/v1',
   timeout: 3 * 1000,
-  // withCredentials: true,
-  // 현재 be에서 Access-Control-Allow-Origin 값을 *(와일드카드)로 설정해두었기 때문에
-  // withCredentials 사용이 불가능합니다. (오류 발생)
-  // 추후 be 세팅 변경 후 변경 예정
+  withCredentials: true,
 });
 
 // Request interceptor
 instance.interceptors.request.use(config => {
+  const { accessToken } = useBoundStore.getState();
+  if (accessToken) {
+    const configWithToken = { ...config };
+    configWithToken.headers.authorization = accessToken;
+    return configWithToken;
+  }
   return config;
 });
 
 // Response interceptor
 instance.interceptors.response.use(
   response => {
-    return response.data.result;
+    const { result } = response.data;
+    if (result && result.accessToken) {
+      // console.log('====토큰====', result.accessToken);
+      useBoundStore.setState({ accessToken: result.accessToken });
+    }
+
+    return result;
   },
-  error => {
+  async error => {
     return Promise.reject(error);
   },
 );
