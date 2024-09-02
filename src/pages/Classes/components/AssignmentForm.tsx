@@ -16,8 +16,7 @@ function AssignmentForm({
   const { title, topic, description, questions } = assignmentInfo;
 
   const formTextStyle = 'text-16 md:text-20';
-  const inputWrapperStyle = 'w-full flex flex-col';
-  const labelStyle = `${formTextStyle} font-semibold`;
+  const labelStyle = `w-full flex flex-col ${formTextStyle} font-semibold`;
   const inputStyle =
     'max-w-[300px] h-36 p-6 border-b-2 border-neutral-300 bg-neutral-100 text-20';
 
@@ -31,11 +30,7 @@ function AssignmentForm({
         <div
           className={'w-full min-h-[140px] flex-col-center gap-20 break-keep'}
         >
-          <h2
-            className={
-              'w-full text-30 md:text-40 font-bold text-center md:text-start'
-            }
-          >
+          <h2 className={'w-full text-30 md:text-40 font-bold text-start'}>
             [과제] {title}
           </h2>
           <h3 className={`w-full ${formTextStyle} font-semibold text-start`}>
@@ -44,36 +39,31 @@ function AssignmentForm({
           <p className={`w-full ${formTextStyle} text-start`}>{description}</p>
         </div>
         {studentInfoInputs.map(({ label, id }) => (
-          <div key={id} className={inputWrapperStyle}>
-            <label htmlFor={id} className={labelStyle}>
-              {label}
-            </label>
-            <input id={id} className={inputStyle} readOnly={readOnly} />
-          </div>
+          <label key={id} className={labelStyle}>
+            {label}
+            <input className={inputStyle} readOnly={readOnly} />
+          </label>
         ))}
         <div className={'py-30 flex flex-col gap-40'}>
           {questions.map((q, qIndex) => (
-            <div key={q.question} className={'w-full flex flex-col gap-20'}>
-              <label
-                htmlFor={`question-${qIndex}`}
-                className={`${formTextStyle}  flex flex-col gap-20`}
-              >
-                <h3 className={'font-semibold'}>
-                  {qIndex + 1}. {q.question}
-                </h3>
-                {q.explanation.map(ex => (
-                  <p key={ex} className={'indent-[20px] whitespace-pre-wrap'}>
-                    {ex}
-                  </p>
-                ))}
-              </label>
+            <label
+              key={q.question}
+              className={`w-full flex flex-col gap-20 ${formTextStyle}`}
+            >
+              <h3 className={'font-semibold'}>
+                {qIndex + 1}. {q.question}
+              </h3>
+              {q.explanation.map(ex => (
+                <p key={ex} className={'indent-[20px] whitespace-pre-wrap'}>
+                  {ex}
+                </p>
+              ))}
               <textarea
-                id={`question-${qIndex}`}
                 className={`w-full min-h-[150px] p-6 ${formTextStyle}`}
                 placeholder={'답안 입력하기'}
                 readOnly={readOnly}
-              ></textarea>
-            </div>
+              />
+            </label>
           ))}
         </div>
         <div className={`w-full flex flex-col gap-20 ${formTextStyle}`}>
