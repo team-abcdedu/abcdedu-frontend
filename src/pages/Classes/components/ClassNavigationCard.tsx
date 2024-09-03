@@ -1,7 +1,7 @@
 import { ArrowRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-import { ClassInfo } from '@/types/classTypes';
+import { ClassInfo } from '../types/classTypes';
 
 interface ClassNavCardProps {
   classes: ClassInfo[] | undefined;

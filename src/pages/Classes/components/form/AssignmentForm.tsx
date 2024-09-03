@@ -1,4 +1,4 @@
-import { AssignmentInfo } from '@/types/classTypes';
+import { AssignmentInfo } from '../../types/classTypes';
 
 const studentInfoInputs = [
   { label: '학교', id: 'school-name' },

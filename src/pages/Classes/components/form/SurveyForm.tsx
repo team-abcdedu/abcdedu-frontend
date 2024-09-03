@@ -1,4 +1,4 @@
-import { surveyInfo } from '../constants/surveyInfo';
+import { surveyInfo } from '../../constants/surveyInfo';
 
 function SurveyItem({
   id,

@@ -1,4 +1,4 @@
-import { SurveyInfo } from '@/types/classTypes';
+import { SurveyInfo } from '../types/classTypes';
 
 export const surveyInfo = (classTitle: string): SurveyInfo[] => {
   return [

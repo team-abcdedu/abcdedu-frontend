@@ -8,9 +8,9 @@ import TextBoxCheck from '@/assets/icons/text-box-check.svg?react';
 import { assignmentInfoMap } from '../constants/assignmentInfo';
 import { examInfoMap } from '../constants/courseInfo';
 
-import AssignmentForm from './AssignmentForm';
-import ExamForm from './ExamForm';
-import SurveyForm from './SurveyForm';
+import AssignmentForm from './form/AssignmentForm';
+import ExamForm from './form/ExamForm';
+import SurveyForm from './form/SurveyForm';
 
 function ClassContent({
   classCode,

@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import Head from '@/components/Head';
-import ClassContent from '@/pages/Classes/components/ClassContent';
-import ClassNavigationCardGroup from '@/pages/Classes/components/ClassNavigationCardGroup';
-import ClassOverview from '@/pages/Classes/components/ClassOverview';
-import { courseInfoMap } from '@/pages/Classes/constants/courseInfo';
+
+import ClassContent from '../../components/ClassContent';
+import ClassNavigationCardGroup from '../../components/ClassNavigationCardGroup';
+import ClassOverview from '../../components/ClassOverview';
+import { courseInfoMap } from '../../constants/courseInfo';
 
 function Class() {
   const navigate = useNavigate();

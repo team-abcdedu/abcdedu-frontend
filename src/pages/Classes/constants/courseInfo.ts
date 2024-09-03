@@ -1,4 +1,4 @@
-import { CourseInfoMap, ExamInfoMap } from '@/types/classTypes';
+import { CourseInfoMap, ExamInfoMap } from '../types/classTypes';
 
 export const mediaList = [
   '인공지능 눈길',

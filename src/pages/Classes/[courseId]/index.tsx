@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Head from '@/components/Head';
-import ClassNavigationCardGroup from '@/pages/Classes/components/ClassNavigationCardGroup';
-import ClassOverview from '@/pages/Classes/components/ClassOverview';
-import { courseInfoMap } from '@/pages/Classes/constants/courseInfo';
+
+import ClassNavigationCardGroup from '../components/ClassNavigationCardGroup';
+import ClassOverview from '../components/ClassOverview';
+import { courseInfoMap } from '../constants/courseInfo';
 
 function Course() {
   const navigate = useNavigate();

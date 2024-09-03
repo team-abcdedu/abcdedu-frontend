@@ -1,5 +1,6 @@
-import ClassNavigationCard from '@/pages/Classes/components/ClassNavigationCard';
-import { CourseInfo } from '@/types/classTypes';
+import { CourseInfo } from '../types/classTypes';
+
+import ClassNavigationCard from './ClassNavigationCard';
 
 function CourseOverview({ courseInfo }: { courseInfo: CourseInfo }) {
   const { title, subTitle, description, classes } = courseInfo;

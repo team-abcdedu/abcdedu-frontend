@@ -1,5 +1,6 @@
-import CourseOverview from '@/pages/Classes/components/CourseOverview';
-import { courseInfoMap } from '@/pages/Classes/constants/courseInfo';
+import { courseInfoMap } from '../constants/courseInfo';
+
+import CourseOverview from './CourseOverview';
 
 function CourseList() {
   const bgColors = [

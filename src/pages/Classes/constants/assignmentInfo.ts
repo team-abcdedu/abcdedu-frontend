@@ -1,4 +1,4 @@
-import type { AssignmentInfoMap } from '@/types/classTypes';
+import type { AssignmentInfoMap } from '../types/classTypes';
 
 export const assignmentInfoMap: AssignmentInfoMap = {
   'A-2': {
