@@ -1,3 +1,5 @@
+import { FormEvent } from 'react';
+
 import { surveyInfo } from '../../constants/surveyInfo';
 
 function SurveyItem({
@@ -14,6 +16,7 @@ function SurveyItem({
       <textarea
         className={'min-h-[150px] p-6 font-normal'}
         placeholder={'답안 입력하기'}
+        name={id}
       ></textarea>
     );
   }
@@ -35,11 +38,25 @@ function SurveyItem({
 function SurveyForm({ classTitle }: { classTitle: string }) {
   const formTextStyle = 'text-16 md:text-20';
 
+  const requiredList = surveyInfo(classTitle.replace('\n', ' '))
+    .filter(q => q.required)
+    .map(q => q.index);
+
+  console.log(requiredList);
+
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // const formData = new FormData(e.target as HTMLFormElement);
+    // const formEntries = Array.from(formData.entries());
+  };
+
   return (
     <form
       className={
         'w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100'
       }
+      onSubmit={submitHandler}
     >
       <div className={'min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}>
         <div
@@ -74,7 +91,7 @@ function SurveyForm({ classTitle }: { classTitle: string }) {
         </div>
 
         <div className={'w-full mt-30 flex flex-col gap-40'}>
-          {surveyInfo(classTitle).map(q => (
+          {surveyInfo(classTitle.replace('\n', ' ')).map(q => (
             <label
               key={q.index}
               className={`w-full flex flex-col gap-20 ${formTextStyle} font-semibold`}

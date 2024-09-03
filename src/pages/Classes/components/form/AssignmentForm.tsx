@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { AssignmentInfo } from '../../types/classTypes';
 
@@ -24,11 +24,19 @@ function AssignmentForm({
     setFiles(prev => prev.filter((_, i) => i !== index));
   };
 
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    files.forEach((file, index) => formData.append(`file-${index}`, file));
+    Array.from(formData.values()).forEach(v => console.log(v));
+  };
+
   return (
     <form
       className={
         'w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100'
       }
+      onSubmit={submitHandler}
     >
       <div className={'min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}>
         <div
