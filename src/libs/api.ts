@@ -5,7 +5,6 @@ import useBoundStore from '@/stores';
 
 const instance = axios.create({
   baseURL: BASE_URL,
-  // baseURL: '/api/v1',
   timeout: 3 * 1000,
   withCredentials: true,
 });
@@ -15,7 +14,7 @@ instance.interceptors.request.use(config => {
   const { accessToken } = useBoundStore.getState();
   if (accessToken) {
     const configWithToken = { ...config };
-    configWithToken.headers.authorization = accessToken;
+    configWithToken.headers.authorization = `Bearer ${accessToken}`;
     return configWithToken;
   }
   return config;
