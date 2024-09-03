@@ -1,10 +1,25 @@
+import { useState } from 'react';
+
+import useModal from '@/hooks/useModal';
+
+import ImageModal from './components/ImageModal';
 import { imageInfo } from './constants';
+import { GalleryImage } from './types';
 
 export default function Gallery() {
+  const { isVisible, toggleModal } = useModal();
+
+  const [selected, setSelected] = useState<GalleryImage>(imageInfo[0]);
+
+  const handleClick = (image: GalleryImage) => {
+    setSelected(image);
+    toggleModal();
+  };
+
   return (
     <div>
       <div className='w-full h-[600px] flex-col-center bg-primary-300'>
-        <h2 className='text-center text-white leading-[1.3] font-bold'>
+        <h2 className='flex-col-center text-center text-white leading-[1.3] font-bold'>
           <span className='block text-18 tracking-[6px] -mr-6 pb-12'>
             GALLERY
           </span>
@@ -23,18 +38,28 @@ export default function Gallery() {
         </div>
         <div className='w-full max-w-[1458px] px-24 py-50 mx-auto'>
           <div className='grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,_minmax(0,_270px))] gap-15 justify-center'>
-            {imageInfo.map((image, i) => (
-              <div key={i} className='aspect-square'>
+            {imageInfo.map(image => (
+              <button
+                type='button'
+                key={image.id}
+                className='aspect-square'
+                onClick={() => handleClick(image)}
+              >
                 <img
                   src={image.url}
                   className='w-full h-full object-cover'
                   alt='photo2'
                 />
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
+      <ImageModal
+        image={selected}
+        isVisible={isVisible}
+        onClose={toggleModal}
+      />
     </div>
   );
 }
