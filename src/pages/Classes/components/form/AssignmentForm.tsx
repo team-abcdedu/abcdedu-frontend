@@ -1,10 +1,6 @@
-import { AssignmentInfo } from '../../types/classTypes';
+import { ChangeEvent, useState } from 'react';
 
-const studentInfoInputs = [
-  { label: '학교', id: 'school-name' },
-  { label: '학번', id: 'student-number' },
-  { label: '이름', id: 'student-name' },
-];
+import { AssignmentInfo } from '../../types/classTypes';
 
 function AssignmentForm({
   assignmentInfo,
@@ -14,11 +10,19 @@ function AssignmentForm({
   readOnly: boolean;
 }) {
   const { title, topic, description, questions } = assignmentInfo;
+  const [files, setFiles] = useState<File[]>([]);
 
   const formTextStyle = 'text-16 md:text-20';
-  const labelStyle = `w-full flex flex-col ${formTextStyle} font-semibold`;
-  const inputStyle =
-    'max-w-[300px] h-36 p-6 border-b-2 border-neutral-300 bg-neutral-100 text-20';
+
+  const inputFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+    if (!fileList) return;
+    setFiles(prev => [...prev, ...Array.from(fileList)]);
+  };
+
+  const deleteFileHandler = (index: number) => {
+    setFiles(prev => prev.filter((_, i) => i !== index));
+  };
 
   return (
     <form
@@ -38,12 +42,7 @@ function AssignmentForm({
           </h3>
           <p className={`w-full ${formTextStyle} text-start`}>{description}</p>
         </div>
-        {studentInfoInputs.map(({ label, id }) => (
-          <label key={id} className={labelStyle}>
-            {label}
-            <input className={inputStyle} readOnly={readOnly} />
-          </label>
-        ))}
+
         <div className={'py-30 flex flex-col gap-40'}>
           {questions.map((q, qIndex) => (
             <label
@@ -59,13 +58,57 @@ function AssignmentForm({
                 </p>
               ))}
               <textarea
-                className={`w-full min-h-[150px] p-6 ${formTextStyle}`}
+                className={`w-full min-h-[150px] p-6`}
                 placeholder={'답안 입력하기'}
                 readOnly={readOnly}
+                name={`question-${qIndex}`}
               />
             </label>
           ))}
         </div>
+
+        <div className={`w-full flex flex-col gap-20 ${formTextStyle}`}>
+          <h3 className={'font-semibold'}>[첨부 파일]</h3>
+          <div className={'flex gap-20'}>
+            <input
+              className={'w-1/2 border-2 text-neutral-300'}
+              value={files.map(f => f.name).join(' / ')}
+              placeholder={'첨부 파일'}
+              readOnly
+            />
+            <label
+              htmlFor={'input-file'}
+              className={
+                'px-10 font-semibold text-neutral-100 border-2 bg-neutral-400'
+              }
+            >
+              파일 찾기
+            </label>
+            <input
+              className={'absolute w-0 h-0 p-0 overflow-hidden'}
+              id={'input-file'}
+              type={'file'}
+              onChange={inputFileHandler}
+              multiple
+            />
+          </div>
+          <div className={'flex flex-col gap-10'}>
+            {files &&
+              Array.from(files).map((file, index) => (
+                <div key={index} className={'flex gap-10'}>
+                  <span>{file.name}</span>
+                  <button
+                    type={'button'}
+                    className={'text-red-700 font-semibold'}
+                    onClick={() => deleteFileHandler(index)}
+                  >
+                    x
+                  </button>
+                </div>
+              ))}
+          </div>
+        </div>
+
         <div className={`w-full flex flex-col gap-20 ${formTextStyle}`}>
           <h3 className={'font-semibold'}>[토론 및 발표]</h3>
           <p className={'indent-[20px] whitespace-pre-wrap'}>
