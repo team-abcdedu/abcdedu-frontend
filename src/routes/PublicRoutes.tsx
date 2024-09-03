@@ -1,6 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 
 import Layout from '@/components/Layout';
+import AboutUs from '@/pages/AboutUs';
+import Gallery from '@/pages/AboutUs/Gallery';
+import History from '@/pages/AboutUs/History';
 import Classes from '@/pages/Classes';
 import Course from '@/pages/Classes/[courseId]';
 import Class from '@/pages/Classes/[courseId]/[classCode]';
@@ -22,6 +25,18 @@ export const publicRoutes: RouteObject[] = [
       {
         index: true, // 기본적으로 렌더링되는 컴포넌트
         element: <Home />,
+      },
+      {
+        path: '/about_us',
+        element: <AboutUs />,
+      },
+      {
+        path: '/about_us/gallery',
+        element: <Gallery />,
+      },
+      {
+        path: '/about_us/history',
+        element: <History />,
       },
       {
         path: '/classes',
