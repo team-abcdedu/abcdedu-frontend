@@ -24,3 +24,25 @@ export interface ExamInfo {
 export interface ExamInfoMap {
   [classCode: string]: ExamInfo;
 }
+
+export interface AssignmentInfo {
+  title: string;
+  topic: string;
+  description: string;
+  questions: {
+    question: string;
+    explanation: string[];
+  }[];
+}
+
+export interface AssignmentInfoMap {
+  [classCode: string]: AssignmentInfo;
+}
+
+export interface SurveyInfo {
+  index: string;
+  question: string;
+  type: string;
+  options?: string[];
+  required: boolean;
+}
