@@ -4,17 +4,23 @@ import useModal from '@/hooks/useModal';
 
 import ContactModal from './components/ContactModal';
 import { contactItems } from './constants';
+import { ContactItem } from './types';
 
 function CardIcon({ Icon }: { Icon: React.FC<React.SVGProps<SVGSVGElement>> }) {
   return <Icon className='w-110 max-sm:w-90 h-fit py-7 fill-primary-300' />;
 }
 
+type SelectedType = Pick<ContactItem, 'label' | 'type'>;
+
 export default function Contact() {
   const { isVisible, toggleModal } = useModal();
-  const [selectedContactType, setSelectedContactType] = useState('');
+  const [selected, setSelected] = useState<SelectedType>({
+    label: contactItems[0].label,
+    type: contactItems[0].type,
+  });
 
-  const handleClick = (label: string) => {
-    setSelectedContactType(label);
+  const handleClick = (selectedItem: SelectedType) => {
+    setSelected(selectedItem);
     toggleModal();
   };
 
@@ -47,7 +53,7 @@ export default function Contact() {
               type='button'
               className='w-full max-w-227 h-57 my-10 rounded-[20px] 
               text-primary-300 text-15 btn-white-pb px-16 py-8 font-semibold'
-              onClick={() => handleClick(item.label)}
+              onClick={() => handleClick(item)}
             >
               작성하기
             </button>
@@ -55,7 +61,7 @@ export default function Contact() {
         ))}
       </div>
       <ContactModal
-        label={selectedContactType}
+        selected={selected}
         isVisible={isVisible}
         onClose={toggleModal}
       />
