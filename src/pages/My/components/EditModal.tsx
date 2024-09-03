@@ -7,13 +7,14 @@ import EditProfile from './EditProfile';
 
 export default function EditModal({
   // type = 'profile',
+  user,
   isVisible,
   onClose,
   onToggle,
 }: ProfileEditModalProps) {
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
-      <EditProfile onClose={onClose} onToggle={onToggle} />
+      <EditProfile user={user} onClose={onClose} onToggle={onToggle} />
     </Modal>
   );
 }
