@@ -8,7 +8,7 @@ export default function useProfileMutation() {
   return useMutation({
     mutationFn: (form: FormData) => userApi.updateUserInfo(form),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: error => {
       if (isAxiosError(error) && error.response?.status) {
