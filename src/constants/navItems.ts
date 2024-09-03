@@ -8,6 +8,25 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'dropdown',
+    to: '/about_us',
+    text: '회사소개',
+    list: [
+      {
+        to: '/about_us',
+        text: '비즈니스',
+      },
+      {
+        to: '/about_us/gallery',
+        text: '갤러리',
+      },
+      {
+        to: '/about_us/history',
+        text: '히스토리',
+      },
+    ],
+  },
+  {
+    type: 'dropdown',
     to: '/classes',
     text: '클래스',
     list: [
@@ -77,6 +96,10 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
   {
     to: '/',
     text: '홈',
+  },
+  {
+    to: '/about_us',
+    text: '회사소개',
   },
   {
     to: '/classes',
