@@ -1,7 +1,7 @@
-import type { AssignmentInfoMap } from '../types/classTypes';
+import type { AssignmentInfoMap } from '../types';
 
 export const assignmentInfoMap: AssignmentInfoMap = {
-  'A-2': {
+  default: {
     title: '사회 문제 해결을 위한 인공지능 설계',
     topic: '인공지능으로 사회문제를 해결한 사례 시청',
     description:

@@ -1,35 +1,35 @@
 import { ArrowRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-import { ClassInfo } from '../types/classTypes';
+import { SubClassInfo } from '../types';
 
-interface ClassNavCardProps {
-  classes: ClassInfo[] | undefined;
+interface SubClassNavCardProps {
+  subClasses: SubClassInfo[] | undefined;
   bgColor: 'neutral' | 'white';
 }
 
-function ClassNavigationCard({ classes, bgColor }: ClassNavCardProps) {
+function SubClassNavigationCard({ subClasses, bgColor }: SubClassNavCardProps) {
   const bgClass = bgColor === 'neutral' ? 'bg-neutral-100' : 'bg-white';
 
-  if (!classes) return null;
+  if (!subClasses) return null;
 
   return (
     <div
       className={`grid grid-cols-1 sm:grid-cols-2 grid-flow-row lg:flex gap-20`}
     >
-      {classes.map(classInfo => (
+      {subClasses.map(subClassInfo => (
         <div
-          key={classInfo.code}
+          key={subClassInfo.code}
           className={`min-w-50 min-h-60 p-15 flex-col-center sm:items-start grow basis-0 rounded-[20px] ${bgClass}`}
         >
           <h5 className={'text-20 font-semibold text-primary-300'}>
-            {classInfo.code}
+            {subClassInfo.code}
           </h5>
           <h5 className={'h-full text-20 font-semibold whitespace-pre-wrap'}>
-            {classInfo.title}
+            {subClassInfo.title}
           </h5>
           <Link
-            to={classInfo.to}
+            to={subClassInfo.to}
             className={'pt-10 flex items-center self-end'}
           >
             <span className={'text-15 underline'}>바로가기</span>
@@ -41,4 +41,4 @@ function ClassNavigationCard({ classes, bgColor }: ClassNavCardProps) {
   );
 }
 
-export default ClassNavigationCard;
+export default SubClassNavigationCard;

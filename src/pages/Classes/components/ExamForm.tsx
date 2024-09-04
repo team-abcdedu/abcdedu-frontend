@@ -5,7 +5,7 @@ import { FormEvent, useRef } from 'react';
 import QuillEditor from '@/components/QuillEditor';
 import base64ToFile from '@/utils/base64ToFile';
 
-import { ExamInfo } from '../../types/classTypes';
+import { ExamInfo } from '../types';
 
 function ExamForm({ examInfo }: { examInfo: ExamInfo }) {
   const { title, questions } = examInfo;

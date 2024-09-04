@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { AssignmentInfo } from '../../types/classTypes';
+import { AssignmentInfo } from '../types';
 
 function AssignmentForm({
   assignmentInfo,

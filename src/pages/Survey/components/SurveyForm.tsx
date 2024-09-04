@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 
-import { surveyInfo } from '../../constants/surveyInfo';
+import { surveyInfo } from '../constants';
 
 function SurveyItem({
   id,

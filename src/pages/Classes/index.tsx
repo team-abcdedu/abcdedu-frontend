@@ -1,6 +1,6 @@
 import Head from '@/components/Head';
 
-import CourseList from './components/CourseList';
+import ClassList from './components/ClassList';
 import Hero from './components/Hero';
 import MediaContents from './components/MediaContents';
 
@@ -13,7 +13,7 @@ function Classes() {
       />
       <Hero />
       <MediaContents />
-      <CourseList />
+      <ClassList />
     </>
   );
 }
