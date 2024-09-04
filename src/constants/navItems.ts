@@ -80,6 +80,11 @@ export const headerNavItems: HeaderNavItem[] = [
     to: '/contact',
     text: '문의',
   },
+  {
+    type: 'link',
+    to: '/admin',
+    text: '관리자',
+  },
   // {
   //   type: 'link',
   //   to: '/assignment',

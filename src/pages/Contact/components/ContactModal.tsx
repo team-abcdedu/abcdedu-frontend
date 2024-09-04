@@ -1,23 +1,27 @@
 import { X } from '@phosphor-icons/react';
 
 import Modal from '@/components/Modal';
+import { ContactType } from '@/types/contact';
 
 import useContactForm from '../hooks/useContactForm';
 
 interface ContactModalProps {
-  label: string;
+  selected: { label: string; type: ContactType };
   isVisible: boolean;
   onClose: () => void;
 }
 
 export default function ContactModal({
-  label,
+  selected,
   isVisible,
   onClose,
 }: ContactModalProps) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14 [&>label]:pb-4';
 
-  const { errors, fieldRules, register, reset, onSubmit } = useContactForm();
+  const { errors, fieldRules, register, reset, onSubmit } = useContactForm({
+    contactType: selected.type,
+    onSuccess: onClose,
+  });
 
   const handleClose = () => {
     reset();
@@ -35,37 +39,39 @@ export default function ContactModal({
           >
             <X size={24} />
           </button>
-          <h2 className='text-30 font-semibold mb-24 text-center'>{label}</h2>
+          <h2 className='text-30 font-semibold mb-24 text-center'>
+            {selected.label}
+          </h2>
           <form className='flex flex-col gap-20'>
             <div className={fieldStyle}>
-              <label htmlFor='name'>이름</label>
+              <label htmlFor='userName'>이름</label>
               <input
-                {...register('name', fieldRules.name)}
-                id='name'
+                {...register('userName', fieldRules.userName)}
+                id='userName'
                 type='text'
                 className='input-primary'
                 placeholder='John Doe'
               />
-              {errors.name && (
+              {errors.userName && (
                 <span className='text-12 text-red-500'>
-                  {errors.name.message}
+                  {errors.userName.message}
                 </span>
               )}
             </div>
             <div className={fieldStyle}>
-              <label htmlFor='phone'>연락처</label>
+              <label htmlFor='phoneNumber'>연락처</label>
               <input
-                {...register('phone', fieldRules.phone)}
-                id='phone'
+                {...register('phoneNumber', fieldRules.phoneNumber)}
+                id='phoneNumber'
                 type='number'
                 inputMode='numeric'
                 pattern='[0-9]*'
                 className='input-primary'
                 placeholder='01012345678'
               />
-              {errors.phone && (
+              {errors.phoneNumber && (
                 <span className='text-12 text-red-500'>
-                  {errors.phone.message}
+                  {errors.phoneNumber.message}
                 </span>
               )}
             </div>
@@ -85,13 +91,27 @@ export default function ContactModal({
               )}
             </div>
             <div className={fieldStyle}>
+              <label htmlFor='title'>제목</label>
+              <input
+                {...register('title', fieldRules.title)}
+                id='title'
+                type='text'
+                className='input-primary'
+                placeholder='title'
+              />
+              {errors.title && (
+                <span className='text-12 text-red-500'>
+                  {errors.title.message}
+                </span>
+              )}
+            </div>
+            <div className={fieldStyle}>
               <label htmlFor='content'>내용</label>
               <textarea
                 {...register('content', fieldRules.content)}
                 id='content'
                 className='input-primary py-4 !h-150'
                 placeholder='Type here...'
-                autoComplete='false'
               />
               {errors.content && (
                 <span className='text-12 text-red-500'>

@@ -1,5 +1,7 @@
+import { ContactType } from '@/types/contact';
+
 export interface ContactItem {
-  type: string;
+  type: ContactType;
   label: string;
   message: string;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
