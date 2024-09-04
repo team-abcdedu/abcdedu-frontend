@@ -2,6 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { GalleryImage } from '../types';
 
+export const teamImage = [
+  'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fc48aa73694122edae77e6fe97fafbfbe.cdn.bubble.io%2Ff1719164328528x236798661104775420%2F%25E1%2584%2589%25E1%2585%25A1%25E1%2584%258C%25E1%2585%25B5%25E1%2586%25AB%25202022.%25205.%252027.%252023%252012%252015.jpg?w=192&h=192&auto=compress&dpr=1.25&fit=max',
+  'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fc48aa73694122edae77e6fe97fafbfbe.cdn.bubble.io%2Ff1723136048441x222109018214924800%2FScreenshot%25202024-08-09%2520at%25201.53.50%25E2%2580%25AFAM.png?w=192&h=192&auto=compress&dpr=1.25&fit=max',
+];
+
 export const imageInfo: GalleryImage[] = [
   {
     id: uuidv4(),
