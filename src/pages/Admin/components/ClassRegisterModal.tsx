@@ -71,6 +71,15 @@ function ClassRegisterModal({ isVisible, onClose }: ClassRegisterModalProps) {
         >
           등록
         </button>
+        <button
+          type={'button'}
+          onClick={onClose}
+          className={
+            'w-full h-50 text-15 font-semibold text-primary-300 rounded-md border-1 border-primary-300'
+          }
+        >
+          취소
+        </button>
       </Modal.Actions>
     </Modal>
   );
