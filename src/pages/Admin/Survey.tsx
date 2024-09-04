@@ -12,7 +12,7 @@ function Survey() {
 
   return (
     <div className={'w-full h-full flex flex-col gap-20'}>
-      <h1 className={'text-30 font-semibold'}>설문 제출 내역</h1>
+      <h1 className={'text-30 font-semibold'}>설문 관리</h1>
       <table
         className={
           'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
