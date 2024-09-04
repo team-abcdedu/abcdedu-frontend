@@ -26,10 +26,12 @@ function MobileMenu() {
         <div className={'grid place-items-center'}>
           <MenuIcon
             className={'w-32 h-32'}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen(prev => !prev)}
           />
         </div>
-        {isMenuOpen && <MobileNav />}
+        {isMenuOpen && (
+          <MobileNav onClick={() => setIsMenuOpen(prev => !prev)} />
+        )}
       </div>
     </div>
   );

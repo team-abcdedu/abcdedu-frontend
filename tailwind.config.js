@@ -39,9 +39,15 @@ export default {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(0)' },
         },
+        skeleton: {
+          '0%': { backgroundColor: 'rgba(170, 170, 170, 0.1)' },
+          '50%': { backgroundColor: 'rgba(170, 170, 170, 0.3)' },
+          '100%': { backgroundColor: 'rgba(170, 170, 170, 0.1)' },
+        },
       },
       animation: {
         dropdown: 'drop-down 0.5s ease-out',
+        skeleton: 'skeleton 1.8s infinite ease-in-out',
       },
       zIndex: {
         backdrop: 100,

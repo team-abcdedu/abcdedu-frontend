@@ -10,7 +10,7 @@ import PostDetail from '@/pages/Community/PostDetail';
 import Project from '@/pages/Community/Project';
 import Qna from '@/pages/Community/Qna';
 import Submit from '@/pages/Community/Submit';
-import Contact from '@/pages/contact';
+import Contact from '@/pages/Contact';
 import Home from '@/pages/Home';
 import Survey from '@/pages/Survey';
 
