@@ -15,7 +15,7 @@ function MemberButtons({ name }: { name: string }) {
   return (
     <>
       <Link
-        className={'hidden sm:flex w-100 h-36 text-14 items-center gap-4'}
+        className={'hidden md:flex w-100 h-36 text-14 items-center gap-4'}
         to='/mypage'
       >
         <UserLogin className={'w-30 h-30'} />
@@ -53,7 +53,7 @@ function GuestButtons() {
   return (
     <>
       <button
-        className={'hidden sm:flex w-100 h-36 text-14 items-center gap-4'}
+        className={'hidden md:flex w-100 h-36 text-14 items-center gap-4'}
         onClick={() => handleClick('login')}
       >
         <UserLogin className={'w-30 h-30'} />
@@ -66,7 +66,7 @@ function GuestButtons() {
         </div>
       </button>
       <button
-        className={`block sm:hidden ${btnStyle} btn-white-pb`}
+        className={`block md:hidden ${btnStyle} btn-white-pb`}
         onClick={() => handleClick('login')}
       >
         로그인
@@ -91,7 +91,7 @@ function HeaderButtons() {
   const user = useBoundStore(state => state.user);
 
   return (
-    <div className={'flex flex-col items-center sm:flex-row gap-10'}>
+    <div className={'flex flex-col items-center md:flex-row gap-10'}>
       {user ? <MemberButtons name={user.name} /> : <GuestButtons />}
     </div>
   );

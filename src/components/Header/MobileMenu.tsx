@@ -21,7 +21,7 @@ function MobileMenu() {
   }, []);
 
   return (
-    <div className={'sm:hidden flex flex-end'} ref={menuRef}>
+    <div className={'md:hidden flex flex-end'} ref={menuRef}>
       <div>
         <div className={'grid place-items-center'}>
           <MenuIcon

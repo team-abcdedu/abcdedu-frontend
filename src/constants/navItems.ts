@@ -95,12 +95,16 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     to: '/contact',
     text: '문의',
   },
-  // {
-  //   to: '/',
-  //   text: '과제',
-  // },
-  // {
-  //   to: '/',
-  //   text: '설문',
-  // },
+  {
+    to: '/assignment',
+    text: '과제',
+  },
+  {
+    to: '/survey',
+    text: '설문',
+  },
+  {
+    to: '/admin',
+    text: '관리자',
+  },
 ];
