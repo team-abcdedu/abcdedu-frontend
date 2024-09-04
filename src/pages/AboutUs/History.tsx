@@ -1,7 +1,7 @@
 export default function History() {
   return (
     <div>
-      <div className='w-full h-[600px] flex-col-center bg-primary-300'>
+      <div className='w-full h-[600px] flex-col-center bg-primary-400'>
         <h2 className='text-center text-white leading-[1.3] font-bold'>
           <span className='block text-18 tracking-[6px] -mr-6 pb-12'>
             HISTORY OF

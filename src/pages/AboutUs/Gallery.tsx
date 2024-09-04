@@ -18,7 +18,7 @@ export default function Gallery() {
 
   return (
     <div>
-      <div className='w-full h-[600px] flex-col-center bg-primary-300'>
+      <div className='w-full h-[600px] flex-col-center bg-primary-400'>
         <h2 className='flex-col-center text-center text-white leading-[1.3] font-bold'>
           <span className='block text-18 tracking-[6px] -mr-6 pb-12'>
             GALLERY
@@ -30,14 +30,20 @@ export default function Gallery() {
       </div>
       <section className='py-80'>
         <div className='flex justify-between items-center mb-30'>
-          <div className='flex-1 h-4 bg-primary-300' />
-          <h3 className='basis-1/3 whitespace-nowrap shrink-0 text-center text-22 sm:text-26 text-neutral-500 font-bold px-16 sm:px-32'>
+          <div className='flex-1 h-4 bg-primary-400' />
+          <h3
+            className='basis-1/3 whitespace-nowrap shrink-0 text-center text-22 sm:text-26 
+          text-neutral-500 font-bold px-16 sm:px-32'
+          >
             학생들과 함께하는 교육 세션
           </h3>
-          <div className='flex-1 h-4 bg-primary-300' />
+          <div className='flex-1 h-4 bg-primary-400' />
         </div>
         <div className='w-full max-w-[1458px] px-24 py-50 mx-auto'>
-          <div className='grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,_minmax(0,_270px))] gap-15 justify-center'>
+          <div
+            className='grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,_minmax(0,_270px))] 
+            gap-15 justify-center'
+          >
             {imageInfo.map(image => (
               <button
                 type='button'
