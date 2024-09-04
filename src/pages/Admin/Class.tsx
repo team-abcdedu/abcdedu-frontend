@@ -1,37 +1,62 @@
+import { useEffect, useState } from 'react';
+
+import useModal from '@/hooks/useModal';
+
+import ClassRegisterModal from './components/ClassRegisterModal';
+import { tableColumns } from './constants';
+
 function Class() {
+  const [data, setData] = useState([]);
+  const { isVisible, toggleModal } = useModal();
+
+  useEffect(() => {
+    // 임시
+    setData([]);
+  }, []);
+
   return (
-    <div className={'w-full h-full flex flex-col gap-20'}>
-      <h1 className={'text-30 font-semibold'}>클래스 관리</h1>
-      <form className={'w-1/2 h-1/3 py-10 px-20 flex flex-col gap-10 shadow '}>
-        <table>
-          <thead>
-            <tr>
-              <td>클래스명</td>
-              <td>타입</td>
-              <td>설명</td>
+    <>
+      <div className={'w-full h-full flex flex-col gap-20'}>
+        <div className={'w-full flex justify-between pr-50'}>
+          <h1 className={'text-30 font-semibold'}>클래스 목록</h1>
+          <button
+            className={'px-10 text-20 border-2 rounded-lg border-neutral-300'}
+            onClick={toggleModal}
+          >
+            클래스 등록
+          </button>
+        </div>
+        <table
+          className={
+            'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
+          }
+        >
+          <thead className={'bg-slate-300'}>
+            <tr className={''}>
+              {tableColumns.class.map(column => (
+                <th key={column} className={'font-medium'}>
+                  {column}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <input />
-              </td>
-              <td>
-                <input />
-              </td>
-              <td>
-                <textarea />
-              </td>
-            </tr>
+            {data.length > 0 ? (
+              data.map((row, idx) => (
+                <tr key={idx}>
+                  {tableColumns.class.map(column => (
+                    <td key={column}>{row[column]}</td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <div className={'text-center'}>데이터가 없습니다.</div>
+            )}
           </tbody>
         </table>
-
-        <button className={'col-span-2'}>클래스 등록</button>
-      </form>
-      <div className={'w-full h-3/5 shadow'}>
-        <h2>서브 클래스 등록</h2>
       </div>
-    </div>
+      <ClassRegisterModal isVisible={isVisible} onClose={toggleModal} />
+    </>
   );
 }
 

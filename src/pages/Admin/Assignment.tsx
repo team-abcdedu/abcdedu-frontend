@@ -1,10 +1,18 @@
-import { mockAdminAssignment } from '@/mock/adminMock';
-import { tableColumnInfo } from '@/pages/Admin/constants/tableInfo';
+import { useEffect, useState } from 'react';
+
+import { tableColumns } from '@/pages/Admin/constants';
 
 function Assignment() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // 임시
+    setData([]);
+  }, []);
+
   return (
     <div className={'w-full h-full flex flex-col gap-20'}>
-      <h1 className={'text-40 font-bold'}>assignment</h1>
+      <h1 className={'text-30 font-semibold'}>과제 제출 내역</h1>
       <table
         className={
           'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
@@ -12,27 +20,27 @@ function Assignment() {
       >
         <thead className={'bg-slate-300'}>
           <tr className={''}>
-            {tableColumnInfo.assignment.map(column => (
-              <th key={column}>{column}</th>
+            {tableColumns.assignment.map(column => (
+              <th key={column} className={'font-medium'}>
+                {column}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {mockAdminAssignment.map((assignment, index) => (
-            <tr
-              key={assignment.id}
-              className={`${index % 2 ? 'bg-slate-200' : 'bg-slate-100'}`}
-            >
-              {Object.values(assignment).map(value => (
-                <td key={value} className={'text-center'}>
-                  {value}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {data.length > 0 ? (
+            data.map((row, idx) => (
+              <tr key={idx}>
+                {tableColumns.assignment.map(column => (
+                  <td key={column}>{row[column]}</td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <div className={'text-center'}>데이터가 없습니다.</div>
+          )}
         </tbody>
       </table>
-      pagination
     </div>
   );
 }
