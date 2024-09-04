@@ -15,44 +15,26 @@ function SurveyItem({
   required: boolean;
   register: UseFormRegister<FormValues>;
 }) {
+  const rules = required ? { required: '답안을 입력해주세요.' } : {};
   if (type === 'textarea') {
-    return required ? (
+    return (
       <textarea
-        {...register(`answers.${id}`, {
-          required: '답안을 입력해주세요.',
-        })}
-        className={'min-h-[150px] p-6 font-normal'}
-        placeholder={'답안 입력하기'}
-      ></textarea>
-    ) : (
-      <textarea
-        {...register(`answers.${id}`)}
+        {...register(`answers.${id}`, rules)}
         className={'min-h-[150px] p-6 font-normal'}
         placeholder={'답안 입력하기'}
       ></textarea>
     );
   }
   if (type === 'radio') {
-    return required ? (
+    return (
       <fieldset className={'flex flex-col font-normal'}>
         {options.map(option => (
           <label key={option} className={'flex gap-10'}>
             <input
-              {...register(`answers.${id}`, {
-                required: '답안을 입력해주세요',
-              })}
+              {...register(`answers.${id}`, rules)}
               type='radio'
               value={option}
             />
-            {option}
-          </label>
-        ))}
-      </fieldset>
-    ) : (
-      <fieldset className={'flex flex-col font-normal'}>
-        {options.map(option => (
-          <label key={option} className={'flex gap-10'}>
-            <input {...register(`answers.${id}`)} type='radio' value={option} />
             {option}
           </label>
         ))}
