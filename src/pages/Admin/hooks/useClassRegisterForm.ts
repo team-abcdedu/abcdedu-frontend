@@ -1,4 +1,3 @@
-import { isAxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import AdminClassApi from '@/services/admin/class';
@@ -10,7 +9,7 @@ interface IClassRegisterForm {
   description: string;
 }
 
-function UseClassRegisterForm() {
+function useClassRegisterForm() {
   const {
     register,
     formState: { errors },
@@ -46,12 +45,8 @@ function UseClassRegisterForm() {
       await AdminClassApi.createClass(data);
       alert('클래스가 성공적으로 등록되었습니다.');
     } catch (error) {
-      if (isAxiosError(error) && error.response?.status) {
-        alert('클래스 등록에 실패했습니다.');
-        console.error(error.response.data);
-      } else {
-        console.error(error);
-      }
+      alert('클래스 등록에 실패했습니다.');
+      console.error(error);
     }
   };
 
@@ -60,4 +55,4 @@ function UseClassRegisterForm() {
   return { register, fieldRules, errors, onSubmit, reset };
 }
 
-export default UseClassRegisterForm;
+export default useClassRegisterForm;
