@@ -9,7 +9,7 @@ function AssignmentForm({
   assignmentInfo: AssignmentInfo;
   readOnly: boolean;
 }) {
-  const { title, topic, description, questions } = assignmentInfo;
+  const { questions } = assignmentInfo;
   const [files, setFiles] = useState<File[]>([]);
 
   const formTextStyle = 'text-16 md:text-20';
@@ -39,18 +39,6 @@ function AssignmentForm({
       onSubmit={submitHandler}
     >
       <div className={'min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}>
-        <div
-          className={'w-full min-h-[140px] flex-col-center gap-20 break-keep'}
-        >
-          <h2 className={'w-full text-30 md:text-40 font-bold text-start'}>
-            [과제] {title}
-          </h2>
-          <h3 className={`w-full ${formTextStyle} font-semibold text-start`}>
-            [{topic}]
-          </h3>
-          <p className={`w-full ${formTextStyle} text-start`}>{description}</p>
-        </div>
-
         <div className={'py-30 flex flex-col gap-40'}>
           {questions.map((q, qIndex) => (
             <label
@@ -70,6 +58,7 @@ function AssignmentForm({
                 placeholder={'답안 입력하기'}
                 readOnly={readOnly}
                 name={`question-${qIndex}`}
+                required
               />
             </label>
           ))}

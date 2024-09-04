@@ -5,7 +5,7 @@ export const assignmentInfoMap: AssignmentInfoMap = {
     title: '사회 문제 해결을 위한 인공지능 설계',
     topic: '인공지능으로 사회문제를 해결한 사례 시청',
     description:
-      '다양한 사례를 통해 인공지능이 사회문제를 해결하기 위해 어떻게 사용되는지 알아보자. 그리고 다음 과제를 수행해보자.',
+      '다양한 사례를 통해 인공지능이 사회문제를 해결하기 위해 어떻게 사용되는지 알아보자.\n그리고 다음 과제를 수행해보자.',
     questions: [
       {
         question: '해결하고 싶은 현재 또는 미래 사회의 문제 찾기',
