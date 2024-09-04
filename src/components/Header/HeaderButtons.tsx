@@ -15,13 +15,13 @@ function MemberButtons({ name }: { name: string }) {
   return (
     <>
       <Link
-        className={'hidden sm:flex w-100 h-36 text-14 items-center gap-4'}
+        className={'hidden sm:flex w-fit h-36 text-14 items-center gap-4'}
         to='/mypage'
       >
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-64 h-36 flex-row-center text-14 font-semibold text-primary-400'
+            'w-fit h-36 flex-row-center text-14 font-semibold text-primary-400'
           }
         >
           {name}
