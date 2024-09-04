@@ -7,7 +7,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <section className={'relative top-[70px] sm:top-[100px]'}>
+      <section className={'relative top-[70px] md:top-[100px]'}>
         <Outlet />
         <Footer />
       </section>
