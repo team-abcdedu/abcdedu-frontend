@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 import Book from '@/assets/icons/book.svg?react';
 import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
+import MessageModal from '@/components/MessageModal';
 import useModal from '@/hooks/useModal';
 
 import { examInfoMap } from '../constants';
 
-import AccessDeniedModal from './AccessDeniedModal';
 import ExamForm from './ExamForm';
 
 function SubClassContent({
@@ -22,6 +22,7 @@ function SubClassContent({
   const iconStyle = 'w-70 h-70 sm:w-90 sm:h-90 text-primary-300';
   const textStyle = 'text-20 sm:text-25 font-semibold text-center';
   const examInfo = examInfoMap[subClassCode];
+  const [modalMessage, setModalMessage] = useState('');
 
   const { isVisible, toggleModal } = useModal();
 
@@ -29,12 +30,16 @@ function SubClassContent({
 
   const handleTheoryClick = () => {
     // 권한 체크
+    setModalMessage('이론 자료는 관리자만 이용 가능합니다.');
     toggleModal();
   };
 
   const handleExamClick = () => {
     if (examInfo) {
       setOpenExam(prev => !prev);
+    } else {
+      setModalMessage('시험 정보가 없습니다.');
+      toggleModal();
     }
   };
 
@@ -55,7 +60,6 @@ function SubClassContent({
           </div>
           <div className={textStyle}>이론</div>
         </button>
-        <AccessDeniedModal isVisible={isVisible} onClose={handleTheoryClick} />
 
         <button className={buttonStyle} onClick={handleExamClick}>
           <div className={iconWrapperStyle}>
@@ -65,7 +69,13 @@ function SubClassContent({
         </button>
       </div>
 
-      {openExam && <ExamForm examInfo={examInfo} />}
+      <MessageModal
+        isVisible={isVisible}
+        onClose={handleTheoryClick}
+        type={'error'}
+        message={modalMessage}
+      />
+      {openExam && examInfo && <ExamForm examInfo={examInfo} />}
     </>
   );
 }
