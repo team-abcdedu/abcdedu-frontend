@@ -4,23 +4,23 @@ import useModal from '@/hooks/useModal';
 import SubClassRegisterModal from '@/pages/Admin/components/SubClassRegisterModal';
 
 import ClassRegisterModal from './components/ClassRegisterModal';
-import { tableColumns } from './constants';
+import { tableColumnMap, tableColumns } from './constants';
 import { ClassTableColumns, ClassTableData } from './types';
 
 const mockData: ClassTableData[] = [
   {
-    ID: '1',
-    생성일: '2021-10-01',
-    이름: '클래스1',
-    설명: '클래스1 설명',
-    목록: ['하위클래스1, 하위클래스2'],
+    id: '1',
+    createdAt: '2021-10-01',
+    title: '클래스1',
+    description: '클래스1 설명',
+    list: ['하위클래스1, 하위클래스2'],
   },
   {
-    ID: '2',
-    생성일: '2021-10-02',
-    이름: '클래스2',
-    설명: '클래스2 설명',
-    목록: ['하위클래스3, 하위클래스4'],
+    id: '2',
+    createdAt: '2021-10-02',
+    title: '클래스2',
+    description: '클래스2 설명',
+    list: ['하위클래스3, 하위클래스4'],
   },
 ];
 
@@ -31,10 +31,10 @@ function DataItem({
   column: keyof ClassTableColumns;
   row: ClassTableData;
 }) {
-  if (column === '목록') {
+  if (column === 'list') {
     return <span>{row[column].join(', ')}</span>;
   }
-  if (column === '관리') {
+  if (column === 'manage') {
     return (
       <button className={'px-5 border-2 border-neutral-300 rounded-lg'}>
         하위클래스 관리
@@ -84,7 +84,7 @@ function Class() {
             <tr className={''}>
               {tableColumns.class.map(column => (
                 <th key={column} className={'font-medium'}>
-                  {column}
+                  {tableColumnMap.class[column]}
                 </th>
               ))}
             </tr>

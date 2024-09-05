@@ -1,30 +1,52 @@
 export interface ClassTableData {
-  ID: string;
-  생성일: string;
-  이름: string;
-  설명: string;
-  목록: string[];
+  id: string;
+  createdAt: string;
+  title: string;
+  description: string;
+  list: string[];
 }
 
 export interface ClassTableColumns extends ClassTableData {
-  관리: string;
+  manage: string;
 }
 
 export interface AssignmentTableColumns {
-  ID: string;
-  제출일: string;
-  이름: string;
+  id: string;
+  createdAt: string;
+  name: string;
 }
 
 export interface SurveyTableColumns {
-  ID: string;
-  제출일: string;
-  클래스: string;
-  이름: string;
+  id: string;
+  createdAt: string;
+  class: string;
+  name: string;
 }
 
 export interface TableColumns {
   class: Array<keyof ClassTableColumns>;
   assignment: Array<keyof AssignmentTableColumns>;
   survey: Array<keyof SurveyTableColumns>;
+}
+
+export interface TableColumnMap {
+  class: {
+    id: string;
+    createdAt: string;
+    title: string;
+    description: string;
+    list: string;
+    manage: string;
+  };
+  assignment: {
+    id: string;
+    createdAt: string;
+    name: string;
+  };
+  survey: {
+    id: string;
+    createdAt: string;
+    class: string;
+    name: string;
+  };
 }
