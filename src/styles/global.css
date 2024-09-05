@@ -115,6 +115,15 @@ textarea {
   );
 }
 
+.about-gradient {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(203, 212, 227, 0.7) 50%,
+    #ffffff 100%
+  );
+}
+
 /* quill */
 .ql-toolbar.ql-snow {
   background-color: white;
