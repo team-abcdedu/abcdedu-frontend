@@ -1,6 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
 
-import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
 import logo from '@/assets/icons/logo.png';
 
 function AdminLayout() {
@@ -39,9 +38,11 @@ function AdminLayout() {
             'h-full py-20 flex flex-col gap-10 text-18 font-light text-white'
           }
         >
+          <Link to={'/admin/class'} className={LinkStyle}>
+            클래스 관리
+          </Link>
           <Link to={'/admin/assignment'} className={LinkStyle}>
-            <CheckToSlot className={'w-25 h-25'} />
-            <span>과제 관리</span>
+            과제 관리
           </Link>
           <Link to={'/admin/survey'} className={LinkStyle}>
             설문 관리
