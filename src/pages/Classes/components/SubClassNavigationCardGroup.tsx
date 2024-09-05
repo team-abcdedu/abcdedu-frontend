@@ -1,11 +1,12 @@
-import ClassNavigationCard from '@/pages/Classes/components/ClassNavigationCard';
-import { CourseInfo } from '@/types/classTypes';
+import { ClassInfo } from '../types';
 
-function ClassNavigationCardGroup({ courseInfo }: { courseInfo: CourseInfo }) {
-  const { title, classes } = courseInfo || {};
+import SubClassNavigationCard from './SubClassNavigationCard';
+
+function SubClassNavigationCardGroup({ classInfo }: { classInfo: ClassInfo }) {
+  const { title, subClasses } = classInfo || {};
   const lineStyle = 'w-full h-4 bg-primary-300';
 
-  if (!courseInfo) {
+  if (!classInfo) {
     return null;
   }
 
@@ -23,10 +24,10 @@ function ClassNavigationCardGroup({ courseInfo }: { courseInfo: CourseInfo }) {
         <div className={lineStyle}></div>
       </div>
       <div className={'p-30'}>
-        <ClassNavigationCard classes={classes} bgColor={'neutral'} />
+        <SubClassNavigationCard subClasses={subClasses} bgColor={'neutral'} />
       </div>
     </>
   );
 }
 
-export default ClassNavigationCardGroup;
+export default SubClassNavigationCardGroup;

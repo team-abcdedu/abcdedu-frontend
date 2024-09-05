@@ -63,19 +63,19 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
+    to: '/assignment',
+    text: '과제',
+  },
+  {
+    type: 'link',
+    to: '/survey',
+    text: '설문',
+  },
+  {
+    type: 'link',
     to: '/admin',
     text: '관리자',
   },
-  // {
-  //   type: 'link',
-  //   to: '/assignment',
-  //   text: '과제',
-  // },
-  // {
-  //   type: 'link',
-  //   to: '/survey',
-  //   text: '설문',
-  // },
 ];
 
 export const mobileMenuNavItems: MobileMenuNavItem[] = [
@@ -95,12 +95,16 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     to: '/contact',
     text: '문의',
   },
-  // {
-  //   to: '/',
-  //   text: '과제',
-  // },
-  // {
-  //   to: '/',
-  //   text: '설문',
-  // },
+  {
+    to: '/assignment',
+    text: '과제',
+  },
+  {
+    to: '/survey',
+    text: '설문',
+  },
+  {
+    to: '/admin',
+    text: '관리자',
+  },
 ];

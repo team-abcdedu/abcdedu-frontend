@@ -1,4 +1,7 @@
-import { CourseInfoMap, ExamInfoMap } from '@/types/classTypes';
+import { ClassInfoMap, ExamInfoMap } from '../types';
+
+export const curriculumImgUrl =
+  'https://c48aa73694122edae77e6fe97fafbfbe.cdn.bubble.io/f1723138717697x280065903378054820/%E1%84%8F%E1%85%A5%E1%84%85%E1%85%B5%E1%84%8F%E1%85%B2%E1%86%AF%E1%84%85%E1%85%A5%E1%86%B7.svg';
 
 export const mediaList = [
   '인공지능 눈길',
@@ -8,13 +11,13 @@ export const mediaList = [
   'Atari Games',
 ];
 
-export const courseInfoMap: CourseInfoMap = {
+export const classInfoMap: ClassInfoMap = {
   A: {
     title: 'Class A',
     subTitle: '인공지능 강의',
     description:
       '인공지능에게 대체되지 않는 인간지능이 되기 위해 인공지능에 대한 기본 원리를 학습하는 수업',
-    classes: [
+    subClasses: [
       { code: 'A-1', title: '학생을 위한\n머신러닝', to: '/classes/a/a-1' },
       { code: 'A-2', title: '학생을 위한\n딥러닝', to: '/classes/a/a-2' },
       {
@@ -29,7 +32,7 @@ export const courseInfoMap: CourseInfoMap = {
     title: 'Class B',
     subTitle: '',
     description: '',
-    classes: [
+    subClasses: [
       { code: 'B-1', title: '빅데이터', to: '/classes/b/b-1' },
       { code: 'B-2', title: '데이터베이스', to: '/classes/b/b-2' },
       { code: 'B-3', title: '데이터 분석', to: '/classes/b/b-3' },
@@ -40,7 +43,7 @@ export const courseInfoMap: CourseInfoMap = {
     title: 'Class C',
     subTitle: '인공지능 강의',
     description: '인공신경망 설계',
-    classes: [
+    subClasses: [
       {
         code: 'C-1',
         title: '눈으로 이해하는 인공신경망\n(코드 없이 인공신경망 설계하기)',
@@ -57,7 +60,7 @@ export const courseInfoMap: CourseInfoMap = {
     title: 'Class D',
     subTitle: '',
     description: '',
-    classes: [
+    subClasses: [
       { code: 'D-1', title: '첨단 융합', to: '/classes/d/d-1' },
       { code: 'D-2', title: '인문 ・ 사회', to: '/classes/d/d-2' },
       { code: 'D-3', title: '수리 ・ 과학', to: '/classes/d/d-3' },
