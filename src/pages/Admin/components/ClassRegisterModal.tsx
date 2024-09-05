@@ -1,5 +1,6 @@
 import Modal from '@/components/Modal';
-import useClassRegisterForm from '@/pages/Admin/hooks/useClassRegisterForm';
+
+import useClassRegisterForm from '../hooks/useClassRegisterForm';
 
 interface ClassRegisterModalProps {
   isVisible: boolean;
@@ -24,7 +25,7 @@ function ClassRegisterModal({ isVisible, onClose }: ClassRegisterModalProps) {
       <Modal.Content>
         <form
           id={'class-register'}
-          className={'w-full h-full flex flex-col gap-20 text-17'}
+          className={'w-full h-full flex flex-col gap-5 text-15'}
           onSubmit={onSubmit}
         >
           <label htmlFor={'title'} className={'flex flex-col'}>
@@ -63,23 +64,25 @@ function ClassRegisterModal({ isVisible, onClose }: ClassRegisterModalProps) {
         </form>
       </Modal.Content>
       <Modal.Actions>
-        <button
-          form={'class-register'}
-          className={
-            'w-full h-50 bg-primary-300 text-15 text-white font-semibold rounded-md'
-          }
-        >
-          등록
-        </button>
-        <button
-          type={'button'}
-          onClick={onClose}
-          className={
-            'w-full h-50 text-15 font-semibold text-primary-300 rounded-md border-1 border-primary-300'
-          }
-        >
-          취소
-        </button>
+        <div className={'w-full flex flex-col gap-3'}>
+          <button
+            form={'class-register'}
+            className={
+              'w-full h-50 bg-primary-300 text-15 text-white font-semibold rounded-md'
+            }
+          >
+            등록
+          </button>
+          <button
+            type={'button'}
+            onClick={onClose}
+            className={
+              'w-full h-50 text-15 font-semibold text-primary-300 rounded-md border-1 border-primary-300'
+            }
+          >
+            취소
+          </button>
+        </div>
       </Modal.Actions>
     </Modal>
   );
