@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { curriculumImgUrl } from '@/pages/Classes/constants/imgUrl';
+import { curriculumImgUrl } from '../constants';
 
 function Hero() {
   const [showCurriculum, setShowCurriculum] = useState(false);

@@ -4,9 +4,8 @@ import Layout from '@/components/Layout';
 import AboutUs from '@/pages/AboutUs';
 import Gallery from '@/pages/AboutUs/Gallery';
 import History from '@/pages/AboutUs/History';
+import Assignment from '@/pages/Assignment';
 import Classes from '@/pages/Classes';
-import Course from '@/pages/Classes/[courseId]';
-import Class from '@/pages/Classes/[courseId]/[classCode]';
 import Community from '@/pages/Community';
 import Board from '@/pages/Community/Board';
 import LevelUp from '@/pages/Community/LevelUp';
@@ -16,6 +15,10 @@ import Qna from '@/pages/Community/Qna';
 import Submit from '@/pages/Community/Submit';
 import Contact from '@/pages/Contact';
 import Home from '@/pages/Home';
+import Survey from '@/pages/Survey';
+
+import Class from '../pages/Classes/[classId]';
+import SubClass from '../pages/Classes/[classId]/[subClassId]';
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -43,12 +46,12 @@ export const publicRoutes: RouteObject[] = [
         element: <Classes />,
       },
       {
-        path: '/classes/:courseId',
-        element: <Course />,
+        path: '/classes/:classId',
+        element: <Class />,
       },
       {
-        path: '/classes/:courseId/:classCode',
-        element: <Class />,
+        path: '/classes/:classId/:subClassId',
+        element: <SubClass />,
       },
       {
         path: '/community',
@@ -93,6 +96,14 @@ export const publicRoutes: RouteObject[] = [
       {
         path: '/contact',
         element: <Contact />,
+      },
+      {
+        path: '/assignment',
+        element: <Assignment />,
+      },
+      {
+        path: '/survey',
+        element: <Survey />,
       },
     ],
   },

@@ -1,7 +1,8 @@
-import CourseOverview from '@/pages/Classes/components/CourseOverview';
-import { courseInfoMap } from '@/pages/Classes/constants/courseInfo';
+import { classInfoMap } from '../constants';
 
-function CourseList() {
+import ClassOverview from './ClassOverview';
+
+function ClassList() {
   const bgColors = [
     'bg-primary-75',
     'bg-primary-100',
@@ -17,7 +18,7 @@ function CourseList() {
 
   return (
     <>
-      {Object.entries(courseInfoMap).map(([id, courseInfo], index) => {
+      {Object.entries(classInfoMap).map(([id, classInfo], index) => {
         return (
           <section
             key={id}
@@ -34,7 +35,7 @@ function CourseList() {
                 {id}
               </span>
             </div>
-            <CourseOverview courseInfo={courseInfo} />
+            <ClassOverview classInfo={classInfo} />
           </section>
         );
       })}
@@ -42,4 +43,4 @@ function CourseList() {
   );
 }
 
-export default CourseList;
+export default ClassList;

@@ -1,7 +1,8 @@
 import Head from '@/components/Head';
-import CourseList from '@/pages/Classes/components/CourseList';
-import Hero from '@/pages/Classes/components/Hero';
-import MediaContents from '@/pages/Classes/components/MediaContents';
+
+import ClassList from './components/ClassList';
+import Hero from './components/Hero';
+import MediaContents from './components/MediaContents';
 
 function Classes() {
   return (
@@ -12,7 +13,7 @@ function Classes() {
       />
       <Hero />
       <MediaContents />
-      <CourseList />
+      <ClassList />
     </>
   );
 }
