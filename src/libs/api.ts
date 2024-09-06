@@ -5,7 +5,7 @@ import { BASE_URL } from '@/config';
 import useBoundStore from '@/stores';
 
 // access token 재발급
-const reIssueAccessToken = memoize(
+const reissueAccessToken = memoize(
   async (): Promise<string> => {
     try {
       const { data } = await axios.get('/auth/reissue', {
@@ -71,7 +71,7 @@ instance.interceptors.response.use(
       // isAutoLogin: 로그인 하지 않은 사용자의 토큰 재발급 요청을 방지합니다.
       const originalRequest = error.config;
 
-      const newToken = await reIssueAccessToken();
+      const newToken = await reissueAccessToken();
       useBoundStore.setState({ accessToken: newToken });
       originalRequest.headers.authorization = `Bearer ${newToken}`;
 
