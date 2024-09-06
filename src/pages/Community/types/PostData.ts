@@ -11,7 +11,7 @@ export interface Post {
 
 export interface PostTableProps {
   posts: Post[];
-  isLevelingUp: boolean;
+  isLevelingUp?: boolean;
   // onSelectPost: (post: Post) => void;
 }
 

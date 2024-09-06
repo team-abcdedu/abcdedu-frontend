@@ -13,7 +13,7 @@ function LevelUp() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
   const [isLevelingUp, setIsLevelingUp] = useState<boolean>(false); // 등업하기 상태
-  const [userRole, setUserRole] = useState<string>(''); 
+  const [userRole, setUserRole] = useState<string>('');
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -35,7 +35,6 @@ function LevelUp() {
   const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setUserRole(e.target.value); // 셀렉트 박스에서 역할 선택 시 상태 변경
   };
-
 
   return (
     <div className='flex flex-col text-center mt-20'>
@@ -81,7 +80,7 @@ function LevelUp() {
           </select>
         </div>
       ) : null}
-      
+
       {isVisible && (
         <WritePostModal isVisible={isVisible} onClose={toggleModal} />
       )}

@@ -9,11 +9,7 @@ export function PostTable({ posts, isLevelingUp }: PostTableProps) {
       <table className='w-full text-sm sm:text-base'>
         <thead>
           <tr className='border-t-2 border-t-gray-400 border-b-2 border-b-primary-400'>
-            {isLevelingUp && (
-                <th className='px-20 py-10'>
-                  등업
-                </th>
-              )}
+            {isLevelingUp && <th className='px-20 py-10'>등업</th>}
             <th className='px-20 py-10'>No.</th>
             <th className='px-20 py-10'>제목</th>
             <th className='hidden md:table-cell px-20 py-10'>글쓴이</th>
@@ -31,7 +27,7 @@ export function PostTable({ posts, isLevelingUp }: PostTableProps) {
             >
               {isLevelingUp && (
                 <td className='px-20 py-10'>
-                  <input type="checkbox" />
+                  <input type='checkbox' />
                 </td>
               )}
               <td className='px-20 py-10'>{post.id}</td>
