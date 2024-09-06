@@ -4,6 +4,8 @@ import memoize from 'memoize';
 import { BASE_URL } from '@/config';
 import useBoundStore from '@/stores';
 
+import { queryClient } from './react-query';
+
 // access token 재발급
 const reissueAccessToken = memoize(
   async (): Promise<string> => {
@@ -22,6 +24,7 @@ const reissueAccessToken = memoize(
       await axios.delete('/auth/logout', {
         baseURL: BASE_URL,
       });
+      queryClient.removeQueries({ queryKey: ['user'] });
       return Promise.reject(refreshError);
     }
   },

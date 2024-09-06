@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useForm, FieldValues } from 'react-hook-form';
 
@@ -14,7 +14,6 @@ interface ILoginFormInput {
 
 export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
   const setIsAutoLogin = useBoundStore(state => state.setIsAutoLogin);
-  const queryClient = useQueryClient();
 
   const {
     formState: { errors },
@@ -47,7 +46,6 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
     mutationFn: ({ email, password }: ILoginFormInput) =>
       auth.login(email, password),
     onSuccess: () => {
-      queryClient.removeQueries({ queryKey: ['user'] });
       setIsAutoLogin();
       onSuccess();
     },
