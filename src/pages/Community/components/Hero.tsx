@@ -15,7 +15,7 @@ function Hero() {
         </p>
         <h1
           className={
-            'font-bold text-primary-300 text-center text-40 md:text-50 lg:text-80 '
+            'font-bold text-primary-300 text-center text-40 md:text-50 lg:text-80 break-keep'
           }
         >
           전국 학생들이 하나로 모이는 공간!
