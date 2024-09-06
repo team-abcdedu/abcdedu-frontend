@@ -6,27 +6,30 @@ export interface ClassTableData {
   list: string[];
 }
 
-export interface ClassTableColumns extends ClassTableData {
-  manage: string;
-}
-
-export interface AssignmentTableColumns {
+export interface AssignmentTableData {
   id: string;
   createdAt: string;
   name: string;
 }
 
-export interface SurveyTableColumns {
+export interface SurveyTableData {
   id: string;
   createdAt: string;
   class: string;
   name: string;
 }
 
+export interface TheoryTableData {
+  id: string;
+  class: string;
+  file: string;
+}
+
 export interface TableColumns {
-  class: Array<keyof ClassTableColumns>;
-  assignment: Array<keyof AssignmentTableColumns>;
-  survey: Array<keyof SurveyTableColumns>;
+  class: Array<keyof ClassTableData>;
+  assignment: Array<keyof AssignmentTableData>;
+  survey: Array<keyof SurveyTableData>;
+  theory: Array<keyof TheoryTableData>;
 }
 
 export interface TableColumnMap {
@@ -36,7 +39,6 @@ export interface TableColumnMap {
     title: string;
     description: string;
     list: string;
-    manage: string;
   };
   assignment: {
     id: string;
@@ -48,5 +50,10 @@ export interface TableColumnMap {
     createdAt: string;
     class: string;
     name: string;
+  };
+  theory: {
+    id: string;
+    class: string;
+    file: string;
   };
 }

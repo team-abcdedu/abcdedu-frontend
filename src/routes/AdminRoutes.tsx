@@ -6,6 +6,7 @@ import Admin from '@/pages/Admin';
 import Assignment from '@/pages/Admin/Assignment';
 import Class from '@/pages/Admin/Class';
 import Survey from '@/pages/Admin/Survey';
+import Theory from '@/pages/Admin/Theory';
 
 export const adminRoutes: RouteObject[] = [
   {
@@ -31,6 +32,10 @@ export const adminRoutes: RouteObject[] = [
       {
         path: '/admin/survey',
         element: <Survey />,
+      },
+      {
+        path: '/admin/theory',
+        element: <Theory />,
       },
     ],
   },

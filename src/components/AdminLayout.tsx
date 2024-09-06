@@ -47,6 +47,9 @@ function AdminLayout() {
           <Link to={'/admin/survey'} className={LinkStyle}>
             설문 관리
           </Link>
+          <Link to={'/admin/theory'} className={LinkStyle}>
+            이론 관리
+          </Link>
         </div>
       </aside>
       <section
