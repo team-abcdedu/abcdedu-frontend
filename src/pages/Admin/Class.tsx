@@ -25,14 +25,6 @@ const mockData: ClassTableData[] = [
   },
 ];
 
-const initialClass: ClassTableData = {
-  id: '',
-  createdAt: '',
-  title: '',
-  description: '',
-  list: [],
-};
-
 function DataItem({
   column,
   row,
@@ -48,8 +40,9 @@ function DataItem({
 
 function Class() {
   const [data, setData] = useState<ClassTableData[]>([]);
-  const [selectedClass, setSelectedClass] =
-    useState<ClassTableData>(initialClass);
+  const [selectedClass, setSelectedClass] = useState<ClassTableData | null>(
+    null,
+  );
 
   const { isVisible: classVisible, toggleModal: classToggle } = useModal();
   const { isVisible: subClassVisible, toggleModal: subClassToggle } =

@@ -7,7 +7,7 @@ import { SurveyTableData } from '../types';
 import DetailModalHeader from './DetailModalHeader';
 
 interface SurveyDetailModalProps {
-  survey: SurveyTableData;
+  survey: SurveyTableData | null;
   isVisible: boolean;
   onClose: () => void;
 }
@@ -18,6 +18,9 @@ function SurveyDetailModal({
   onClose,
 }: SurveyDetailModalProps) {
   useEffect(() => {}, []);
+
+  if (!survey) return null;
+
   return (
     <Modal size={'lg'} isVisible={isVisible} onClose={onClose}>
       <Modal.Content>

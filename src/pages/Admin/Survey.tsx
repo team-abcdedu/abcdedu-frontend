@@ -21,17 +21,11 @@ const mockData: SurveyTableData[] = [
   },
 ];
 
-const initialSurvey: SurveyTableData = {
-  id: '',
-  createdAt: '',
-  class: '',
-  name: '',
-};
-
 function Survey() {
   const [data, setData] = useState<SurveyTableData[]>([]);
-  const [selectedSurvey, setSelectedSurvey] =
-    useState<SurveyTableData>(initialSurvey);
+  const [selectedSurvey, setSelectedSurvey] = useState<SurveyTableData | null>(
+    null,
+  );
   const { isVisible, toggleModal } = useModal();
 
   const handleRowClick = (survey: SurveyTableData) => {

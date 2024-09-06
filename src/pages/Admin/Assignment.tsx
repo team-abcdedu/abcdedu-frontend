@@ -24,16 +24,10 @@ const mockData: AssignmentTableData[] = [
   },
 ];
 
-const initialAssignment: AssignmentTableData = {
-  id: '',
-  createdAt: '',
-  name: '',
-};
-
 function Assignment() {
   const [data, setData] = useState<AssignmentTableData[]>([]);
   const [selectedAssignment, setSelectedAssignment] =
-    useState<AssignmentTableData>(initialAssignment);
+    useState<AssignmentTableData | null>(null);
   const { isVisible, toggleModal } = useModal();
 
   const handleRowClick = (assignment: AssignmentTableData) => {

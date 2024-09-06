@@ -7,26 +7,29 @@ import { AssignmentTableData } from '../types';
 import DetailModalHeader from './DetailModalHeader';
 
 interface AssignmentDetailModalProps {
-  assignment: AssignmentTableData;
+  assignment: AssignmentTableData | null;
   isVisible: boolean;
   onClose: () => void;
 }
 
 function AssignmentDetailModal({
-  assignment: { id, createdAt, name },
+  assignment,
   isVisible,
   onClose,
 }: AssignmentDetailModalProps) {
   useEffect(() => {}, []);
+
+  if (!assignment) return null;
+
   return (
     <Modal size={'lg'} isVisible={isVisible} onClose={onClose}>
       <Modal.Content>
         <div className={'h-max flex flex-col gap-5'}>
           <DetailModalHeader
             list={{
-              ID: id,
-              제출일: createdAt,
-              이름: name,
+              ID: assignment.id,
+              제출일: assignment.createdAt,
+              이름: assignment.name,
             }}
           />
           <div
