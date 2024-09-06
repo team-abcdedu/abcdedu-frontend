@@ -1,7 +1,33 @@
 import axios from 'axios';
+import memoize from 'memoize';
 
 import { BASE_URL } from '@/config';
 import useBoundStore from '@/stores';
+
+// access token 재발급
+const reIssueAccessToken = memoize(
+  async (): Promise<string> => {
+    try {
+      const { data } = await axios.get('/auth/reissue', {
+        baseURL: BASE_URL,
+      });
+
+      const newToken = data.result.accessToken;
+      return newToken;
+    } catch (refreshError) {
+      // 토큰 재발급 실패 시 로그아웃 처리
+      const { resetAuthState, resetUser } = useBoundStore.getState();
+      resetAuthState();
+      resetUser();
+      await axios.delete('/auth/logout', {
+        baseURL: BASE_URL,
+      });
+      return Promise.reject(refreshError);
+    }
+  },
+  // 2초 동안 캐시
+  { maxAge: 2000 },
+);
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -45,28 +71,12 @@ instance.interceptors.response.use(
       // isAutoLogin: 로그인 하지 않은 사용자의 토큰 재발급 요청을 방지합니다.
       const originalRequest = error.config;
 
-      try {
-        // 토큰 재발급 요청
-        const { data } = await axios.get('/auth/reissue', {
-          baseURL: BASE_URL,
-        });
+      const newToken = await reIssueAccessToken();
+      useBoundStore.setState({ accessToken: newToken });
+      originalRequest.headers.authorization = `Bearer ${newToken}`;
 
-        const newToken = data.result.accessToken;
-        useBoundStore.setState({ accessToken: newToken });
-        originalRequest.headers.authorization = `Bearer ${newToken}`;
-
-        // 이전 요청 재요청
-        return instance(originalRequest);
-      } catch (refreshError) {
-        // 토큰 재발급 실패 시 로그아웃 처리
-        const { resetAuthState, resetUser } = useBoundStore.getState();
-        resetAuthState();
-        resetUser();
-        await axios.delete('/auth/logout', {
-          baseURL: BASE_URL,
-        });
-        return Promise.reject(refreshError);
-      }
+      // 이전 요청 재요청
+      return instance(originalRequest);
     }
 
     return Promise.reject(error);
