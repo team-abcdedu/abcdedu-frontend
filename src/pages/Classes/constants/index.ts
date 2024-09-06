@@ -1,4 +1,4 @@
-import { ClassInfoMap, ExamInfoMap } from '../types';
+import { ClassInfoMap, ExamInfoMap, TempExamInfoMap } from '../types';
 
 export const curriculumImgUrl =
   'https://c48aa73694122edae77e6fe97fafbfbe.cdn.bubble.io/f1723138717697x280065903378054820/%E1%84%8F%E1%85%A5%E1%84%85%E1%85%B5%E1%84%8F%E1%85%B2%E1%86%AF%E1%84%85%E1%85%A5%E1%86%B7.svg';
@@ -102,8 +102,17 @@ export const examInfoMap: ExamInfoMap = {
   },
 };
 
-// export const tempExamInfoMap: {
-//   'A-2': ,
-//   'C-1': ,
-//   'D-1': ,
-// };
+export const tempExamInfoMap: TempExamInfoMap = {
+  'A-2': {
+    pdf: 'https://www.soundczech.cz/temp/lorem-ipsum.pdf',
+    hwp: 'https://cdn.hancom.com/link/docs/한글문서파일형식_배포용문서_revision1.2.hwp',
+  },
+  'C-1': {
+    pdf: 'https://www.soundczech.cz/temp/lorem-ipsum.pdf',
+    hwp: 'https://cdn.hancom.com/link/docs/한글문서파일형식_배포용문서_revision1.2.hwp',
+  },
+  'D-1': {
+    pdf: 'https://www.soundczech.cz/temp/lorem-ipsum.pdf',
+    hwp: 'https://cdn.hancom.com/link/docs/한글문서파일형식_배포용문서_revision1.2.hwp',
+  },
+};
