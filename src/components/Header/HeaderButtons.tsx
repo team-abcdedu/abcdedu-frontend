@@ -21,7 +21,7 @@ function MemberButtons({ name }: { name: string }) {
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-fit h-36 flex-row-center text-14 font-semibold text-primary-400'
+            'w-fit px-16 h-36 flex-row-center text-14 font-semibold text-primary-400'
           }
         >
           {name}

@@ -1,4 +1,4 @@
-import { post } from '@/libs/api';
+import { del, post } from '@/libs/api';
 import { TokenResponse } from '@/types/auth';
 
 class AuthApi {
@@ -15,6 +15,10 @@ class AuthApi {
       email,
       password,
     });
+  }
+
+  static async logout() {
+    return del('/auth/logout');
   }
 }
 

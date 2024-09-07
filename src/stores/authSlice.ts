@@ -1,5 +1,4 @@
 import { StateCreator } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 type State = {
   accessToken: string | null;
@@ -19,14 +18,9 @@ const initialState: State = {
   isAutoLogin: false,
 };
 
-const createAuthSlice: StateCreator<AuthSlice> = set => ({
+export const createAuthSlice: StateCreator<AuthSlice> = set => ({
   ...initialState,
   fetchAccessToken: accessToken => set({ accessToken }),
   resetAuthState: () => set(initialState),
   setIsAutoLogin: () => set({ isAutoLogin: true }),
-});
-
-export const createPersistedAuthSlice = persist(createAuthSlice, {
-  name: 'abcdedu',
-  partialize: state => ({ isAutoLogin: state.isAutoLogin }), // isAutoLogin만 localStorage에 저장
 });
