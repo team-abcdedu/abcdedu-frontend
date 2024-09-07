@@ -3,7 +3,7 @@ import { ContactForm, ContactType } from '@/types/contact';
 
 class ContactApi {
   static async createContact(form: ContactForm, type: ContactType) {
-    return post(`/contacts/${type}`, form);
+    return post(`/contacts/`, { ...form, type });
   }
 }
 
