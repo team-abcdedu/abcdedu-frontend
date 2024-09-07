@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import useModal from '@/hooks/useModal';
-import SubClassRegisterModal from '@/pages/Admin/components/SubClassRegisterModal';
 
+import ClassDetailModal from './components/ClassDetailModal';
 import ClassRegisterModal from './components/ClassRegisterModal';
+import SubClassRegisterModal from './components/SubClassRegisterModal';
 import { tableColumnMap, tableColumns } from './constants';
-import { ClassTableColumns, ClassTableData } from './types';
+import { ClassTableData } from './types';
 
 const mockData: ClassTableData[] = [
   {
@@ -28,27 +29,31 @@ function DataItem({
   column,
   row,
 }: {
-  column: keyof ClassTableColumns;
+  column: keyof ClassTableData;
   row: ClassTableData;
 }) {
   if (column === 'list') {
     return <span>{row[column].join(', ')}</span>;
-  }
-  if (column === 'manage') {
-    return (
-      <button className={'px-5 border-2 border-neutral-300 rounded-lg'}>
-        하위클래스 관리
-      </button>
-    );
   }
   return <span>{row[column]}</span>;
 }
 
 function Class() {
   const [data, setData] = useState<ClassTableData[]>([]);
+  const [selectedClass, setSelectedClass] = useState<ClassTableData | null>(
+    null,
+  );
+
   const { isVisible: classVisible, toggleModal: classToggle } = useModal();
   const { isVisible: subClassVisible, toggleModal: subClassToggle } =
     useModal();
+  const { isVisible: classDetailVisible, toggleModal: classDetailToggle } =
+    useModal();
+
+  const handleRowClick = (classData: ClassTableData) => {
+    setSelectedClass(classData);
+    classDetailToggle();
+  };
 
   useEffect(() => {
     // 임시
@@ -91,8 +96,12 @@ function Class() {
           </thead>
           <tbody>
             {data.length > 0 ? (
-              data.map((row, idx) => (
-                <tr key={idx}>
+              data.map(row => (
+                <tr
+                  key={row.id}
+                  className={'cursor-pointer hover:bg-neutral-200'}
+                  onClick={() => handleRowClick({ ...row })}
+                >
                   {tableColumns.class.map(column => (
                     <td key={column} className={'text-center'}>
                       <DataItem column={column} row={row} />
@@ -101,7 +110,9 @@ function Class() {
                 </tr>
               ))
             ) : (
-              <div className={'text-center'}>데이터가 없습니다.</div>
+              <tr className={'text-center'}>
+                <td>데이터가 없습니다.</td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -110,6 +121,11 @@ function Class() {
       <SubClassRegisterModal
         isVisible={subClassVisible}
         onClose={subClassToggle}
+      />
+      <ClassDetailModal
+        classData={selectedClass}
+        isVisible={classDetailVisible}
+        onClose={classDetailToggle}
       />
     </>
   );
