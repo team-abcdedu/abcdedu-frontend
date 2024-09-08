@@ -7,13 +7,12 @@ export default function AdminRoute({ children }: PropsWithChildren) {
   const user = useBoundStore(state => state.user);
 
   useEffect(() => {
-    // todo: 나중에 관리자로 변경
-    if (user && user.role !== '새싹') {
+    if (user && user.role !== '관리자') {
       alert('권한이 없습니다.');
     }
   }, [user]);
 
-  return user && user.role === '새싹' ? (
+  return user && user.role === '관리자' ? (
     children
   ) : (
     <Navigate to={'/'} replace />

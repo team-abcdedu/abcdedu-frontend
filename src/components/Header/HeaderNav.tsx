@@ -57,7 +57,7 @@ function HeaderNav() {
         }
         return null;
       })}
-      {user && user.role === '새싹' && (
+      {user && user.role === '관리자' && (
         <NavLink
           to={adminNavItem.to}
           className={({ isActive }) => navLinkStyle(isActive)}
