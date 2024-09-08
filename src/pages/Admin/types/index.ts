@@ -25,11 +25,20 @@ export interface TheoryTableData {
   file: string;
 }
 
+export interface ExamTableData {
+  id: string;
+  createdAt: string;
+  class: string;
+  pdf: string;
+  hwp: string;
+}
+
 export interface TableColumns {
   class: Array<keyof ClassTableData>;
   assignment: Array<keyof AssignmentTableData>;
   survey: Array<keyof SurveyTableData>;
   theory: Array<keyof TheoryTableData>;
+  exam: Array<keyof ExamTableData>;
 }
 
 export interface TableColumnMap {
@@ -55,5 +64,12 @@ export interface TableColumnMap {
     id: string;
     class: string;
     file: string;
+  };
+  exam: {
+    id: string;
+    createdAt: string;
+    class: string;
+    pdf: string;
+    hwp: string;
   };
 }

@@ -5,6 +5,7 @@ export const tableColumns: TableColumns = {
   assignment: ['id', 'createdAt', 'name'],
   survey: ['id', 'createdAt', 'class', 'name'],
   theory: ['id', 'class', 'file'],
+  exam: ['id', 'createdAt', 'class', 'pdf', 'hwp'],
 };
 
 export const tableColumnMap: TableColumnMap = {
@@ -30,5 +31,12 @@ export const tableColumnMap: TableColumnMap = {
     id: 'ID',
     class: '클래스',
     file: '파일',
+  },
+  exam: {
+    id: 'ID',
+    createdAt: '생성일',
+    class: '클래스',
+    pdf: '과제 PDF',
+    hwp: '제출용 HWP',
   },
 };
