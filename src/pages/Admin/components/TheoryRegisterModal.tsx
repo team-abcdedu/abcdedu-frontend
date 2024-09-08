@@ -9,7 +9,6 @@ interface TheoryRegisterModalProps {
 
 function TheoryRegisterModal({ isVisible, onClose }: TheoryRegisterModalProps) {
   const inputWrapperStyle = 'w-full flex flex-col gap-5 p-5';
-  const labelStyle = 'w-fit px-5';
   const [filePath, setFilePath] = useState<string | null>(null);
   const fileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0] as File;
@@ -26,7 +25,7 @@ function TheoryRegisterModal({ isVisible, onClose }: TheoryRegisterModalProps) {
           className={'w-full flex flex-col gap-10 text-16'}
         >
           <div className={`${inputWrapperStyle}`}>
-            <label htmlFor={'title'} className={`${labelStyle}`}>
+            <label htmlFor={'title'} className={`w-fit px-5`}>
               클래스명
             </label>
             <input
@@ -36,7 +35,9 @@ function TheoryRegisterModal({ isVisible, onClose }: TheoryRegisterModalProps) {
             />
           </div>
           <div className={`${inputWrapperStyle}`}>
-            <div className={`${labelStyle} flex items-center gap-20`}>
+            <div
+              className={`w-full px-5 flex justify-between items-center gap-20`}
+            >
               <span>이론 파일</span>
               <label
                 htmlFor={'file'}
