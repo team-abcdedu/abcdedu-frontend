@@ -67,7 +67,10 @@ instance.interceptors.response.use(
     if (error.response?.status === 403) {
       const { data } = error.response;
       const { errorCode } = data.result;
-      if (errorCode === 'ADMIN_VALID_PERMISSION') window.location.href = '/';
+      if (errorCode === 'ADMIN_VALID_PERMISSION') {
+        // 권한 설정이 아직 안되어 admin 테스트 시 /로 가고 새로고침되기 때문에 잠시 주석처리
+        // window.location.href = '/';
+      }
     }
 
     if (error.response?.status === 401 && isAutoLogin) {
