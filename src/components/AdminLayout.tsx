@@ -7,7 +7,7 @@ function AdminLayout() {
     'h-50 flex-row-center gap-20 rounded-lg bg-transparent shadow-2xl shadow-neutral-700 hover:bg-primary-300 transition duration-300';
 
   return (
-    <div className={'p-10 flex bg-primary-50 gap-10'}>
+    <div className={'w-full h-screen p-10 flex bg-primary-50 gap-10'}>
       <aside
         className={
           'w-[250px] min-h-[calc(100vh_-_20px)] max-h-max p-20 flex flex-col rounded-lg bg-zinc-700 shadow-md'
@@ -54,7 +54,7 @@ function AdminLayout() {
       </aside>
       <section
         className={
-          'w-full p-20 flex flex-col gap-30 bg-white rounded-lg shadow-md'
+          'w-full h-full pt-20 pb-10 px-20 flex flex-col gap-30 bg-white rounded-lg shadow-md'
         }
       >
         <Outlet />
