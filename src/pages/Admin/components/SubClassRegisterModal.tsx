@@ -32,7 +32,7 @@ function SubClassRegisterModal({
           onSubmit={onSubmit}
         >
           <label htmlFor={'classId'} className={'flex flex-col'}>
-            클래스 ID
+            클래스 ID (숫자)
             <input
               {...register('classId', fieldRules.classId)}
               id={'classId'}
@@ -44,7 +44,7 @@ function SubClassRegisterModal({
             )}
           </label>
           <label htmlFor={'title'} className={'flex flex-col'}>
-            클래스명
+            서브 클래스명
             <input
               {...register('title', fieldRules.title)}
               id={'title'}
@@ -55,7 +55,7 @@ function SubClassRegisterModal({
             )}
           </label>
           <label htmlFor={'orderNumber'} className={'flex flex-col'}>
-            번호
+            서브 클래스 번호 (숫자)
             <input
               {...register('orderNumber', fieldRules.orderNumber)}
               id={'orderNumber'}
@@ -67,7 +67,7 @@ function SubClassRegisterModal({
             )}
           </label>
           <label htmlFor={'description'} className={'flex flex-col'}>
-            설명
+            서브 클래스 설명
             <textarea
               {...register('description', fieldRules.description)}
               id={'description'}

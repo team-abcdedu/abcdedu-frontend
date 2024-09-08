@@ -40,7 +40,7 @@ function ClassRegisterModal({ isVisible, onClose }: ClassRegisterModalProps) {
             )}
           </label>
           <label htmlFor={'type'} className={'flex flex-col'}>
-            타입
+            타입 (A,B,C,D)
             <input
               {...register('type', fieldRules.type)}
               id={'type'}
