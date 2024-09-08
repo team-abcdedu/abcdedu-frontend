@@ -1,7 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
+
+import useClass from './useClass';
 
 interface IClassRegisterForm {
   title: string;
@@ -40,14 +41,11 @@ function useClassRegisterForm() {
     },
   };
 
-  const submitForm: SubmitHandler<IClassRegisterForm> = async data => {
-    try {
-      await AdminClassApi.createClass(data);
-      alert('클래스가 성공적으로 등록되었습니다.');
-    } catch (error) {
-      alert('클래스 등록에 실패했습니다.');
-      console.error(error);
-    }
+  const { classMutation } = useClass();
+
+  const submitForm: SubmitHandler<IClassRegisterForm> = (data, event) => {
+    event?.preventDefault();
+    classMutation.mutate(data);
   };
 
   const onSubmit = handleSubmit(submitForm);

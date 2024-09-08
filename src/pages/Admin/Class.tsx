@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
 
@@ -6,24 +6,8 @@ import ClassDetailModal from './components/ClassDetailModal';
 import ClassRegisterModal from './components/ClassRegisterModal';
 import SubClassRegisterModal from './components/SubClassRegisterModal';
 import { tableColumnMap, tableColumns } from './constants';
+import useAdminClass from './hooks/useClass';
 import { ClassTableData } from './types';
-
-const mockData: ClassTableData[] = [
-  {
-    id: '1',
-    createdAt: '2021-10-01',
-    title: '클래스1',
-    description: '클래스1 설명',
-    list: ['하위클래스1, 하위클래스2'],
-  },
-  {
-    id: '2',
-    createdAt: '2021-10-02',
-    title: '클래스2',
-    description: '클래스2 설명',
-    list: ['하위클래스3, 하위클래스4'],
-  },
-];
 
 function DataItem({
   column,
@@ -39,26 +23,22 @@ function DataItem({
 }
 
 function Class() {
-  const [data, setData] = useState<ClassTableData[]>([]);
+  // const [data, setData] = useState<ClassTableData[]>([]);
   const [selectedClass, setSelectedClass] = useState<ClassTableData | null>(
     null,
   );
-
   const { isVisible: classVisible, toggleModal: classToggle } = useModal();
   const { isVisible: subClassVisible, toggleModal: subClassToggle } =
     useModal();
   const { isVisible: classDetailVisible, toggleModal: classDetailToggle } =
     useModal();
 
+  const { data, isLoading, isError } = useAdminClass();
+
   const handleRowClick = (classData: ClassTableData) => {
     setSelectedClass(classData);
     classDetailToggle();
   };
-
-  useEffect(() => {
-    // 임시
-    setData(mockData);
-  }, []);
 
   return (
     <>
@@ -95,7 +75,17 @@ function Class() {
             </tr>
           </thead>
           <tbody>
-            {data.length > 0 ? (
+            {isLoading && (
+              <tr className={'text-center'}>
+                <td>데이터를 불러오는 중입니다.</td>
+              </tr>
+            )}
+            {isError && (
+              <tr className={'text-center'}>
+                <td>데이터가 없습니다.</td>
+              </tr>
+            )}
+            {data && data.length > 0 ? (
               data.map(row => (
                 <tr
                   key={row.id}

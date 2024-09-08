@@ -1,12 +1,17 @@
-import { post } from '@/libs/api';
+import { get, post } from '@/libs/api';
+import { ClassTableData } from '@/pages/Admin/types';
 
 class AdminClassApi {
+  static async getClasses(): Promise<ClassTableData[]> {
+    return get('/lectures');
+  }
+
   static async createClass(data: {
     title: string;
     type: string;
     description: string;
   }) {
-    return post('/lectures', JSON.stringify(data));
+    return post('/lectures', data);
   }
 
   static async createSubClass(data: {
@@ -16,7 +21,7 @@ class AdminClassApi {
     orderNumber: number;
   }) {
     const { classId, ...rest } = data;
-    return post(`/lectures/${classId}`, JSON.stringify({ ...rest }));
+    return post(`/lectures/${classId}`, { ...rest });
   }
 }
 
