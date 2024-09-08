@@ -1,27 +1,18 @@
 import { useEffect, useState } from 'react';
 
+import useModal from '@/hooks/useModal';
+import TheoryRegisterModal from '@/pages/Admin/components/TheoryRegisterModal';
+
 import { tableColumnMap, tableColumns } from './constants';
 import { TheoryTableData } from './types';
 
-const mockData: TheoryTableData[] = [
-  {
-    id: '1',
-    class: 'A-1',
-    file: 'https://picsum.photos/seed/picsum/200/300',
-  },
-  {
-    id: '2',
-    class: 'A-2',
-    file: 'https://picsum.photos/200/300?grayscale',
-  },
-];
-
 function Theory() {
   const [data, setData] = useState<TheoryTableData[]>([]);
+  const { isVisible, toggleModal } = useModal();
 
   useEffect(() => {
     // 임시
-    setData(mockData);
+    setData([]);
   }, []);
 
   return (
@@ -30,6 +21,7 @@ function Theory() {
         <h1 className={'text-30 font-semibold'}>이론 관리</h1>
         <div className={'flex-row-center gap-30'}>
           <button
+            onClick={toggleModal}
             className={'px-10 text-20 border-2 rounded-lg border-neutral-300'}
           >
             이론 파일 등록
@@ -79,6 +71,7 @@ function Theory() {
           )}
         </tbody>
       </table>
+      <TheoryRegisterModal isVisible={isVisible} onClose={toggleModal} />
     </div>
   );
 }
