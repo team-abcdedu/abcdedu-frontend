@@ -1,7 +1,10 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
+
+import useClass from './useClass';
 
 interface ISubClassRegisterForm {
   classId: number;
@@ -10,7 +13,11 @@ interface ISubClassRegisterForm {
   orderNumber: number;
 }
 
-function useSubClassRegisterForm() {
+interface UseSubClassRegisterFormProps {
+  onClose: () => void;
+}
+
+function useSubClassRegisterForm({ onClose }: UseSubClassRegisterFormProps) {
   const {
     register,
     formState: { errors },
@@ -40,14 +47,26 @@ function useSubClassRegisterForm() {
     },
   };
 
-  const submitForm: SubmitHandler<ISubClassRegisterForm> = async data => {
-    try {
-      await AdminClassApi.createSubClass(data);
-      alert('서브 클래스가 성공적으로 등록되었습니다.');
-    } catch (error) {
-      alert('서브 클래스 등록에 실패했습니다.');
-      console.error(error);
-    }
+  const queryClient = useQueryClient();
+  const { subClassMutation } = useClass();
+
+  const submitForm: SubmitHandler<ISubClassRegisterForm> = (data, event) => {
+    event?.preventDefault();
+    subClassMutation.mutate(data, {
+      onSuccess: () => {
+        alert('서브 클래스가 등록되었습니다.');
+        queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+        onClose();
+      },
+      onError: error => {
+        alert('서브 클래스 등록에 실패했습니다.');
+        if (isAxiosError(error)) {
+          console.error(error.response?.data.result.message);
+          return;
+        }
+        console.error(error);
+      },
+    });
   };
 
   const onSubmit = handleSubmit(submitForm);

@@ -90,11 +90,6 @@ export const headerNavItems: HeaderNavItem[] = [
     to: '/contact',
     text: '문의',
   },
-  {
-    type: 'link',
-    to: '/admin',
-    text: '관리자',
-  },
 ];
 
 export const mobileMenuNavItems: MobileMenuNavItem[] = [
@@ -126,8 +121,9 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     to: '/contact',
     text: '문의',
   },
-  {
-    to: '/admin',
-    text: '관리자',
-  },
 ];
+
+export const adminNavItem: MobileMenuNavItem = {
+  to: '/admin',
+  text: '관리자',
+};

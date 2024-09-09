@@ -1,9 +1,15 @@
-export interface ClassTableData {
-  id: string;
-  createdAt: string;
+export interface SubClassData {
   title: string;
+  orderNumber: number;
   description: string;
-  list: string[];
+  subClassId: number;
+}
+
+export interface ClassTableData {
+  title: string;
+  type: string;
+  description: string;
+  subClasses: SubClassData[];
 }
 
 export interface AssignmentTableData {
@@ -43,11 +49,10 @@ export interface TableColumns {
 
 export interface TableColumnMap {
   class: {
-    id: string;
-    createdAt: string;
     title: string;
+    type: string;
     description: string;
-    list: string;
+    subClasses: string;
   };
   assignment: {
     id: string;
