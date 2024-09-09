@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
-import QuestionnaireInput from '@/pages/Admin/components/QuestionnaireInput';
+import QuestionnaireInput from './QuestionnaireInput';
 
 interface FlexibleInputProps {
   deleteHandler: () => void;

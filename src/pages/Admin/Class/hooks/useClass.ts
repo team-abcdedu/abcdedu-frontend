@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { ClassTableData } from '@/pages/Admin/types';
 import AdminClassApi from '@/services/admin/class';
+import { ClassTableData } from '@/types/admin';
 
 function useClass() {
   const { data, isLoading, isError } = useQuery<ClassTableData[]>({

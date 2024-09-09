@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-import FormBuilder from '@/pages/Admin/components/FormBuilder';
-import SurveyTable from '@/pages/Admin/components/SurveyTable';
+import FormBuilder from '@/components/FormBuilder';
 
-function Survey() {
+import SurveyTable from './components/SurveyTable';
+
+function Index() {
   const [mode, setMode] = useState<'list' | 'register'>('list');
 
   const handleSurveyRegister = () => {
@@ -28,4 +29,4 @@ function Survey() {
   );
 }
 
-export default Survey;
+export default Index;

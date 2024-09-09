@@ -13,7 +13,7 @@ export const mediaList = [
 
 export const classInfoMap: ClassInfoMap = {
   A: {
-    title: 'Class A',
+    title: 'Index A',
     subTitle: '인공지능 강의',
     description:
       '인공지능에게 대체되지 않는 인간지능이 되기 위해 인공지능에 대한 기본 원리를 학습하는 수업',
@@ -29,7 +29,7 @@ export const classInfoMap: ClassInfoMap = {
     ],
   },
   B: {
-    title: 'Class B',
+    title: 'Index B',
     subTitle: '',
     description: '',
     subClasses: [
@@ -40,7 +40,7 @@ export const classInfoMap: ClassInfoMap = {
     ],
   },
   C: {
-    title: 'Class C',
+    title: 'Index C',
     subTitle: '인공지능 강의',
     description: '인공신경망 설계',
     subClasses: [
@@ -57,7 +57,7 @@ export const classInfoMap: ClassInfoMap = {
     ],
   },
   D: {
-    title: 'Class D',
+    title: 'Index D',
     subTitle: '',
     description: '',
     subClasses: [

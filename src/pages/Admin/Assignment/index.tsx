@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-import AssignmentTable from '@/pages/Admin/components/AssignmentTable';
-import FormBuilder from '@/pages/Admin/components/FormBuilder';
+import FormBuilder from '@/components/FormBuilder';
 
-function Assignment() {
+import AssignmentTable from './components/AssignmentTable';
+
+function Index() {
   const [mode, setMode] = useState<'list' | 'register'>('list');
 
   const handleAssignmentRegister = () => {
@@ -28,4 +29,4 @@ function Assignment() {
   );
 }
 
-export default Assignment;
+export default Index;

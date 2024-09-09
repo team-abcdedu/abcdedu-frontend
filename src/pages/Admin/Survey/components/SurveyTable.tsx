@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 
+import { tableColumnMap, tableColumns } from '@/constants/adminTableColumns';
 import useModal from '@/hooks/useModal';
-import AssignmentDetailModal from '@/pages/Admin/components/AssignmentDetailModal';
-import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
-import { AssignmentTableData } from '@/pages/Admin/types';
+import { SurveyTableData } from '@/types/admin';
 
-function AssignmentTable() {
-  const [data, setData] = useState<AssignmentTableData[]>([]);
-  const [selectedAssignment, setSelectedAssignment] =
-    useState<AssignmentTableData | null>(null);
+import SurveyDetailModal from './SurveyDetailModal';
+
+function SurveyTable() {
+  const [data, setData] = useState<SurveyTableData[]>([]);
+  const [selectedSurvey, setSelectedSurvey] = useState<SurveyTableData | null>(
+    null,
+  );
   const { isVisible, toggleModal } = useModal();
 
-  const handleRowClick = (assignment: AssignmentTableData) => {
-    setSelectedAssignment(assignment);
+  const handleRowClick = (survey: SurveyTableData) => {
+    setSelectedSurvey(survey);
     toggleModal();
   };
 
@@ -30,9 +32,9 @@ function AssignmentTable() {
       >
         <thead className={'bg-slate-300'}>
           <tr className={''}>
-            {tableColumns.assignment.map(column => (
+            {tableColumns.survey.map(column => (
               <th key={column} className={'font-medium'}>
-                {tableColumnMap.assignment[column]}
+                {tableColumnMap.survey[column]}
               </th>
             ))}
           </tr>
@@ -45,7 +47,7 @@ function AssignmentTable() {
                 className={'cursor-pointer hover:bg-neutral-200'}
                 onClick={() => handleRowClick({ ...row })}
               >
-                {tableColumns.assignment.map(column => (
+                {tableColumns.survey.map(column => (
                   <td key={column} className={'text-center'}>
                     {row[column]}
                   </td>
@@ -59,8 +61,8 @@ function AssignmentTable() {
           )}
         </tbody>
       </table>
-      <AssignmentDetailModal
-        assignment={selectedAssignment}
+      <SurveyDetailModal
+        survey={selectedSurvey}
         isVisible={isVisible}
         onClose={toggleModal}
       />
@@ -68,4 +70,4 @@ function AssignmentTable() {
   );
 }
 
-export default AssignmentTable;
+export default SurveyTable;

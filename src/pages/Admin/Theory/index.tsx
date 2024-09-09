@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import { tableColumnMap, tableColumns } from '@/constants/adminTableColumns';
 import useModal from '@/hooks/useModal';
-import ExamRegisterModal from '@/pages/Admin/components/ExamRegisterModal';
+import { TheoryTableData } from '@/types/admin';
 
-import { tableColumnMap, tableColumns } from './constants';
-import { ExamTableData } from './types';
+import TheoryRegisterModal from './components/TheoryRegisterModal';
 
-function Exam() {
-  const [data, setData] = useState<ExamTableData[]>([]);
+function Index() {
+  const [data, setData] = useState<TheoryTableData[]>([]);
   const { isVisible, toggleModal } = useModal();
 
   useEffect(() => {
@@ -18,13 +18,13 @@ function Exam() {
   return (
     <div className={'w-full h-full flex flex-col gap-20'}>
       <div className={'w-full flex justify-between pr-50'}>
-        <h1 className={'text-30 font-semibold'}>시험 관리</h1>
+        <h1 className={'text-30 font-semibold'}>이론 관리</h1>
         <div className={'flex-row-center gap-30'}>
           <button
             onClick={toggleModal}
             className={'px-10 text-20 border-2 rounded-lg border-neutral-300'}
           >
-            시험 파일 등록
+            이론 파일 등록
           </button>
         </div>
       </div>
@@ -35,9 +35,9 @@ function Exam() {
       >
         <thead className={'bg-slate-300'}>
           <tr className={''}>
-            {tableColumns.exam.map(column => (
+            {tableColumns.theory.map(column => (
               <th key={column} className={'font-medium'}>
-                {tableColumnMap.exam[column]}
+                {tableColumnMap.theory[column]}
               </th>
             ))}
           </tr>
@@ -46,9 +46,9 @@ function Exam() {
           {data.length > 0 ? (
             data.map(row => (
               <tr key={row.id}>
-                {tableColumns.exam.map(column => (
+                {tableColumns.theory.map(column => (
                   <td key={column} className={'text-center'}>
-                    {column === 'pdf' || column === 'hwp' ? (
+                    {column === 'file' ? (
                       <a
                         href={row[column]}
                         target={'_blank'}
@@ -71,9 +71,9 @@ function Exam() {
           )}
         </tbody>
       </table>
-      <ExamRegisterModal isVisible={isVisible} onClose={toggleModal} />
+      <TheoryRegisterModal isVisible={isVisible} onClose={toggleModal} />
     </div>
   );
 }
 
-export default Exam;
+export default Index;

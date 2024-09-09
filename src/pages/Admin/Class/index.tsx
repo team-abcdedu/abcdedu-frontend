@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
+import { tableColumnMap, tableColumns } from '@/constants/adminTableColumns';
 import useModal from '@/hooks/useModal';
+import { ClassTableData } from '@/types/admin';
 
 import ClassDetailModal from './components/ClassDetailModal';
 import ClassRegisterModal from './components/ClassRegisterModal';
 import SubClassRegisterModal from './components/SubClassRegisterModal';
-import { tableColumnMap, tableColumns } from './constants';
 import useClass from './hooks/useClass';
-import { ClassTableData } from './types';
 
 function DataItem({
   column,
@@ -27,7 +27,7 @@ function DataItem({
   return <div className={'truncate'}>{row[column]}</div>;
 }
 
-function Class() {
+function Index() {
   const [selectedClass, setSelectedClass] = useState<ClassTableData | null>(
     null,
   );
@@ -128,4 +128,4 @@ function Class() {
   );
 }
 
-export default Class;
+export default Index;
