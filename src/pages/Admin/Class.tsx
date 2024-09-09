@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
-import truncateString from '@/utils/truncateString';
 
 import ClassDetailModal from './components/ClassDetailModal';
 import ClassRegisterModal from './components/ClassRegisterModal';
@@ -20,12 +19,12 @@ function DataItem({
   if (column === 'subClasses') {
     const subClasses = row[column];
     if (subClasses.length === 0) {
-      return <span>없음</span>;
+      return <div>없음</div>;
     }
     const subClassesTitle = subClasses.map(subClass => subClass.title);
-    return <span>{truncateString(subClassesTitle.join(', '), 20)}</span>;
+    return <div className={'truncate'}>{subClassesTitle.join(', ')}</div>;
   }
-  return <span>{truncateString(row[column], 20)}</span>;
+  return <div className={'truncate'}>{row[column]}</div>;
 }
 
 function Class() {
@@ -98,7 +97,10 @@ function Class() {
                   onClick={() => handleRowClick({ ...row })}
                 >
                   {tableColumns.class.map(column => (
-                    <td key={column} className={'text-center'}>
+                    <td
+                      key={column}
+                      className={'text-center px-10 overflow-hidden'}
+                    >
                       <DataItem column={column} row={row} />
                     </td>
                   ))}
