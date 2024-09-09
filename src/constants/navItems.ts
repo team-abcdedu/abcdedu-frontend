@@ -32,19 +32,19 @@ export const headerNavItems: HeaderNavItem[] = [
     list: [
       {
         to: '/classes/a',
-        text: 'A-Index',
+        text: 'A-Class',
       },
       {
         to: '/classes/b',
-        text: 'B-Index',
+        text: 'B-Class',
       },
       {
         to: '/classes/c',
-        text: 'C-Index',
+        text: 'C-Class',
       },
       {
         to: '/classes/d',
-        text: 'D-Index',
+        text: 'D-Class',
       },
     ],
   },
