@@ -1,7 +1,7 @@
 import { TableColumnMap, TableColumns } from '../types';
 
 export const tableColumns: TableColumns = {
-  class: ['id', 'createdAt', 'title', 'description', 'list'],
+  class: ['title', 'type', 'description', 'subClasses'],
   assignment: ['id', 'createdAt', 'name'],
   survey: ['id', 'createdAt', 'class', 'name'],
   theory: ['id', 'class', 'file'],
@@ -9,11 +9,10 @@ export const tableColumns: TableColumns = {
 
 export const tableColumnMap: TableColumnMap = {
   class: {
-    id: 'ID',
-    createdAt: '생성일',
     title: '클래스명',
+    type: '타입',
     description: '설명',
-    list: '목록',
+    subClasses: '서브클래스',
   },
   assignment: {
     id: 'ID',

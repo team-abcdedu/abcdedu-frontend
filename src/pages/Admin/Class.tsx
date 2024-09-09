@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
+import truncateString from '@/utils/truncateString';
 
 import ClassDetailModal from './components/ClassDetailModal';
 import ClassRegisterModal from './components/ClassRegisterModal';
 import SubClassRegisterModal from './components/SubClassRegisterModal';
 import { tableColumnMap, tableColumns } from './constants';
-import useAdminClass from './hooks/useClass';
+import useClass from './hooks/useClass';
 import { ClassTableData } from './types';
 
 function DataItem({
@@ -16,14 +17,18 @@ function DataItem({
   column: keyof ClassTableData;
   row: ClassTableData;
 }) {
-  if (column === 'list') {
-    return <span>{row[column].join(', ')}</span>;
+  if (column === 'subClasses') {
+    const subClasses = row[column];
+    if (subClasses.length === 0) {
+      return <span>없음</span>;
+    }
+    const subClassesTitle = subClasses.map(subClass => subClass.title);
+    return <span>{truncateString(subClassesTitle.join(', '), 20)}</span>;
   }
-  return <span>{row[column]}</span>;
+  return <span>{truncateString(row[column], 20)}</span>;
 }
 
 function Class() {
-  // const [data, setData] = useState<ClassTableData[]>([]);
   const [selectedClass, setSelectedClass] = useState<ClassTableData | null>(
     null,
   );
@@ -33,7 +38,7 @@ function Class() {
   const { isVisible: classDetailVisible, toggleModal: classDetailToggle } =
     useModal();
 
-  const { data, isLoading, isError } = useAdminClass();
+  const { data, isLoading, isError } = useClass();
 
   const handleRowClick = (classData: ClassTableData) => {
     setSelectedClass(classData);
@@ -88,7 +93,7 @@ function Class() {
             {data && data.length > 0 ? (
               data.map(row => (
                 <tr
-                  key={row.id}
+                  key={row.title + row.type}
                   className={'cursor-pointer hover:bg-neutral-200'}
                   onClick={() => handleRowClick({ ...row })}
                 >
