@@ -20,7 +20,7 @@ function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
   };
 
   const handleDeleteItem = (index: number) => {
-    setItems(items.filter((_, i) => i !== index));
+    setItems(items.filter(item => item.id !== index));
   };
 
   return (
@@ -32,7 +32,7 @@ function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
             {type === 'checkbox' && <input name={'temp'} type='checkbox' />}
             <button
               type={'button'}
-              onClick={() => handleDeleteItem(itemIdx)}
+              onClick={() => handleDeleteItem(item.id)}
               className={`${textareaStyle} text-13 text-red-700 font-semibold`}
             >
               X
