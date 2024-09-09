@@ -13,7 +13,7 @@ function HeaderNav() {
   };
 
   return (
-    <div className={'flex items-center gap-40'}>
+    <div className={'flex items-center gap-30 lg:gap-40'}>
       {headerNavItems.map((item: HeaderNavItem) => {
         if (item.type === 'link') {
           return (
