@@ -18,9 +18,12 @@ function useClass() {
       type: string;
       description: string;
     }) => AdminClassApi.createClass(classData),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['admin-class'] }),
+    onSuccess: () => {
+      alert('클래스가 등록되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+    },
     onError: error => {
+      alert('클래스 등록에 실패했습니다.');
       if (isAxiosError(error)) {
         console.error(error.response?.data.result.message);
         return;
@@ -36,9 +39,12 @@ function useClass() {
       description: string;
       orderNumber: number;
     }) => AdminClassApi.createSubClass(subClassData),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['admin-class'] }),
+    onSuccess: () => {
+      alert('서브 클래스가 등록되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+    },
     onError: error => {
+      alert('서브 클래스 등록에 실패했습니다.');
       if (isAxiosError(error)) {
         console.error(error.response?.data.result.message);
         return;
