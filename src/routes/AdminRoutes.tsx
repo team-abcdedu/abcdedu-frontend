@@ -5,6 +5,7 @@ import AdminRoute from '@/components/AdminRoute';
 import Admin from '@/pages/Admin';
 import Assignment from '@/pages/Admin/Assignment';
 import Class from '@/pages/Admin/Class';
+import Exam from '@/pages/Admin/Exam';
 import Survey from '@/pages/Admin/Survey';
 import Theory from '@/pages/Admin/Theory';
 
@@ -24,6 +25,10 @@ export const adminRoutes: RouteObject[] = [
       {
         path: '/admin/class',
         element: <Class />,
+      },
+      {
+        path: '/admin/exam',
+        element: <Exam />,
       },
       {
         path: '/admin/assignment',
