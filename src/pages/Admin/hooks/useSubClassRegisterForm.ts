@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { FieldRules } from '@/types';
@@ -11,7 +13,11 @@ interface ISubClassRegisterForm {
   orderNumber: number;
 }
 
-function useSubClassRegisterForm() {
+interface UseSubClassRegisterFormProps {
+  onClose: () => void;
+}
+
+function useSubClassRegisterForm({ onClose }: UseSubClassRegisterFormProps) {
   const {
     register,
     formState: { errors },
@@ -41,11 +47,26 @@ function useSubClassRegisterForm() {
     },
   };
 
+  const queryClient = useQueryClient();
   const { subClassMutation } = useClass();
 
   const submitForm: SubmitHandler<ISubClassRegisterForm> = (data, event) => {
     event?.preventDefault();
-    subClassMutation.mutate(data);
+    subClassMutation.mutate(data, {
+      onSuccess: () => {
+        alert('서브 클래스가 등록되었습니다.');
+        queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+        onClose();
+      },
+      onError: error => {
+        alert('서브 클래스 등록에 실패했습니다.');
+        if (isAxiosError(error)) {
+          console.error(error.response?.data.result.message);
+          return;
+        }
+        console.error(error);
+      },
+    });
   };
 
   const onSubmit = handleSubmit(submitForm);

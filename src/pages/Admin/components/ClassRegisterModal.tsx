@@ -13,7 +13,7 @@ function ErrorMessage({ message }: { message: string }) {
 
 function ClassRegisterModal({ isVisible, onClose }: ClassRegisterModalProps) {
   const { register, fieldRules, errors, onSubmit, reset } =
-    useClassRegisterForm();
+    useClassRegisterForm({ onClose });
 
   const closeModal = () => {
     reset();

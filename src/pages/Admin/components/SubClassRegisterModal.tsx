@@ -16,7 +16,7 @@ function SubClassRegisterModal({
   onClose,
 }: ClassRegisterModalProps) {
   const { register, fieldRules, errors, onSubmit, reset } =
-    useSubClassRegisterForm();
+    useSubClassRegisterForm({ onClose });
 
   const closeModal = () => {
     reset();
