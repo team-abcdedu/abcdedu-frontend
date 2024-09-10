@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import FormBuilder from '@/components/FormBuilder';
+import FormBuilder from '../components/FormBuilder';
 
 import SurveyTable from './components/SurveyTable';
 

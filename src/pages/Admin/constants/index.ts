@@ -1,4 +1,4 @@
-import { TableColumnMap, TableColumns } from '@/types/admin';
+import { TableColumnMap, TableColumns } from '../types';
 
 export const tableColumns: TableColumns = {
   class: ['title', 'type', 'description', 'subClasses'],

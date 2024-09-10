@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
-import DetailModalHeader from '@/components/DetailModalHeader';
 import Modal from '@/components/Modal';
-import { SurveyTableData } from '@/types/admin';
+
+import DetailModalHeader from '../../components/DetailModalHeader';
+import { SurveyTableData } from '../../types';
 
 interface SurveyDetailModalProps {
   survey: SurveyTableData | null;

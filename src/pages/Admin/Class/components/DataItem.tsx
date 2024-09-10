@@ -1,4 +1,4 @@
-import { ClassTableData } from '@/types/admin';
+import { ClassTableData } from '../../types';
 
 function DataItem({
   column,

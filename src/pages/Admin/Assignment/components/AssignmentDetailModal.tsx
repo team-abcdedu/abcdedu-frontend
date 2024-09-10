@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
-import DetailModalHeader from '@/components/DetailModalHeader';
 import Modal from '@/components/Modal';
-import { AssignmentTableData } from '@/types/admin';
+
+import DetailModalHeader from '../../components/DetailModalHeader';
+import { AssignmentTableData } from '../../types';
 
 interface AssignmentDetailModalProps {
   assignment: AssignmentTableData | null;

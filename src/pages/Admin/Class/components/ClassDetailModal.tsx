@@ -1,6 +1,7 @@
-import DetailModalHeader from '@/components/DetailModalHeader';
 import Modal from '@/components/Modal';
-import { ClassTableData } from '@/types/admin';
+
+import DetailModalHeader from '../../components/DetailModalHeader';
+import { ClassTableData } from '../../types';
 
 interface ClassDetailModalProps {
   classData: ClassTableData | null;

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-import { tableColumnMap, tableColumns } from '@/constants/adminTableColumns';
 import useModal from '@/hooks/useModal';
 import DataItem from '@/pages/Admin/Class/components/DataItem';
-import { ClassTableData } from '@/types/admin';
+
+import { tableColumnMap, tableColumns } from '../constants';
+import { ClassTableData } from '../types';
 
 import ClassDetailModal from './components/ClassDetailModal';
 import ClassRegisterModal from './components/ClassRegisterModal';

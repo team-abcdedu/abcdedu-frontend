@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { tableColumnMap, tableColumns } from '@/constants/adminTableColumns';
 import useModal from '@/hooks/useModal';
-import { ExamTableData } from '@/types/admin';
+
+import { tableColumnMap, tableColumns } from '../constants';
+import { ExamTableData } from '../types';
 
 import ExamRegisterModal from './components/ExamRegisterModal';
 

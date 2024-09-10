@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { tableColumnMap, tableColumns } from '@/constants/adminTableColumns';
 import useModal from '@/hooks/useModal';
-import { SurveyTableData } from '@/types/admin';
+
+import { tableColumnMap, tableColumns } from '../../constants';
+import { SurveyTableData } from '../../types';
 
 import SurveyDetailModal from './SurveyDetailModal';
 
