@@ -14,14 +14,11 @@ function MemberButtons({ name }: { name: string }) {
   const { handleLogout } = useLogout();
   return (
     <>
-      <Link
-        className={'hidden md:flex w-fit h-36 text-14 items-center gap-4'}
-        to='/mypage'
-      >
+      <Link className={'flex w-fit h-36 text-14 items-center'} to='/mypage'>
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-fit px-16 h-36 flex-row-center text-14 font-semibold text-primary-400'
+            'w-fit px-10 md:px-14 h-36 flex-row-center text-14 font-semibold text-primary-400'
           }
         >
           {name}
