@@ -2,24 +2,23 @@ import { useEffect } from 'react';
 
 import Modal from '@/components/Modal';
 
-import { AssignmentTableData } from '../types';
+import DetailModalHeader from '../../components/DetailModalHeader';
+import { SurveyTableData } from '../../types';
 
-import DetailModalHeader from './DetailModalHeader';
-
-interface AssignmentDetailModalProps {
-  assignment: AssignmentTableData | null;
+interface SurveyDetailModalProps {
+  survey: SurveyTableData | null;
   isVisible: boolean;
   onClose: () => void;
 }
 
-function AssignmentDetailModal({
-  assignment,
+function SurveyDetailModal({
+  survey,
   isVisible,
   onClose,
-}: AssignmentDetailModalProps) {
+}: SurveyDetailModalProps) {
   useEffect(() => {}, []);
 
-  if (!assignment) return null;
+  if (!survey) return null;
 
   return (
     <Modal size={'lg'} isVisible={isVisible} onClose={onClose}>
@@ -27,15 +26,16 @@ function AssignmentDetailModal({
         <div className={'h-max flex flex-col gap-5'}>
           <DetailModalHeader
             list={{
-              ID: assignment.id,
-              제출일: assignment.createdAt,
-              이름: assignment.name,
+              ID: survey.id,
+              제출일: survey.createdAt,
+              클래스: survey.class,
+              이름: survey.name,
             }}
           />
           <div
             className={'h-[400px] p-5 border-2 border-neutral-300 rounded-sm'}
           >
-            과제답변
+            설문답변
           </div>
         </div>
       </Modal.Content>
@@ -48,4 +48,4 @@ function AssignmentDetailModal({
   );
 }
 
-export default AssignmentDetailModal;
+export default SurveyDetailModal;

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import useModal from '@/hooks/useModal';
-import SurveyDetailModal from '@/pages/Admin/components/SurveyDetailModal';
-import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
-import { SurveyTableData } from '@/pages/Admin/types';
+
+import { tableColumnMap, tableColumns } from '../../constants';
+import { SurveyTableData } from '../../types';
+
+import SurveyDetailModal from './SurveyDetailModal';
 
 function SurveyTable() {
   const [data, setData] = useState<SurveyTableData[]>([]);

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import AssignmentTable from '@/pages/Admin/components/AssignmentTable';
-import FormBuilder from '@/pages/Admin/components/FormBuilder';
+import FormBuilder from '../components/FormBuilder';
 
-function Assignment() {
+import SurveyTable from './components/SurveyTable';
+
+function Index() {
   const [mode, setMode] = useState<'list' | 'register'>('list');
 
-  const handleAssignmentRegister = () => {
+  const handleSurveyRegister = () => {
     setMode(mode === 'list' ? 'register' : 'list');
   };
 
@@ -14,18 +15,18 @@ function Assignment() {
     <div className={'w-full h-full flex flex-col gap-20'}>
       <div className={'w-full flex justify-between pr-50'}>
         <h1 className={'text-30 font-semibold'}>
-          {mode === 'list' ? '과제 관리' : '과제 등록'}
+          {mode === 'list' ? '설문 관리' : '설문 등록'}
         </h1>
         <button
           className={'px-10 text-20 border-2 rounded-lg border-neutral-300'}
-          onClick={handleAssignmentRegister}
+          onClick={handleSurveyRegister}
         >
-          {mode === 'list' ? '과제 등록' : '과제 관리'}
+          {mode === 'list' ? '설문 등록' : '설문 관리'}
         </button>
       </div>
-      {mode === 'list' ? <AssignmentTable /> : <FormBuilder />}
+      {mode === 'list' ? <SurveyTable /> : <FormBuilder />}
     </div>
   );
 }
 
-export default Assignment;
+export default Index;

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import useModal from '@/hooks/useModal';
-import AssignmentDetailModal from '@/pages/Admin/components/AssignmentDetailModal';
-import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
-import { AssignmentTableData } from '@/pages/Admin/types';
+
+import { tableColumnMap, tableColumns } from '../../constants';
+import { AssignmentTableData } from '../../types';
+
+import AssignmentDetailModal from './AssignmentDetailModal';
 
 function AssignmentTable() {
   const [data, setData] = useState<AssignmentTableData[]>([]);

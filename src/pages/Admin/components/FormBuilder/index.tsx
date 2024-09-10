@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import QuestionnaireBuilder from '@/pages/Admin/components/QuestionnaireBuilder';
+import QuestionnaireBuilder from './QuestionnaireBuilder';
 
 interface InputItem {
   id: number;
 }
 
-function FormBuilder() {
+function Index() {
   const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0 }]);
   const [inputIdx, setInputIdx] = useState(1);
 
@@ -49,4 +49,4 @@ function FormBuilder() {
   );
 }
 
-export default FormBuilder;
+export default Index;
