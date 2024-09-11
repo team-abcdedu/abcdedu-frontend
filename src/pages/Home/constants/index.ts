@@ -72,7 +72,7 @@ export const classes: ClassType[] = [
       '데이터 수집과 저장',
       '데이터 처리',
       '데이터 시각화',
-      '빅데이터 분석과 통계',
+      '빅데이터 분석과 해석',
     ],
   },
   {
@@ -81,9 +81,9 @@ export const classes: ClassType[] = [
     engName: 'Coding',
     chapters: [
       '컴퓨터의 기본 원리',
-      '코딩 및 프로그래밍 개론',
-      'Python 프로그래밍',
-      'C, C++ 프로그래밍',
+      '코딩과 프로그래밍',
+      'Python 코딩',
+      'C, C++ 코딩',
       '눈으로 이해하는 인공신경망',
       'Python으로 이해하는 인공신경망',
     ],
@@ -92,7 +92,7 @@ export const classes: ClassType[] = [
     key: 'D',
     name: '관심분야',
     engName: 'Domain',
-    chapters: ['ChatGPT를 활용한 전공 탐색 프로젝트'],
+    chapters: ['ChatGPT를 활용한 진로 탐색 프로젝트'],
   },
 ];
 
