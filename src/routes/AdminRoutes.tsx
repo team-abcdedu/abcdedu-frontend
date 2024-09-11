@@ -5,6 +5,7 @@ import AdminRoute from '@/components/AdminRoute';
 import Admin from '@/pages/Admin';
 import Assignment from '@/pages/Admin/Assignment';
 import Class from '@/pages/Admin/Class';
+import ContactList from '@/pages/Admin/Contact';
 import Exam from '@/pages/Admin/Exam';
 import Survey from '@/pages/Admin/Survey';
 import Theory from '@/pages/Admin/Theory';
@@ -41,6 +42,10 @@ export const adminRoutes: RouteObject[] = [
       {
         path: '/admin/theory',
         element: <Theory />,
+      },
+      {
+        path: '/admin/contact',
+        element: <ContactList />,
       },
     ],
   },
