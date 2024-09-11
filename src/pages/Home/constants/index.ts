@@ -58,34 +58,41 @@ export const classes: ClassType[] = [
     name: '인공지능',
     engName: 'Artificial Intelligence',
     chapters: [
+      '학생을 위한 머신러닝',
+      '학생을 위한 딥러닝',
       '인공지능의 수학적 기초',
       'ChatGPT의 수학적 기초',
-      '머신러닝과 딥러닝',
-      '창의 수학 연구소',
     ],
   },
   {
     key: 'B',
     name: '빅데이터',
     engName: 'Bigdata',
-    chapters: ['빅데이터', '데이터베이스', '데이터 분석', '데이터 관리 도구'],
+    chapters: [
+      '데이터 수집과 저장',
+      '데이터 처리',
+      '데이터 시각화',
+      '빅데이터 분석과 해석',
+    ],
   },
   {
     key: 'C',
     name: '코딩',
     engName: 'Coding',
     chapters: [
-      '컴퓨터 기초',
-      '코딩 기초',
+      '컴퓨터의 기본 원리',
+      '코딩과 프로그래밍',
+      'Python 코딩',
+      'C, C++ 코딩',
       '눈으로 이해하는 인공신경망',
-      '파이썬으로 이해하는 인공신경망',
+      'Python으로 이해하는 인공신경망',
     ],
   },
   {
     key: 'D',
     name: '관심분야',
     engName: 'Domain',
-    chapters: ['첨단 융합', '인문·사회', '수리·과학', '창의·예술'],
+    chapters: ['ChatGPT를 활용한 진로 탐색 프로젝트'],
   },
 ];
 

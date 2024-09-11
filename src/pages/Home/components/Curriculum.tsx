@@ -40,13 +40,13 @@ export default function Curriculum() {
       </div>
       <div
         className='w-full max-w-[720px] grid md:grid-cols-2 grid-cols-1 justify-items-center 
-        md:gap-40 gap-32 max-md:mt-60 max-md:px-30'
+        md:gap-40 gap-32 max-md:mt-60 max-md:px-24'
       >
         {classes.map(c => (
           <div
             key={c.key}
             className={`relative md:text-28 text-22 bg-white rounded-[10px] 
-            w-full max-w-[340px] md:h-[400px] h-[320px] pr-24 pl-50 max-400:pl-40 pt-14
+            w-full max-w-[340px] md:h-[400px] max-md:min-h-300 pb-80 pr-24 pl-36 max-400:pl-40 pt-14
             ${c.key === selected && 'md:shadow-card-lg'}`}
           >
             <span

@@ -77,11 +77,6 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
-    to: '/contact',
-    text: '문의',
-  },
-  {
-    type: 'link',
     to: '/assignment',
     text: '과제',
   },
@@ -92,8 +87,8 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
-    to: '/admin',
-    text: '관리자',
+    to: '/contact',
+    text: '문의',
   },
 ];
 
@@ -115,10 +110,6 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     text: '커뮤니티',
   },
   {
-    to: '/contact',
-    text: '문의',
-  },
-  {
     to: '/assignment',
     text: '과제',
   },
@@ -127,7 +118,12 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     text: '설문',
   },
   {
-    to: '/admin',
-    text: '관리자',
+    to: '/contact',
+    text: '문의',
   },
 ];
+
+export const adminNavItem: MobileMenuNavItem = {
+  to: '/admin',
+  text: '관리자',
+};

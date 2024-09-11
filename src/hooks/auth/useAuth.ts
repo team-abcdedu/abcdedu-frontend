@@ -5,9 +5,8 @@ import userApi from '@/services/user';
 import useBoundStore from '@/stores';
 
 export default function useAuth() {
-  const { isAutoLogin, user, setUser } = useBoundStore(state => ({
+  const { isAutoLogin, setUser } = useBoundStore(state => ({
     isAutoLogin: state.isAutoLogin,
-    user: state.user,
     setUser: state.setUser,
   }));
 
@@ -19,10 +18,9 @@ export default function useAuth() {
   });
 
   useEffect(() => {
-    if (data && data !== user && isAutoLogin) {
-      // 새로운 사용자 데이터가 기존 데이터와 다를 때만 업데이트
+    if (data && isAutoLogin) {
       setUser(data);
       // console.log('user data fetched'); // 확인용, 추후 제거
     }
-  }, [data, setUser, user, isAutoLogin]);
+  }, [data, setUser, isAutoLogin]);
 }

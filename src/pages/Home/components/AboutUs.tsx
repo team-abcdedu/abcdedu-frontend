@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-import ArrowRightOutline from '@/assets/icons/arrow-right-outline.svg?react';
+// import ArrowRightOutline from '@/assets/icons/arrow-right-outline.svg?react';
 import Badge from '@/assets/icons/badge-with-laurel.svg?react';
 import ThumbsUp from '@/assets/icons/thumbs-up.svg?react';
 import Handshake from '@/assets/images/handshake.png';
@@ -76,13 +76,14 @@ export default function AboutUs() {
           데이터 사이언스 교육의 선두 주자!
         </h2>
         <Achievements />
-        <Link
+        {/* 추후 개발 */}
+        {/* <Link
           to='/'
           className='w-300 h-66 text-18 rounded-[20px] border-2 border-neutral-200 
           font-semibold flex-row-center gap-14'
         >
           서비스 더 알아보기 <ArrowRightOutline />
-        </Link>
+        </Link> */}
       </div>
     </section>
   );

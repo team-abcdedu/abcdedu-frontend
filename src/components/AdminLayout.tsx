@@ -1,6 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
 
-import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
 import logo from '@/assets/icons/logo.png';
 
 function AdminLayout() {
@@ -8,7 +7,7 @@ function AdminLayout() {
     'h-50 flex-row-center gap-20 rounded-lg bg-transparent shadow-2xl shadow-neutral-700 hover:bg-primary-300 transition duration-300';
 
   return (
-    <div className={'p-10 flex bg-primary-50 gap-10'}>
+    <div className={'w-full h-screen p-10 flex bg-primary-50 gap-10'}>
       <aside
         className={
           'w-[250px] min-h-[calc(100vh_-_20px)] max-h-max p-20 flex flex-col rounded-lg bg-zinc-700 shadow-md'
@@ -39,18 +38,26 @@ function AdminLayout() {
             'h-full py-20 flex flex-col gap-10 text-18 font-light text-white'
           }
         >
+          <Link to={'/admin/class'} className={LinkStyle}>
+            클래스 관리
+          </Link>
+          <Link to={'/admin/exam'} className={LinkStyle}>
+            시험 관리
+          </Link>
           <Link to={'/admin/assignment'} className={LinkStyle}>
-            <CheckToSlot className={'w-25 h-25'} />
-            <span>과제 관리</span>
+            과제 관리
           </Link>
           <Link to={'/admin/survey'} className={LinkStyle}>
             설문 관리
+          </Link>
+          <Link to={'/admin/theory'} className={LinkStyle}>
+            이론 관리
           </Link>
         </div>
       </aside>
       <section
         className={
-          'w-full p-20 flex flex-col gap-30 bg-white rounded-lg shadow-md'
+          'w-full h-full pt-20 pb-10 px-20 flex flex-col gap-30 bg-white rounded-lg shadow-md'
         }
       >
         <Outlet />

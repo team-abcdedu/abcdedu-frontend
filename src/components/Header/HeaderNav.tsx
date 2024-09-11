@@ -1,7 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 
 import Dropdown from '@/components/Dropdown';
-import { headerNavItems } from '@/constants/navItems';
+import { adminNavItem, headerNavItems } from '@/constants/navItems';
+import useBoundStore from '@/stores';
 import { HeaderNavItem } from '@/types/navTypes';
 
 function HeaderNav() {
@@ -11,9 +12,10 @@ function HeaderNav() {
       ? `${linkStyle} text-black`
       : `${linkStyle} text-neutral-300`;
   };
+  const user = useBoundStore(state => state.user);
 
   return (
-    <div className={'flex items-center gap-40'}>
+    <div className={'flex items-center gap-30 lg:gap-40'}>
       {headerNavItems.map((item: HeaderNavItem) => {
         if (item.type === 'link') {
           return (
@@ -55,6 +57,14 @@ function HeaderNav() {
         }
         return null;
       })}
+      {user && user.role === '관리자' && (
+        <NavLink
+          to={adminNavItem.to}
+          className={({ isActive }) => navLinkStyle(isActive)}
+        >
+          {adminNavItem.text}
+        </NavLink>
+      )}
     </div>
   );
 }
