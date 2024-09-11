@@ -12,6 +12,7 @@ const reissueAccessToken = memoize(
     try {
       const { data } = await axios.get('/auth/reissue', {
         baseURL: BASE_URL,
+        withCredentials: true,
       });
 
       const newToken = data.result.accessToken;
@@ -23,6 +24,7 @@ const reissueAccessToken = memoize(
       resetUser();
       await axios.delete('/auth/logout', {
         baseURL: BASE_URL,
+        withCredentials: true,
       });
       queryClient.removeQueries({ queryKey: ['user'] });
       return Promise.reject(refreshError);
