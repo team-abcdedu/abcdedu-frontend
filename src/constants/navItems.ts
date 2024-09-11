@@ -66,10 +66,6 @@ export const headerNavItems: HeaderNavItem[] = [
         text: 'Q & A',
       },
       {
-        to: '/community_submit_assignment',
-        text: '과제 제출',
-      },
-      {
         to: '/community_bulletin_board',
         text: '자유게시판',
       },
