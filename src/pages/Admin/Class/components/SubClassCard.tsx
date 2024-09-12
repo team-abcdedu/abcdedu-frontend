@@ -11,7 +11,7 @@ interface SubClassCardProps {
 
 function SubClassCard({ subClass }: SubClassCardProps) {
   const [enabled, setEnabled] = useState<boolean>(false);
-  const { data } = useGetSubClassFiles({
+  const { data, isLoading, isError } = useGetSubClassFiles({
     subLectureId: subClass.subClassId,
     enabled,
   });
@@ -44,7 +44,16 @@ function SubClassCard({ subClass }: SubClassCardProps) {
         >
           파일 목록 확인하기
         </button>
+        {enabled && isError && (
+          <span className={'col-start-5 text-15'}>
+            데이터를 불러오는데 오류가 생겼습니다.
+          </span>
+        )}
+        {enabled && isLoading && (
+          <span className={'col-start-5 text-15'}>Loading...</span>
+        )}
         {enabled &&
+          !isLoading &&
           (data && data.length > 0 ? (
             <div
               className={'row-start-5 col-start-2 col-span-4 grid grid-cols-4'}

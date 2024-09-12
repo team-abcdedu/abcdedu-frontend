@@ -11,13 +11,13 @@ function useGetSubClassAnswerFile({
   assignmentAnswerFileId,
   enabled,
 }: UseGetSubClassAnswerFileProps) {
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['sub-class-answer-file', assignmentAnswerFileId],
     queryFn: () => ClassApi.getSubClassAnswerFile(assignmentAnswerFileId || 0),
     enabled,
   });
 
-  return { data };
+  return { data, isLoading, isError };
 }
 
 export default useGetSubClassAnswerFile;
