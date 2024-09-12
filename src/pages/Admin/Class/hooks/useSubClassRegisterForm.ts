@@ -55,7 +55,7 @@ function useSubClassRegisterForm({ onClose }: UseSubClassRegisterFormProps) {
     subClassMutation.mutate(data, {
       onSuccess: () => {
         alert('서브 클래스가 등록되었습니다.');
-        queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+        queryClient.invalidateQueries({ queryKey: ['class'] });
         onClose();
       },
       onError: error => {

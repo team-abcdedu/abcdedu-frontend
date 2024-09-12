@@ -55,7 +55,7 @@ function useClassRegisterForm({ onClose }: UseClassRegisterFormProps) {
     classMutation.mutate(data, {
       onSuccess: () => {
         alert('클래스가 등록되었습니다.');
-        queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+        queryClient.invalidateQueries({ queryKey: ['class'] });
         onClose();
       },
       onError: error => {
