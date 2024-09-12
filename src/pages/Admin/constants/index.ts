@@ -1,3 +1,5 @@
+import { ContactTypeLabel } from '@/types/contact';
+
 import { TableColumnMap, TableColumns } from '../types';
 
 export const tableColumns: TableColumns = {
@@ -6,6 +8,7 @@ export const tableColumns: TableColumns = {
   survey: ['id', 'createdAt', 'class', 'name'],
   theory: ['id', 'class', 'file'],
   exam: ['id', 'createdAt', 'class', 'pdf', 'hwp'],
+  contact: ['contactId', 'type', 'title', 'userName', 'createdAt'],
 };
 
 export const tableColumnMap: TableColumnMap = {
@@ -38,4 +41,17 @@ export const tableColumnMap: TableColumnMap = {
     pdf: '과제 PDF',
     hwp: '제출용 HWP',
   },
+  contact: {
+    contactId: 'ID',
+    type: '문의 유형',
+    title: '문의 제목',
+    userName: '작성자',
+    createdAt: '작성일',
+  },
+};
+
+export const contactTypeLabel: ContactTypeLabel = {
+  class: '강의 의뢰',
+  training: '교사 연수 의뢰',
+  etc: '기타 문의',
 };
