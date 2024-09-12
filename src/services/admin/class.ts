@@ -1,11 +1,6 @@
-import { get, post } from '@/libs/api';
-import { ClassTableData } from '@/pages/Admin/types';
+import { post } from '@/libs/api';
 
 class AdminClassApi {
-  static async getClasses(): Promise<ClassTableData[]> {
-    return get('/lectures');
-  }
-
   static async createClass(data: {
     title: string;
     type: string;
@@ -24,7 +19,7 @@ class AdminClassApi {
     return post(`/lectures/${classId}`, { ...rest });
   }
 
-  static async uploadDocument({
+  static async uploadFile({
     subLectureId,
     type,
     file,
@@ -35,6 +30,7 @@ class AdminClassApi {
   }) {
     const formData = new FormData();
     formData.append('file', file);
+
     return post(
       `/lectures/sub-lecture/${subLectureId}/file?assignmentType=${type}`,
       formData,
@@ -46,17 +42,17 @@ class AdminClassApi {
     );
   }
 
-  static async uploadAnswerTemplate({
-    assignmentFieldId,
+  static async uploadAnswerFile({
+    assignmentFileId,
     file,
   }: {
-    assignmentFieldId: number;
+    assignmentFileId: number;
     file: File;
   }) {
     const formData = new FormData();
     formData.append('file', file);
     return post(
-      `/lectures/assignment-file/${assignmentFieldId}/answer`,
+      `/lectures/assignment-file/${assignmentFileId}/answer`,
       formData,
       {
         headers: {
