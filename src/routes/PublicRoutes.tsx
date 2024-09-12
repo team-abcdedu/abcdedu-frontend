@@ -12,7 +12,6 @@ import LevelUp from '@/pages/Community/LevelUp';
 import PostDetail from '@/pages/Community/PostDetail';
 import Project from '@/pages/Community/Project';
 import Qna from '@/pages/Community/Qna';
-import Submit from '@/pages/Community/Submit';
 import Contact from '@/pages/Contact';
 import Home from '@/pages/Home';
 import Survey from '@/pages/Survey';
@@ -80,10 +79,6 @@ export const publicRoutes: RouteObject[] = [
       {
         path: '/community_qna/:postId',
         element: <PostDetail />,
-      },
-      {
-        path: '/community_submit_assignment',
-        element: <Submit />,
       },
       {
         path: '/community_bulletin_board',
