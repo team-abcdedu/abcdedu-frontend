@@ -1,8 +1,8 @@
 import { get, post } from '@/libs/api';
-import { ClassTableData } from '@/pages/Admin/types';
+import { ClassData } from '@/types/class';
 
 class ClassApi {
-  static async getClasses(): Promise<ClassTableData[]> {
+  static async getClasses(): Promise<ClassData[]> {
     return get('/lectures');
   }
 

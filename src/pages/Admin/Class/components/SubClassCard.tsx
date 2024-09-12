@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import useGetSubClassFiles from '@/hooks/class/useGetSubClassFiles';
-import { SubClassData } from '@/pages/Admin/types';
+import { SubClassData } from '@/types/class';
 
 import FileItem from './FileItem';
 

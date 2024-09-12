@@ -2,10 +2,10 @@ import useModal from '@/hooks/useModal';
 import AnswerFileUploadModal from '@/pages/Admin/Class/components/AnswerFileUploadModal';
 import FileUploadModal from '@/pages/Admin/Class/components/FileUploadModal';
 import SubClassCard from '@/pages/Admin/Class/components/SubClassCard';
-import { ClassTableData } from '@/pages/Admin/types';
+import { ClassData } from '@/types/class';
 
 interface ClassDetailProps {
-  classData: ClassTableData | null;
+  classData: ClassData | null;
 }
 
 function ClassDetail({ classData }: ClassDetailProps) {

@@ -3,23 +3,20 @@ import { useState } from 'react';
 import useModal from '@/hooks/useModal';
 import ClassDetail from '@/pages/Admin/Class/components/ClassDetail';
 import ClassTable from '@/pages/Admin/Class/components/ClassTable';
-
-import { ClassTableData } from '../types';
+import { ClassData } from '@/types/class';
 
 import ClassRegisterModal from './components/ClassRegisterModal';
 import SubClassRegisterModal from './components/SubClassRegisterModal';
 
 function Index() {
-  const [selectedClass, setSelectedClass] = useState<ClassTableData | null>(
-    null,
-  );
+  const [selectedClass, setSelectedClass] = useState<ClassData | null>(null);
   const { isVisible: classVisible, toggleModal: classToggle } = useModal();
   const { isVisible: subClassVisible, toggleModal: subClassToggle } =
     useModal();
 
   const buttonStyle = 'px-10 text-20 border-2 rounded-lg border-neutral-300';
 
-  const handleRowClick = (classData: ClassTableData) => {
+  const handleRowClick = (classData: ClassData) => {
     setSelectedClass(classData);
   };
 

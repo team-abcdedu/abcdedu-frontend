@@ -1,15 +1,15 @@
 import useClass from '@/pages/Admin/Class/hooks/useClass';
 import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
-import { ClassTableData } from '@/pages/Admin/types';
+import { ClassData } from '@/types/class';
 
 interface ClassTableProps {
-  handleRowClick: (classData: ClassTableData) => void;
+  handleRowClick: (classData: ClassData) => void;
 }
 
 function ClassTable({ handleRowClick }: ClassTableProps) {
   const { data, isLoading, isError } = useClass();
 
-  const fieldValue = (column: keyof ClassTableData, row: ClassTableData) => {
+  const fieldValue = (column: keyof ClassData, row: ClassData) => {
     if (column === 'subClasses') {
       const subClasses = row[column];
       const subClassesTitle = subClasses.map(subClass => subClass.title);

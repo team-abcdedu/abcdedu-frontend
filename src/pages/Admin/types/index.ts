@@ -1,16 +1,4 @@
-export interface SubClassData {
-  title: string;
-  orderNumber: number;
-  description: string;
-  subClassId: number;
-}
-
-export interface ClassTableData {
-  title: string;
-  type: string;
-  description: string;
-  subClasses: SubClassData[];
-}
+import { ClassData } from '@/types/class';
 
 export interface AssignmentTableData {
   id: string;
@@ -40,7 +28,7 @@ export interface ExamTableData {
 }
 
 export interface TableColumns {
-  class: Array<keyof ClassTableData>;
+  class: Array<keyof ClassData>;
   assignment: Array<keyof AssignmentTableData>;
   survey: Array<keyof SurveyTableData>;
   theory: Array<keyof TheoryTableData>;

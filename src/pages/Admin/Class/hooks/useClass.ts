@@ -2,11 +2,10 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import AdminClassApi from '@/services/admin/class';
 import ClassApi from '@/services/class';
-
-import { ClassTableData } from '../../types';
+import { ClassData } from '@/types/class';
 
 function useClass() {
-  const { data, isLoading, isError } = useQuery<ClassTableData[]>({
+  const { data, isLoading, isError } = useQuery<ClassData[]>({
     queryKey: ['class'],
     queryFn: () => ClassApi.getClasses(),
   });
