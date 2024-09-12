@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { FieldRules } from '@/types';
 
-import useClass from './useClass';
+import useClass from './useClassMutation';
 
 interface ISubClassRegisterForm {
   classId: number;

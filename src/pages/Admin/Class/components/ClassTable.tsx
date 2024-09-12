@@ -1,4 +1,4 @@
-import useClass from '@/pages/Admin/Class/hooks/useClass';
+import useGetClass from '@/hooks/class/useGetClass';
 import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
 import { ClassData } from '@/types/class';
 
@@ -7,7 +7,7 @@ interface ClassTableProps {
 }
 
 function ClassTable({ handleRowClick }: ClassTableProps) {
-  const { data, isLoading, isError } = useClass();
+  const { data, isLoading, isError } = useGetClass();
 
   const fieldValue = (column: keyof ClassData, row: ClassData) => {
     if (column === 'subClasses') {

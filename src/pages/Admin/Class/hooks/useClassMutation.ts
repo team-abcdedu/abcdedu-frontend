@@ -1,15 +1,8 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import AdminClassApi from '@/services/admin/class';
-import ClassApi from '@/services/class';
-import { ClassData } from '@/types/class';
 
-function useClass() {
-  const { data, isLoading, isError } = useQuery<ClassData[]>({
-    queryKey: ['class'],
-    queryFn: () => ClassApi.getClasses(),
-  });
-
+function useClassMutation() {
   const classMutation = useMutation({
     mutationFn: (classData: {
       title: string;
@@ -27,7 +20,7 @@ function useClass() {
     }) => AdminClassApi.createSubClass(subClassData),
   });
 
-  return { data, isLoading, isError, classMutation, subClassMutation };
+  return { classMutation, subClassMutation };
 }
 
-export default useClass;
+export default useClassMutation;
