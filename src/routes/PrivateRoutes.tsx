@@ -1,8 +1,10 @@
+import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
 import Layout from '@/components/Layout';
 import PrivateRoute from '@/components/PrivateRoute';
-import MyPage from '@/pages/My';
+
+const MyPage = lazy(() => import('@/pages/My'));
 
 export const privateRoutes: RouteObject[] = [
   {

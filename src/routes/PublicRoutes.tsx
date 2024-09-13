@@ -1,23 +1,29 @@
+import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
 import Layout from '@/components/Layout';
-import AboutUs from '@/pages/AboutUs';
-import Gallery from '@/pages/AboutUs/Gallery';
-import History from '@/pages/AboutUs/History';
-import Assignment from '@/pages/Assignment';
-import Classes from '@/pages/Classes';
-import Community from '@/pages/Community';
-import Board from '@/pages/Community/Board';
-import LevelUp from '@/pages/Community/LevelUp';
-import PostDetail from '@/pages/Community/PostDetail';
-import Project from '@/pages/Community/Project';
-import Qna from '@/pages/Community/Qna';
-import Contact from '@/pages/Contact';
 import Home from '@/pages/Home';
-import Survey from '@/pages/Survey';
 
-import Class from '../pages/Classes/[classId]';
-import SubClass from '../pages/Classes/[classId]/[subClassId]';
+const AboutUs = lazy(() => import('@/pages/AboutUs'));
+const Gallery = lazy(() => import('@/pages/AboutUs/Gallery'));
+const History = lazy(() => import('@/pages/AboutUs/History'));
+
+const Classes = lazy(() => import('@/pages/Classes'));
+
+const Community = lazy(() => import('@/pages/Community'));
+const Class = lazy(() => import('@/pages/Classes/[classId]'));
+const SubClass = lazy(() => import('@/pages/Classes/[classId]/[subClassId]'));
+
+const Board = lazy(() => import('@/pages/Community/Board'));
+const LevelUp = lazy(() => import('@/pages/Community/LevelUp'));
+const PostDetail = lazy(() => import('@/pages/Community/PostDetail'));
+const Project = lazy(() => import('@/pages/Community/Project'));
+const Qna = lazy(() => import('@/pages/Community/Qna'));
+
+const Assignment = lazy(() => import('@/pages/Assignment'));
+const Survey = lazy(() => import('@/pages/Survey'));
+
+const Contact = lazy(() => import('@/pages/Contact'));
 
 export const publicRoutes: RouteObject[] = [
   {
