@@ -10,6 +10,16 @@ function FileItem({
   assignmentType: string;
   assignmentFileId: number;
 }) {
+  const fileTypeStyle = () => {
+    if (assignmentType === '이론') {
+      return 'bg-green-100';
+    }
+    if (assignmentType === '시험') {
+      return 'bg-blue-100';
+    }
+    return 'bg-yellow-100';
+  };
+
   const { data: fileData } = useGetSubClassFile({
     assignmentFileId,
   });
@@ -26,14 +36,16 @@ function FileItem({
   if (!fileData) return null;
 
   return (
-    <>
+    <div className={`border-1 rounded-xl ${fileTypeStyle()}`}>
       <a
         href={fileData.filePresignedUrl}
-        className={'text-15 font-medium text-primary-200 cursor-pointer'}
+        className={`gap-3 text-13 font-medium text-center text-primary-200 cursor-pointer`}
       >
-        {assignmentType}-{assignmentFileId}
+        <div>
+          {assignmentType} [ {assignmentFileId} ]
+        </div>
       </a>
-    </>
+    </div>
   );
 }
 
