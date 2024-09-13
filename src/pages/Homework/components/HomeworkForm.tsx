@@ -25,6 +25,7 @@ function HomeworkForm({
   const isError = false;
   const isLoading = false;
   const myAnswers = mockAnswer;
+  // const myAnswers = [];
 
   const { isVisible, toggleModal } = useModal();
   const [successModal, setSuccessModal] = useState<boolean>(false);
@@ -81,11 +82,14 @@ function HomeworkForm({
                 <div className={`w-full`}>
                   <UserInput
                     question={question}
-                    answer={myAnswers[question.index - 1]}
+                    answer={
+                      myAnswers.length > 0
+                        ? myAnswers[question.index - 1]
+                        : null
+                    }
                     register={register}
                     errors={errors}
                   />
-                  {/* <UserInput q={q} answer={null} register={register} errors={errors} /> */}
                 </div>
               </div>
             ))}
