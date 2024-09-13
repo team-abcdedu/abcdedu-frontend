@@ -1,3 +1,4 @@
+import { X } from '@phosphor-icons/react';
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
@@ -47,9 +48,16 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
       <Modal.Content>
         <form
           id={'file-upload'}
-          className={'w-full flex flex-col gap-10 text-16'}
+          className={'w-full pt-10 flex flex-col gap-10 text-16'}
           onSubmit={handleSubmit(onSubmit)}
         >
+          <button
+            type='button'
+            className='absolute top-12 right-12'
+            onClick={closeModal}
+          >
+            <X size={20} />
+          </button>
           <div className={`${inputWrapperStyle}`}>
             <label htmlFor={'assignment-file-id'} className={`w-fit px-5`}>
               제출용 파일의 문제 파일 ID
