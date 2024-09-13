@@ -9,7 +9,7 @@ interface UseSubClassProps {
 function useGetSubClassFile({ assignmentFileId }: UseSubClassProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['sub-class-file', assignmentFileId],
-    queryFn: () => ClassApi.getSubClassFile(assignmentFileId || 0),
+    queryFn: () => ClassApi.getSubClassFile(assignmentFileId),
   });
 
   return { data, isLoading, isError };

@@ -4,14 +4,12 @@ import ClassApi from '@/services/class';
 
 interface UseSubClassProps {
   subLectureId: number;
-  enabled: boolean;
 }
 
-function useGetSubClassFileList({ subLectureId, enabled }: UseSubClassProps) {
+function useGetSubClassFileList({ subLectureId }: UseSubClassProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['sub-class-fileList', subLectureId],
-    queryFn: () => ClassApi.getSubClassFileList(subLectureId || 0),
-    enabled,
+    queryKey: ['sub-class-file-list', subLectureId],
+    queryFn: () => ClassApi.getSubClassFileList(subLectureId),
   });
 
   return { data, isLoading, isError };
