@@ -56,7 +56,7 @@ export default function ContactDetailModal({
                 <span>이메일</span> {data?.email}
               </p>
               <p className={textStyle}>
-                <span>작성일</span> {data?.createdAt}
+                <span>작성일</span> {data?.createdAt.split('T')[0]}
               </p>
               <hr className='my-12'></hr>
               <p className='text-18 font-semibold mb-8'>{data?.title}</p>
