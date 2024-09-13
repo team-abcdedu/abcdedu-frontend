@@ -15,7 +15,12 @@ interface UseHomeworkFormProps {
   toggleModal: () => void;
 }
 
-function useHomeworkForm({ homeworkId, questions }: UseHomeworkFormProps) {
+function useHomeworkForm({
+  homeworkId,
+  questions,
+  setSuccessModal,
+  toggleModal,
+}: UseHomeworkFormProps) {
   const {
     register,
     handleSubmit,
@@ -29,7 +34,7 @@ function useHomeworkForm({ homeworkId, questions }: UseHomeworkFormProps) {
     mutationFn: (data: MyHomeworkAnswerInfo[]) =>
       HomeworkApi.postMyHomework(homeworkId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['my-homework', { homeworkId }]);
+      queryClient.invalidateQueries(['my-homework', homeworkId]);
       reset();
       setSuccessModal(true);
       toggleModal();
@@ -53,7 +58,7 @@ function useHomeworkForm({ homeworkId, questions }: UseHomeworkFormProps) {
       if (questions[questionId - 1].type === 'MULTIPLE_OPTION') {
         return {
           questionId,
-          optionIndexes: value.map(v => Number(v)),
+          optionIndexes: value.map((v: string) => Number(v)),
         };
       }
       if (questions[questionId - 1].type === 'SINGLE_OPTION') {

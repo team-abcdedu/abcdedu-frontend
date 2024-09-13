@@ -9,7 +9,7 @@ interface UseGetHomeworksProps {
 
 function useGetHomeworks({ page = 1, size = 1 }: UseGetHomeworksProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['homeworks', { page, size }],
+    queryKey: ['homeworks', `${page}-${size}`],
     queryFn: () => HomeworkApi.getHomeworks(page, size),
   });
 

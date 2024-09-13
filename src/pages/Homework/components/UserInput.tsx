@@ -1,11 +1,11 @@
-import { FieldErrors } from 'react-hook-form';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import { MyHomeworkAnswerInfo, QuestionInfo } from '@/types/homework';
 
 interface UserInputAreaProps {
   question: QuestionInfo;
   answer: MyHomeworkAnswerInfo | null;
-  register: (name: string, RegisterOptions?) => { onChange; onBlur; name; ref };
+  register: UseFormRegister<{ [key: number]: string | string[] }>;
   errors: FieldErrors;
 }
 
@@ -67,7 +67,7 @@ function UserInput({ question, answer, register, errors }: UserInputAreaProps) {
                 type={'checkbox'}
                 value={option.index}
                 disabled={!!answer}
-                checked={answer?.optionIndexes.includes(option.index)}
+                checked={answer?.optionIndexes?.includes(option.index)}
               />
               {option.content}
             </label>
