@@ -7,14 +7,14 @@ interface UseSubClassProps {
   enabled: boolean;
 }
 
-function useGetSubClassFiles({ subLectureId, enabled }: UseSubClassProps) {
+function useGetSubClassFileList({ subLectureId, enabled }: UseSubClassProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['sub-class-files', subLectureId],
-    queryFn: () => ClassApi.getSubClassFiles(subLectureId || 0),
+    queryKey: ['sub-class-fileList', subLectureId],
+    queryFn: () => ClassApi.getSubClassFileList(subLectureId || 0),
     enabled,
   });
 
   return { data, isLoading, isError };
 }
 
-export default useGetSubClassFiles;
+export default useGetSubClassFileList;
