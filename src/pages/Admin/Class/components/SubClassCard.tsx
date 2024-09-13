@@ -1,20 +1,15 @@
 import { useState } from 'react';
 
-import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import { SubClassData } from '@/types/class';
 
-import FileItem from './FileItem';
+import FileList from './FileList';
 
 interface SubClassCardProps {
   subClass: SubClassData;
 }
 
 function SubClassCard({ subClass }: SubClassCardProps) {
-  const [enabled, setEnabled] = useState<boolean>(false);
-  const { data, isLoading, isError } = useGetSubClassFileList({
-    subLectureId: subClass.subClassId,
-    enabled,
-  });
+  const [openFileList, setOpenFileList] = useState<boolean>(false);
 
   return (
     <li
@@ -40,37 +35,11 @@ function SubClassCard({ subClass }: SubClassCardProps) {
           className={
             'col-span-2 px-10 text-12 border-2 rounded-lg border-neutral-300'
           }
-          onClick={() => setEnabled(prev => !prev)}
+          onClick={() => setOpenFileList(prev => !prev)}
         >
           파일 목록 확인하기
         </button>
-        {enabled && isError && (
-          <span className={'col-start-5 text-15'}>
-            데이터를 불러오는데 오류가 생겼습니다.
-          </span>
-        )}
-        {enabled && isLoading && (
-          <span className={'col-start-5 text-15'}>Loading...</span>
-        )}
-        {enabled &&
-          !isLoading &&
-          (data && data.length > 0 ? (
-            <div
-              className={
-                'row-start-5 col-start-2 col-span-4 grid grid-cols-4 pt-5 gap-3'
-              }
-            >
-              {data.map(file => (
-                <FileItem
-                  key={file.assignmentFileId}
-                  assignmentType={file.assignmentType}
-                  assignmentFileId={file.assignmentFileId}
-                />
-              ))}
-            </div>
-          ) : (
-            <span className={'col-start-5 text-15'}>없음</span>
-          ))}
+        {openFileList && <FileList subLectureId={subClass.subClassId} />}
       </div>
     </li>
   );
