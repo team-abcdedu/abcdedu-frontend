@@ -18,3 +18,16 @@ export type StrictPropsWithChildren<P = unknown> = P & {
 export type FieldRules<T extends FieldValues> = {
   [K in Path<T>]: RegisterOptions<T, K>;
 };
+
+/**
+ * 페이징 처리된 목록 응답 타입
+ * @example PaginatedResponse<Post>
+ */
+export type PaginatedResponse<T> = {
+  content: T[];
+  currentPage: number;
+  pageSize: number;
+  totalElements: number;
+  totalPages: number;
+  last: boolean;
+};
