@@ -30,20 +30,16 @@ function Index() {
         <div className={'w-full flex justify-between pr-50'}>
           <h1 className={'text-30 font-semibold'}>클래스 관리</h1>
           <div className={'flex-row-center gap-30'}>
+            <button className={`${buttonStyle}`} onClick={classToggle}>
+              클래스 등록
+            </button>
+            <button className={`${buttonStyle}`} onClick={subClassToggle}>
+              서브 클래스 등록
+            </button>
             {selectedClass && (
               <button className={`${buttonStyle}`} onClick={handleBackClick}>
                 뒤로 가기
               </button>
-            )}
-            {!selectedClass && (
-              <>
-                <button className={`${buttonStyle}`} onClick={classToggle}>
-                  클래스 등록
-                </button>
-                <button className={`${buttonStyle}`} onClick={subClassToggle}>
-                  서브 클래스 등록
-                </button>
-              </>
             )}
           </div>
         </div>
