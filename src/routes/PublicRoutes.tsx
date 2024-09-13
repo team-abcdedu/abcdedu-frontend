@@ -4,7 +4,6 @@ import Layout from '@/components/Layout';
 import AboutUs from '@/pages/AboutUs';
 import Gallery from '@/pages/AboutUs/Gallery';
 import History from '@/pages/AboutUs/History';
-import Assignment from '@/pages/Assignment';
 import Classes from '@/pages/Classes';
 import Community from '@/pages/Community';
 import Board from '@/pages/Community/Board';
@@ -14,6 +13,7 @@ import Project from '@/pages/Community/Project';
 import Qna from '@/pages/Community/Qna';
 import Contact from '@/pages/Contact';
 import Home from '@/pages/Home';
+import Homework from '@/pages/Homework';
 import Survey from '@/pages/Survey';
 
 import Class from '../pages/Classes/[classId]';
@@ -93,8 +93,8 @@ export const publicRoutes: RouteObject[] = [
         element: <Contact />,
       },
       {
-        path: '/assignment',
-        element: <Assignment />,
+        path: '/homework',
+        element: <Homework />,
       },
       {
         path: '/survey',

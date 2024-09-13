@@ -73,7 +73,7 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
-    to: '/assignment',
+    to: '/homework',
     text: '과제',
   },
   {
