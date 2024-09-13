@@ -9,11 +9,10 @@ const Gallery = lazy(() => import('@/pages/AboutUs/Gallery'));
 const History = lazy(() => import('@/pages/AboutUs/History'));
 
 const Classes = lazy(() => import('@/pages/Classes'));
-
-const Community = lazy(() => import('@/pages/Community'));
 const Class = lazy(() => import('@/pages/Classes/[classId]'));
 const SubClass = lazy(() => import('@/pages/Classes/[classId]/[subClassId]'));
 
+const Community = lazy(() => import('@/pages/Community'));
 const Board = lazy(() => import('@/pages/Community/Board'));
 const LevelUp = lazy(() => import('@/pages/Community/LevelUp'));
 const PostDetail = lazy(() => import('@/pages/Community/PostDetail'));
