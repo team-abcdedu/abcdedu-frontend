@@ -75,7 +75,6 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
             )}
           </div>
 
-          <div></div>
           <div className={`${inputWrapperStyle}`}>
             <div className={`w-full px-5 flex justify-end items-center`}>
               <label
