@@ -60,7 +60,7 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
           </button>
           <div className={`${inputWrapperStyle}`}>
             <label htmlFor={'assignment-file-id'} className={`w-fit px-5`}>
-              제출용 파일의 문제 파일 ID
+              시험 파일 ID
             </label>
             <input
               {...register('assignmentFileId', fieldRules.assignmentFileId)}
