@@ -1,3 +1,5 @@
+import { X } from '@phosphor-icons/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
@@ -19,6 +21,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
     useFileUpload();
 
   const closeModal = () => {
+    setFile(null);
     reset();
     onClose();
   };
@@ -29,6 +32,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
     setFile(inputFile);
   };
 
+  const queryClient = useQueryClient();
   const onSubmit: SubmitHandler<ISubClassFileUploadForm> = (data, e) => {
     e?.preventDefault();
     const fileData = { ...data };
@@ -36,8 +40,10 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
     fileMutation.mutate(fileData, {
       onSuccess: () => {
         alert('파일이 등록되었습니다.');
-        reset();
-        onClose();
+        queryClient.invalidateQueries({
+          queryKey: ['sub-class-file-list', fileData.subLectureId as number],
+        });
+        closeModal();
       },
     });
   };
@@ -47,9 +53,16 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
       <Modal.Content>
         <form
           id={'file-upload'}
-          className={'w-full flex flex-col gap-10 text-16'}
+          className={'w-full pt-10 flex flex-col gap-10 text-16'}
           onSubmit={handleSubmit(onSubmit)}
         >
+          <button
+            type='button'
+            className='absolute top-12 right-12'
+            onClick={closeModal}
+          >
+            <X size={20} />
+          </button>
           <div className={`${inputWrapperStyle}`}>
             <label htmlFor={'title'} className={`w-fit px-5`}>
               서브 클래스 ID
@@ -67,7 +80,6 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
             )}
           </div>
 
-          <div></div>
           <div className={`${inputWrapperStyle}`}>
             <div
               className={`w-full px-5 flex justify-between items-center gap-20`}
