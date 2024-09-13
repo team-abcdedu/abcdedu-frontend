@@ -34,7 +34,7 @@ function useHomeworkForm({
     mutationFn: (data: MyHomeworkAnswerInfo[]) =>
       HomeworkApi.postMyHomework(homeworkId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['my-homework', homeworkId]);
+      queryClient.invalidateQueries(['my-homework', homeworkId.toString()]);
       reset();
       setSuccessModal(true);
       toggleModal();
