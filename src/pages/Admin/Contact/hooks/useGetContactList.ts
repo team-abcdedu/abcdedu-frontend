@@ -4,7 +4,7 @@ import contactApi from '@/services/contact';
 
 export default function useGetContactList(currentPage: number) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['contact', currentPage],
+    queryKey: ['contact', 'list', currentPage],
     queryFn: () => contactApi.getContactList(currentPage),
     placeholderData: keepPreviousData,
   });
