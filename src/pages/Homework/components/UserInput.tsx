@@ -5,7 +5,7 @@ import { MyHomeworkAnswerInfo, QuestionInfo } from '@/types/homework';
 interface UserInputAreaProps {
   question: QuestionInfo;
   answer: MyHomeworkAnswerInfo | null;
-  register: UseFormRegister<{ [key: number]: string | string[] }>;
+  register: UseFormRegister<{ [key: string]: string | string[] }>;
   errors: FieldErrors;
 }
 

@@ -5,7 +5,7 @@ import HomeworkApi from '@/services/homework';
 import { MyHomeworkAnswerInfo, QuestionInfo } from '@/types/homework';
 
 interface IHomeworkForm {
-  [key: number]: string | string[];
+  [key: string]: string | string[];
 }
 
 interface UseHomeworkFormProps {

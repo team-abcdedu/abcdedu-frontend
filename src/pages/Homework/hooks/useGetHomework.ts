@@ -8,7 +8,7 @@ interface UseGetHomeworkProps {
 
 function useGetHomework({ homeworkId }: UseGetHomeworkProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['homework', homeworkId.toString()],
+    queryKey: ['homework', `${homeworkId}`],
     queryFn: () => HomeworkApi.getHomework(homeworkId),
   });
 
