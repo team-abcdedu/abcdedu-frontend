@@ -51,12 +51,12 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className={`${inputWrapperStyle}`}>
-            <label htmlFor={'title'} className={`w-fit px-5`}>
+            <label htmlFor={'assignment-file-id'} className={`w-fit px-5`}>
               제출용 파일의 문제 파일 ID
             </label>
             <input
               {...register('assignmentFileId', fieldRules.assignmentFileId)}
-              id={'subclass-id'}
+              id={'assignment-file-id'}
               type='number'
               className={'p-5 border-2 rounded-md'}
             />
@@ -69,9 +69,7 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
 
           <div></div>
           <div className={`${inputWrapperStyle}`}>
-            <div
-              className={`w-full px-5 flex justify-between items-center gap-20`}
-            >
+            <div className={`w-full px-5 flex justify-end items-center`}>
               <label
                 htmlFor={'file'}
                 className={

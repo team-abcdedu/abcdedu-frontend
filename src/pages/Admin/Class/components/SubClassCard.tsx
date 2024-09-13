@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useGetSubClassFiles from '@/hooks/class/useGetSubClassFiles';
+import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import { SubClassData } from '@/types/class';
 
 import FileItem from './FileItem';
@@ -11,7 +11,7 @@ interface SubClassCardProps {
 
 function SubClassCard({ subClass }: SubClassCardProps) {
   const [enabled, setEnabled] = useState<boolean>(false);
-  const { data, isLoading, isError } = useGetSubClassFiles({
+  const { data, isLoading, isError } = useGetSubClassFileList({
     subLectureId: subClass.subClassId,
     enabled,
   });
@@ -56,7 +56,9 @@ function SubClassCard({ subClass }: SubClassCardProps) {
           !isLoading &&
           (data && data.length > 0 ? (
             <div
-              className={'row-start-5 col-start-2 col-span-4 grid grid-cols-4'}
+              className={
+                'row-start-5 col-start-2 col-span-4 grid grid-cols-4 pt-5 gap-3'
+              }
             >
               {data.map(file => (
                 <FileItem
