@@ -34,7 +34,9 @@ function useHomeworkForm({
     mutationFn: (data: MyHomeworkAnswerInfo[]) =>
       HomeworkApi.postMyHomework(homeworkId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['my-homework', homeworkId.toString()]);
+      queryClient.invalidateQueries({
+        queryKey: ['my-homework', homeworkId.toString()],
+      });
       reset();
       setSuccessModal(true);
       toggleModal();
@@ -58,7 +60,7 @@ function useHomeworkForm({
       if (questions[questionId - 1].type === 'MULTIPLE_OPTION') {
         return {
           questionId,
-          optionIndexes: value.map((v: string) => Number(v)),
+          optionIndexes: Array.from(value).map((v: string) => Number(v)),
         };
       }
       if (questions[questionId - 1].type === 'SINGLE_OPTION') {
