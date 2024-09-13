@@ -25,13 +25,12 @@ function FileItem({
   });
 
   const { data: answerData } = useGetSubClassAnswerFile({
-    assignmentAnswerFileId: assignmentFileId,
-    enabled: !!fileData?.assignmentAnswerFileId,
+    assignmentAnswerFileId: 0,
   });
 
   useEffect(() => {
     if (fileData && fileData.assignmentAnswerFileId) console.log(answerData);
-  }, [fileData]);
+  }, [fileData, answerData]);
 
   if (!fileData) return null;
 
