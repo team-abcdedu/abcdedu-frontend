@@ -1,10 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
-
-import useClass from './useClass';
 
 interface ISubClassRegisterForm {
   classId: number;
@@ -48,14 +47,22 @@ function useSubClassRegisterForm({ onClose }: UseSubClassRegisterFormProps) {
   };
 
   const queryClient = useQueryClient();
-  const { subClassMutation } = useClass();
+
+  const subClassMutation = useMutation({
+    mutationFn: (subClassData: {
+      classId: number;
+      title: string;
+      description: string;
+      orderNumber: number;
+    }) => AdminClassApi.createSubClass(subClassData),
+  });
 
   const submitForm: SubmitHandler<ISubClassRegisterForm> = (data, event) => {
     event?.preventDefault();
     subClassMutation.mutate(data, {
       onSuccess: () => {
         alert('서브 클래스가 등록되었습니다.');
-        queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+        queryClient.invalidateQueries({ queryKey: ['class'] });
         onClose();
       },
       onError: error => {

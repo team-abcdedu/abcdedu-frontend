@@ -1,3 +1,5 @@
+import { X } from '@phosphor-icons/react';
+
 import Modal from '@/components/Modal';
 
 import useSubClassRegisterForm from '../hooks/useSubClassRegisterForm';
@@ -28,9 +30,16 @@ function SubClassRegisterModal({
       <Modal.Content>
         <form
           id={'class-register'}
-          className={'w-full h-full flex flex-col gap-5 text-15'}
+          className={'w-full h-full pt-10 flex flex-col gap-5 text-15'}
           onSubmit={onSubmit}
         >
+          <button
+            type='button'
+            className='absolute top-12 right-12'
+            onClick={closeModal}
+          >
+            <X size={24} />
+          </button>
           <label htmlFor={'classId'} className={'flex flex-col'}>
             클래스 ID (숫자)
             <input
@@ -88,15 +97,6 @@ function SubClassRegisterModal({
             }
           >
             등록
-          </button>
-          <button
-            type={'button'}
-            onClick={onClose}
-            className={
-              'w-full h-50 text-15 text-primary-300 font-semibold rounded-md border-1 border-primary-300'
-            }
-          >
-            취소
           </button>
         </div>
       </Modal.Actions>

@@ -10,13 +10,15 @@ interface SubClassNavCardProps {
 
 function SubClassNavigationCard({ subClasses, bgColor }: SubClassNavCardProps) {
   const bgClass = bgColor === 'neutral' ? 'bg-neutral-100' : 'bg-white';
+  const gridStyle =
+    subClasses && subClasses.length > 4
+      ? 'md:grid-cols-3'
+      : 'grid-flow-row lg:flex';
 
   if (!subClasses) return null;
 
   return (
-    <div
-      className={`grid grid-cols-1 sm:grid-cols-2 grid-flow-row lg:flex gap-20`}
-    >
+    <div className={`grid grid-cols-1 sm:grid-cols-2 ${gridStyle} gap-20`}>
       {subClasses.map(subClassInfo => (
         <div
           key={subClassInfo.code}

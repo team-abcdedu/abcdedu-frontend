@@ -1,4 +1,4 @@
-import { ClassInfoMap, ExamInfoMap } from '../types';
+import { ClassInfoMap, ExamInfoMap, TempExamInfoMap } from '../types';
 
 export const curriculumImgUrl =
   'https://c48aa73694122edae77e6fe97fafbfbe.cdn.bubble.io/f1723138717697x280065903378054820/%E1%84%8F%E1%85%A5%E1%84%85%E1%85%B5%E1%84%8F%E1%85%B2%E1%86%AF%E1%84%85%E1%85%A5%E1%86%B7.svg';
@@ -33,10 +33,10 @@ export const classInfoMap: ClassInfoMap = {
     subTitle: '',
     description: '',
     subClasses: [
-      { code: 'B-1', title: '빅데이터', to: '/classes/b/b-1' },
-      { code: 'B-2', title: '데이터베이스', to: '/classes/b/b-2' },
-      { code: 'B-3', title: '데이터 분석', to: '/classes/b/b-3' },
-      { code: 'B-4', title: '데이터 관리 도구', to: '/classes/b/b-4' },
+      { code: 'B-1', title: '데이터 수집과 저장', to: '/classes/b/b-1' },
+      { code: 'B-2', title: '데이터 처리', to: '/classes/b/b-2' },
+      { code: 'B-3', title: '데이터 시각화', to: '/classes/b/b-3' },
+      { code: 'B-4', title: '빅데이터 분석과 통계', to: '/classes/b/b-4' },
     ],
   },
   C: {
@@ -46,13 +46,33 @@ export const classInfoMap: ClassInfoMap = {
     subClasses: [
       {
         code: 'C-1',
-        title: '눈으로 이해하는 인공신경망\n(코드 없이 인공신경망 설계하기)',
+        title: '컴퓨터의 기본원리',
         to: '/classes/c/c-1',
       },
       {
         code: 'C-2',
-        title: '파이썬으로 이해하는 인공신경망',
+        title: '코딩 및 프로그래밍 개론',
         to: '/classes/c/c-2',
+      },
+      {
+        code: 'C-3',
+        title: 'Python 프로그래밍',
+        to: '/classes/c/c-3',
+      },
+      {
+        code: 'C-4',
+        title: 'C, C++ 프로그래밍',
+        to: '/classes/c/c-4',
+      },
+      {
+        code: 'C-5',
+        title: '눈으로 이해하는 인공신경망',
+        to: '/classes/c/c-5',
+      },
+      {
+        code: 'C-6',
+        title: 'Python으로 이해하는 인공신경망',
+        to: '/classes/c/c-6',
       },
     ],
   },
@@ -61,10 +81,11 @@ export const classInfoMap: ClassInfoMap = {
     subTitle: '',
     description: '',
     subClasses: [
-      { code: 'D-1', title: '첨단 융합', to: '/classes/d/d-1' },
-      { code: 'D-2', title: '인문 ・ 사회', to: '/classes/d/d-2' },
-      { code: 'D-3', title: '수리 ・ 과학', to: '/classes/d/d-3' },
-      { code: 'D-4', title: '창의 ・ 예술', to: '/classes/d/d-4' },
+      {
+        code: 'D-1',
+        title: 'ChatGPT를 활용한 전공 탐색 프로젝트',
+        to: '/classes/d/d-1',
+      },
     ],
   },
 };
@@ -78,5 +99,20 @@ export const examInfoMap: ExamInfoMap = {
       '텍스트 생성형 인공지능을 만들기 위한 핵심 수학적 개념이 무엇인가요?\n그리고 왜 그러한 수학적 개념을 사용하는지 이유를 설명해봅시다.',
       'ChatGPT를 만들기 위한 핵심 원리 세 가지를 우리가 배운 수학 개념을 이용하여 설명해봅시다.',
     ],
+  },
+};
+
+export const tempExamInfoMap: TempExamInfoMap = {
+  'A-2': {
+    pdf: 'https://www.soundczech.cz/temp/lorem-ipsum.pdf',
+    hwp: 'https://cdn.hancom.com/link/docs/한글문서파일형식_배포용문서_revision1.2.hwp',
+  },
+  'C-1': {
+    pdf: 'https://www.soundczech.cz/temp/lorem-ipsum.pdf',
+    hwp: 'https://cdn.hancom.com/link/docs/한글문서파일형식_배포용문서_revision1.2.hwp',
+  },
+  'D-1': {
+    pdf: 'https://www.soundczech.cz/temp/lorem-ipsum.pdf',
+    hwp: 'https://cdn.hancom.com/link/docs/한글문서파일형식_배포용문서_revision1.2.hwp',
   },
 };
