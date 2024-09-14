@@ -1,4 +1,5 @@
 import { ClassData } from '@/types/class';
+import { ContactSummary } from '@/types/contact';
 
 export interface AssignmentTableData {
   id: string;
@@ -33,6 +34,7 @@ export interface TableColumns {
   survey: Array<keyof SurveyTableData>;
   theory: Array<keyof TheoryTableData>;
   exam: Array<keyof ExamTableData>;
+  contact: Array<keyof ContactSummary>;
 }
 
 export interface TableColumnMap {
@@ -64,5 +66,12 @@ export interface TableColumnMap {
     class: string;
     pdf: string;
     hwp: string;
+  };
+  contact: {
+    contactId: string;
+    type: string;
+    title: string;
+    userName: string;
+    createdAt: string;
   };
 }

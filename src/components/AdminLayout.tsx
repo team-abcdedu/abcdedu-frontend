@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 import logo from '@/assets/icons/logo.png';
@@ -53,6 +54,9 @@ function AdminLayout() {
           <Link to={'/admin/theory'} className={LinkStyle}>
             이론 관리
           </Link>
+          <Link to={'/admin/contact'} className={LinkStyle}>
+            문의 관리
+          </Link>
         </div>
       </aside>
       <section
@@ -60,7 +64,15 @@ function AdminLayout() {
           'w-full h-full pt-20 pb-10 px-20 flex flex-col gap-30 bg-white rounded-lg shadow-md'
         }
       >
-        <Outlet />
+        <Suspense
+          fallback={
+            <Suspense fallback={<div className='w-full h-[100dvh]'></div>}>
+              <Outlet />
+            </Suspense>
+          }
+        >
+          <Outlet />
+        </Suspense>
       </section>
     </div>
   );
