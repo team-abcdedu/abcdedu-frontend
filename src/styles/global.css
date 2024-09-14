@@ -1,0 +1,143 @@
+@import url('./fonts.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  color: #02081b; /* text-default */
+}
+
+@layer utilities {
+  .position-center {
+    @apply left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .flex-row-center {
+    @apply flex flex-row justify-center items-center;
+  }
+  .flex-col-center {
+    @apply flex flex-col justify-center items-center;
+  }
+  /* border-white, bg-white, hover 시 배경이 투명해지는 버튼 */
+  .btn-white-wb {
+    @apply border-solid border-1 border-white bg-white lg:hover:bg-transparent lg:hover:text-white;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  /* border color primary, bg-white, hover 시 배경이 primary/8 */
+  .btn-white-pb {
+    @apply border-solid border-1 border-primary-300 bg-white lg:hover:bg-primary-300/8;
+    transition: background-color 0.2s;
+  }
+  .input-primary {
+    @apply px-6 text-14 h-48 rounded-md border-1 border-[#bdbdbd] focus:border-primary-300 transition duration-200;
+  }
+
+  .transition-2 {
+    @apply transition duration-200;
+  }
+}
+
+#modal {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-button:vertical:start:increment {
+    display: block;
+  }
+
+  ::-webkit-scrollbar-button:vertical:end:increment {
+    display: block;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 5px;
+    background: #d0d0d0;
+    border-radius: 10px;
+  }
+}
+
+input {
+  outline: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #bdbdbd;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    #e9eeff 0%,
+    #fcfdff 14%,
+    #fcfdff 65%,
+    #ffffff 100%
+  );
+}
+
+.about-gradient {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(203, 212, 227, 0.7) 50%,
+    #ffffff 100%
+  );
+}
+
+/* quill */
+.ql-toolbar.ql-snow {
+  background-color: white;
+}
+
+.ql-container.ql-snow {
+  min-height: 250px;
+  height: auto;
+  border: none !important;
+  background-color: white;
+}
+
+.ql-editor {
+  max-width: 100%;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
