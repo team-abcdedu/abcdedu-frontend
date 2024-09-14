@@ -1,11 +1,28 @@
+import { ClassData, SubClassData } from '@/types/class';
+
 interface SubClassOverviewProps {
-  title: string;
-  subTitle: string;
-  description: string;
+  viewData: ClassData | SubClassData;
+  classTitle: string;
 }
 
-function SubClassOverview(props: SubClassOverviewProps) {
-  const { title, subTitle, description } = props;
+function isClassData(data: ClassData | SubClassData): data is ClassData {
+  return (data as ClassData).subClasses !== undefined;
+}
+
+function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
+  let title;
+  let subTitle;
+  let description;
+
+  if (isClassData(viewData)) {
+    title = viewData.title;
+    subTitle = '';
+    description = viewData.description;
+  } else {
+    title = `Class ${classTitle}-${viewData.orderNumber}`;
+    subTitle = viewData.title;
+    description = viewData.description;
+  }
 
   return (
     <div className={'min-h-[600px] px-24 flex justify-center'}>
