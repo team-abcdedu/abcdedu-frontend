@@ -86,8 +86,12 @@ function HomeworkForm({
                         : null
                     }
                     register={register}
-                    errors={errors}
                   />
+                  {errors?.[`${question.index}`] && (
+                    <span className={'text-14 text-red-700'}>
+                      답안을 입력해주세요
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
