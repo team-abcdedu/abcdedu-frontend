@@ -1,4 +1,5 @@
 import { get, post } from '@/libs/api';
+import { PaginatedResponse } from '@/types';
 import {
   Contact,
   ContactForm,
@@ -11,8 +12,10 @@ class ContactApi {
     return post(`/contacts/`, { ...form, type });
   }
 
-  static async getContactList() {
-    return get<ContactSummary[]>('/contacts/');
+  static async getContactList(page: number) {
+    return get<PaginatedResponse<ContactSummary>>('/contacts/', {
+      params: { page },
+    });
   }
 
   static async getContactDetail(id: number) {

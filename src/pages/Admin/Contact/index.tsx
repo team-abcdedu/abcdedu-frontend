@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
+import Pagination from '@/components/Pagination';
 import useModal from '@/hooks/useModal';
 import { ContactType } from '@/types/contact';
 
@@ -9,7 +11,10 @@ import ContactDetailModal from './components/ContactDetailModal';
 import useGetContactList from './hooks/useGetContactList';
 
 export default function ContactList() {
-  const { list, isLoading, isError } = useGetContactList();
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get('page')) || 1;
+
+  const { list, totalElements, isLoading, isError } = useGetContactList(page);
   const { isVisible, toggleModal } = useModal();
   const [selected, setSelected] = useState<number | null>(null);
 
@@ -71,6 +76,7 @@ export default function ContactList() {
           ))}
         </tbody>
       </table>
+      <Pagination currentPage={page} totalElements={totalElements} />
       <ContactDetailModal
         id={selected}
         isVisible={isVisible}
