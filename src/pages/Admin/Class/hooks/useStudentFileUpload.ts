@@ -5,20 +5,20 @@ import { useForm } from 'react-hook-form';
 import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
 
-export interface ISubClassAnswerFileUploadForm {
+export interface IStudentFileUploadForm {
   assignmentFileId: number;
   file: File;
 }
 
-function useAnswerFileUpload() {
+function useStudentFileUpload() {
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<ISubClassAnswerFileUploadForm>({ mode: 'onSubmit' });
+  } = useForm<IStudentFileUploadForm>({ mode: 'onSubmit' });
 
-  const fieldRules: FieldRules<ISubClassAnswerFileUploadForm> = {
+  const fieldRules: FieldRules<IStudentFileUploadForm> = {
     assignmentFileId: {
       required: '파일 ID를 입력해주세요',
     },
@@ -29,7 +29,7 @@ function useAnswerFileUpload() {
 
   const fileMutation = useMutation({
     mutationFn: (data: { assignmentFileId: number; file: File }) =>
-      AdminClassApi.uploadAnswerFile(data),
+      AdminClassApi.uploadStudentFile(data),
     onError: error => {
       alert('제출용 파일 등록에 실패했습니다.');
       if (isAxiosError(error)) {
@@ -43,4 +43,4 @@ function useAnswerFileUpload() {
   return { register, errors, handleSubmit, reset, fieldRules, fileMutation };
 }
 
-export default useAnswerFileUpload;
+export default useStudentFileUpload;

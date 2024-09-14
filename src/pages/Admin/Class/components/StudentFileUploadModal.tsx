@@ -3,21 +3,24 @@ import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import Modal from '@/components/Modal';
-import useAnswerFileUpload, {
-  ISubClassAnswerFileUploadForm,
-} from '@/pages/Admin/Class/hooks/useAnswerFileUpload';
+import useStudentFileUpload, {
+  IStudentFileUploadForm,
+} from '@/pages/Admin/Class/hooks/useStudentFileUpload';
 
-interface AnswerFileUploadModalProps {
+interface StudentFileUploadModalProps {
   isVisible: boolean;
   onClose: () => void;
 }
 
-function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
+function StudentFileUploadModal({
+  isVisible,
+  onClose,
+}: StudentFileUploadModalProps) {
   const inputWrapperStyle = 'w-full flex flex-col gap-5 p-5';
   const [file, setFile] = useState<File | null>(null);
 
   const { register, fieldRules, reset, errors, handleSubmit, fileMutation } =
-    useAnswerFileUpload();
+    useStudentFileUpload();
 
   const closeModal = () => {
     reset();
@@ -30,7 +33,7 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
     setFile(inputFile);
   };
 
-  const onSubmit: SubmitHandler<ISubClassAnswerFileUploadForm> = (data, e) => {
+  const onSubmit: SubmitHandler<IStudentFileUploadForm> = (data, e) => {
     e?.preventDefault();
     const fileData = { ...data };
     fileData.file = file as File;
@@ -122,4 +125,4 @@ function FileUploadModal({ isVisible, onClose }: AnswerFileUploadModalProps) {
   );
 }
 
-export default FileUploadModal;
+export default StudentFileUploadModal;

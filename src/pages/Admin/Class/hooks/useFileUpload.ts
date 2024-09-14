@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
 
-export interface ISubClassFileUploadForm {
+export interface IFileUploadForm {
   subLectureId: number;
   type: string;
   file: File;
@@ -17,9 +17,9 @@ function useFileUpload() {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<ISubClassFileUploadForm>({ mode: 'onSubmit' });
+  } = useForm<IFileUploadForm>({ mode: 'onSubmit' });
 
-  const fieldRules: FieldRules<ISubClassFileUploadForm> = {
+  const fieldRules: FieldRules<IFileUploadForm> = {
     subLectureId: {
       required: '클래스 ID를 입력해주세요',
     },
@@ -33,7 +33,7 @@ function useFileUpload() {
 
   const fileMutation = useMutation({
     mutationFn: (data: { subLectureId: number; type: string; file: File }) =>
-      AdminClassApi.uploadFile(data),
+      AdminClassApi.uploadGeneralFile(data),
     onError: error => {
       alert('파일 등록에 실패했습니다.');
       if (isAxiosError(error)) {

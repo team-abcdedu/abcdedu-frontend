@@ -1,6 +1,6 @@
 import useModal from '@/hooks/useModal';
-import AnswerFileUploadModal from '@/pages/Admin/Class/components/AnswerFileUploadModal';
 import FileUploadModal from '@/pages/Admin/Class/components/FileUploadModal';
+import StudentFileUploadModal from '@/pages/Admin/Class/components/StudentFileUploadModal';
 import SubClassCard from '@/pages/Admin/Class/components/SubClassCard';
 import { ClassData } from '@/types/class';
 
@@ -9,8 +9,14 @@ interface ClassDetailProps {
 }
 
 function ClassDetail({ classData }: ClassDetailProps) {
-  const { isVisible: mainVisible, toggleModal: mainToggle } = useModal();
-  const { isVisible: subVisible, toggleModal: subToggle } = useModal();
+  const {
+    isVisible: isGeneralUploadVisible,
+    toggleModal: isGeneralUploadToggle,
+  } = useModal();
+  const {
+    isVisible: isStudentUploadVisible,
+    toggleModal: isStudentUploadToggle,
+  } = useModal();
 
   if (!classData) return null;
   return (
@@ -51,13 +57,13 @@ function ClassDetail({ classData }: ClassDetailProps) {
         <div className={'col-span-2 px-10 flex justify-end gap-20'}>
           <button
             className={'px-10 text-15 border-2 rounded-lg border-neutral-300'}
-            onClick={mainToggle}
+            onClick={isGeneralUploadToggle}
           >
             파일 업로드
           </button>
           <button
             className={'px-10 text-15 border-2 rounded-lg border-neutral-300'}
-            onClick={subToggle}
+            onClick={isStudentUploadToggle}
           >
             학생 제출용 파일 업로드
           </button>
@@ -75,8 +81,14 @@ function ClassDetail({ classData }: ClassDetailProps) {
           ))}
         </ul>
       </div>
-      <FileUploadModal isVisible={mainVisible} onClose={mainToggle} />
-      <AnswerFileUploadModal isVisible={subVisible} onClose={subToggle} />
+      <FileUploadModal
+        isVisible={isGeneralUploadVisible}
+        onClose={isGeneralUploadToggle}
+      />
+      <StudentFileUploadModal
+        isVisible={isStudentUploadVisible}
+        onClose={isStudentUploadToggle}
+      />
     </div>
   );
 }

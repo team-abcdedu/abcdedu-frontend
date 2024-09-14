@@ -5,7 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 
 import Modal from '@/components/Modal';
 import useFileUpload, {
-  ISubClassFileUploadForm,
+  IFileUploadForm,
 } from '@/pages/Admin/Class/hooks/useFileUpload';
 
 interface FileUploadModalProps {
@@ -33,7 +33,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
   };
 
   const queryClient = useQueryClient();
-  const onSubmit: SubmitHandler<ISubClassFileUploadForm> = (data, e) => {
+  const onSubmit: SubmitHandler<IFileUploadForm> = (data, e) => {
     e?.preventDefault();
     const fileData = { ...data };
     fileData.file = file as File;

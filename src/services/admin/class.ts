@@ -19,7 +19,7 @@ class AdminClassApi {
     return post(`/lectures/${classId}`, { ...rest });
   }
 
-  static async uploadFile({
+  static async uploadGeneralFile({
     subLectureId,
     type,
     file,
@@ -42,7 +42,7 @@ class AdminClassApi {
     );
   }
 
-  static async uploadAnswerFile({
+  static async uploadStudentFile({
     assignmentFileId,
     file,
   }: {
