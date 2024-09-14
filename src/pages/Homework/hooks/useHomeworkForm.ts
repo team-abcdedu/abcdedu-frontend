@@ -11,14 +11,14 @@ interface IHomeworkForm {
 interface UseHomeworkFormProps {
   homeworkId: number;
   questions: QuestionInfo[];
-  setSuccessModal: (value: boolean) => void;
+  setModalState: (value: 'success' | 'error') => void;
   toggleModal: () => void;
 }
 
 function useHomeworkForm({
   homeworkId,
   questions,
-  setSuccessModal,
+  setModalState,
   toggleModal,
 }: UseHomeworkFormProps) {
   const {
@@ -38,12 +38,12 @@ function useHomeworkForm({
         queryKey: ['my-homework', homeworkId.toString()],
       });
       reset();
-      setSuccessModal(true);
+      setModalState('success');
       toggleModal();
     },
     onError: error => {
       console.error(error);
-      setSuccessModal(false);
+      setModalState('error');
       toggleModal();
     },
   });

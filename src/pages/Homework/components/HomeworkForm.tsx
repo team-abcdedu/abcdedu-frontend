@@ -28,16 +28,14 @@ function HomeworkForm({
   // const myAnswers = [];
 
   const { isVisible, toggleModal } = useModal();
-  const [successModal, setSuccessModal] = useState<boolean>(false);
+  const [modalState, setModalState] = useState<'success' | 'error'>('success');
 
   const formTextStyle = 'text-16 md:text-20 whitespace-pre-wrap';
-  const buttonBgStyle =
-    myAnswers && myAnswers.length > 0 ? 'bg-neutral-300' : 'bg-primary-300';
 
   const { register, errors, reset, onSubmit } = useHomeworkForm({
     homeworkId,
     questions,
-    setSuccessModal,
+    setModalState,
     toggleModal,
   });
 
@@ -102,20 +100,23 @@ function HomeworkForm({
             </p>
           </div>
 
-          <button
-            className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] text-white ${buttonBgStyle}`}
-            disabled={myAnswers.length > 0}
-          >
-            제출하기
-          </button>
+          {!(myAnswers.length > 0) && (
+            <button
+              className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] text-white bg-primary-400`}
+            >
+              제출하기
+            </button>
+          )}
         </div>
       </form>
 
       <MessageModal
         isVisible={isVisible}
         onClose={toggleModal}
-        type={successModal ? 'success' : 'error'}
-        message={successModal ? '제출되었습니다.' : '제출에 실패했습니다.'}
+        type={modalState === 'success' ? 'success' : 'error'}
+        message={
+          modalState === 'success' ? '제출되었습니다.' : '제출에 실패했습니다.'
+        }
       />
     </>
   );
