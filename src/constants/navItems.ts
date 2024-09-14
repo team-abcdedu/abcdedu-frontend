@@ -73,7 +73,7 @@ export const headerNavItems: HeaderNavItem[] = [
   },
   {
     type: 'link',
-    to: '/assignment',
+    to: '/homework',
     text: '과제',
   },
   {
@@ -106,7 +106,7 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     text: '커뮤니티',
   },
   {
-    to: '/assignment',
+    to: '/homework',
     text: '과제',
   },
   {
