@@ -42,6 +42,8 @@ export default function Pagination({
     if (currentPage < start) setStart(prev => prev - pageCount);
   }, [currentPage, pageCount, start]);
 
+  if (totalPages === 1) return null;
+
   return (
     <div className='flex-row-center text-14 text-neutral-500 mt-30'>
       <ul className='flex-row-center [&>li]:h-30 [&>li]:leading-[30px]'>
