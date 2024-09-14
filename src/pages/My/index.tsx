@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 
 import EditModal from './components/EditModal';
@@ -29,6 +30,7 @@ export default function MyPage() {
   const bgColor = !user.imageUrl && 'bg-primary-300/5';
   return (
     <div className='w-full max-w-screen-sm m-auto px-24 py-60 flex flex-col gap-20'>
+      <Head title='마이페이지 | ABCDEdu' />
       <EditModal
         type={infoType}
         user={user}
