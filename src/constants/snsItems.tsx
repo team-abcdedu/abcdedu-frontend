@@ -6,14 +6,17 @@ import naverBlog from '@/assets/icons/naver blog.jpg';
 
 export const snsItems = [
   {
+    label: 'Instagram',
     to: 'https://www.instagram.com/abcd_education/',
     icon: <InstagramLogo size={44} weight='fill' />,
   },
   {
+    label: 'Youtube',
     to: 'https://www.youtube.com/@abcd_edu',
     icon: <YoutubeLogo size={44} weight='fill' />,
   },
   {
+    label: 'Naver Blog',
     to: 'https://blog.naver.com/abcdedu',
     icon: (
       <img
@@ -24,6 +27,7 @@ export const snsItems = [
     ),
   },
   {
+    label: 'Naver Band',
     to: 'https://band.us/@abcdedu',
     icon: (
       <img
@@ -34,6 +38,7 @@ export const snsItems = [
     ),
   },
   {
+    label: 'KakaoTalk',
     to: 'https://pf.kakao.com/_rtaxoG',
     icon: (
       <img

@@ -27,7 +27,7 @@ export default function TeamInfo() {
             <img
               src={teamImage[0]}
               alt='한서현'
-              className='block w-150 h-auto object-center scale-125 -mt-30 -ml-8'
+              className='block w-150 h-fit object-center scale-125 -mt-30 -ml-8'
             />
           </div>
           <div className={profileCardStyle}>
@@ -49,7 +49,11 @@ export default function TeamInfo() {
         </div>
         <div className='flex-col-center relative pt-90 max-md:order-3'>
           <div className={imgContainerStyle}>
-            <img src={teamImage[1]} alt='박건도' className='object-cover' />
+            <img
+              src={teamImage[1]}
+              alt='박건도'
+              className='w-full h-full object-cover'
+            />
           </div>
           <div className={profileCardStyle}>
             <h3 className='text-24 sm:text-30'>박건도</h3>

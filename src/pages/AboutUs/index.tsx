@@ -1,11 +1,15 @@
+import Head from '@/components/Head';
+
 import MobileLinks from './components/MobileLinks';
 import TeamInfo from './components/TeamInfo';
 
 export default function AboutUs() {
   const h3Style =
     'mt-20 mb-30 tracking-[2px] text-26 sm:text-30 text-primary-400';
+
   return (
     <div>
+      <Head title='회사소개 | ABCDEdu' />
       <div className='w-full h-[600px] flex-col-center bg-primary-400'>
         <h2 className='text-center text-white leading-[1.3] font-bold'>
           <span className='block text-18 tracking-[6px] -mr-6 pb-12'>

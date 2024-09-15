@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 
 import ImageModal from './components/ImageModal';
@@ -18,6 +19,7 @@ export default function Gallery() {
 
   return (
     <div>
+      <Head title='갤러리 | ABCDEdu' />
       <div className='w-full h-[600px] flex-col-center bg-primary-400'>
         <h2 className='flex-col-center text-center text-white leading-[1.3] font-bold'>
           <span className='block text-18 tracking-[6px] -mr-6 pb-12'>
