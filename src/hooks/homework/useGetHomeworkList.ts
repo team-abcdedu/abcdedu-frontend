@@ -7,14 +7,14 @@ interface UseGetHomeworksProps {
   size: number;
 }
 
-function useGetHomeworks({ page = 1, size = 1 }: UseGetHomeworksProps) {
+function useGetHomeworkList({ page = 1, size = 1 }: UseGetHomeworksProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['homeworks', `${page}-${size}`],
-    queryFn: () => HomeworkApi.getHomeworks(page, size),
+    queryFn: () => HomeworkApi.getHomeworkList(page, size),
   });
 
   // 현재는 1페이지 1번만 가져옴
   return { data, isLoading, isError };
 }
 
-export default useGetHomeworks;
+export default useGetHomeworkList;

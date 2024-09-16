@@ -7,7 +7,7 @@ import {
 } from '@/types/homework';
 
 class HomeworkApi {
-  static async getHomeworks(page: number, size: number = 10) {
+  static async getHomeworkList(page: number, size: number = 10) {
     return get<PaginatedResponse<HomeworkSummary>>(
       `/homeworks?page=${page}&size=${size}`,
     );
