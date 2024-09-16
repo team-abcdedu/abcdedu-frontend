@@ -1,13 +1,16 @@
 import { get, post } from '@/libs/api';
+import { PaginatedResponse } from '@/types';
 import {
   HomeworkInfo,
-  HomeworksInfo,
+  HomeworkSummary,
   MyHomeworkAnswerInfo,
 } from '@/types/homework';
 
 class HomeworkApi {
   static async getHomeworks(page: number, size: number = 10) {
-    return get<HomeworksInfo>(`/homeworks?page=${page}&size=${size}`);
+    return get<PaginatedResponse<HomeworkSummary>>(
+      `/homeworks?page=${page}&size=${size}`,
+    );
   }
 
   static async getHomework(homeworkId: number) {

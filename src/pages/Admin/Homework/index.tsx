@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
+import HomeworkTable from '@/pages/Admin/Homework/components/HomeworkTable';
+
 import FormBuilder from '../components/FormBuilder';
 
-import AssignmentTable from './components/AssignmentTable';
-
-function Index() {
+function Homework() {
   const [mode, setMode] = useState<'list' | 'register'>('list');
 
   const handleAssignmentRegister = () => {
@@ -24,9 +24,9 @@ function Index() {
           {mode === 'list' ? '과제 등록' : '과제 관리'}
         </button>
       </div>
-      {mode === 'list' ? <AssignmentTable /> : <FormBuilder />}
+      {mode === 'list' ? <HomeworkTable /> : <FormBuilder />}
     </div>
   );
 }
 
-export default Index;
+export default Homework;

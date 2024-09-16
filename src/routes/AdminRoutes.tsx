@@ -5,7 +5,7 @@ import AdminLayout from '@/components/AdminLayout';
 import AdminRoute from '@/components/AdminRoute';
 
 const Admin = lazy(() => import('@/pages/Admin'));
-const Assignment = lazy(() => import('@/pages/Admin/Assignment'));
+const Homework = lazy(() => import('../pages/Admin/Homework'));
 const Class = lazy(() => import('@/pages/Admin/Class'));
 const ContactList = lazy(() => import('@/pages/Admin/Contact'));
 const Survey = lazy(() => import('@/pages/Admin/Survey'));
@@ -29,7 +29,7 @@ export const adminRoutes: RouteObject[] = [
       },
       {
         path: '/admin/homework',
-        element: <Assignment />,
+        element: <Homework />,
       },
       {
         path: '/admin/survey',

@@ -1,11 +1,6 @@
 import { ClassData } from '@/types/class';
 import { ContactSummary } from '@/types/contact';
-
-export interface AssignmentTableData {
-  id: string;
-  createdAt: string;
-  name: string;
-}
+import { HomeworkSummary } from '@/types/homework';
 
 export interface SurveyTableData {
   id: string;
@@ -16,7 +11,7 @@ export interface SurveyTableData {
 
 export interface TableColumns {
   class: Array<keyof ClassData>;
-  assignment: Array<keyof AssignmentTableData>;
+  homework: Array<keyof HomeworkSummary>;
   survey: Array<keyof SurveyTableData>;
   contact: Array<keyof ContactSummary>;
 }
@@ -28,10 +23,10 @@ export interface TableColumnMap {
     description: string;
     subClasses: string;
   };
-  assignment: {
+  homework: {
     id: string;
-    createdAt: string;
-    name: string;
+    title: string;
+    subTitle: string;
   };
   survey: {
     id: string;

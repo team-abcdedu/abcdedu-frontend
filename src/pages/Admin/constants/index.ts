@@ -4,10 +4,8 @@ import { TableColumnMap, TableColumns } from '../types';
 
 export const tableColumns: TableColumns = {
   class: ['title', 'type', 'description', 'subClasses'],
-  assignment: ['id', 'createdAt', 'name'],
+  homework: ['id', 'title', 'subTitle'],
   survey: ['id', 'createdAt', 'class', 'name'],
-  theory: ['id', 'class', 'file'],
-  exam: ['id', 'createdAt', 'class', 'pdf', 'hwp'],
   contact: ['contactId', 'type', 'title', 'userName', 'createdAt'],
 };
 
@@ -18,28 +16,16 @@ export const tableColumnMap: TableColumnMap = {
     description: '설명',
     subClasses: '서브클래스',
   },
-  assignment: {
+  homework: {
     id: 'ID',
-    createdAt: '제출일',
-    name: '이름',
+    title: '제목',
+    subTitle: '부제목',
   },
   survey: {
     id: 'ID',
     createdAt: '제출일',
     class: '클래스',
     name: '이름',
-  },
-  theory: {
-    id: 'ID',
-    class: '클래스',
-    file: '파일',
-  },
-  exam: {
-    id: 'ID',
-    createdAt: '생성일',
-    class: '클래스',
-    pdf: '과제 PDF',
-    hwp: '제출용 HWP',
   },
   contact: {
     contactId: 'ID',

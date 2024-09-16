@@ -18,25 +18,16 @@ export interface QuestionInfo {
   options?: QuestionOption[];
 }
 
-export interface HomeworkBrief {
+export interface HomeworkSummary {
   id: number;
   title: string;
   subTitle: string;
-  description: string;
 }
 
-export interface HomeworkInfo extends HomeworkBrief {
+export interface HomeworkInfo extends HomeworkSummary {
+  description: string;
   questions: QuestionInfo[];
   additionalDescription: string;
-}
-
-export interface HomeworksInfo {
-  content: HomeworkBrief[];
-  currentPage: number;
-  pageSize: number;
-  totalElements: number;
-  totalPages: number;
-  last: boolean;
 }
 
 export interface MyHomeworkAnswerInfo {
