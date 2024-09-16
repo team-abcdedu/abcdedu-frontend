@@ -15,7 +15,7 @@ function WritePostModal({ isVisible, onClose, boardId }: WritePostModalProps) {
       secret: false,
       commentAllow: true,
     },
-    file: '',
+    file: null, // 파일을 null로 초기화
   });
 
   const handleChange = (
@@ -44,7 +44,7 @@ function WritePostModal({ isVisible, onClose, boardId }: WritePostModalProps) {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : '';
+    const file = e.target.files ? e.target.files[0] : null; // 파일을 null로 설정
     setFormData(prevData => ({
       ...prevData,
       file,
@@ -52,29 +52,34 @@ function WritePostModal({ isVisible, onClose, boardId }: WritePostModalProps) {
   };
 
   const handleSubmit = async () => {
-    const requestData = {
-      data: {
+    const formDataToSend = new FormData();
+
+    formDataToSend.append(
+      'data',
+      JSON.stringify({
         boardId: formData.data.boardId,
         title: formData.data.title,
         content: formData.data.content,
         secret: formData.data.secret,
         commentAllow: formData.data.commentAllow,
-      },
-      file: formData.file,
-    };
+      }),
+    );
+
+    if (formData.file) {
+      formDataToSend.append('file', formData.file);
+    }
 
     try {
-      await post('/posts/', requestData, {
+      await post('/posts/', formDataToSend, {
         headers: {
-          'Content-Type': 'application/json', // Ensure the Content-Type is set
+          'Content-Type': 'multipart/form-data',
         },
       });
       console.log('글 작성 성공!');
-      console.log(requestData);
+      console.log(formDataToSend);
     } catch (err) {
       console.log('글 작성 실패..', err);
-      console.log(requestData);
-      console.log(import.meta.env.VITE_API_ROOT); // Vite 기반 프로젝트
+      console.log(formDataToSend);
     }
   };
 
