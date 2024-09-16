@@ -1,5 +1,10 @@
-import { useEffect } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+  Outlet,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from 'react-router-dom';
 
 import Head from '@/components/Head';
 import useGetClass from '@/hooks/class/useGetClass';
@@ -7,22 +12,38 @@ import useGetClass from '@/hooks/class/useGetClass';
 import SubClassNavigationCardGroup from './SubClassNavigationCardGroup';
 import SubClassOverview from './SubClassOverview';
 
+type SubClassIdMap = { [key: string]: number };
+
 function ClassLayout() {
-  const { data, isError, isLoading } = useGetClass();
   const { classId, subClassId } = useParams();
   const navigate = useNavigate();
+  const { data: classes, isError, isLoading } = useGetClass();
 
-  const classData = data?.find(d => d.type === classId?.toUpperCase());
+  const classData = classes?.find(d => d.type === classId?.toUpperCase());
   const subClassData = classData?.subClasses.find(
     d => d.orderNumber === Number(subClassId),
   );
 
+  const [subClassIdMap, setSubClassIdMap] = useState<SubClassIdMap>({});
+
   useEffect(() => {
-    if (data && (!classData || (subClassId && !subClassData))) {
+    if (classes) {
+      const newObj: SubClassIdMap = {};
+      classes?.forEach(c => {
+        c.subClasses.forEach(sc => {
+          newObj[`${c.type}-${sc.orderNumber}`] = Number(sc.subClassId);
+        });
+      });
+      setSubClassIdMap(newObj);
+    }
+  }, [classes]);
+
+  useEffect(() => {
+    if (classes && (!classData || (subClassId && !subClassData))) {
       alert('존재하지 않는 클래스입니다.');
       navigate('/classes');
     }
-  }, [data, classData, subClassId, subClassData, navigate]);
+  }, [classes, classData, subClassId, subClassData, navigate]);
 
   if (isError || isLoading) {
     return null;
@@ -44,10 +65,14 @@ function ClassLayout() {
         viewData={subClassData ?? classData}
         classTitle={classData.title}
       />
-      <Outlet />
+      <Outlet context={subClassIdMap satisfies SubClassIdMap} />
       <SubClassNavigationCardGroup classData={classData} />
     </>
   );
+}
+
+export function useSubClassIdMap() {
+  return useOutletContext<SubClassIdMap>();
 }
 
 export default ClassLayout;
