@@ -2,11 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import ClassApi from '@/services/class';
 
-interface UseSubClassProps {
+interface UseSubClassGeneralFileProps {
   assignmentFileId: number;
 }
 
-function useGetSubClassFile({ assignmentFileId }: UseSubClassProps) {
+function useGetSubClassGeneralFile({
+  assignmentFileId,
+}: UseSubClassGeneralFileProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['sub-class-file', assignmentFileId],
     queryFn: () => ClassApi.getSubClassFile(assignmentFileId),
@@ -15,4 +17,4 @@ function useGetSubClassFile({ assignmentFileId }: UseSubClassProps) {
   return { data, isLoading, isError };
 }
 
-export default useGetSubClassFile;
+export default useGetSubClassGeneralFile;
