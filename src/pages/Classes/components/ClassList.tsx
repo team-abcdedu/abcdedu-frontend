@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import useGetClass from '@/hooks/class/useGetClass';
@@ -20,10 +19,6 @@ function ClassList() {
   ];
 
   const { data, isError, isLoading } = useGetClass();
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   if (isError || isLoading) {
     return null;
