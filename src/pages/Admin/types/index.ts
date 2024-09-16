@@ -14,26 +14,10 @@ export interface SurveyTableData {
   name: string;
 }
 
-export interface TheoryTableData {
-  id: string;
-  class: string;
-  file: string;
-}
-
-export interface ExamTableData {
-  id: string;
-  createdAt: string;
-  class: string;
-  pdf: string;
-  hwp: string;
-}
-
 export interface TableColumns {
   class: Array<keyof ClassData>;
   assignment: Array<keyof AssignmentTableData>;
   survey: Array<keyof SurveyTableData>;
-  theory: Array<keyof TheoryTableData>;
-  exam: Array<keyof ExamTableData>;
   contact: Array<keyof ContactSummary>;
 }
 
@@ -54,18 +38,6 @@ export interface TableColumnMap {
     createdAt: string;
     class: string;
     name: string;
-  };
-  theory: {
-    id: string;
-    class: string;
-    file: string;
-  };
-  exam: {
-    id: string;
-    createdAt: string;
-    class: string;
-    pdf: string;
-    hwp: string;
   };
   contact: {
     contactId: string;
