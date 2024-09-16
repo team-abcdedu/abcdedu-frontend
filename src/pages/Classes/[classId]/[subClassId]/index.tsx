@@ -1,13 +1,21 @@
 import { useParams } from 'react-router-dom';
 
+import { useSubClassIdMap } from '@/components/ClassLayout';
+
 import SubClassContent from '../../components/SubClassContent';
 
 function SubClass() {
-  const { subClassId } = useParams();
+  const { classId, subClassId } = useParams();
+
+  const subClassIdMap = useSubClassIdMap();
 
   return (
     <>
-      <SubClassContent subClassId={subClassId ?? ''} />
+      <SubClassContent
+        subClassId={
+          subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`] ?? ''
+        }
+      />
     </>
   );
 }
