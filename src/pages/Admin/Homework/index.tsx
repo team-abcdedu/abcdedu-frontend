@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import HomeworkTable from '@/pages/Admin/Homework/components/HomeworkTable';
+import HomeworkList from '@/pages/Admin/Homework/components/HomeworkList';
 
 import FormBuilder from '../components/FormBuilder';
 
@@ -24,7 +24,7 @@ function Homework() {
           {mode === 'list' ? '과제 등록' : '과제 관리'}
         </button>
       </div>
-      {mode === 'list' ? <HomeworkTable /> : <FormBuilder />}
+      {mode === 'list' ? <HomeworkList /> : <FormBuilder />}
     </div>
   );
 }

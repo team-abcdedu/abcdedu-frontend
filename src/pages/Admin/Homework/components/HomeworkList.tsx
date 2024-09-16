@@ -1,18 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import { HomeworkSummary } from '@/types/homework';
+import Pagination from '@/components/Pagination';
+import useGetHomeworkList from '@/hooks/homework/useGetHomeworkList';
 
 import { tableColumnMap, tableColumns } from '../../constants';
 
-function HomeworkTable() {
-  const [data, setData] = useState<HomeworkSummary[]>([]);
-  // 임시
-  useEffect(() => {
-    setData([]);
-  }, []);
+function HomeworkList() {
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get('page')) || 1;
+
+  const { list, totalElements } = useGetHomeworkList({
+    page,
+  });
+
+  // if (isError || isLoading) {
+  //   return <div>{isError ? '에러가 발생했습니다.' : '로딩 중입니다.'}</div>;
+  // }
 
   return (
-    <>
+    <div>
       <table
         className={
           'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
@@ -28,8 +34,8 @@ function HomeworkTable() {
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 ? (
-            data.map(row => (
+          {list.length > 0 ? (
+            list.map(row => (
               <tr
                 key={row.id}
                 className={'cursor-pointer hover:bg-neutral-200'}
@@ -48,8 +54,9 @@ function HomeworkTable() {
           )}
         </tbody>
       </table>
-    </>
+      <Pagination currentPage={page} totalElements={totalElements} />
+    </div>
   );
 }
 
-export default HomeworkTable;
+export default HomeworkList;
