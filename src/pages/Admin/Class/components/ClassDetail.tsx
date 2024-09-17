@@ -35,8 +35,8 @@ function ClassDetail({ classData }: ClassDetailProps) {
           <span className={'col-span-11 text-17'}>{classData.title}</span>
         </div>
         <div className={'grid grid-cols-12 items-center'}>
-          <span className={'text-14 text-neutral-500'}>타입</span>
-          <span className={'col-span-11 text-17'}>{classData.type}</span>
+          <span className={'text-14 text-neutral-500'}>부제목</span>
+          <span className={'col-span-11 text-17'}>{classData.subTitle}</span>
         </div>
         <div
           className={

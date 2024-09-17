@@ -8,7 +8,7 @@ function Classes() {
   return (
     <>
       <Head
-        title='ABCD CLASSES'
+        title='ABCD CLASSES | ABCDEdu'
         description='AI & Data 사회에서 진로를 준비하기 위한 ABCDEdu만의 특별한 수업!'
       />
       <Hero />

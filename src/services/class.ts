@@ -13,15 +13,21 @@ class ClassApi {
   }
 
   static async getSubClassFile(
-    assignmentFileId: number,
+    assignmentFileId: number | null,
   ): Promise<{ filePresignedUrl: string; assignmentAnswerFileId: string }> {
-    return get(`/lectures/file/${assignmentFileId}`);
+    if (!assignmentFileId) {
+      return get(`/lectures/file/${assignmentFileId}`);
+    }
+    return { filePresignedUrl: '', assignmentAnswerFileId: '' };
   }
 
   static async getSubClassAnswerFile(
-    assignmentAnswerFileId: number,
-  ): Promise<{ a: string; b: string }> {
-    return get(`/lectures/answer-file/${assignmentAnswerFileId}`);
+    assignmentAnswerFileId: number | null,
+  ): Promise<{ filePresignedUrl: string }> {
+    if (!assignmentAnswerFileId) {
+      return get(`/lectures/answer-file/${assignmentAnswerFileId}`);
+    }
+    return { filePresignedUrl: '' };
   }
 
   static async submitAssignment() {
