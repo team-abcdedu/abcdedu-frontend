@@ -3,12 +3,8 @@ import { ClassData } from '@/types/class';
 import SubClassNavigationCard from './SubClassNavigationCard';
 
 function SubClassNavigationCardGroup({ classData }: { classData: ClassData }) {
-  const { title, type, subClasses } = classData || {};
+  const { title, subClasses } = classData || {};
   const lineStyle = 'w-full h-4 bg-primary-300';
-
-  if (!classData) {
-    return null;
-  }
 
   return (
     <>
@@ -25,7 +21,7 @@ function SubClassNavigationCardGroup({ classData }: { classData: ClassData }) {
       </div>
       <div className={'p-30'}>
         <SubClassNavigationCard
-          classType={type}
+          classTitle={title}
           subClasses={subClasses}
           bgColor={'neutral'}
         />

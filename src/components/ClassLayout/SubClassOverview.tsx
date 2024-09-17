@@ -16,7 +16,7 @@ function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
 
   if (isClassData(viewData)) {
     title = viewData.title;
-    subTitle = '';
+    subTitle = viewData.subTitle;
     description = viewData.description;
   } else {
     title = `Class ${classTitle}-${viewData.orderNumber}`;
