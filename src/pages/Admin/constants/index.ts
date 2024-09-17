@@ -3,7 +3,7 @@ import { ContactTypeLabel } from '@/types/contact';
 import { TableColumnMap, TableColumns } from '../types';
 
 export const tableColumns: TableColumns = {
-  class: ['title', 'type', 'description', 'subClasses'],
+  class: ['title', 'subTitle', 'description', 'subClasses'],
   assignment: ['id', 'createdAt', 'name'],
   survey: ['id', 'createdAt', 'class', 'name'],
   theory: ['id', 'class', 'file'],
@@ -14,7 +14,7 @@ export const tableColumns: TableColumns = {
 export const tableColumnMap: TableColumnMap = {
   class: {
     title: '클래스명',
-    type: '타입',
+    subTitle: '부제목',
     description: '설명',
     subClasses: '서브클래스',
   },
