@@ -36,3 +36,5 @@ export interface MyHomeworkAnswerInfo {
   optionIndex?: number;
   optionIndexes?: number[];
 }
+
+export type CreateHomeworkForm = Omit<HomeworkInfo, 'id'>;
