@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-import { FormEventHandler } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Dispatch, FormEventHandler, SetStateAction } from 'react';
 
 import AdminHomeworkApi from '@/services/admin/homework';
 import {
@@ -8,10 +8,22 @@ import {
   QuestionType,
 } from '@/types/homework';
 
-function useSubmitHomeworkForm() {
-  const mutation = useMutation({
+interface UseSubmitHomeworkFormProps {
+  setModalState: Dispatch<SetStateAction<'success' | 'error'>>;
+}
+
+function useSubmitHomeworkForm({ setModalState }: UseSubmitHomeworkFormProps) {
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
     mutationFn: (data: CreateHomeworkData) =>
       AdminHomeworkApi.createHomework(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['homework-list'] });
+      setModalState('success');
+    },
+    onError: () => {
+      setModalState('error');
+    },
   });
 
   const onSubmit: FormEventHandler<HTMLFormElement> = e => {
@@ -80,11 +92,12 @@ function useSubmitHomeworkForm() {
     });
     refinedData.questions = questions;
 
-    mutation.mutate(refinedData);
+    mutate(refinedData);
   };
 
   return {
     onSubmit,
+    isPending,
   };
 }
 
