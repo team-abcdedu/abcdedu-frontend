@@ -1,9 +1,8 @@
 import { SortAscending } from '@phosphor-icons/react';
-import React, { useState } from 'react';
+import { useState , useEffect} from 'react';
 
 import useModal from '@/hooks/useModal';
-import { posts as initialPosts } from '@/mock/Community';
-
+import { get } from '@/libs/api';
 import { PostTable } from './components/PostData';
 import WritePostModal from './components/WirtePostModal';
 import { Post } from './types/PostData';
@@ -11,18 +10,38 @@ import { Post } from './types/PostData';
 function LevelUp() {
   const { isVisible, toggleModal } = useModal();
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
+  const [posts, setPosts] = useState<Post[]>([]); // 전체 게시물 상태
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [isLevelingUp, setIsLevelingUp] = useState<boolean>(false); // 등업하기 상태
   const [userRole, setUserRole] = useState<string>('');
 
-  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const filtered = initialPosts.filter(post =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  // 검색어가 변경될 때마다 필터링된 게시물 업데이트
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredPosts(posts); // 검색어가 없으면 전체 게시물 표시
+    } else {
+      const filtered = posts.filter(post =>
+        post.data.title.toLowerCase().includes(searchTerm.toLowerCase()),
       );
       setFilteredPosts(filtered);
     }
-  };
+  }, [searchTerm, posts]);
+
+  // 게시판 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const url = `/boards/4`;
+    console.log('Request URL:', url);
+
+    get<Post[]>(url)
+      .then(res => {
+        setPosts(res); // 전체 게시물을 설정
+        setFilteredPosts(res); // 필터링된 게시물도 초기에는 전체 게시물로 설정
+        console.log('자유 게시판: ', res);
+      })
+      .catch(err => {
+        console.log('error:', err);
+      });
+  }, []); // 페이지 상태 의존성 배열에 필요시 추가
 
   const handleLevelUpClick = () => {
     setIsLevelingUp(true); // 등업하기 버튼을 누르면 등업하기 상태로 전환
@@ -54,7 +73,6 @@ function LevelUp() {
             className='border-3 rounded-lg pr-2 md:p-6 md:pr-50'
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            onKeyDown={handleSearch}
           />
         </div>
         <button
@@ -82,7 +100,11 @@ function LevelUp() {
       ) : null}
 
       {isVisible && (
-        <WritePostModal isVisible={isVisible} onClose={toggleModal} />
+        <WritePostModal 
+          isVisible={isVisible} 
+          onClose={toggleModal} 
+          boardId={4}
+        />
       )}
       <PostTable posts={filteredPosts} isLevelingUp={isLevelingUp} />
 

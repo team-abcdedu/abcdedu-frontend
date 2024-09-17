@@ -1,6 +1,6 @@
 import { DotsThreeVertical } from '@phosphor-icons/react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 import { get, patch, del } from '@/libs/api';
 import { comments } from '@/mock/Comment';
@@ -10,9 +10,9 @@ import { PostDetails } from './components/2PostData';
 import { Comment } from './types/Comment';
 
 function PostDetail() {
-  const { postId } = useParams<{ postId: string }>();
-  const numericPostId = parseInt(postId || '0', 10);
-  const post = posts.find(p => p.id === numericPostId);
+  // const { postId } = useParams<{ postId: string }>();
+  // const numericPostId = parseInt(postId || '0', 10);
+  // const post = posts.find(p => p.id === numericPostId);
   const [commentText, setCommentText] = useState<string>('');
   const [commentList, setCommentList] = useState<Comment[]>([]);
   const [menuVisible, setMenuVisible] = useState<{ [key: number]: boolean }>(
