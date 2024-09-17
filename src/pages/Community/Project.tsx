@@ -1,6 +1,6 @@
 import { SortAscending } from '@phosphor-icons/react';
-import{ useState,useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
+import { get } from '@/libs/api';
 import useModal from '@/hooks/useModal';
 import { PostTable } from './components/PostData';
 import WritePostModal from './components/WirtePostModal';
@@ -68,7 +68,11 @@ function Project() {
         </button>
       </div>
       {isVisible && (
-        <WritePostModal isVisible={isVisible} onClose={toggleModal} boardId={3}/>
+        <WritePostModal
+          isVisible={isVisible}
+          onClose={toggleModal}
+          boardId={3}
+        />
       )}
       <PostTable posts={filteredPosts} />
     </div>
