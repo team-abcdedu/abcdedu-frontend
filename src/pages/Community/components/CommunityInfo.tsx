@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { communityInfoMap } from '@/pages/Community/constants/communityInfo';
 
-function CommunityContents() {
+export default function CommunityInfo() {
   return (
     <div className='flex flex-col lg:flex-row px-50 gap-20'>
       {Object.keys(communityInfoMap).map(key => {
@@ -44,5 +44,3 @@ function CommunityContents() {
     </div>
   );
 }
-
-export default CommunityContents;
