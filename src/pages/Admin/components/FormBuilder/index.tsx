@@ -1,6 +1,6 @@
 import { FormEventHandler, useState } from 'react';
 
-import RequiredInput from '@/pages/Admin/components/FormBuilder/RequiredInput';
+import RequiredField from '@/pages/Admin/components/FormBuilder/RequiredField';
 
 import QuestionnaireBuilder from './QuestionnaireBuilder';
 
@@ -37,7 +37,7 @@ function FormBuilder({ formName, onSubmit }: FormBuilderProps) {
           'w-full h-full p-5 flex flex-col items-center gap-5 border-3 rounded-xl overflow-y-scroll bg-primary-50'
         }
       >
-        <RequiredInput />
+        <RequiredField />
         {inputItems.map((item, questionIdx) => (
           <QuestionnaireBuilder
             key={item.id}
