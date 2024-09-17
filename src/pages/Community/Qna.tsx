@@ -1,10 +1,12 @@
 import { SortAscending } from '@phosphor-icons/react';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+
 import useModal from '@/hooks/useModal';
-import { PostTable } from './components/PostData';
-import WritePostModal from './components/WirtePostModal';
-import { Post } from './types/PostData';
 import { get } from '@/libs/api';
+
+import { PostTable } from './components/PostData';
+import WritePostModal from './components/WritePostModal';
+import { Post } from './types/PostData';
 
 function Qna() {
   const { isVisible, toggleModal } = useModal();
@@ -12,33 +14,33 @@ function Qna() {
   const [posts, setPosts] = useState<Post[]>([]); // 전체 게시물 상태
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
 
-    // 검색어가 변경될 때마다 필터링된 게시물 업데이트
-    useEffect(() => {
-      if (searchTerm === '') {
-        setFilteredPosts(posts); // 검색어가 없으면 전체 게시물 표시
-      } else {
-        const filtered = posts.filter(post =>
-          post.data.title.toLowerCase().includes(searchTerm.toLowerCase()),
-        );
-        setFilteredPosts(filtered);
-      }
-    }, [searchTerm, posts]);
-  
-    // 게시판 데이터를 가져오는 useEffect
-    useEffect(() => {
-      const url = `/boards/2`;
-      console.log('Request URL:', url);
-  
-      get<Post[]>(url)
-        .then(res => {
-          setPosts(res); // 전체 게시물을 설정
-          setFilteredPosts(res); // 필터링된 게시물도 초기에는 전체 게시물로 설정
-          console.log('자유 게시판: ', res);
-        })
-        .catch(err => {
-          console.log('error:', err);
-        });
-    }, []); // 페이지 상태 의존성 배열에 필요시 추가
+  // 검색어가 변경될 때마다 필터링된 게시물 업데이트
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredPosts(posts); // 검색어가 없으면 전체 게시물 표시
+    } else {
+      const filtered = posts.filter(post =>
+        post.data.title.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setFilteredPosts(filtered);
+    }
+  }, [searchTerm, posts]);
+
+  // 게시판 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const url = `/boards/2`;
+    console.log('Request URL:', url);
+
+    get<Post[]>(url)
+      .then(res => {
+        setPosts(res); // 전체 게시물을 설정
+        setFilteredPosts(res); // 필터링된 게시물도 초기에는 전체 게시물로 설정
+        console.log('자유 게시판: ', res);
+      })
+      .catch(err => {
+        console.log('error:', err);
+      });
+  }, []); // 페이지 상태 의존성 배열에 필요시 추가
 
   return (
     <div className='flex flex-col text-center mt-20'>
@@ -68,7 +70,11 @@ function Qna() {
         </button>
       </div>
       {isVisible && (
-        <WritePostModal isVisible={isVisible} onClose={toggleModal} boardId={2}/>
+        <WritePostModal
+          isVisible={isVisible}
+          onClose={toggleModal}
+          boardId={2}
+        />
       )}
       <PostTable posts={filteredPosts} />
     </div>

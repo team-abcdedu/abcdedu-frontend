@@ -10,7 +10,7 @@ export interface WritePostFormData {
     title: string; // 제목
     content?: string; // 내용
     secret: boolean; // 비밀
-    commentAllow: boolean; // 코멘트 얼라우
+    commentAllow: boolean; 
   };
   file: File | null;
 }

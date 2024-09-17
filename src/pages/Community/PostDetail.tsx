@@ -6,7 +6,7 @@ import { get, patch, del } from '@/libs/api';
 import { comments } from '@/mock/Comment';
 // import { posts } from '@/mock/Community';
 
-import { PostDetails } from './components/2PostData';
+import { PostDetails } from './components/PostData';
 import { Comment } from './types/Comment';
 
 function PostDetail() {

@@ -5,8 +5,8 @@ import useModal from '@/hooks/useModal';
 // import { posts as initialPosts } from '@/mock/Community';
 import { get } from '@/libs/api';
 
-import { PostTable } from './components/2PostData';
-import WritePostModal from './components/2WriteModal';
+import { PostTable } from './components/PostData';
+import WritePostModal from './components/WritePostModal';
 import { Post } from './types/PostData';
 
 function Board() {

@@ -5,7 +5,7 @@ import useModal from '@/hooks/useModal';
 import { get } from '@/libs/api';
 
 import { PostTable } from './components/PostData';
-import WritePostModal from './components/WirtePostModal';
+import WritePostModal from './components/WritePostModal';
 import { Post } from './types/PostData';
 
 function LevelUp() {

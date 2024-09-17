@@ -1,9 +1,11 @@
 import { SortAscending } from '@phosphor-icons/react';
 import { useState, useEffect } from 'react';
-import { get } from '@/libs/api';
+
 import useModal from '@/hooks/useModal';
+import { get } from '@/libs/api';
+
 import { PostTable } from './components/PostData';
-import WritePostModal from './components/WirtePostModal';
+import WritePostModal from './components/WritePostModal';
 import { Post } from './types/PostData';
 
 function Project() {
