@@ -1,8 +1,9 @@
 import { SortAscending } from '@phosphor-icons/react';
-import { useState , useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 import useModal from '@/hooks/useModal';
 import { get } from '@/libs/api';
+
 import { PostTable } from './components/PostData';
 import WritePostModal from './components/WirtePostModal';
 import { Post } from './types/PostData';
@@ -100,9 +101,9 @@ function LevelUp() {
       ) : null}
 
       {isVisible && (
-        <WritePostModal 
-          isVisible={isVisible} 
-          onClose={toggleModal} 
+        <WritePostModal
+          isVisible={isVisible}
+          onClose={toggleModal}
           boardId={4}
         />
       )}
