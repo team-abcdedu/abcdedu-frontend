@@ -22,8 +22,10 @@ export default function CommunityInfo() {
                 <h3 className={'text-20 text-primary-300 font-semibold'}>
                   {communityInfo.label}
                 </h3>
-                <div className='text-gray-500'>_______________________</div>
-                <h5 className={'mt-10 text-18 text-gray-500 font-bold mb-20'}>
+                <div className='bg-gray-500 w-180 h-[1.5px] mt-6' />
+                <h5
+                  className={'mt-10 text-18 text-gray-500 font-semibold mb-20'}
+                >
                   {communityInfo.description}
                 </h5>
               </div>
