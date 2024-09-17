@@ -1,4 +1,4 @@
-import { CommunityInfoMap } from '@/types/CommunityTypes';
+import { CommunityInfoMap } from '../types';
 
 export const communityInfoMap: CommunityInfoMap = {
   abcdProject: {
@@ -18,3 +18,12 @@ export const communityInfoMap: CommunityInfoMap = {
     to: '/community/bulletin_board',
   },
 };
+
+export const boardTitle = {
+  levelup: '등업 게시판',
+  project: 'ABCD 프로젝트',
+  qna: 'Q & A',
+  bulletin_board: '자유게시판',
+};
+
+export type BoardType = keyof typeof boardTitle;

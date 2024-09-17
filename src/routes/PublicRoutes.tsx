@@ -13,11 +13,8 @@ const Class = lazy(() => import('@/pages/Classes/[classId]'));
 const SubClass = lazy(() => import('@/pages/Classes/[classId]/[subClassId]'));
 
 const Community = lazy(() => import('@/pages/Community'));
-const BulletinBoard = lazy(() => import('@/pages/Community/BulletinBoard'));
-const LevelUp = lazy(() => import('@/pages/Community/LevelUp'));
+const Board = lazy(() => import('@/pages/Community/Board'));
 const PostDetail = lazy(() => import('@/pages/Community/PostDetail'));
-const Project = lazy(() => import('@/pages/Community/Project'));
-const Qna = lazy(() => import('@/pages/Community/Qna'));
 
 const Homework = lazy(() => import('@/pages/Homework'));
 const Survey = lazy(() => import('@/pages/Survey'));
@@ -62,35 +59,11 @@ export const publicRoutes: RouteObject[] = [
         element: <Community />,
       },
       {
-        path: '/community/levelup',
-        element: <LevelUp />,
+        path: '/community/:category',
+        element: <Board />,
       },
       {
-        path: '/community/levelup/:postId',
-        element: <PostDetail />,
-      },
-      {
-        path: '/community/project',
-        element: <Project />,
-      },
-      {
-        path: '/community/project/:postId',
-        element: <PostDetail />,
-      },
-      {
-        path: '/community/qna',
-        element: <Qna />,
-      },
-      {
-        path: '/community/qna/:postId',
-        element: <PostDetail />,
-      },
-      {
-        path: '/community/bulletin_board',
-        element: <BulletinBoard />,
-      },
-      {
-        path: '/community/bulletin_board/:postId',
+        path: '/community/:category/:postId',
         element: <PostDetail />,
       },
       {
