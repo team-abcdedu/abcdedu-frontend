@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   Outlet,
   useNavigate,
@@ -8,35 +8,23 @@ import {
 
 import Head from '@/components/Head';
 import useGetClass from '@/hooks/class/useGetClass';
+import useGetSubClassIdMap from '@/hooks/class/useGetSubClassIdMap';
+import { SubClassIdMap } from '@/types/class';
 
 import SubClassNavigationCardGroup from './SubClassNavigationCardGroup';
 import SubClassOverview from './SubClassOverview';
-
-type SubClassIdMap = { [key: string]: number };
 
 function ClassLayout() {
   const { classId, subClassId } = useParams();
   const navigate = useNavigate();
   const { data: classes, isError, isLoading } = useGetClass();
 
-  const classData = classes?.find(d => d.type === classId?.toUpperCase());
+  const classData = classes?.find(d => d.title === classId?.toUpperCase());
   const subClassData = classData?.subClasses.find(
     d => d.orderNumber === Number(subClassId),
   );
 
-  const [subClassIdMap, setSubClassIdMap] = useState<SubClassIdMap>({});
-
-  useEffect(() => {
-    if (classes) {
-      const newObj: SubClassIdMap = {};
-      classes?.forEach(c => {
-        c.subClasses.forEach(sc => {
-          newObj[`${c.type}-${sc.orderNumber}`] = Number(sc.subClassId);
-        });
-      });
-      setSubClassIdMap(newObj);
-    }
-  }, [classes]);
+  const subClassIdMap = useGetSubClassIdMap({ classes: classes ?? [] });
 
   useEffect(() => {
     if (classes && (!classData || (subClassId && !subClassData))) {
@@ -56,7 +44,7 @@ function ClassLayout() {
   return (
     <>
       <Head
-        title={`ABCDEdu-${subClassData ? subClassData.title : classData.title}`}
+        title={`${subClassData ? subClassData.title : classData.subTitle} | ABCDEdu`}
         description={
           subClassData ? subClassData.description : classData.description
         }

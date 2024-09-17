@@ -7,7 +7,9 @@ export interface SubClassData {
 
 export interface ClassData {
   title: string;
-  type: string;
+  subTitle: string;
   description: string;
   subClasses: SubClassData[];
 }
+
+export type SubClassIdMap = { [key: string]: number };
