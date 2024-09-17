@@ -9,7 +9,7 @@ import { PostTable } from './components/PostData';
 import WritePostModal from './components/WritePostModal';
 import { Post } from './types/PostData';
 
-function Board() {
+export default function BulletinBoard() {
   const { isVisible, toggleModal } = useModal();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [posts, setPosts] = useState<Post[]>([]); // 전체 게시물 상태
@@ -82,5 +82,3 @@ function Board() {
     </div>
   );
 }
-
-export default Board;
