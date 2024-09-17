@@ -19,7 +19,7 @@ export interface TableColumns {
 export interface TableColumnMap {
   class: {
     title: string;
-    type: string;
+    subTitle: string;
     description: string;
     subClasses: string;
   };

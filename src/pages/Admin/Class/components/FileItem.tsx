@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import useGetSubClassAnswerFile from '@/hooks/class/useGetSubClassAnswerFile';
-import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
+import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
+import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
 
 function FileItem({
   assignmentType,
@@ -20,11 +20,11 @@ function FileItem({
     return 'bg-yellow-100';
   };
 
-  const { data: fileData } = useGetSubClassFile({
+  const { data: fileData } = useGetSubClassGeneralFile({
     assignmentFileId,
   });
 
-  const { data: answerData } = useGetSubClassAnswerFile({
+  const { data: answerData } = useGetSubClassStudentFile({
     assignmentAnswerFileId: 0,
   });
 

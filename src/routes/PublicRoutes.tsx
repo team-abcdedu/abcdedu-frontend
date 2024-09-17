@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
+import ClassLayout from '@/components/ClassLayout';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 
@@ -9,7 +10,6 @@ const Gallery = lazy(() => import('@/pages/AboutUs/Gallery'));
 const History = lazy(() => import('@/pages/AboutUs/History'));
 
 const Classes = lazy(() => import('@/pages/Classes'));
-const Class = lazy(() => import('@/pages/Classes/[classId]'));
 const SubClass = lazy(() => import('@/pages/Classes/[classId]/[subClassId]'));
 
 const Community = lazy(() => import('@/pages/Community'));
@@ -51,11 +51,13 @@ export const publicRoutes: RouteObject[] = [
       },
       {
         path: '/classes/:classId',
-        element: <Class />,
-      },
-      {
-        path: '/classes/:classId/:subClassId',
-        element: <SubClass />,
+        element: <ClassLayout />,
+        children: [
+          {
+            path: '/classes/:classId/:subClassId',
+            element: <SubClass />,
+          },
+        ],
       },
       {
         path: '/community',

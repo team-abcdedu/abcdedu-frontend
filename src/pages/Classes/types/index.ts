@@ -31,3 +31,8 @@ export interface TempExamInfoMap {
     hwp: string;
   };
 }
+
+export interface SubClassContentState {
+  generalType: '이론' | '자료' | '시험' | null;
+  generalFileId: number | null;
+}

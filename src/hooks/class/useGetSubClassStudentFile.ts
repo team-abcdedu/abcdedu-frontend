@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 
 import ClassApi from '@/services/class';
 
-interface UseGetSubClassAnswerFileProps {
-  assignmentAnswerFileId: number;
+interface UseGetSubClassStudentFileProps {
+  assignmentAnswerFileId: number | null;
 }
 
-function useGetSubClassAnswerFile({
+function useGetSubClassStudentFile({
   assignmentAnswerFileId,
-}: UseGetSubClassAnswerFileProps) {
+}: UseGetSubClassStudentFileProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['sub-class-answer-file', assignmentAnswerFileId],
+    queryKey: ['sub-class-student-file', assignmentAnswerFileId],
     queryFn: () => ClassApi.getSubClassAnswerFile(assignmentAnswerFileId),
     enabled: !!assignmentAnswerFileId,
   });
@@ -18,4 +18,4 @@ function useGetSubClassAnswerFile({
   return { data, isLoading, isError };
 }
 
-export default useGetSubClassAnswerFile;
+export default useGetSubClassStudentFile;

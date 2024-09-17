@@ -48,7 +48,7 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
           (data && data.length > 0 ? (
             data.map(row => (
               <tr
-                key={row.title + row.type}
+                key={row.title}
                 className={'cursor-pointer hover:bg-neutral-200'}
                 onClick={() => handleRowClick({ ...row })}
               >
