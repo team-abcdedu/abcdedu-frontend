@@ -4,12 +4,12 @@ import QuestionnaireInput from './QuestionnaireInput';
 
 interface QuestionnaireBuilderProps {
   deleteHandler: () => void;
-  itemIdx: number;
+  questionIdx: number;
 }
 
 function QuestionnaireBuilder({
   deleteHandler,
-  itemIdx,
+  questionIdx,
 }: QuestionnaireBuilderProps) {
   const [type, setType] = useState<'radio' | 'checkbox' | 'textarea'>('radio');
   const questionRef = useRef<HTMLLIElement | null>(null);
@@ -27,13 +27,13 @@ function QuestionnaireBuilder({
 
   return (
     <li
-      className={`w-full min-h-fit grid grid-cols-8 p-10 border-3 rounded-md gap-10 ${itemIdx % 2 ? 'bg-white' : 'bg-neutral-100'}`}
+      className={`w-full min-h-fit grid grid-cols-8 p-10 border-3 rounded-md gap-10 ${questionIdx % 2 ? 'bg-white' : 'bg-neutral-100'}`}
       ref={questionRef}
     >
       <div className={'w-full col-span-7 flex flex-col'}>
         <div className={'w-full grid grid-cols-7 justify-items-center py-3'}>
           <select
-            name={'question-type'}
+            name={`${questionIdx}-type`}
             onChange={handleTypeChange}
             className={'w-[80%] h-full text-center border-2 rounded-2xl'}
           >
@@ -43,18 +43,26 @@ function QuestionnaireBuilder({
           </select>
           <div className={'w-full col-span-6 flex flex-col gap-2'}>
             <input
+              name={`${questionIdx}-title`}
               className={'w-full py-3 px-10 border-2 rounded-md'}
               placeholder={'제목을 입력해주세요'}
             />
             <textarea
+              name={`${questionIdx}-description`}
               className={'w-full py-3 px-10 border-2 rounded-md'}
               placeholder={'설명을 입력해주세요'}
             />
           </div>
         </div>
-        {type === 'radio' && <QuestionnaireInput type={'radio'} />}
-        {type === 'checkbox' && <QuestionnaireInput type={'checkbox'} />}
-        {type === 'textarea' && <QuestionnaireInput type={'textarea'} />}
+        {type === 'radio' && (
+          <QuestionnaireInput type={'radio'} questionIdx={questionIdx} />
+        )}
+        {type === 'checkbox' && (
+          <QuestionnaireInput type={'checkbox'} questionIdx={questionIdx} />
+        )}
+        {type === 'textarea' && (
+          <QuestionnaireInput type={'textarea'} questionIdx={questionIdx} />
+        )}
       </div>
 
       <div className={'flex-col-center'}>

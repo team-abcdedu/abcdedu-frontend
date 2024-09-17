@@ -6,9 +6,10 @@ interface FlexibleInputItem {
 
 interface QuestionnaireInputProps {
   type: 'radio' | 'checkbox' | 'textarea';
+  questionIdx: number;
 }
 
-function QuestionnaireInput({ type }: QuestionnaireInputProps) {
+function QuestionnaireInput({ type, questionIdx }: QuestionnaireInputProps) {
   const textareaStyle = type === 'textarea' ? 'hidden' : 'block';
 
   const [items, setItems] = useState<FlexibleInputItem[]>([{ id: 0 }]);
@@ -26,14 +27,14 @@ function QuestionnaireInput({ type }: QuestionnaireInputProps) {
 
   return (
     <div className={'w-full flex-col-center gap-3'}>
-      {items.map(item => (
+      {items.map((item, optionIdx) => (
         <div
           key={item.id}
           className={'w-full grid grid-cols-7 justify-items-center'}
         >
           <div className={'w-[10%] flex-row-center gap-20'}>
-            {type === 'radio' && <input name={'temp'} type='radio' />}
-            {type === 'checkbox' && <input name={'temp'} type='checkbox' />}
+            {type === 'radio' && <input type='radio' />}
+            {type === 'checkbox' && <input type='checkbox' />}
             <button
               type={'button'}
               onClick={() => handleDeleteItem(item.id)}
@@ -43,7 +44,7 @@ function QuestionnaireInput({ type }: QuestionnaireInputProps) {
             </button>
           </div>
           <input
-            type='text'
+            name={`${questionIdx}-options-${optionIdx + 1}`}
             className={`${textareaStyle} w-full col-span-6 px-10 border-1 rounded-md`}
             placeholder={'내용을 입력해주세요'}
           />
