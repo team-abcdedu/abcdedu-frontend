@@ -37,4 +37,15 @@ export interface MyHomeworkAnswerInfo {
   optionIndexes?: number[];
 }
 
-export type CreateHomeworkForm = Omit<HomeworkInfo, 'id'>;
+export type CreateHomeworkData = Omit<HomeworkInfo, 'id'>;
+
+export type CreateQuestionOption = QuestionOption & { isAnswer: boolean };
+
+export interface CreateQuestion {
+  index: number;
+  type: QuestionType;
+  title: string;
+  description: string;
+  score: number;
+  options?: CreateQuestionOption[];
+}
