@@ -46,6 +46,7 @@ function QuestionnaireBuilder({
               name={`${questionIdx}-title`}
               className={'w-full py-3 px-10 border-2 rounded-md'}
               placeholder={'제목을 입력해주세요'}
+              required
             />
             <textarea
               name={`${questionIdx}-description`}

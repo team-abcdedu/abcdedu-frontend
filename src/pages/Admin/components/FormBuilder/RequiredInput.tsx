@@ -1,8 +1,32 @@
 const requiredInputItems = [
-  { label: '제목', type: 'input', name: 'title' },
-  { label: '부제목', type: 'input', name: 'subTitle' },
-  { label: '설명', type: 'textarea', name: 'description' },
-  { label: '추가 내용', type: 'textarea', name: 'additionalDescription' },
+  {
+    label: '제목',
+    type: 'input',
+    name: 'title',
+    placeholder: '제목을 입력해주세요',
+    required: true,
+  },
+  {
+    label: '부제목',
+    type: 'input',
+    name: 'subTitle',
+    placeholder: '부제목을 입력해주세요',
+    required: true,
+  },
+  {
+    label: '설명',
+    type: 'textarea',
+    name: 'description',
+    placeholder: '설명을 입력해주세요',
+    required: true,
+  },
+  {
+    label: '추가 내용',
+    type: 'textarea',
+    name: 'additionalDescription',
+    placeholder: '추가 내용을 입력해주세요',
+    required: false,
+  },
 ];
 
 function RequiredInput() {
@@ -18,13 +42,16 @@ function RequiredInput() {
           {item.type === 'input' ? (
             <input
               name={item.name}
-              type={'text'}
               className={'col-span-7 py-3 px-10 border-3 rounded-md'}
+              placeholder={item.placeholder}
+              required={item.required}
             />
           ) : (
             <textarea
               name={item.name}
               className={'col-span-7 h-full py-3 px-10 border-3 rounded-md'}
+              placeholder={item.placeholder}
+              required={item.required}
             />
           )}
         </label>

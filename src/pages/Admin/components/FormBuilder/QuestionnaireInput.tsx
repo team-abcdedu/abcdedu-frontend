@@ -33,8 +33,8 @@ function QuestionnaireInput({ type, questionIdx }: QuestionnaireInputProps) {
           className={'w-full grid grid-cols-7 justify-items-center'}
         >
           <div className={'w-[10%] flex-row-center gap-20'}>
-            {type === 'radio' && <input type='radio' />}
-            {type === 'checkbox' && <input type='checkbox' />}
+            {type === 'radio' && <input type='radio' required />}
+            {type === 'checkbox' && <input type='checkbox' required />}
             <button
               type={'button'}
               onClick={() => handleDeleteItem(item.id)}
@@ -47,6 +47,7 @@ function QuestionnaireInput({ type, questionIdx }: QuestionnaireInputProps) {
             name={`${questionIdx}-options-${optionIdx + 1}`}
             className={`${textareaStyle} w-full col-span-6 px-10 border-1 rounded-md`}
             placeholder={'내용을 입력해주세요'}
+            required
           />
         </div>
       ))}
