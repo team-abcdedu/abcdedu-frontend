@@ -19,11 +19,11 @@ export const communityInfoMap: CommunityInfoMap = {
   },
 };
 
-export const boardTitle = {
-  levelup: '등업 게시판',
-  project: 'ABCD 프로젝트',
-  qna: 'Q & A',
-  bulletin_board: '자유게시판',
+export const boardMetaData = {
+  bulletin_board: { id: 1, label: '자유게시판' },
+  qna: { id: 2, label: 'Q & A' },
+  project: { id: 3, label: 'ABCD 프로젝트' },
+  levelup: { id: 4, label: '등업 게시판' },
 };
 
-export type BoardType = keyof typeof boardTitle;
+export type Category = keyof typeof boardMetaData;
