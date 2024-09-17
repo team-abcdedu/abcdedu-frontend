@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-interface FlexibleRadioInputItem {
+interface FlexibleInputItem {
   id: number;
 }
 
-interface FlexibleRadioInputProps {
+interface QuestionnaireInputProps {
   type: 'radio' | 'checkbox' | 'textarea';
 }
 
-function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
+function QuestionnaireInput({ type }: QuestionnaireInputProps) {
   const textareaStyle = type === 'textarea' ? 'hidden' : 'block';
 
-  const [items, setItems] = useState<FlexibleRadioInputItem[]>([{ id: 0 }]);
+  const [items, setItems] = useState<FlexibleInputItem[]>([{ id: 0 }]);
   const [itemIdx, setItemIdx] = useState(1);
 
   const handleAddItem = () => {
@@ -20,13 +20,17 @@ function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
   };
 
   const handleDeleteItem = (index: number) => {
+    if (items.length === 1) return;
     setItems(items.filter(item => item.id !== index));
   };
 
   return (
-    <div className={'flex-col-center gap-3'}>
+    <div className={'w-full flex-col-center gap-3'}>
       {items.map(item => (
-        <div key={item.id} className={'w-full flex justify-between'}>
+        <div
+          key={item.id}
+          className={'w-full grid grid-cols-7 justify-items-center'}
+        >
           <div className={'w-[10%] flex-row-center gap-20'}>
             {type === 'radio' && <input name={'temp'} type='radio' />}
             {type === 'checkbox' && <input name={'temp'} type='checkbox' />}
@@ -40,14 +44,14 @@ function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
           </div>
           <input
             type='text'
-            className={`${textareaStyle} w-[85%] px-10 border-1 rounded-md`}
+            className={`${textareaStyle} w-full col-span-6 px-10 border-1 rounded-md`}
             placeholder={'내용을 입력해주세요'}
           />
         </div>
       ))}
       <button
         type={'button'}
-        className={`${textareaStyle} w-1/5 px-20 text-13 font-semibold border-2 rounded-2xl`}
+        className={`${textareaStyle} w-1/5 px-20 text-13 font-semibold border-2 rounded-2xl bg-white`}
         onClick={handleAddItem}
       >
         +

@@ -2,11 +2,15 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import QuestionnaireInput from './QuestionnaireInput';
 
-interface FlexibleInputProps {
+interface QuestionnaireBuilderProps {
   deleteHandler: () => void;
+  itemIdx: number;
 }
 
-function QuestionnaireBuilder({ deleteHandler }: FlexibleInputProps) {
+function QuestionnaireBuilder({
+  deleteHandler,
+  itemIdx,
+}: QuestionnaireBuilderProps) {
   const [type, setType] = useState<'radio' | 'checkbox' | 'textarea'>('radio');
   const questionRef = useRef<HTMLLIElement | null>(null);
   const textareaStyle =
@@ -23,38 +27,45 @@ function QuestionnaireBuilder({ deleteHandler }: FlexibleInputProps) {
 
   return (
     <li
-      className={
-        'w-full min-h-fit flex justify-between p-10 border-3 rounded-md gap-10 bg-white'
-      }
+      className={`w-full min-h-fit grid grid-cols-8 p-10 border-3 rounded-md gap-10 ${itemIdx % 2 ? 'bg-white' : 'bg-neutral-100'}`}
       ref={questionRef}
     >
-      <div className={'w-full flex flex-col px-20'}>
-        <div className={'w-full flex justify-between py-3'}>
+      <div className={'w-full col-span-7 flex flex-col'}>
+        <div className={'w-full grid grid-cols-7 justify-items-center py-3'}>
           <select
             name={'question-type'}
             onChange={handleTypeChange}
-            className={'w-[10%] text-center border-2 rounded-2xl'}
+            className={'w-[80%] h-full text-center border-2 rounded-2xl'}
           >
             <option value={'radio'}>단일선택</option>
             <option value={'checkbox'}>다중선택</option>
             <option value={'textarea'}>서술형</option>
           </select>
-          <textarea
-            className={'w-[85%] h-full py-3 px-10 border-3 rounded-md'}
-            placeholder={'질문을 입력해주세요'}
-          />
+          <div className={'w-full col-span-6 flex flex-col gap-2'}>
+            <input
+              className={'w-full py-3 px-10 border-2 rounded-md'}
+              placeholder={'제목을 입력해주세요'}
+            />
+            <textarea
+              className={'w-full py-3 px-10 border-2 rounded-md'}
+              placeholder={'설명을 입력해주세요'}
+            />
+          </div>
         </div>
         {type === 'radio' && <QuestionnaireInput type={'radio'} />}
         {type === 'checkbox' && <QuestionnaireInput type={'checkbox'} />}
         {type === 'textarea' && <QuestionnaireInput type={'textarea'} />}
       </div>
-      <button
-        type={'button'}
-        onClick={deleteHandler}
-        className={`${textareaStyle} w-[50px] border-2 rounded-lg text-red-700 font-bold`}
-      >
-        X
-      </button>
+
+      <div className={'flex-col-center'}>
+        <button
+          type={'button'}
+          onClick={deleteHandler}
+          className={`${textareaStyle} w-[60%] border-2 rounded-lg text-red-700 font-bold bg-white`}
+        >
+          X
+        </button>
+      </div>
     </li>
   );
 }

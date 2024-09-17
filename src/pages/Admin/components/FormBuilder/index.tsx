@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
+import RequiredInput from '@/pages/Admin/components/FormBuilder/RequiredInput';
+
 import QuestionnaireBuilder from './QuestionnaireBuilder';
 
 interface InputItem {
   id: number;
 }
 
-function Index() {
+function FormBuilder() {
   const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0 }]);
   const [inputIdx, setInputIdx] = useState(1);
 
@@ -23,13 +25,15 @@ function Index() {
     <form className={'w-full h-full flex flex-col gap-10 overflow-hidden'}>
       <ul
         className={
-          'w-full h-[calc(100%_-_50px)] p-5 flex flex-col items-center gap-5 border-3 rounded-xl overflow-y-scroll bg-neutral-100'
+          'w-full h-[calc(100%_-_50px)] p-5 flex flex-col items-center gap-5 border-3 rounded-xl overflow-y-scroll bg-primary-50'
         }
       >
-        {inputItems.map(item => (
+        <RequiredInput />
+        {inputItems.map((item, itemIdx) => (
           <QuestionnaireBuilder
             key={item.id}
             deleteHandler={() => handleDeleteItem(item.id)}
+            itemIdx={itemIdx}
           />
         ))}
         <button
@@ -49,4 +53,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default FormBuilder;
