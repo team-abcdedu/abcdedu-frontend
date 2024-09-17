@@ -1,7 +1,7 @@
 import Boards from '@/pages/Community/components/Boards';
 import Hero from '@/pages/Community/components/Hero';
 
-function Index() {
+export default function Community() {
   return (
     <>
       <Hero />
@@ -9,5 +9,3 @@ function Index() {
     </>
   );
 }
-
-export default Index;
