@@ -1,7 +1,7 @@
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
 
 interface ExamContentProps {
-  pdfUrl: string | null;
+  pdfUrl: string | undefined;
   pdfFileId: number | null;
 }
 
@@ -14,7 +14,7 @@ function ExamContent({ pdfUrl, pdfFileId }: ExamContentProps) {
     <div className={'w-full'}>
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
         <a
-          href={pdfUrl ?? ''}
+          href={pdfUrl}
           target={'_blank'}
           className={
             'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
@@ -33,7 +33,7 @@ function ExamContent({ pdfUrl, pdfFileId }: ExamContentProps) {
         </a>
       </div>
       <iframe
-        src={pdfUrl ?? ''}
+        src={pdfUrl}
         title={'exam-pdf'}
         className={'w-full h-[600px] md:h-[1000px] p-40 md:p-80'}
       ></iframe>
