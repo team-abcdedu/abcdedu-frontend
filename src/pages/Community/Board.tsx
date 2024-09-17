@@ -4,15 +4,15 @@ import useModal from '@/hooks/useModal';
 import { mockPosts } from '@/mock/Community';
 
 import List from './components/List';
-import WritePostModal from './components/WritePostModal';
-import { boardTitle, BoardType } from './constants/communityInfo';
+import PostFormModal from './components/PostFormModal';
+import { boardMetaData, Category } from './constants/communityInfo';
 
 export default function Board() {
   const { isVisible, toggleModal } = useModal();
 
   const { category } = useParams();
 
-  if (!category || !(category in boardTitle)) {
+  if (!category || !(category in boardMetaData)) {
     return <Navigate to='/community' replace />;
   }
 
@@ -21,7 +21,7 @@ export default function Board() {
       <div className='py-30'>
         <p className='text-gray-400'>ABCDEdu 커뮤니티</p>
         <h3 className='text-primary-400 text-30 font-bold'>
-          {boardTitle[category as BoardType]}
+          {boardMetaData[category as Category].label}
         </h3>
       </div>
 
@@ -34,11 +34,7 @@ export default function Board() {
         </button>
       </div>
       {isVisible && (
-        <WritePostModal
-          isVisible={isVisible}
-          onClose={toggleModal}
-          boardId={1}
-        />
+        <PostFormModal isVisible={isVisible} onClose={toggleModal} />
       )}
       <List posts={mockPosts} />
     </div>
