@@ -24,7 +24,9 @@ export default function CommunityInfo() {
                 </h3>
                 <div className='bg-gray-500 w-180 h-[1.5px] mt-6' />
                 <h5
-                  className={'mt-10 text-18 text-gray-500 font-semibold mb-20'}
+                  className={
+                    'mt-10 text-18 text-gray-500 font-semibold mb-20 break-keep'
+                  }
                 >
                   {communityInfo.description}
                 </h5>
