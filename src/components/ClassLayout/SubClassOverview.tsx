@@ -15,7 +15,7 @@ function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
   let description;
 
   if (isClassData(viewData)) {
-    title = viewData.title;
+    title = `Class ${viewData.title}`;
     subTitle = viewData.subTitle;
     description = viewData.description;
   } else {
@@ -31,7 +31,7 @@ function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
           'max-w-[400px] flex flex-col items-center gap-12 self-center text-center'
         }
       >
-        <h1 className={'text-18 text-neutral-400'}>ABCD Classes</h1>
+        <p className={'text-18 text-neutral-400'}>ABCD Classes</p>
         <h1
           className={
             'text-80 text-primary-300 font-bold whitespace-pre-wrap sm:whitespace-normal'
@@ -39,10 +39,10 @@ function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
         >
           {title}
         </h1>
-        <h4 className={'text-25 font-semibold whitespace-pre-wrap'}>
+        <h3 className={'text-25 font-semibold whitespace-pre-wrap'}>
           {subTitle}
-        </h4>
-        <h1 className={'text-18 text-neutral-400'}>{description}</h1>
+        </h3>
+        <h4 className={'text-18 text-neutral-400'}>{description}</h4>
       </div>
     </div>
   );
