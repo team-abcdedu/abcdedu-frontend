@@ -1,14 +1,10 @@
-import { ClassInfo } from '../types';
+import { ClassData } from '@/types/class';
 
 import SubClassNavigationCard from './SubClassNavigationCard';
 
-function SubClassNavigationCardGroup({ classInfo }: { classInfo: ClassInfo }) {
-  const { title, subClasses } = classInfo || {};
+function SubClassNavigationCardGroup({ classData }: { classData: ClassData }) {
+  const { title, subClasses } = classData || {};
   const lineStyle = 'w-full h-4 bg-primary-300';
-
-  if (!classInfo) {
-    return null;
-  }
 
   return (
     <>
@@ -24,7 +20,11 @@ function SubClassNavigationCardGroup({ classInfo }: { classInfo: ClassInfo }) {
         <div className={lineStyle}></div>
       </div>
       <div className={'p-30'}>
-        <SubClassNavigationCard subClasses={subClasses} bgColor={'neutral'} />
+        <SubClassNavigationCard
+          classTitle={title}
+          subClasses={subClasses}
+          bgColor={'neutral'}
+        />
       </div>
     </>
   );

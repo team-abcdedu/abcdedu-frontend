@@ -1,14 +1,19 @@
 import { ArrowRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-import { SubClassInfo } from '../types';
+import { SubClassData } from '@/types/class';
 
 interface SubClassNavCardProps {
-  subClasses: SubClassInfo[] | undefined;
+  classTitle: string;
+  subClasses: SubClassData[] | undefined;
   bgColor: 'neutral' | 'white';
 }
 
-function SubClassNavigationCard({ subClasses, bgColor }: SubClassNavCardProps) {
+function SubClassNavigationCard({
+  classTitle,
+  subClasses,
+  bgColor,
+}: SubClassNavCardProps) {
   const bgClass = bgColor === 'neutral' ? 'bg-neutral-100' : 'bg-white';
   const gridStyle =
     subClasses && subClasses.length > 4
@@ -19,19 +24,19 @@ function SubClassNavigationCard({ subClasses, bgColor }: SubClassNavCardProps) {
 
   return (
     <div className={`grid grid-cols-1 sm:grid-cols-2 ${gridStyle} gap-20`}>
-      {subClasses.map(subClassInfo => (
+      {subClasses.map(subClass => (
         <div
-          key={subClassInfo.code}
+          key={subClass.orderNumber}
           className={`min-w-50 min-h-60 p-15 flex-col-center sm:items-start grow basis-0 rounded-[20px] ${bgClass}`}
         >
           <h5 className={'text-20 font-semibold text-primary-300'}>
-            {subClassInfo.code}
+            {classTitle}-{subClass.orderNumber}
           </h5>
           <h5 className={'h-full text-20 font-semibold whitespace-pre-wrap'}>
-            {subClassInfo.title}
+            {subClass.title}
           </h5>
           <Link
-            to={subClassInfo.to}
+            to={`/classes/${classTitle}/${subClass.orderNumber}`}
             className={'pt-10 flex items-center self-end'}
           >
             <span className={'text-15 underline'}>바로가기</span>

@@ -10,6 +10,7 @@ function useGetSubClassFileList({ subLectureId }: UseSubClassProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['sub-class-file-list', subLectureId],
     queryFn: () => ClassApi.getSubClassFileList(subLectureId),
+    enabled: !!subLectureId,
   });
 
   return { data, isLoading, isError };
