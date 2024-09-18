@@ -6,18 +6,21 @@ import useModal from '@/hooks/useModal';
 import { mockPost } from '@/mock/Community';
 import useBoundStore from '@/stores';
 
+import Comments from './components/Comments';
 import LevelUpButton from './components/LevelUpButton';
-import PostActions from './components/PostActions';
+import MoreButton from './components/MoreButton';
 import PostFormModal from './components/PostFormModal';
 import { boardMetaData } from './constants/communityInfo';
+// import usePostMutation from './hooks/usePostMutation';
 
 const data = mockPost;
 
-export default function PostDetails() {
+export default function PostDetail() {
   const { isVisible: isEditModalVisible, toggleModal: toggleEditModal } =
     useModal();
   const { category } = useParams();
   const user = useBoundStore(state => state.user);
+  // const { deletePost } = usePostMutation({ category: category ?? '' });
 
   if (!category || !(category in boardMetaData))
     return <Navigate to='/community' replace />;
@@ -30,6 +33,14 @@ export default function PostDetails() {
   // 등업 게시판 & 관리자 권한일 경우에만 등업시키기 버튼 렌더링
   const isLevelUpButtonVisible =
     user && user.role === '관리자' && category === 'levelup';
+
+  const handleDelete = () => {
+    const ok = window.confirm('게시글을 삭제하시겠습니까?');
+    if (ok) {
+      // API
+    }
+    // if (ok) deletePost.mutate(data.postId);
+  };
 
   return (
     <div className='text-left mt-10'>
@@ -54,13 +65,14 @@ export default function PostDetails() {
               <DownloadSimple className='mt-1 block' size={17} />
             </p>
           </button>
-          <PostActions id={data.postId} onEdit={toggleEditModal} />
+          <MoreButton onEdit={toggleEditModal} onDelete={handleDelete} />
         </div>
       </div>
       <hr className='border-1 border-gray-300 w-full' />
       <p className='px-20 my-100'>{data.content}</p>
       <hr className='border-1 border-gray-300 w-full' />
       {isLevelUpButtonVisible && <LevelUpButton />}
+      <Comments />
       <PostFormModal
         post={data}
         isVisible={isEditModalVisible}
