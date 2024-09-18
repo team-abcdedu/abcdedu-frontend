@@ -5,7 +5,7 @@ import AdminLayout from '@/components/AdminLayout';
 import AdminRoute from '@/components/AdminRoute';
 
 const Admin = lazy(() => import('@/pages/Admin'));
-const Homework = lazy(() => import('../pages/Admin/Homework'));
+const Homework = lazy(() => import('@/pages/Admin/Homework'));
 const Class = lazy(() => import('@/pages/Admin/Class'));
 const ContactList = lazy(() => import('@/pages/Admin/Contact'));
 const Survey = lazy(() => import('@/pages/Admin/Survey'));
