@@ -40,8 +40,8 @@ export default function Contents() {
       <CommunityInfo />
 
       <p className='text-xl text-gray-500 font-medium pt-80 pb-30 px-20 break-keep'>
-        아직 씨앗 등급이신가요? <br />
-        새싹 등급 이상 회원만 수업 자료를 다운받을 수 있습니다. <br />
+        아직 새싹 등급이신가요? <br />
+        학생 등급 이상 회원만 수업 자료를 다운받을 수 있습니다. <br />
         게시물을 작성하고 새싹으로 등업하세요!
       </p>
       <Link to='/community/levelup'>
