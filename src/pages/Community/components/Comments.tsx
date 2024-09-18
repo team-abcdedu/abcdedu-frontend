@@ -1,9 +1,12 @@
 import { Comment, comments } from '@/mock/Comment';
+import useBoundStore from '@/stores';
 
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 
 export default function Comments() {
+  const user = useBoundStore(state => state.user);
+
   return (
     <div className='px-20 mb-20'>
       <p className='font-semibold text-zinc-600 mt-20 text-sm mb-16'>
@@ -17,7 +20,14 @@ export default function Comments() {
         ))}
       </div>
       <div className='mt-40'>
-        <CommentForm postId={1} mode='create' />
+        {user && user.role !== '새싹' ? (
+          <CommentForm postId={1} mode='create' />
+        ) : (
+          <p className='text-center'>
+            <span className='text-primary-400 font-bold'>학생</span> 등급 이상만
+            댓글을 작성할 수 있어요.
+          </p>
+        )}
       </div>
     </div>
   );
