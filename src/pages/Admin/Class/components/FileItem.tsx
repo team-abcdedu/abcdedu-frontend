@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 
 import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
+import useModal from '@/hooks/useModal';
+import FileItemModal from '@/pages/Admin/Class/components/FileItemModal';
 
 function FileItem({
   assignmentType,
@@ -20,13 +22,18 @@ function FileItem({
     return 'bg-yellow-100';
   };
 
+  const { isVisible, toggleModal } = useModal();
+
   const { data: fileData } = useGetSubClassGeneralFile({
     assignmentFileId,
   });
-
   const { data: answerData } = useGetSubClassStudentFile({
     assignmentAnswerFileId: 0,
   });
+
+  const clickHandler = () => {
+    toggleModal();
+  };
 
   useEffect(() => {
     if (fileData && fileData.assignmentAnswerFileId) console.log(answerData);
@@ -35,15 +42,21 @@ function FileItem({
   if (!fileData) return null;
 
   return (
-    <div className={`border-1 rounded-xl ${fileTypeStyle()}`}>
-      <a
-        href={fileData.filePresignedUrl}
+    <div className={`flex-col-center border-1 rounded-xl ${fileTypeStyle()}`}>
+      <button
+        // href={fileData.filePresignedUrl}
+        onClick={clickHandler}
         className={`gap-3 text-13 font-medium text-center text-primary-200 cursor-pointer`}
       >
         <div>
           {assignmentType} [ {assignmentFileId} ]
         </div>
-      </a>
+      </button>
+      <FileItemModal
+        fileUrl={fileData.filePresignedUrl}
+        isVisible={isVisible}
+        onClose={toggleModal}
+      />
     </div>
   );
 }
