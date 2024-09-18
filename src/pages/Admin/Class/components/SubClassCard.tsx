@@ -5,10 +5,11 @@ import { SubClassData } from '@/types/class';
 import FileList from './FileList';
 
 interface SubClassCardProps {
+  classTitle: string;
   subClass: SubClassData;
 }
 
-function SubClassCard({ subClass }: SubClassCardProps) {
+function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
   const [openFileList, setOpenFileList] = useState<boolean>(false);
 
   return (
@@ -17,19 +18,25 @@ function SubClassCard({ subClass }: SubClassCardProps) {
       key={subClass.subClassId}
     >
       <div className={'grid grid-cols-5 items-center'}>
-        <h2 className={'text-14 text-neutral-500'}>ID</h2>
+        <span className={'text-14 text-neutral-500'}>ID</span>
         <p className={'col-span-4'}>{subClass.subClassId}</p>
       </div>
       <div className={'grid grid-cols-5 items-center'}>
-        <h2 className={'text-14 text-neutral-500'}>타이틀</h2>
+        <span className={'text-14 text-neutral-500'}>이름</span>
+        <p className={'col-span-4'}>
+          {classTitle}-{subClass.orderNumber}
+        </p>
+      </div>
+      <div className={'grid grid-cols-5 items-center'}>
+        <span className={'text-14 text-neutral-500'}>주제</span>
         <p className={'col-span-4'}>{subClass.title}</p>
       </div>
       <div className={'grid grid-cols-5 items-center'}>
-        <h2 className={'text-14 text-neutral-500'}>설명</h2>
+        <span className={'text-14 text-neutral-500'}>설명</span>
         <p className={'col-span-4'}>{subClass.description}</p>
       </div>
       <div className={'grid grid-cols-5 items-center'}>
-        <h2 className={'text-14 text-neutral-500'}>파일</h2>
+        <span className={'text-14 text-neutral-500'}>파일</span>
         <button
           type={'button'}
           className={
