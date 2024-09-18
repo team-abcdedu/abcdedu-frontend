@@ -135,29 +135,30 @@ function FileItemModal({
             </button>
           </div>
         )}
-        {/* {assignmentType === '시험' && data && ( */}
-        <div className={'w-2/3 grid grid-cols-2 text-center'}>
-          <span className={'text-neutral-500'}>제출용 파일</span>
-          <div className={'flex gap-10'}>
-            <a
-              href={data?.filePresignedUrl}
-              target={'_blank'}
-              download
-              className={'text-18 text-primary-300'}
-              rel='noreferrer'
-            >
-              다운로드
-            </a>
-            <button
-              type={'button'}
-              className={'text-16 text-green-600'}
-              onClick={() => setStudentGeneralFile(prev => !prev)}
-            >
-              수정
-            </button>
+        {assignmentType === '시험' && data && (
+          <div className={'w-2/3 grid grid-cols-2 text-center'}>
+            <span className={'text-neutral-500'}>제출용 파일</span>
+            <div className={'flex gap-10'}>
+              <a
+                href={data?.filePresignedUrl}
+                target={'_blank'}
+                download
+                className={'text-18 text-primary-300'}
+                rel='noreferrer'
+              >
+                다운로드
+              </a>
+              <button
+                type={'button'}
+                className={'text-16 text-green-600'}
+                onClick={() => setStudentGeneralFile(prev => !prev)}
+              >
+                수정
+              </button>
+            </div>
           </div>
-        </div>
-        {openStudentFileInput && (
+        )}
+        {assignmentType === '시험' && data && openStudentFileInput && (
           <div className={'w-full px-10 flex flex-col-center gap-10'}>
             <div className={'flex gap-10 justify-center'}>
               <input
@@ -189,7 +190,6 @@ function FileItemModal({
             </button>
           </div>
         )}
-        {/* )} */}
       </div>
     </Modal>
   );
