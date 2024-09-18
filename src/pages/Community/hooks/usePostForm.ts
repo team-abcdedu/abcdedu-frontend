@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
-import { Post } from '@/types/Community';
+import { Post } from '@/types/community';
 
 import { boardMetaData, Category } from '../constants/communityInfo';
 

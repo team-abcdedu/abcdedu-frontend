@@ -1,7 +1,7 @@
 import { X } from '@phosphor-icons/react';
 
 import Modal from '@/components/Modal';
-import { Post } from '@/types/Community';
+import { Post } from '@/types/community';
 
 import usePostForm from '../hooks/usePostForm';
 

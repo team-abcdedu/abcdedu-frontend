@@ -1,4 +1,4 @@
-import { Post, PostSummary } from '@/types/Community';
+import { Post, PostSummary } from '@/types/community';
 
 // 목업 데이터
 export const mockPosts: PostSummary[] = [

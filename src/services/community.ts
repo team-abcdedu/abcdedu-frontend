@@ -1,6 +1,6 @@
 import { del, get, patch, post } from '@/libs/api';
 import { PaginatedResponse } from '@/types';
-import { Post, PostSummary } from '@/types/Community';
+import { Post, PostSummary } from '@/types/community';
 
 class CommunityApi {
   static async createPost(form: FormData) {

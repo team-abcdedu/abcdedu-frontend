@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
-import { PostSummary } from '@/types/Community';
+import { PostSummary } from '@/types/community';
 
 export interface PostTableProps {
   posts: PostSummary[];
