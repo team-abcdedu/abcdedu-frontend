@@ -4,9 +4,9 @@ import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import Modal from '@/components/Modal';
-import useFileUpload, {
+import useGeneralFileUpload, {
   IFileUploadForm,
-} from '@/pages/Admin/Class/hooks/useFileUpload';
+} from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
 
 interface FileUploadModalProps {
   isVisible: boolean;
@@ -18,7 +18,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
   const [file, setFile] = useState<File | null>(null);
 
   const { register, fieldRules, reset, errors, handleSubmit, fileMutation } =
-    useFileUpload();
+    useGeneralFileUpload();
 
   const closeModal = () => {
     setFile(null);
