@@ -3,43 +3,47 @@ import { useState } from 'react';
 
 import Backdrop from '@/components/Backdrop';
 
-interface PostActionsProps {
-  id: number;
+interface MoreButtonProps {
+  iconSize?: 'sm' | 'md';
   onEdit: () => void;
+  onDelete: () => void;
 }
 
-export default function PostActions({ id, onEdit }: PostActionsProps) {
+export default function MoreButton({
+  iconSize = 'md',
+  onEdit,
+  onDelete,
+}: MoreButtonProps) {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = () => {
     setMenuVisible(prev => !prev);
   };
 
-  const handleEditClick = () => {
+  const handleEdit = () => {
     toggleMenu();
     onEdit();
   };
 
   const handleDelete = () => {
     toggleMenu();
-    const ok = window.confirm('게시글을 삭제하시겠습니까?');
-    if (ok) {
-      console.log(id);
-      // TODO: 삭제
-    }
+    onDelete();
   };
 
   return (
     <div className='relative'>
-      <button className='block' onClick={toggleMenu}>
-        <DotsThreeVertical size={20} />
+      <button
+        className={`block ${iconSize === 'sm' && 'px-2'}`}
+        onClick={toggleMenu}
+      >
+        <DotsThreeVertical size={iconSize === 'sm' ? 16 : 20} />
       </button>
       {menuVisible && (
         <>
           <Backdrop isDark={false} onClick={toggleMenu} />
           <div className='absolute right-8 mt-2 w-80 bg-white shadow-lg z-[101] rounded-lg border'>
             <button
-              onClick={handleEditClick}
+              onClick={handleEdit}
               className='block w-full py-6 text-sm text-gray-700 hover:bg-gray-100'
             >
               수정
