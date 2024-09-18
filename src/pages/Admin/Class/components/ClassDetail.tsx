@@ -1,5 +1,5 @@
 import useModal from '@/hooks/useModal';
-import FileUploadModal from '@/pages/Admin/Class/components/FileUploadModal';
+import GeneralFileUploadModal from '@/pages/Admin/Class/components/GeneralFileUploadModal';
 import StudentFileUploadModal from '@/pages/Admin/Class/components/StudentFileUploadModal';
 import SubClassCard from '@/pages/Admin/Class/components/SubClassCard';
 import { ClassData } from '@/types/class';
@@ -85,7 +85,7 @@ function ClassDetail({ classData }: ClassDetailProps) {
           ))}
         </ul>
       </div>
-      <FileUploadModal
+      <GeneralFileUploadModal
         isVisible={isGeneralUploadVisible}
         onClose={isGeneralUploadToggle}
       />

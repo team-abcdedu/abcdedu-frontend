@@ -13,7 +13,7 @@ interface FileUploadModalProps {
   onClose: () => void;
 }
 
-function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
+function GeneralFileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
   const inputWrapperStyle = 'w-full flex flex-col gap-5 p-5';
   const [file, setFile] = useState<File | null>(null);
 
@@ -140,4 +140,4 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
   );
 }
 
-export default FileUploadModal;
+export default GeneralFileUploadModal;
