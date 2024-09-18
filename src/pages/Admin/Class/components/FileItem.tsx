@@ -25,16 +25,12 @@ function FileItem({
     assignmentFileId,
   });
 
-  const clickHandler = () => {
-    toggleModal();
-  };
-
   if (!fileData) return null;
 
   return (
     <div className={`flex-col-center border-1 rounded-xl ${fileTypeStyle()}`}>
       <button
-        onClick={clickHandler}
+        onClick={toggleModal}
         className={`gap-3 text-13 font-medium text-center text-primary-200 cursor-pointer`}
       >
         <div>
