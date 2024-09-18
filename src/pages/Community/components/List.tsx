@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
 import { PostSummary } from '@/types/community';
 
-export interface PostTableProps {
+interface ListProps {
   posts: PostSummary[];
 }
 
-export default function List({ posts }: PostTableProps) {
+export default function List({ posts }: ListProps) {
   return (
     <div className='overflow-x-auto'>
       <table className='w-full text-sm sm:text-base'>
