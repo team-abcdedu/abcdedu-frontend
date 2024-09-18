@@ -116,6 +116,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
                 type={'file'}
                 onChange={fileChangeHandler}
                 className={'hidden'}
+                accept={'.zip,.rar,.7z,.tar,.gz,.pdf,.hwp,.doc,.docx'}
               />
               {errors.file && (
                 <span className={'text-13 text-red-700'}>
