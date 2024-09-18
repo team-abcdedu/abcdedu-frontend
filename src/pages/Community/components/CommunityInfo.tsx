@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { communityInfoMap } from '@/pages/Community/constants/communityInfo';
 
-function CommunityContents() {
+export default function CommunityInfo() {
   return (
     <div className='flex flex-col lg:flex-row px-50 gap-20'>
       {Object.keys(communityInfoMap).map(key => {
@@ -22,8 +22,12 @@ function CommunityContents() {
                 <h3 className={'text-20 text-primary-300 font-semibold'}>
                   {communityInfo.label}
                 </h3>
-                <div className='text-gray-500'>_______________________</div>
-                <h5 className={'mt-10 text-18 text-gray-500 font-bold mb-20'}>
+                <div className='bg-gray-500 w-180 h-[1.5px] mt-6' />
+                <h5
+                  className={
+                    'mt-10 text-18 text-gray-500 font-semibold mb-20 break-keep'
+                  }
+                >
                   {communityInfo.description}
                 </h5>
               </div>
@@ -44,5 +48,3 @@ function CommunityContents() {
     </div>
   );
 }
-
-export default CommunityContents;

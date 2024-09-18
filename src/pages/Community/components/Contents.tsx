@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import CommunityContents from '@/pages/Community/components/CommunityContents';
+import CommunityInfo from './CommunityInfo';
 
-function Boards() {
+export default function Contents() {
   return (
     <section
       className={
@@ -11,7 +11,7 @@ function Boards() {
     >
       <h3
         className={
-          'font-bold pb-50 grid place-items-center text-40 md:text-50 px-30'
+          'font-bold pb-50 grid place-items-center text-40 md:text-50 px-30 break-keep'
         }
       >
         ABCDEdu의 커뮤니티에 오신 것을 환영합니다!
@@ -23,7 +23,7 @@ function Boards() {
         </h5>
         <div className='h-5 bg-primary-300 flex-grow'></div>
       </div>
-      <p className='text-xl font-medium pb-50 px-20'>
+      <p className='text-xl font-medium pb-50 px-20 break-keep'>
         함께 모여 지식을 공유하고 경험을 나눌 수 있는 ABCDEdu의 커뮤니티에 오신
         것을 환영합니다!
         <br />
@@ -37,14 +37,14 @@ function Boards() {
         수 있습니다.
       </p>
 
-      <CommunityContents />
+      <CommunityInfo />
 
-      <p className='text-xl text-gray-500 font-medium pt-80 pb-30 px-20'>
+      <p className='text-xl text-gray-500 font-medium pt-80 pb-30 px-20 break-keep'>
         아직 씨앗 등급이신가요? <br />
         새싹 등급 이상 회원만 수업 자료를 다운받을 수 있습니다. <br />
         게시물을 작성하고 새싹으로 등업하세요!
       </p>
-      <Link to='/community_levelup'>
+      <Link to='/community/levelup'>
         <button className='py-8 px-30 rounded-2xl bg-primary-300 text-white hover:opacity-80`'>
           등업 게시판 바로가기
         </button>
@@ -52,5 +52,3 @@ function Boards() {
     </section>
   );
 }
-
-export default Boards;
