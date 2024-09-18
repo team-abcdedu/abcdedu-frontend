@@ -42,17 +42,11 @@ function AdminLayout() {
           <Link to={'/admin/class'} className={LinkStyle}>
             클래스 관리
           </Link>
-          <Link to={'/admin/exam'} className={LinkStyle}>
-            시험 관리
-          </Link>
-          <Link to={'/admin/assignment'} className={LinkStyle}>
+          <Link to={'/admin/homework'} className={LinkStyle}>
             과제 관리
           </Link>
           <Link to={'/admin/survey'} className={LinkStyle}>
             설문 관리
-          </Link>
-          <Link to={'/admin/theory'} className={LinkStyle}>
-            이론 관리
           </Link>
           <Link to={'/admin/contact'} className={LinkStyle}>
             문의 관리

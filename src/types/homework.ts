@@ -18,25 +18,16 @@ export interface QuestionInfo {
   options?: QuestionOption[];
 }
 
-export interface HomeworkBrief {
+export interface HomeworkSummary {
   id: number;
   title: string;
   subTitle: string;
-  description: string;
 }
 
-export interface HomeworkInfo extends HomeworkBrief {
+export interface HomeworkInfo extends HomeworkSummary {
+  description: string;
   questions: QuestionInfo[];
   additionalDescription: string;
-}
-
-export interface HomeworksInfo {
-  content: HomeworkBrief[];
-  currentPage: number;
-  pageSize: number;
-  totalElements: number;
-  totalPages: number;
-  last: boolean;
 }
 
 export interface MyHomeworkAnswerInfo {
@@ -44,4 +35,17 @@ export interface MyHomeworkAnswerInfo {
   content?: string;
   optionIndex?: number;
   optionIndexes?: number[];
+}
+
+export type CreateHomeworkData = Omit<HomeworkInfo, 'id'>;
+
+export type CreateQuestionOption = QuestionOption & { isAnswer: boolean };
+
+export interface CreateQuestion {
+  index: number;
+  type: QuestionType;
+  title: string;
+  description: string;
+  score: number;
+  options?: CreateQuestionOption[];
 }
