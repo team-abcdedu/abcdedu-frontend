@@ -42,7 +42,13 @@ class AdminClassApi {
     );
   }
 
-  static async updateGeneralFile(assignmentFileId: number, file: File) {
+  static async updateGeneralFile({
+    assignmentFileId,
+    file,
+  }: {
+    assignmentFileId: number;
+    file: File;
+  }) {
     const formData = new FormData();
     formData.append('file', file);
     return patch(`/lectures/file/${assignmentFileId}`, formData, {
@@ -72,18 +78,20 @@ class AdminClassApi {
     );
   }
 
-  static async updateStudentFile(assignmentAnswerFileId: number, file: File) {
+  static async updateStudentFile({
+    assignmentAnswerFileId,
+    file,
+  }: {
+    assignmentAnswerFileId: number;
+    file: File;
+  }) {
     const formData = new FormData();
     formData.append('file', file);
-    return patch(
-      `/lectures/assignment-file/${assignmentAnswerFileId}`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+    return patch(`/lectures/answer-file/${assignmentAnswerFileId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
-    );
+    });
   }
 }
 
