@@ -41,7 +41,7 @@ function GeneralFileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
       onSuccess: () => {
         alert('파일이 등록되었습니다.');
         queryClient.invalidateQueries({
-          queryKey: ['sub-class-file-list', fileData.subLectureId as number],
+          queryKey: ['sub-class-file-list', fileData.subLectureId],
         });
         closeModal();
       },
