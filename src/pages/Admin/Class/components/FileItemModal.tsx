@@ -3,7 +3,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import Modal from '@/components/Modal';
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
-import AdminClassApi from '@/services/admin/class';
+import useGeneralFileUpdate from '@/pages/Admin/Class/hooks/useGeneralFileUpdate';
+import useStudentFileUpdate from '@/pages/Admin/Class/hooks/useStudentFileUpdate';
 
 interface FileItemModalProps {
   assignmentType: string;
@@ -43,26 +44,30 @@ function FileItemModal({
     setStudentFile(file);
   };
 
+  const { mutation: generalFileMutation } = useGeneralFileUpdate({
+    assignmentFileId,
+    setGeneralFile,
+  });
+
+  const { mutation: studentFileMutation } = useStudentFileUpdate({
+    assignmentAnswerFileId: assignmentFileId,
+    setStudentFile,
+  });
+
   const updateGeneralFile = () => {
     if (!generalFile) return;
-    try {
-      AdminClassApi.updateGeneralFile(assignmentFileId, generalFile);
-      alert('파일 수정이 완료되었습니다.');
-      setGeneralFile(null);
-    } catch (error) {
-      alert('파일 수정에 실패했습니다.');
-    }
+    generalFileMutation.mutate({
+      assignmentFileId,
+      file: generalFile,
+    });
   };
 
   const updateStudentFile = () => {
     if (!studentFile) return;
-    try {
-      AdminClassApi.updateStudentFile(assignmentFileId, studentFile);
-      alert('파일 수정이 완료되었습니다.');
-      setStudentFile(null);
-    } catch (error) {
-      alert('파일 수정에 실패했습니다.');
-    }
+    studentFileMutation.mutate({
+      assignmentAnswerFileId: assignmentFileId,
+      file: studentFile,
+    });
   };
 
   useEffect(() => {
