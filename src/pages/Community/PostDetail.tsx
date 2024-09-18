@@ -1,6 +1,7 @@
 import { DownloadSimple } from '@phosphor-icons/react';
 import { Navigate, useParams } from 'react-router-dom';
 
+import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 import { mockPost } from '@/mock/Community';
 import useBoundStore from '@/stores';
@@ -32,6 +33,7 @@ export default function PostDetails() {
 
   return (
     <div className='text-left mt-10'>
+      <Head title={`${data.title} | ABCDEdu 커뮤니티`} />
       <hr className='border-1 border-black w-full' />
       <div className='flex flex-col sm:flex-row justify-between px-20 py-4 sm:py-10 bg-gray-100 relative'>
         <h2 className='text-20 font-bold'>{data.title}</h2>

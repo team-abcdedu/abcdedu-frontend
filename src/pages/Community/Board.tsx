@@ -1,5 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 
+import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 import { mockPosts } from '@/mock/Community';
 
@@ -16,13 +17,14 @@ export default function Board() {
     return <Navigate to='/community' replace />;
   }
 
+  const { label } = boardMetaData[category as Category];
+
   return (
     <div className='flex flex-col text-center mt-20'>
+      <Head title={`${label} | ABCDEdu`} />
       <div className='py-30'>
         <p className='text-gray-400'>ABCDEdu 커뮤니티</p>
-        <h3 className='text-primary-400 text-30 font-bold'>
-          {boardMetaData[category as Category].label}
-        </h3>
+        <h3 className='text-primary-400 text-30 font-bold'>{label}</h3>
       </div>
 
       <div className='flex flex-row w-full justify-end px-20 py-10'>
