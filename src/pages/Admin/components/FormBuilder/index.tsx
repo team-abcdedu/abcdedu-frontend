@@ -10,10 +10,10 @@ interface InputItem {
 
 interface FormBuilderProps {
   formName: string;
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
 }
 
-function FormBuilder({ formName, onSubmit }: FormBuilderProps) {
+function FormBuilder({ formName }: FormBuilderProps) {
   const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0 }]);
   const [inputIdx, setInputIdx] = useState(1);
 
@@ -29,7 +29,9 @@ function FormBuilder({ formName, onSubmit }: FormBuilderProps) {
   return (
     <form
       id={formName}
-      onSubmit={onSubmit}
+      onSubmit={e => {
+        e.preventDefault();
+      }}
       className={'w-full h-full flex flex-col gap-10 overflow-hidden'}
     >
       <ul
