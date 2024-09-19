@@ -21,6 +21,8 @@ const Survey = lazy(() => import('@/pages/Survey'));
 
 const Contact = lazy(() => import('@/pages/Contact'));
 
+const NotFound = lazy(() => import('@/pages/NotFound'));
+
 export const publicRoutes: RouteObject[] = [
   {
     path: '/',
@@ -81,5 +83,9 @@ export const publicRoutes: RouteObject[] = [
         element: <Survey />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ];
