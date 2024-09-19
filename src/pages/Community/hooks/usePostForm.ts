@@ -84,7 +84,6 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     createPost.mutate(formData, {
       onSuccess: () => {
         onSuccess();
-        reset();
       },
     });
   };
