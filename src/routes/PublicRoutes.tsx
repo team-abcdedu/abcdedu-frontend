@@ -18,6 +18,7 @@ const PostDetail = lazy(() => import('@/pages/Community/PostDetail'));
 
 const Homework = lazy(() => import('@/pages/Homework'));
 const Survey = lazy(() => import('@/pages/Survey'));
+const SurveyDetail = lazy(() => import('@/pages/Survey/[surveyId]'));
 
 const Contact = lazy(() => import('@/pages/Contact'));
 
@@ -79,6 +80,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: '/survey',
         element: <Survey />,
+      },
+      {
+        path: '/survey/:surveyId',
+        element: <SurveyDetail />,
       },
     ],
   },

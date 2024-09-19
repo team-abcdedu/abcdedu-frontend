@@ -1,4 +1,4 @@
-import { SurveyInfo } from '@/types/survey';
+import { SurveyInfo, SurveySummary } from '@/types/survey';
 
 export const mockSurvey: SurveyInfo = {
   title: '수업 만족도 조사',
@@ -53,3 +53,30 @@ export const mockSurvey: SurveyInfo = {
     },
   ],
 };
+
+export const mockSurveyList: SurveySummary[] = [
+  {
+    id: 1,
+    title: '수업 만족도 조사',
+    createAt: '2021-08-01',
+    writerName: 'ABCDEdu',
+  },
+  {
+    id: 2,
+    title: '수업 만족도 조사',
+    createAt: '2021-08-01',
+    writerName: 'ABCDEdu',
+  },
+  {
+    id: 3,
+    title: '수업 만족도 조사',
+    createAt: '2021-08-01',
+    writerName: 'ABCDEdu',
+  },
+  {
+    id: 4,
+    title: '수업 만족도 조사',
+    createAt: '2021-08-01',
+    writerName: 'ABCDEdu',
+  },
+];
