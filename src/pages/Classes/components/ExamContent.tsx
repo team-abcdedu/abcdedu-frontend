@@ -22,7 +22,7 @@ function ExamContent({ pdfUrl, pdfFileId }: ExamContentProps) {
             'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
           }
         >
-          가이드 pdf 다운로드
+          메뉴얼 pdf 다운로드
         </a>
         <a
           href={hwp?.filePresignedUrl}
