@@ -1,4 +1,4 @@
-import { HomeworkInfo } from '@/types/homework';
+import { HomeworkInfo, HomeworkSummary } from '@/types/homework';
 
 export const mockHomework: HomeworkInfo = {
   title: '사회 문제 해결을 위한 인공지능 설계',
@@ -24,3 +24,26 @@ export const mockHomework: HomeworkInfo = {
     },
   ],
 };
+
+export const mockHomeworkList: HomeworkSummary[] = [
+  {
+    id: 1,
+    title: '수업 만족도 조사',
+    subTitle: '수업 만족도 조사',
+  },
+  {
+    id: 2,
+    title: '수업 만족도 조사',
+    subTitle: '수업 만족도 조사',
+  },
+  {
+    id: 3,
+    title: '수업 만족도 조사',
+    subTitle: '수업 만족도 조사',
+  },
+  {
+    id: 4,
+    title: '수업 만족도 조사',
+    subTitle: '수업 만족도 조사',
+  },
+];
