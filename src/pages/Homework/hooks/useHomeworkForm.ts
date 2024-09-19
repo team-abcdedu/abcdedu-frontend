@@ -1,23 +1,22 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import HomeworkApi from '@/services/homework';
-import { MyHomeworkAnswerInfo, QuestionInfo } from '@/types/homework';
+import { HomeworkAnswer } from '@/types/homework';
 
-interface IHomeworkForm {
-  [key: string]: string | string[];
+export interface IHomeworkForm {
+  [key: string]: string;
 }
 
 interface UseHomeworkFormProps {
   homeworkId: number;
-  questions: QuestionInfo[];
-  setModalState: (value: 'success' | 'error') => void;
+  setModalState: Dispatch<SetStateAction<'success' | 'error'>>;
   toggleModal: () => void;
 }
 
 function useHomeworkForm({
   homeworkId,
-  questions,
   setModalState,
   toggleModal,
 }: UseHomeworkFormProps) {
@@ -28,21 +27,15 @@ function useHomeworkForm({
     reset,
   } = useForm<IHomeworkForm>({ mode: 'onSubmit' });
 
-  const queryClient = useQueryClient();
-
   const mutation = useMutation({
-    mutationFn: (data: MyHomeworkAnswerInfo[]) =>
-      HomeworkApi.postMyHomework(homeworkId, data),
+    mutationFn: (data: HomeworkAnswer[]) =>
+      HomeworkApi.postHomework({ homeworkId, answers: data }),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['my-homework', homeworkId.toString()],
-      });
       reset();
       setModalState('success');
       toggleModal();
     },
-    onError: error => {
-      console.error(error);
+    onError: () => {
       setModalState('error');
       toggleModal();
     },
@@ -54,25 +47,8 @@ function useHomeworkForm({
   ) => {
     e?.preventDefault();
 
-    const refinedData = Object.entries(data).map(([key, value]) => {
-      const questionId = Number(key);
-
-      if (questions[questionId - 1].type === 'MULTIPLE_OPTION') {
-        return {
-          questionId,
-          optionIndexes: Array.from(value).map((v: string) => Number(v)),
-        };
-      }
-      if (questions[questionId - 1].type === 'SINGLE_OPTION') {
-        return {
-          questionId,
-          optionIndex: Number(value),
-        };
-      }
-      return {
-        questionId,
-        content: value as string,
-      };
+    const refinedData = Object.values(data).map(v => {
+      return { answer: v };
     });
 
     mutation.mutate(refinedData);
