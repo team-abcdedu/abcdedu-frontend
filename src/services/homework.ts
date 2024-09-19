@@ -1,35 +1,30 @@
 import { get, post } from '@/libs/api';
 import { PaginatedResponse } from '@/types';
 import {
+  HomeworkAnswer,
   HomeworkInfo,
   HomeworkSummary,
-  MyHomeworkAnswerInfo,
 } from '@/types/homework';
 
 class HomeworkApi {
-  static async getHomeworkList(page: number, size: number = 10) {
+  static async getHomeworkList({ page, size }: { page: number; size: number }) {
     return get<PaginatedResponse<HomeworkSummary>>(
       `/homeworks?page=${page}&size=${size}`,
     );
   }
 
-  static async getHomework(homeworkId: number) {
+  static async getHomework({ homeworkId }: { homeworkId: number }) {
     return get<HomeworkInfo>(`/homeworks/${homeworkId}`);
   }
 
-  static async getMyHomework(homeworkId: number) {
-    return get<MyHomeworkAnswerInfo[]>(`/homeworks/${homeworkId}/replies/me`);
-  }
-
-  static async postMyHomework(
-    homeworkId: number,
-    answers: MyHomeworkAnswerInfo[],
-  ) {
-    const data = { userReplies: answers };
-    return post<MyHomeworkAnswerInfo[]>(
-      `/homeworks/${homeworkId}/replies`,
-      data,
-    );
+  static async postHomework({
+    homeworkId,
+    answers,
+  }: {
+    homeworkId: number;
+    answers: HomeworkAnswer[];
+  }) {
+    return post<HomeworkAnswer[]>(`/homeworks/${homeworkId}/replies`, answers);
   }
 }
 

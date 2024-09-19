@@ -10,10 +10,10 @@ export interface HomeworkQuestion {
   isAnswerRequired: boolean;
 }
 
-export interface HomeworkInfo extends HomeworkSummary {
+export type HomeworkInfo = Omit<HomeworkSummary, 'id'> & {
   description: string;
   questionGetResponses: HomeworkQuestion[];
-}
+};
 
 export interface HomeworkAnswer {
   answer: string;
