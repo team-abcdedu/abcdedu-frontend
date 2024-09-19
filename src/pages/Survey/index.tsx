@@ -6,7 +6,7 @@ function Survey() {
     <div className={'flex flex-col text-center mt-20'}>
       <Head title={'설문 | ABCDEdu'} />
       <div className='py-30'>
-        <p className='text-gray-400'>ABCDEdu 커뮤니티</p>
+        <p className='text-gray-400'>ABCDEdu</p>
         <h3 className='text-primary-400 text-30 font-bold'>설문</h3>
       </div>
       <SurveyListTable />
