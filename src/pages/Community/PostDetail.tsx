@@ -43,6 +43,7 @@ export default function PostDetail() {
       {post && (
         <>
           <PostSection
+            id={Number(postId)}
             post={post}
             category={category ?? ''}
             toggleEditModal={toggleEditModal}

@@ -8,12 +8,14 @@ import usePostMutation from '../hooks/usePostMutation';
 import MoreButton from './MoreButton';
 
 interface PostSectionProps {
+  id: number;
   post: Post;
   category: string;
   toggleEditModal: () => void;
 }
 
 export default function PostSection({
+  id,
   post,
   category,
   toggleEditModal,
@@ -23,7 +25,7 @@ export default function PostSection({
   const handleDelete = () => {
     const ok = window.confirm('게시글을 삭제하시겠습니까?');
     if (ok && post) {
-      deletePost.mutate(post.postId);
+      deletePost.mutate(id);
     }
   };
 
