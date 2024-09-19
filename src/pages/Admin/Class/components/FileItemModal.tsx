@@ -1,8 +1,8 @@
 import { X } from '@phosphor-icons/react';
-import { ChangeEvent, useEffect, useState } from 'react';
 
 import Modal from '@/components/Modal';
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
+import FileActionButtons from '@/pages/Admin/Class/components/FileActionButtons';
 import useGeneralFileUpdate from '@/pages/Admin/Class/hooks/useGeneralFileUpdate';
 import useStudentFileUpdate from '@/pages/Admin/Class/hooks/useStudentFileUpdate';
 
@@ -21,61 +21,37 @@ function FileItemModal({
   isVisible,
   onClose,
 }: FileItemModalProps) {
-  const { data } = useGetSubClassStudentFile({
+  const { data: studentFile } = useGetSubClassStudentFile({
     assignmentAnswerFileId: assignmentFileId,
     enabled: assignmentType === '시험',
   });
 
-  const [openGeneralFileInput, setOpenGeneralFile] = useState(false);
-  const [openStudentFileInput, setStudentGeneralFile] = useState(false);
-
-  const [generalFile, setGeneralFile] = useState<File | null>(null);
-  const [studentFile, setStudentFile] = useState<File | null>(null);
-
-  const handleGeneralFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setGeneralFile(file);
-  };
-
-  const handleStudentFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setStudentFile(file);
-  };
-
   const { mutation: generalFileMutation } = useGeneralFileUpdate({
     assignmentFileId,
-    setGeneralFile,
   });
 
   const { mutation: studentFileMutation } = useStudentFileUpdate({
     assignmentAnswerFileId: assignmentFileId,
-    setStudentFile,
   });
 
-  const updateGeneralFile = () => {
-    if (!generalFile) return;
-    generalFileMutation.mutate({
-      assignmentFileId,
-      file: generalFile,
-    });
-  };
+  const updateFile = (type: 'general' | 'student') => {
+    return (file: File | null) => {
+      if (!file) return;
 
-  const updateStudentFile = () => {
-    if (!studentFile) return;
-    studentFileMutation.mutate({
-      assignmentAnswerFileId: assignmentFileId,
-      file: studentFile,
-    });
+      if (type === 'general') {
+        generalFileMutation.mutate({
+          assignmentFileId,
+          file,
+        });
+      }
+      if (type === 'student') {
+        studentFileMutation.mutate({
+          assignmentAnswerFileId: assignmentFileId,
+          file,
+        });
+      }
+    };
   };
-
-  useEffect(() => {
-    setGeneralFile(null);
-    setStudentFile(null);
-    setOpenGeneralFile(false);
-    setStudentGeneralFile(false);
-  }, [isVisible]);
 
   return (
     <Modal size={'sm'} isVisible={isVisible} onClose={onClose}>
@@ -87,113 +63,18 @@ function FileItemModal({
         <div className={'text-18'}>
           {assignmentType} [ {assignmentFileId} ]
         </div>
-        <div className={'w-2/3 grid grid-cols-2 text-center'}>
-          <span className={'text-neutral-500'}>{assignmentType} 파일</span>
-          <div className={'flex gap-10'}>
-            <a
-              href={assignmentFileUrl}
-              target={'_blank'}
-              download
-              className={'text-18 text-primary-300'}
-              rel='noreferrer'
-            >
-              다운로드
-            </a>
-            <button
-              type={'button'}
-              className={'text-16 text-green-600'}
-              onClick={() => setOpenGeneralFile(prev => !prev)}
-            >
-              수정
-            </button>
-          </div>
-        </div>
-        {openGeneralFileInput && (
-          <div className={'w-full px-10 flex flex-col-center gap-10'}>
-            <div className={'flex gap-10 justify-center'}>
-              <input
-                value={generalFile?.name}
-                className={'border-2 px-5'}
-                readOnly
-              />
-              <label
-                htmlFor={'update-general-file'}
-                className={'text-neutral-500 border-2 px-5 cursor-pointer'}
-              >
-                파일 선택
-              </label>
-              <input
-                id={'update-general-file'}
-                type={'file'}
-                onChange={handleGeneralFileChange}
-                className={'hidden'}
-              />
-            </div>
-            <button
-              type={'button'}
-              className={
-                'w-fit p-5 border-1 rounded-md text-green-800 border-green-800'
-              }
-              onClick={updateGeneralFile}
-            >
-              파일 수정하기
-            </button>
-          </div>
-        )}
-        {assignmentType === '시험' && data && (
-          <div className={'w-2/3 grid grid-cols-2 text-center'}>
-            <span className={'text-neutral-500'}>제출용 파일</span>
-            <div className={'flex gap-10'}>
-              <a
-                href={data?.filePresignedUrl}
-                target={'_blank'}
-                download
-                className={'text-18 text-primary-300'}
-                rel='noreferrer'
-              >
-                다운로드
-              </a>
-              <button
-                type={'button'}
-                className={'text-16 text-green-600'}
-                onClick={() => setStudentGeneralFile(prev => !prev)}
-              >
-                수정
-              </button>
-            </div>
-          </div>
-        )}
-        {assignmentType === '시험' && data && openStudentFileInput && (
-          <div className={'w-full px-10 flex flex-col-center gap-10'}>
-            <div className={'flex gap-10 justify-center'}>
-              <input
-                value={studentFile?.name}
-                className={'border-2 px-5'}
-                readOnly
-              />
-              <label
-                htmlFor={'update-student-file'}
-                className={'text-neutral-500 border-2 px-5 cursor-pointer'}
-              >
-                파일 선택
-              </label>
-              <input
-                id={'update-student-file'}
-                type={'file'}
-                onChange={handleStudentFileChange}
-                className={'hidden'}
-              />
-            </div>
-            <button
-              type={'button'}
-              className={
-                'w-fit p-5 border-1 rounded-md text-green-800 border-green-800'
-              }
-              onClick={updateStudentFile}
-            >
-              파일 수정하기
-            </button>
-          </div>
+
+        <FileActionButtons
+          fileType={assignmentType}
+          fileUrl={assignmentFileUrl}
+          updateHandler={updateFile('general')}
+        />
+        {studentFile && (
+          <FileActionButtons
+            fileType={'제출용'}
+            fileUrl={studentFile?.filePresignedUrl}
+            updateHandler={updateFile('student')}
+          />
         )}
       </div>
     </Modal>
