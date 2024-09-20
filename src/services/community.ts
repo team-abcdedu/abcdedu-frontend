@@ -25,6 +25,10 @@ class CommunityApi {
     });
   }
 
+  static async deletePostFile(id: number) {
+    return del(`/posts/${id}/file`);
+  }
+
   static async deletePost(id: number) {
     return del(`/posts/${id}`);
   }
