@@ -24,11 +24,13 @@ export default function CommentForm({
   const btnStyle = `rounded-[20px] text-14 ${mode === 'create' ? 'px-30 py-8' : 'px-16 py-4'}`;
 
   const { createComment, updateComment } = useCommentMutation({ postId });
-  const { register, handleSubmit, watch } = useForm<ICommentForm>({
+  const { register, reset, handleSubmit, watch } = useForm<ICommentForm>({
     defaultValues: { content: defaultValue ?? '' },
   });
 
   const content = watch('content', defaultValue);
+  const isButtonDisabled =
+    !content.trim() || createComment.isPending || updateComment.isPending;
 
   const submitform = async (data: FieldValues) => {
     // 댓글 수정
@@ -45,7 +47,11 @@ export default function CommentForm({
     }
 
     // 댓글 생성
-    createComment.mutate(data.content);
+    createComment.mutate(data.content, {
+      onSuccess: () => {
+        reset();
+      },
+    });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +70,7 @@ export default function CommentForm({
         <button
           type='submit'
           className={`bg-primary-400 text-white ${btnStyle} disabled:bg-primary-400/15`}
-          disabled={!content.trim()}
+          disabled={isButtonDisabled}
         >
           {mode === 'create' ? '등록' : '완료'}
         </button>
