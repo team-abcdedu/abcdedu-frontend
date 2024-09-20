@@ -1,6 +1,6 @@
 import { del, get, patch, post } from '@/libs/api';
 import { PaginatedResponse } from '@/types';
-import { Post, PostSummary } from '@/types/community';
+import { Comment, Post, PostSummary } from '@/types/community';
 
 class CommunityApi {
   static async createPost(form: FormData) {
@@ -27,6 +27,26 @@ class CommunityApi {
 
   static async deletePost(id: number) {
     return del(`/posts/${id}`);
+  }
+
+  // 댓글 API
+
+  static async getComments(postId: number, page: number) {
+    return get<PaginatedResponse<Comment>>(`/posts/${postId}/comments`, {
+      params: { page },
+    });
+  }
+
+  static async createComment(postId: number, content: string) {
+    return post(`/posts/${postId}/comments`, { content });
+  }
+
+  static async updateComment(commentId: number, content: string) {
+    return patch(`/comments/${commentId}`, { content });
+  }
+
+  static async deleteComment(postId: number, commentId: number) {
+    return del(`/posts/${postId}/comments/${commentId}`);
   }
 }
 
