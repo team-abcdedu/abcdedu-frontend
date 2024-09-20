@@ -3,7 +3,8 @@ import HomeworkForm from '@/pages/Homework/components/HomeworkForm';
 
 function Index() {
   return (
-    <div className={'flex flex-col text-center mt-20'}>
+    // <div className={'flex flex-col text-center mt-20'}>
+    <div className={'flex flex-col mt-20'}>
       <Head title={'과제 | ABCDEdu'} />
       {/* <div className='py-30'> */}
       {/*  <p className='text-gray-400'>ABCDEdu</p> */}

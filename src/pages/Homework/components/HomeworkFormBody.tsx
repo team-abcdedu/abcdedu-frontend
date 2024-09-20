@@ -42,13 +42,19 @@ function HomeworkFormBody({
                   {question.orderNumber}. {question.content}{' '}
                   {question.isAnswerRequired && <RedDot />}
                 </div>
-                <div className={'pl-10'}>{question.content}</div>
+                <div className={'flex flex-col gap-10 font-light'}>
+                  {question.additionalContent.split('\n').map(line => (
+                    <p key={line} className={'indent-[10px] break-keep'}>
+                      {line}
+                    </p>
+                  ))}
+                </div>
               </div>
               <textarea
                 {...register(`${question.orderNumber}`, {
                   required: '답안을 입력해주세요.',
                 })}
-                className={'w-full min-h-[150px] p-6 font-normal'}
+                className={'w-full min-h-[150px] p-10 font-normal'}
                 placeholder={'답안 입력하기'}
               />
               {errors?.[`${question.orderNumber}`] && (
@@ -62,7 +68,7 @@ function HomeworkFormBody({
 
         <div className={`w-full flex flex-col gap-20`}>
           <div className={'font-semibold'}>[토론 및 발표]</div>
-          <p className={'indent-[20px] whitespace-pre-wrap'}>
+          <p className={'indent-[10px] font-light whitespace-pre-wrap'}>
             위에서 적은 내용을 친구들과 공유하고 토론해보자. 그리고 생각을
             가다듬고 정리해서 자신 있게 발표해보자.
           </p>
