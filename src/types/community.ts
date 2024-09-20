@@ -7,6 +7,7 @@ export interface Post {
   viewCount: number;
   fileUrl: string | null;
   commentAllow: boolean;
+  commentCount: number;
   secret: boolean;
 }
 
@@ -15,7 +16,6 @@ export type PostSummary = Omit<
   'fileUrl' | 'content' | 'commentAllow' | 'writerEmail'
 > & {
   postId: number;
-  commentCount: number;
 };
 
 export interface Comment {
