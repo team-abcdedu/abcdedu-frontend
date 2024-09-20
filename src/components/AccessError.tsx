@@ -6,7 +6,7 @@ function AccessError({
   linkUrl,
   linkString,
 }: {
-  type: '과제' | '설문';
+  type: string;
   errorCode: number;
   linkUrl: string;
   linkString: string;
