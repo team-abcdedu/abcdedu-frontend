@@ -18,7 +18,7 @@ function SurveyFormItem({
     return (
       <textarea
         {...register(`${orderNumber}#${type}`, rules)}
-        className={'w-full min-h-[150px] p-6 font-normal'}
+        className={'w-full min-h-[150px] p-10 font-normal'}
         placeholder={'답안 입력하기'}
       ></textarea>
     );
