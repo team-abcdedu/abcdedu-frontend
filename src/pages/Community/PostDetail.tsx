@@ -1,10 +1,10 @@
 import { Navigate, useParams } from 'react-router-dom';
 
+import AccessError from '@/components/AccessError';
 import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 import useBoundStore from '@/stores';
 
-import AccessError from './components/AccessError';
 import Comments from './components/Comments';
 import LevelUpButton from './components/LevelUpButton';
 import PostFormModal from './components/PostFormModal';
@@ -40,8 +40,12 @@ export default function PostDetail() {
       <Head
         title={`${post?.title ? `${post.title} | ` : ''}ABCDEdu 커뮤니티`}
       />
-      {!isLoading && isForbidden && <AccessError errorCode={errorCode} />}
-      {!isLoading && !user && <AccessError errorCode={401} />}
+      {!isLoading && isForbidden && (
+        <AccessError type='게시글' isPrevPageDirection errorCode={errorCode} />
+      )}
+      {!isLoading && !user && (
+        <AccessError type='게시글' isPrevPageDirection errorCode={401} />
+      )}
       {post && (
         <>
           <PostSection
