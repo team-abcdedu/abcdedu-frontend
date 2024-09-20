@@ -1,10 +1,11 @@
-export default function LevelUpButton() {
+import useLevelUpMutation from '../hooks/useLevelUpMutation';
+
+export default function LevelUpButton({ postId }: { postId: number }) {
+  const mutation = useLevelUpMutation();
+
   const handleClick = () => {
     const ok = window.confirm('해당 멤버를 등업시키겠습니까?');
-    if (ok) {
-      // API 요청
-      alert('등업이 완료되었습니다.');
-    }
+    if (ok) mutation.mutate(postId);
   };
 
   return (

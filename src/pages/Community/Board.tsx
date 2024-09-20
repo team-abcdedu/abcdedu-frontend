@@ -25,7 +25,8 @@ export default function Board() {
   }
 
   const isPostButtonVisible =
-    category === 'levelup' || (user && user.role !== '새싹');
+    (category === 'levelup' && user && user.role === '새싹') ||
+    (category !== 'levelup' && user && user.role !== '새싹');
 
   return (
     <div className='flex flex-col text-center mt-20'>
