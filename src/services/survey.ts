@@ -30,7 +30,7 @@ class SurveyApi {
     surveyId: number;
     answers: SurveyAnswer[];
   }) {
-    return post(`/surveys/${surveyId}/answers`, answers);
+    return post(`/surveys/${surveyId}/replies`, answers);
   }
 }
 
