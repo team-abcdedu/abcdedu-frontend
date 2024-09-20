@@ -1,13 +1,13 @@
 interface HomeworkFormHeaderProps {
   title: string;
-  subTitle: string;
   description: string;
+  additionalDescription: string;
 }
 
 function HomeworkFormHeader({
   title,
-  subTitle,
   description,
+  additionalDescription,
 }: HomeworkFormHeaderProps) {
   return (
     <div
@@ -21,10 +21,10 @@ function HomeworkFormHeader({
         </div>
       </h1>
       <h2 className={`w-full text-18 md:text-22 font-semibold`}>
-        [{subTitle}]
+        {description}
       </h2>
       <p className={`w-full text-16 md:text-20 whitespace-pre-wrap`}>
-        {description}
+        {additionalDescription}
       </p>
     </div>
   );
