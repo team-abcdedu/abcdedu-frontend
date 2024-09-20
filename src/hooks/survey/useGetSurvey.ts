@@ -2,20 +2,20 @@ import { useQuery } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
-import HomeworkApi from '@/services/homework';
+import SurveyApi from '@/services/survey';
 import useBoundStore from '@/stores';
 
-interface UseGetHomeworkProps {
-  homeworkId: number;
+interface UseGetSurveyProps {
+  surveyId: number;
 }
 
-function useGetHomework({ homeworkId }: UseGetHomeworkProps) {
+function useGetSurvey({ surveyId }: UseGetSurveyProps) {
   const [queryEnabled, setQueryEnabled] = useState(false);
   const { user, accessToken } = useBoundStore.getState();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['homework', homeworkId.toString()],
-    queryFn: () => HomeworkApi.getHomework({ homeworkId }),
+    queryKey: ['survey', surveyId],
+    queryFn: () => SurveyApi.getSurvey({ surveyId }),
     enabled: queryEnabled,
   });
 
@@ -30,4 +30,4 @@ function useGetHomework({ homeworkId }: UseGetHomeworkProps) {
   return { data, isLoading, isError, errorCode };
 }
 
-export default useGetHomework;
+export default useGetSurvey;

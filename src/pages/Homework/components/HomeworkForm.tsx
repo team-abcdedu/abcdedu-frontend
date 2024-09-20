@@ -1,128 +1,81 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import MessageModal from '@/components/MessageModal';
-import useModal from '@/hooks/useModal';
-import UserInput from '@/pages/Homework/components/UserInput';
-import { mockAnswer } from '@/pages/Homework/constants';
-// import useGetMyHomework from '@/pages/Homework/hooks/useGetMyHomework';
+import AccessError from '@/components/AccessError';
+import useGetHomework from '@/hooks/homework/useGetHomework';
+import HomeworkFormBody from '@/pages/Homework/components/HomeworkFormBody';
+import HomeworkFormHeader from '@/pages/Homework/components/HomeworkFormHeader';
 import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
-import { QuestionInfo } from '@/types/homework';
 
 interface HomeworkFormProps {
   homeworkId: number;
-  questions: QuestionInfo[];
-  additionalDescription: string;
-  showScore: boolean;
 }
 
-function HomeworkForm({
-  homeworkId,
-  questions,
-  additionalDescription,
-  showScore,
-}: HomeworkFormProps) {
-  // const { data: myAnswers, isLoading, isError } = useGetMyHomework({ homeworkId });
-  const isError = false;
-  const isLoading = false;
-  const myAnswers = mockAnswer;
-  // const myAnswers = [];
-
-  const { isVisible, toggleModal } = useModal();
-  const [modalState, setModalState] = useState<'success' | 'error'>('success');
-
-  const formTextStyle = 'text-16 md:text-20 whitespace-pre-wrap';
+function HomeworkForm({ homeworkId }: HomeworkFormProps) {
+  const {
+    data: homework,
+    isLoading,
+    isError,
+    errorCode,
+  } = useGetHomework({ homeworkId });
 
   const { register, errors, reset, onSubmit } = useHomeworkForm({
     homeworkId,
-    questions,
-    setModalState,
-    toggleModal,
   });
 
   useEffect(() => {
     reset();
   }, [reset]);
 
+  if (errorCode) {
+    return (
+      <AccessError
+        type={'과제'}
+        errorCode={errorCode}
+        linkUrl={'/'}
+        linkString={'홈으로'}
+      />
+    );
+  }
+
   if (isError || isLoading) {
     return (
       <div
         className={
-          'w-full h-[600px] flex-row-center text-center text-30 bg-neutral-100'
+          'w-full h-[500px] flex-col-center gap-10 text-center text-18'
         }
       >
-        {isError ? '에러가 발생했습니다.' : '로딩 중입니다.'}
+        {isError ? '에러가 발생했습니다.' : '로딩중...'}
+        {isError && (
+          <Link
+            to='/'
+            className='px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white'
+          >
+            홈으로
+          </Link>
+        )}
       </div>
     );
   }
 
+  if (!homework) {
+    return null;
+  }
+
   return (
-    <>
-      <form
-        className={`w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100 ${formTextStyle}`}
-        onSubmit={onSubmit}
-      >
-        <div className={'min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}>
-          <div className={'py-30 flex flex-col gap-40'}>
-            {questions.map(question => (
-              <div
-                key={question.index}
-                className={'w-full flex flex-col gap-30'}
-              >
-                <div className={`w-full flex flex-col gap-20`}>
-                  <div className={'font-semibold'}>
-                    {question.index}. {question.title}
-                    <span className={'text-14 text-red-700'}>
-                      {showScore && ` (${question.score}점)`}
-                    </span>
-                  </div>
-                  <div className={'pl-10'}>{question.description}</div>
-                </div>
-                <div className={`w-full`}>
-                  <UserInput
-                    question={question}
-                    answer={
-                      myAnswers.length > 0
-                        ? myAnswers[question.index - 1]
-                        : null
-                    }
-                    register={register}
-                  />
-                  {errors?.[`${question.index}`] && (
-                    <span className={'text-14 text-red-700'}>
-                      답안을 입력해주세요
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className={`w-full flex flex-col gap-20`}>
-            <h3 className={'font-semibold'}>[토론 및 발표]</h3>
-            <p className={'indent-[20px] whitespace-pre-wrap'}>
-              {additionalDescription}
-            </p>
-          </div>
-
-          {!(myAnswers.length > 0) && (
-            <button
-              className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] text-white bg-primary-400`}
-            >
-              제출하기
-            </button>
-          )}
-        </div>
-      </form>
-
-      <MessageModal
-        isVisible={isVisible}
-        onClose={toggleModal}
-        type={modalState === 'success' ? 'success' : 'error'}
-        message={
-          modalState === 'success' ? '제출되었습니다.' : '제출에 실패했습니다.'
-        }
+    <form className={'w-full h-full'} onSubmit={onSubmit}>
+      <HomeworkFormHeader
+        title={homework.title}
+        description={homework.description}
+        additionalDescription={homework.additionalDescription}
       />
-    </>
+
+      <HomeworkFormBody
+        questions={homework.questionGetResponses}
+        register={register}
+        errors={errors}
+      />
+    </form>
   );
 }
 

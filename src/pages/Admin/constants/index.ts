@@ -4,7 +4,7 @@ import { TableColumnMap, TableColumns } from '../types';
 
 export const tableColumns: TableColumns = {
   class: ['title', 'subTitle', 'description', 'subClasses'],
-  homework: ['id', 'title', 'subTitle'],
+  homework: ['id', 'title', 'description'],
   survey: ['id', 'createdAt', 'class', 'name'],
   contact: ['contactId', 'type', 'title', 'userName', 'createdAt'],
 };
@@ -19,7 +19,7 @@ export const tableColumnMap: TableColumnMap = {
   homework: {
     id: 'ID',
     title: '제목',
-    subTitle: '부제목',
+    description: '설명',
   },
   survey: {
     id: 'ID',
