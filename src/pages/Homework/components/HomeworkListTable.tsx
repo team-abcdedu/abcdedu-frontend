@@ -1,21 +1,19 @@
 // import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 // import Pagination from '@/components/Pagination';
-// import useGetSurveyList from '@/hooks/survey/useGetSurveyList';
-import { mockHomeworkList } from '@/mock/homework';
+// import useGetHomeworkList from '@/hooks/homework/useGetHomeworkList';
+// import { Link } from 'react-router-dom';
 
 function HomeworkListTable() {
   // const [searchParams] = useSearchParams();
   // const page = Number(searchParams.get('page')) || 1;
-  const navigate = useNavigate();
 
   // const {
   //   list: surveyList,
   //   totalElements: surveyListLength,
   //   isError,
   //   isLoading,
-  // } = useGetSurveyList({
+  // } = useGetHomeworkList({
   //   page,
   // });
 
@@ -30,29 +28,27 @@ function HomeworkListTable() {
 
   return (
     <div className='overflow-x-auto mt-30'>
-      <table className='w-full text-sm sm:text-base'>
+      <table className='w-full text-sm sm:text-base table-auto'>
         <thead>
           <tr className='border-t-2 border-t-gray-400 border-b-2 border-b-primary-400'>
             <th className='px-20 py-10'>No.</th>
             <th className='px-20 py-10'>제목</th>
-            <th className='hidden md:table-cell px-20 py-10'>부제목</th>
+            <th className='hidden md:table-cell px-20 py-10'>설명</th>
           </tr>
         </thead>
         <tbody>
-          {mockHomeworkList.map(homework => (
+          {[].map(homework => (
             <tr
-              key={homework.id}
+              // key={homework.id}
+              key={homework}
               className='space-x-5 border-b border-b-gray-400 cursor-pointer hover:bg-gray-100'
-              onClick={() => navigate(`/homework/${homework.id}`)}
             >
+              <td className='px-20 py-10'>{/* {homework.id} */}</td>
               <td className='px-20 py-10'>
-                <span>{homework.id}</span>
-              </td>
-              <td className='px-20 py-10'>
-                <p>{homework.title}</p>
+                {/* <Link to={`/homework/${homework.id}`}><p>{homework?.title}</p></Link> */}
               </td>
               <td className='hidden md:table-cell px-20 py-10'>
-                <p>{homework.subTitle}</p>
+                {/* <Link to={`/homework/${homework.id}`}><p>{homework?.description}</p></Link> */}
               </td>
             </tr>
           ))}
