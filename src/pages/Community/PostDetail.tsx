@@ -37,7 +37,9 @@ export default function PostDetail() {
 
   return (
     <div className='text-left mt-10 min-h-[500px]'>
-      <Head title={`${post?.title} | ABCDEdu 커뮤니티`} />
+      <Head
+        title={`${post?.title ? `${post.title} | ` : ''}ABCDEdu 커뮤니티`}
+      />
       {!isLoading && isForbidden && <AccessError errorCode={errorCode} />}
       {!isLoading && !user && <AccessError errorCode={401} />}
       {post && (
@@ -56,7 +58,7 @@ export default function PostDetail() {
         </>
       )}
       {isLevelUpButtonVisible && <LevelUpButton postId={Number(postId)} />}
-      {post && post.commentAllow && <Comments />}
+      {post && post.commentAllow && <Comments postId={Number(postId)} />}
     </div>
   );
 }

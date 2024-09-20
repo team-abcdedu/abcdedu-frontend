@@ -1,19 +1,28 @@
 import { useState } from 'react';
 
-import { Comment } from '@/mock/Comment';
+import { Comment } from '@/types/community';
+
+import useCommentMutation from '../hooks/useCommentMutation';
 
 import CommentForm from './CommentForm';
 import MoreButton from './MoreButton';
 
-export default function CommentCard({ comment }: { comment: Comment }) {
+interface CommentCardProps {
+  postId: number;
+  comment: Comment;
+}
+
+export default function CommentCard({ postId, comment }: CommentCardProps) {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const toggleEditMode = () => setIsEditMode(prev => !prev);
 
+  const { deleteComment } = useCommentMutation({ postId });
+
   const handleDelete = () => {
     const ok = window.confirm('댓글을 삭제하시겠습니까?');
     if (ok) {
-      // API
+      deleteComment.mutate(comment.commentId);
     }
   };
 
@@ -21,7 +30,7 @@ export default function CommentCard({ comment }: { comment: Comment }) {
     <div className='flex flex-col gap-2'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <p className='font-semibold mr-4 text-sm'>{comment.writer}</p>
+          <p className='font-semibold mr-4 text-sm'>{comment.writerName}</p>
           <p className='text-xs text-gray-500'>
             {comment.createdAt.split('T')[0]}
           </p>
@@ -34,7 +43,8 @@ export default function CommentCard({ comment }: { comment: Comment }) {
       </div>
       {isEditMode ? (
         <CommentForm
-          commentId={comment.id}
+          postId={postId}
+          commentId={comment.commentId}
           mode='edit'
           defaultValue={comment.content}
           toggleEditMode={toggleEditMode}
