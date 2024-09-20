@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import SurveyApi from '@/services/survey';
 import useBoundStore from '@/stores';
@@ -21,6 +22,8 @@ function useSurveyForm({ surveyId }: UseSurveyFormProps) {
     handleSubmit,
   } = useForm<ISurveyForm>({ mode: 'onSubmit' });
 
+  const navigate = useNavigate();
+
   const mutation = useMutation({
     mutationFn: (data: SurveyAnswer[]) =>
       SurveyApi.postSurvey({
@@ -30,6 +33,7 @@ function useSurveyForm({ surveyId }: UseSurveyFormProps) {
     onSuccess: () => {
       reset();
       alert('설문이 제출되었습니다.');
+      navigate('/survey');
     },
     onError: () => {
       alert('설문 제출 중 문제가 발생했습니다.');
