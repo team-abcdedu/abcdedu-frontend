@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 
 import SurveyApi from '@/services/survey';
 
@@ -15,7 +16,7 @@ function useGetSurveyList({
   sortBy = '',
   sortDirection = 'desc',
 }: UseGetSurveyListProps) {
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError, isLoading, error } = useQuery({
     queryKey: ['surveyList'],
     queryFn: () =>
       SurveyApi.getSurveyList({ page, size, sortBy, sortDirection }),
@@ -24,7 +25,9 @@ function useGetSurveyList({
   const list = data?.content || [];
   const totalElements = data?.totalElements || 0;
 
-  return { list, totalElements, isError, isLoading };
+  const errorCode = isAxiosError(error) ? error.response?.status : null;
+
+  return { list, totalElements, isError, isLoading, errorCode };
 }
 
 export default useGetSurveyList;
