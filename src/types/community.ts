@@ -17,3 +17,11 @@ export type PostSummary = Omit<
   postId: number;
   commentCount: number;
 };
+
+export interface Comment {
+  commentId: number;
+  writerName: string;
+  writerEmail: string;
+  content: string;
+  createdAt: string;
+}
