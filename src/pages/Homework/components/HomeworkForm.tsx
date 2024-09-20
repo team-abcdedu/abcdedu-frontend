@@ -28,7 +28,14 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
   }, [reset]);
 
   if (errorCode) {
-    return <AccessError type={'과제'} errorCode={errorCode} linkUrl={'/'} />;
+    return (
+      <AccessError
+        type={'과제'}
+        errorCode={errorCode}
+        linkUrl={'/'}
+        linkString={'홈으로'}
+      />
+    );
   }
 
   if (isError || isLoading) {

@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import MessageModal from '@/components/MessageModal';
-import useModal from '@/hooks/useModal';
-import { mockSurvey } from '@/mock/Survey';
+import AccessError from '@/components/AccessError';
+import useGetSurvey from '@/hooks/survey/useGetSurvey';
 import SurveyFormBody from '@/pages/Survey/components/SurveyFormBody';
 import SurveyFormHeader from '@/pages/Survey/components/SurveyFormHeader';
 import useSurveyForm from '@/pages/Survey/hooks/useSurveyForm';
@@ -12,36 +11,58 @@ interface SurveyFormProps {
 }
 
 function SurveyForm({ surveyId }: SurveyFormProps) {
-  const { isVisible, toggleModal } = useModal();
-  const [modalState, setModalState] = useState<'success' | 'error'>('success');
+  const {
+    data: survey,
+    isError,
+    isLoading,
+    errorCode,
+  } = useGetSurvey({ surveyId });
+
   const { register, errors, onSubmit } = useSurveyForm({
     surveyId,
-    toggleModal,
-    setModalState,
   });
+
+  if (errorCode) {
+    return (
+      <AccessError
+        type={'설문'}
+        errorCode={errorCode}
+        linkUrl={'/survey'}
+        linkString={'설문 목록으로'}
+      />
+    );
+  }
+
+  if (isError || isLoading) {
+    return (
+      <div
+        className={
+          'w-full h-[500px] flex-col-center gap-10 text-center text-18'
+        }
+      >
+        {isError ? '에러가 발생했습니다.' : '로딩중...'}
+        {isError && (
+          <Link
+            to='/survey'
+            className='px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white'
+          >
+            설문 목록으로
+          </Link>
+        )}
+      </div>
+    );
+  }
+
+  if (!survey) return null;
 
   return (
     <form onSubmit={onSubmit} className={'w-full'}>
-      <SurveyFormHeader
-        title={mockSurvey.title}
-        description={mockSurvey.description}
-      />
+      <SurveyFormHeader title={survey.title} description={survey.description} />
 
       <SurveyFormBody
-        questions={mockSurvey.questionGetResponses}
+        questions={survey.questionGetResponses}
         register={register}
         errors={errors}
-      />
-
-      <MessageModal
-        isVisible={isVisible}
-        onClose={toggleModal}
-        type={modalState === 'success' ? 'success' : 'error'}
-        message={
-          modalState === 'success'
-            ? '설문 제출이 완료되었습니다.'
-            : '설문 제출 중 문제가 발생했습니다.'
-        }
       />
     </form>
   );
