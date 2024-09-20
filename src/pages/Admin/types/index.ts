@@ -26,7 +26,7 @@ export interface TableColumnMap {
   homework: {
     id: string;
     title: string;
-    subTitle: string;
+    description: string;
   };
   survey: {
     id: string;
