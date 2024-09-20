@@ -1,17 +1,18 @@
 export interface HomeworkSummary {
   id: number;
   title: string;
-  subTitle: string;
+  description: string;
 }
 
 export interface HomeworkQuestion {
   orderNumber: string;
   content: string;
+  additionalContent: string;
   isAnswerRequired: boolean;
 }
 
 export type HomeworkInfo = Omit<HomeworkSummary, 'id'> & {
-  description: string;
+  additionalDescription: string;
   questionGetResponses: HomeworkQuestion[];
 };
 
