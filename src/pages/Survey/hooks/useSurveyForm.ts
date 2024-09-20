@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import SurveyApi from '@/services/survey';
+import useBoundStore from '@/stores';
 import { SurveyAnswer } from '@/types/survey';
 
 export interface ISurveyForm {
@@ -11,15 +11,9 @@ export interface ISurveyForm {
 
 interface UseSurveyFormProps {
   surveyId: number;
-  toggleModal: () => void;
-  setModalState: Dispatch<SetStateAction<'success' | 'error'>>;
 }
 
-function useSurveyForm({
-  surveyId,
-  toggleModal,
-  setModalState,
-}: UseSurveyFormProps) {
+function useSurveyForm({ surveyId }: UseSurveyFormProps) {
   const {
     register,
     reset,
@@ -35,17 +29,22 @@ function useSurveyForm({
       }),
     onSuccess: () => {
       reset();
-      toggleModal();
-      setModalState('success');
+      alert('설문이 제출되었습니다.');
     },
     onError: () => {
-      toggleModal();
-      setModalState('error');
+      alert('설문 제출 중 문제가 발생했습니다.');
     },
   });
 
+  const { user } = useBoundStore();
+
   const submitHandler: SubmitHandler<ISurveyForm> = (data: ISurveyForm, e) => {
     e?.preventDefault();
+
+    if (!user || (user.role !== '학생' && user.role !== '관리자')) {
+      alert('학생 등급 이상만 설문에 참여할 수 있습니다.');
+      return;
+    }
 
     const refinedData = Object.entries(data).map(([key, value]) => {
       const type = key.split('#')[1];
