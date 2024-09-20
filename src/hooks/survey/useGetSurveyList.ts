@@ -17,7 +17,7 @@ function useGetSurveyList({
   sortDirection = 'desc',
 }: UseGetSurveyListProps) {
   const { data, isError, isLoading, error } = useQuery({
-    queryKey: ['surveyList'],
+    queryKey: ['surveyList', page, size, sortBy, sortDirection],
     queryFn: () =>
       SurveyApi.getSurveyList({ page, size, sortBy, sortDirection }),
   });
@@ -27,7 +27,13 @@ function useGetSurveyList({
 
   const errorCode = isAxiosError(error) ? error.response?.status : null;
 
-  return { list, totalElements, isError, isLoading, errorCode };
+  return {
+    list,
+    totalElements,
+    isError,
+    isLoading,
+    errorCode,
+  };
 }
 
 export default useGetSurveyList;
