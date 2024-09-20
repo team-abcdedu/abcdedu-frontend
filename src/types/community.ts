@@ -1,7 +1,7 @@
 export interface Post {
-  postId: number;
   title: string;
   writer: string;
+  writerEmail: string;
   content: string;
   createdAt: string;
   viewCount: number;
@@ -10,6 +10,10 @@ export interface Post {
   secret: boolean;
 }
 
-export type PostSummary = Omit<Post, 'fileUrl' | 'content' | 'commentAllow'> & {
+export type PostSummary = Omit<
+  Post,
+  'fileUrl' | 'content' | 'commentAllow' | 'writerEmail'
+> & {
+  postId: number;
   commentCount: number;
 };
