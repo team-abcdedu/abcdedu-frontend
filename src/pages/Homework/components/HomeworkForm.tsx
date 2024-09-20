@@ -27,15 +27,15 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     reset();
   }, [reset]);
 
-  if (errorCode === 401) {
-    return <AccessError />;
+  if (errorCode) {
+    return <AccessError errorCode={errorCode} />;
   }
 
   if (isError || isLoading) {
     return (
       <div
         className={
-          'w-full h-[300px] flex-col-center gap-10 text-center text-20'
+          'w-full h-[500px] flex-col-center gap-10 text-center text-18'
         }
       >
         {isError ? '에러가 발생했습니다.' : '로딩중...'}
