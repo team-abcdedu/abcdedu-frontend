@@ -33,7 +33,6 @@ export default function Comments({ postId }: { postId: number }) {
         ))}
         <Pagination
           currentPage={page}
-          itemCountPerPage={2}
           totalElements={totalElements}
           pageQueryKey='comments_page'
         />
