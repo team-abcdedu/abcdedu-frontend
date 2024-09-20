@@ -10,7 +10,7 @@ function ClassOverview({ classData }: { classData: ClassData }) {
         'w-full min-h-100 p-30 flex flex-col border-2 border-white rounded-[20px]'
       }
     >
-      <h3 className={'text-30 font-semibold text-white'}>{title}</h3>
+      <h3 className={'text-30 font-semibold text-white'}>Class {title}</h3>
       <p className={'mt-5 mb-20 text-20 text-white'}>
         {subTitle ? `${subTitle}: ` : ''} {description}
       </p>

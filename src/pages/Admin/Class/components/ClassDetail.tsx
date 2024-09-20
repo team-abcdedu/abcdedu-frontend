@@ -1,5 +1,5 @@
 import useModal from '@/hooks/useModal';
-import FileUploadModal from '@/pages/Admin/Class/components/FileUploadModal';
+import GeneralFileUploadModal from '@/pages/Admin/Class/components/GeneralFileUploadModal';
 import StudentFileUploadModal from '@/pages/Admin/Class/components/StudentFileUploadModal';
 import SubClassCard from '@/pages/Admin/Class/components/SubClassCard';
 import { ClassData } from '@/types/class';
@@ -51,9 +51,9 @@ function ClassDetail({ classData }: ClassDetailProps) {
       </div>
 
       <div className={'w-full grid grid-cols-5'}>
-        <h1 className={'col-start-3 text-20 text-center font-medium'}>
+        <div className={'col-start-3 text-20 text-center font-medium'}>
           서브 클래스
-        </h1>
+        </div>
         <div className={'col-span-2 px-10 flex justify-end gap-20'}>
           <button
             className={'px-10 text-15 border-2 rounded-lg border-neutral-300'}
@@ -77,11 +77,15 @@ function ClassDetail({ classData }: ClassDetailProps) {
       >
         <ul className={'grid grid-cols-2 gap-10'}>
           {classData.subClasses.map(subClass => (
-            <SubClassCard key={subClass.subClassId} subClass={subClass} />
+            <SubClassCard
+              key={subClass.subClassId}
+              classTitle={classData.title}
+              subClass={subClass}
+            />
           ))}
         </ul>
       </div>
-      <FileUploadModal
+      <GeneralFileUploadModal
         isVisible={isGeneralUploadVisible}
         onClose={isGeneralUploadToggle}
       />

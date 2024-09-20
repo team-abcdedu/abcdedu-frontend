@@ -1,4 +1,4 @@
-import { post } from '@/libs/api';
+import { patch, post } from '@/libs/api';
 
 class AdminClassApi {
   static async createClass(data: {
@@ -42,6 +42,22 @@ class AdminClassApi {
     );
   }
 
+  static async updateGeneralFile({
+    assignmentFileId,
+    file,
+  }: {
+    assignmentFileId: number;
+    file: File;
+  }) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return patch(`/lectures/file/${assignmentFileId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
+
   static async uploadStudentFile({
     assignmentFileId,
     file,
@@ -60,6 +76,22 @@ class AdminClassApi {
         },
       },
     );
+  }
+
+  static async updateStudentFile({
+    assignmentAnswerFileId,
+    file,
+  }: {
+    assignmentAnswerFileId: number;
+    file: File;
+  }) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return patch(`/lectures/answer-file/${assignmentAnswerFileId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   }
 }
 

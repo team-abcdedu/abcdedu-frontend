@@ -1,4 +1,5 @@
 import { X } from '@phosphor-icons/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
@@ -33,6 +34,7 @@ function StudentFileUploadModal({
     setFile(inputFile);
   };
 
+  const queryClient = useQueryClient();
   const onSubmit: SubmitHandler<IStudentFileUploadForm> = (data, e) => {
     e?.preventDefault();
     const fileData = { ...data };
@@ -40,6 +42,9 @@ function StudentFileUploadModal({
     fileMutation.mutate(fileData, {
       onSuccess: () => {
         alert('파일이 등록되었습니다.');
+        queryClient.invalidateQueries({
+          queryKey: ['sub-class-student-file', fileData.assignmentFileId],
+        });
         reset();
         onClose();
       },
@@ -102,6 +107,7 @@ function StudentFileUploadModal({
                 type={'file'}
                 onChange={fileChangeHandler}
                 className={'hidden'}
+                accept={'.zip,.rar,.7z,.tar,.gz,.pdf,.hwp,.doc,.docx'}
               />
               {errors.file && (
                 <span className={'text-13 text-red-700'}>

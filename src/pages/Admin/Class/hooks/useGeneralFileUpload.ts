@@ -11,7 +11,7 @@ export interface IFileUploadForm {
   file: File;
 }
 
-function useFileUpload() {
+function useGeneralFileUpload() {
   const {
     register,
     formState: { errors },
@@ -47,4 +47,4 @@ function useFileUpload() {
   return { register, errors, handleSubmit, reset, fieldRules, fileMutation };
 }
 
-export default useFileUpload;
+export default useGeneralFileUpload;

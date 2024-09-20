@@ -4,21 +4,21 @@ import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import Modal from '@/components/Modal';
-import useFileUpload, {
+import useGeneralFileUpload, {
   IFileUploadForm,
-} from '@/pages/Admin/Class/hooks/useFileUpload';
+} from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
 
 interface FileUploadModalProps {
   isVisible: boolean;
   onClose: () => void;
 }
 
-function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
+function GeneralFileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
   const inputWrapperStyle = 'w-full flex flex-col gap-5 p-5';
   const [file, setFile] = useState<File | null>(null);
 
   const { register, fieldRules, reset, errors, handleSubmit, fileMutation } =
-    useFileUpload();
+    useGeneralFileUpload();
 
   const closeModal = () => {
     setFile(null);
@@ -41,7 +41,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
       onSuccess: () => {
         alert('파일이 등록되었습니다.');
         queryClient.invalidateQueries({
-          queryKey: ['sub-class-file-list', fileData.subLectureId as number],
+          queryKey: ['sub-class-file-list', fileData.subLectureId],
         });
         closeModal();
       },
@@ -116,6 +116,7 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
                 type={'file'}
                 onChange={fileChangeHandler}
                 className={'hidden'}
+                accept={'.zip,.rar,.7z,.tar,.gz,.pdf,.hwp,.doc,.docx'}
               />
               {errors.file && (
                 <span className={'text-13 text-red-700'}>
@@ -139,4 +140,4 @@ function FileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
   );
 }
 
-export default FileUploadModal;
+export default GeneralFileUploadModal;
