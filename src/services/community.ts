@@ -4,7 +4,7 @@ import { Post, PostSummary } from '@/types/community';
 
 class CommunityApi {
   static async createPost(form: FormData) {
-    return post(`/posts/`, form, {
+    return post<number>(`/posts`, form, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   }

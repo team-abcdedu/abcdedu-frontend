@@ -1,7 +1,9 @@
-import { X } from '@phosphor-icons/react';
+import { Trash, X } from '@phosphor-icons/react';
+import { useState } from 'react';
 
 import Modal from '@/components/Modal';
 import { Post } from '@/types/community';
+import { getFileName } from '@/utils/getFileName';
 
 import usePostForm from '../hooks/usePostForm';
 
@@ -20,9 +22,11 @@ export default function PostFormModal({
     post,
     onSuccess: onClose,
   });
+  const [isFileInputVisible, setIsFileInputVisible] = useState(!post?.fileUrl);
 
   const handleClose = () => {
     onClose();
+    setIsFileInputVisible(!post?.fileUrl);
     reset();
   };
 
@@ -32,7 +36,7 @@ export default function PostFormModal({
         <form className='flex flex-col' onSubmit={onSubmit}>
           <div className='flex justify-between items-center'>
             <h2 className='text-lg font-bold'>글쓰기</h2>
-            <button type='button' onClick={handleClose}>
+            <button type='button' aria-label='닫기' onClick={handleClose}>
               <X size={24} />
             </button>
           </div>
@@ -58,17 +62,31 @@ export default function PostFormModal({
                 <span className='block -mt-4'>내용을 입력하세요.</span>
               )}
             </div>
-            <div className='mb-20 flex items-center space-x-14'>
-              <label htmlFor='file' className='block text-gray-700 text mb-2'>
-                첨부파일
-              </label>
-              <input
-                id='file'
-                type='file'
-                className='w-2/3 border rounded p-2 h-full'
-                onChange={handleFileChange}
-              />
-            </div>
+            {isFileInputVisible && (
+              <div className='mb-20 flex items-center space-x-14'>
+                <label htmlFor='file' className='block text-gray-700 text mb-2'>
+                  첨부파일
+                </label>
+                <input
+                  id='file'
+                  type='file'
+                  className='w-2/3 border rounded p-2 h-full'
+                  onChange={handleFileChange}
+                />
+              </div>
+            )}
+            {post?.fileUrl && !isFileInputVisible && (
+              <div className='mb-20 py-5 flex items-center space-x-14'>
+                <p>첨부파일 &nbsp;&nbsp;{getFileName(post.fileUrl)}</p>
+                <button
+                  type='button'
+                  aria-label='파일 삭제'
+                  onClick={() => setIsFileInputVisible(true)}
+                >
+                  <Trash size={20} className='text-neutral-500' />
+                </button>
+              </div>
+            )}
             <div className='flex mb-4 items-center gap-4'>
               <input type='checkbox' id='secret' {...register('secret')} />
               <label htmlFor='secret' className='text-14'>
@@ -89,7 +107,7 @@ export default function PostFormModal({
               className='block w-160 py-8 px-16 rounded-2xl bg-primary-400 text-white mx-auto'
               type='submit'
             >
-              확인
+              {!post ? '등록' : '수정'}
             </button>
           </div>
         </form>

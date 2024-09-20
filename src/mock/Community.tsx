@@ -128,7 +128,7 @@ export const mockPost: Post = {
   content: '내용임',
   createdAt: '2024-09-17T',
   viewCount: 5,
-  fileDownloadUrl: null,
+  fileUrl: null,
   commentAllow: true,
   secret: false,
 };

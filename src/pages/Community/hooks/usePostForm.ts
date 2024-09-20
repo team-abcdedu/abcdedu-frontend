@@ -6,6 +6,8 @@ import { Post } from '@/types/community';
 
 import { boardMetaData, Category } from '../constants/communityInfo';
 
+import usePostMutation from './usePostMutation';
+
 interface IPostFormInput {
   title: string;
   content: string;
@@ -18,7 +20,7 @@ interface usePostFormProps {
   onSuccess: () => void;
 }
 
-const MAX_FILE_SIZE = 1 * 1024 * 1024;
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
 export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   const {
@@ -35,8 +37,12 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     },
   });
 
-  const { category } = useParams();
+  const { category, postId } = useParams();
   const boardId = boardMetaData[category as Category].id;
+  const { createPost, updatePost } = usePostMutation({
+    category: category ?? '',
+    postId: Number(postId),
+  });
 
   const [file, setFile] = useState<File | null>(null);
 
@@ -54,20 +60,32 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
 
   const submitForm: SubmitHandler<IPostFormInput> = async data => {
     const formData = new FormData();
+    formData.append('boardId', boardId.toString());
     formData.append('title', data.title);
     formData.append('content', data.content);
     formData.append('secret', data.secret.toString());
     formData.append('commentAllow', data.commentAllow.toString());
 
-    if (file) {
-      formData.append('file', file);
-    }
-    console.log(JSON.stringify(data));
-    console.log(boardId);
+    formData.append('file', file ?? '');
 
-    // TODO: API 연결
-    onSuccess();
-    reset();
+    // 게시글 수정
+    if (post && postId) {
+      const postUpdateData = { id: Number(postId), form: formData };
+      updatePost.mutate(postUpdateData, {
+        onSuccess: () => {
+          onSuccess();
+          reset();
+        },
+      });
+      return;
+    }
+
+    // 게시글 생성
+    createPost.mutate(formData, {
+      onSuccess: () => {
+        onSuccess();
+      },
+    });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
