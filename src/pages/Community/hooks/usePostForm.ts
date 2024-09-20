@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
+import communityApi from '@/services/community';
 import { Post } from '@/types/community';
 
 import { boardMetaData, Category } from '../constants/communityInfo';
@@ -25,15 +26,16 @@ const MAX_FILE_SIZE = 100 * 1024 * 1024;
 export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   const {
     register,
+    setValue,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<IPostFormInput>({
     defaultValues: {
-      title: post?.title || '',
-      content: post?.content || '',
-      secret: post?.secret || false,
-      commentAllow: post?.commentAllow || false,
+      title: post?.title ?? '',
+      content: post?.content ?? '',
+      secret: post?.secret ?? false,
+      commentAllow: post?.commentAllow ?? false,
     },
   });
 
@@ -45,6 +47,23 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   });
 
   const [file, setFile] = useState<File | null>(null);
+  const [fileUrl, setFileUrl] = useState(post?.fileUrl ?? null);
+  const [isFileInputVisible, setIsFileInputVisible] = useState(!fileUrl);
+
+  // 수정 후 다시 모달을 열였을 때 updated 된 데이터 fetch
+  useEffect(() => {
+    if (post) {
+      setValue('title', post.title);
+      setValue('content', post.content);
+      setValue('secret', post.secret);
+      setValue('commentAllow', post.commentAllow);
+      setFileUrl(post.fileUrl ?? null);
+    }
+  }, [post, setValue]);
+
+  useEffect(() => {
+    setIsFileInputVisible(!fileUrl);
+  }, [fileUrl]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = e.target.files?.[0];
@@ -58,6 +77,16 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     setFile(inputFile);
   };
 
+  const handleDeleteFileUrl = () => {
+    setFileUrl(null);
+  };
+
+  const handleClose = () => {
+    onSuccess();
+    setIsFileInputVisible(!fileUrl);
+    reset();
+  };
+
   const submitForm: SubmitHandler<IPostFormInput> = async data => {
     const formData = new FormData();
     formData.append('boardId', boardId.toString());
@@ -66,10 +95,15 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     formData.append('secret', data.secret.toString());
     formData.append('commentAllow', data.commentAllow.toString());
 
-    formData.append('file', file ?? '');
+    const prevFileUrl = fileUrl ?? '';
+    formData.append('file', file ?? prevFileUrl);
 
     // 게시글 수정
     if (post && postId) {
+      // 파일을 삭제하는 경우
+      if (post?.fileUrl && !fileUrl) {
+        communityApi.deletePostFile(Number(postId));
+      }
       const postUpdateData = { id: Number(postId), form: formData };
       updatePost.mutate(postUpdateData, {
         onSuccess: () => {
@@ -93,5 +127,15 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     handleSubmit(submitForm)();
   };
 
-  return { register, errors, reset, handleFileChange, file, onSubmit };
+  return {
+    register,
+    errors,
+    reset,
+    handleFileChange,
+    handleClose,
+    fileUrl,
+    isFileInputVisible,
+    handleDeleteFileUrl,
+    onSubmit,
+  };
 }
