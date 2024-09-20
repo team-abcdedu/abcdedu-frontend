@@ -17,7 +17,7 @@ export default function PostDetail() {
     useModal();
   const { category, postId } = useParams();
   const user = useBoundStore(state => state.user);
-  const isPostIdNumeric = /^\d+$/.test(postId ?? '');
+  const isPostIdNumeric = !Number.isNaN(Number(postId));
   const { data: post, isLoading, errorCode } = useGetPost(postId ?? '');
   const isForbidden = errorCode === 403;
 
@@ -31,9 +31,10 @@ export default function PostDetail() {
     return <Navigate to={`/community/${category}`} replace />;
   }
 
+  const isAdminRole = user?.role === '관리자';
+
   // 등업 게시판 & 관리자 권한일 경우에만 등업시키기 버튼 렌더링
-  const isLevelUpButtonVisible =
-    user && user.role === '관리자' && category === 'levelup';
+  const isLevelUpButtonVisible = isAdminRole && category === 'levelup';
 
   return (
     <div className='text-left mt-10 min-h-[500px]'>
@@ -53,6 +54,7 @@ export default function PostDetail() {
             post={post}
             category={category ?? ''}
             toggleEditModal={toggleEditModal}
+            isMine={isAdminRole || user?.email === post.writerEmail}
           />
           <PostFormModal
             post={post}
