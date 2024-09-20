@@ -1,5 +1,4 @@
 import { Trash, X } from '@phosphor-icons/react';
-import { useState } from 'react';
 
 import Modal from '@/components/Modal';
 import { Post } from '@/types/community';
@@ -18,18 +17,19 @@ export default function PostFormModal({
   isVisible,
   onClose,
 }: WritePostModalProps) {
-  const { register, reset, errors, handleFileChange, onSubmit } = usePostForm({
+  const {
+    fileUrl,
+    isFileInputVisible,
+    handleDeleteFileUrl,
+    register,
+    errors,
+    handleFileChange,
+    handleClose,
+    onSubmit,
+  } = usePostForm({
     post,
     onSuccess: onClose,
   });
-  const [isFileInputVisible, setIsFileInputVisible] = useState(!post?.fileUrl);
-
-  const handleClose = () => {
-    onClose();
-    setIsFileInputVisible(!post?.fileUrl);
-    reset();
-  };
-
   return (
     <Modal isVisible={isVisible} onClose={handleClose} size='lg'>
       <Modal.Content>
@@ -75,13 +75,13 @@ export default function PostFormModal({
                 />
               </div>
             )}
-            {post?.fileUrl && !isFileInputVisible && (
+            {fileUrl && !isFileInputVisible && (
               <div className='mb-20 py-5 flex items-center space-x-14'>
-                <p>첨부파일 &nbsp;&nbsp;{getFileName(post.fileUrl)}</p>
+                <p>첨부파일 &nbsp;&nbsp;{getFileName(fileUrl)}</p>
                 <button
                   type='button'
                   aria-label='파일 삭제'
-                  onClick={() => setIsFileInputVisible(true)}
+                  onClick={handleDeleteFileUrl}
                 >
                   <Trash size={20} className='text-neutral-500' />
                 </button>
