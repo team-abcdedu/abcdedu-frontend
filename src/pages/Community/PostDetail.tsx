@@ -56,7 +56,7 @@ export default function PostDetail() {
         </>
       )}
       {isLevelUpButtonVisible && <LevelUpButton />}
-      {post && post.commentAllow && <Comments />}
+      {post && post.commentAllow && <Comments postId={Number(postId)} />}
     </div>
   );
 }
