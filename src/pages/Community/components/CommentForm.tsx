@@ -1,11 +1,13 @@
 import { FieldValues, useForm } from 'react-hook-form';
 
+import useCommentMutation from '../hooks/useCommentMutation';
+
 interface CommentForm {
   defaultValue?: string;
   toggleEditMode?: () => void;
   mode?: 'create' | 'edit';
   commentId?: number;
-  postId?: number;
+  postId: number;
 }
 
 interface ICommentForm {
@@ -16,9 +18,12 @@ export default function CommentForm({
   defaultValue,
   toggleEditMode,
   mode = 'create',
+  commentId,
+  postId,
 }: CommentForm) {
   const btnStyle = `rounded-[20px] text-14 ${mode === 'create' ? 'px-30 py-8' : 'px-16 py-4'}`;
 
+  const { createComment, updateComment } = useCommentMutation({ postId });
   const { register, handleSubmit, watch } = useForm<ICommentForm>({
     defaultValues: { content: defaultValue ?? '' },
   });
@@ -26,8 +31,21 @@ export default function CommentForm({
   const content = watch('content', defaultValue);
 
   const submitform = async (data: FieldValues) => {
-    // API 요청 (생성 또는 수정)
-    console.log(JSON.stringify(data));
+    // 댓글 수정
+    if (mode === 'edit' && commentId) {
+      updateComment.mutate(
+        { commentId, content: data.content },
+        {
+          onSuccess: () => {
+            if (toggleEditMode) toggleEditMode();
+          },
+        },
+      );
+      return;
+    }
+
+    // 댓글 생성
+    createComment.mutate(data.content);
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
