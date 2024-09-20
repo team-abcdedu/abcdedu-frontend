@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import AccessError from '@/components/AccessError';
 import useGetHomework from '@/hooks/homework/useGetHomework';
-import AccessError from '@/pages/Homework/components/AccessError';
 import HomeworkFormBody from '@/pages/Homework/components/HomeworkFormBody';
 import HomeworkFormHeader from '@/pages/Homework/components/HomeworkFormHeader';
 import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
@@ -28,7 +28,7 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
   }, [reset]);
 
   if (errorCode) {
-    return <AccessError errorCode={errorCode} />;
+    return <AccessError errorCode={errorCode} linkUrl={'/'} />;
   }
 
   if (isError || isLoading) {

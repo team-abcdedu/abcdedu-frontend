@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 
-function AccessError({ errorCode }: { errorCode: number }) {
+function AccessError({
+  errorCode,
+  linkUrl,
+}: {
+  errorCode: number;
+  linkUrl: string;
+}) {
   return (
     <div className='flex-col-center h-[500px] gap-10 py-120'>
       <p className='text-center'>
@@ -8,7 +14,7 @@ function AccessError({ errorCode }: { errorCode: number }) {
         {errorCode === 403 && '학생 등급 이상만 과제를 열람할 수 있습니다.'}
       </p>
       <Link
-        to={'/'}
+        to={linkUrl}
         className='px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white'
       >
         홈으로
