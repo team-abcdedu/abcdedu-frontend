@@ -5,7 +5,8 @@ import SurveyForm from '@/pages/Survey/components/SurveyForm';
 function SurveyDetail() {
   const { surveyId } = useParams();
 
-  if (!surveyId) {
+  if (!surveyId || Number.isNaN(Number(surveyId))) {
+    alert('설문이 존재하지 않습니다.');
     return <Navigate to={`/survey`} replace />;
   }
 
