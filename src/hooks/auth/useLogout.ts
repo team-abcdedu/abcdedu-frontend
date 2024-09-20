@@ -17,9 +17,9 @@ export default function useLogout() {
   const handleLogout = async () => {
     try {
       await auth.logout();
+      navigate('/');
       resetAuthState();
       resetUser();
-      navigate('/');
       queryClient.removeQueries({ queryKey: ['user'] });
     } catch (error) {
       console.log('error with logout: ', error);
