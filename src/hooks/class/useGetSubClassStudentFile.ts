@@ -12,7 +12,7 @@ function useGetSubClassStudentFile({
   enabled,
 }: UseGetSubClassStudentFileProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['sub-class-student-file', assignmentAnswerFileId],
+    queryKey: ['class', 'sub-class-student-file', assignmentAnswerFileId],
     queryFn: () => ClassApi.getSubClassAnswerFile(assignmentAnswerFileId),
     enabled,
   });
