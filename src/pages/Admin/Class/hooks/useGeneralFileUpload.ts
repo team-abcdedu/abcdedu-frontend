@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { queryClient } from '@/libs/react-query';
 import AdminClassApi from '@/services/admin/class';
@@ -7,7 +7,7 @@ import { FieldRules } from '@/types';
 
 export interface IFileUploadForm {
   type: string;
-  file: File;
+  file: FileList;
 }
 
 interface UseGeneralFileUploadProps {
@@ -19,7 +19,6 @@ function useGeneralFileUpload({ subLectureId }: UseGeneralFileUploadProps) {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<IFileUploadForm>({ mode: 'onSubmit' });
 
   const fieldRules: FieldRules<IFileUploadForm> = {
@@ -32,7 +31,7 @@ function useGeneralFileUpload({ subLectureId }: UseGeneralFileUploadProps) {
   };
 
   const fileMutation = useMutation({
-    mutationFn: (data: IFileUploadForm) =>
+    mutationFn: (data: { type: string; file: File }) =>
       AdminClassApi.uploadGeneralFile({ ...data, subLectureId }),
     onSuccess: () => {
       alert('파일이 등록되었습니다.');
@@ -45,7 +44,15 @@ function useGeneralFileUpload({ subLectureId }: UseGeneralFileUploadProps) {
     },
   });
 
-  return { register, errors, handleSubmit, reset, fieldRules, fileMutation };
+  const submitForm: SubmitHandler<IFileUploadForm> = (data, e) => {
+    e?.preventDefault();
+    const file = data.file[0];
+    fileMutation.mutate({ type: data.type, file });
+  };
+
+  const onSubmit = handleSubmit(submitForm);
+
+  return { register, errors, fieldRules, onSubmit };
 }
 
 export default useGeneralFileUpload;
