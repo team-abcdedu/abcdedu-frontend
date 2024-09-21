@@ -12,7 +12,6 @@ interface IProfileFormInput {
   name: string;
   school: string;
   studentId: number;
-  image: FileList | null;
 }
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024;
@@ -26,15 +25,12 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
   } = useForm<IProfileFormInput>({
     defaultValues: {
       name: user.name,
       school: user.school ?? '',
       studentId: user.studentId ?? undefined,
-      image: null,
     },
   });
 
@@ -54,19 +50,14 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
       },
     },
     studentId: {},
-    image: {},
   };
 
-  const [imagePreview, setImagePreview] = useState('');
+  const [imagePreview, setImagePreview] = useState(user?.imageUrl);
   const [compressedImageFile, setCompressedImageFile] = useState<File | null>(
     null,
   );
 
-  const resetImageFile = () => {
-    setValue('image', null);
-    setImagePreview('');
-  };
-
+  // 이미지 File 압축 및 미리보기 추가
   const processImage = async (file: File) => {
     try {
       const compressedFile = await compressImage(file);
@@ -82,17 +73,28 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
     }
   };
 
-  const imageFile = watch('image');
-  if (imageFile && imageFile.length > 0) {
-    const file = imageFile[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputFile = e.target.files?.[0];
+    if (!inputFile) return;
 
-    if (file.size > MAX_FILE_SIZE) {
+    if (inputFile.size > MAX_FILE_SIZE) {
       alert('이미지 파일의 크기는 2MB를 초과할 수 없습니다.');
-      resetImageFile();
-    } else {
-      processImage(file);
+      e.target.value = '';
+      return;
     }
-  }
+
+    processImage(inputFile);
+  };
+
+  const resetImageFile = () => {
+    setImagePreview('');
+  };
+
+  const getCurrentImageFile = async () => {
+    if (compressedImageFile) return compressedImageFile;
+    if (imagePreview && user.imageUrl) return convertURLtoFile(user.imageUrl);
+    return null;
+  };
 
   const updateProfile: SubmitHandler<IProfileFormInput> = async data => {
     const { name, school, studentId } = data;
@@ -102,13 +104,8 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
     formData.append('studentId', studentId.toString());
 
     // 이미지 처리
-    // 기존 이미지가 있고, 변경하지 않는 경우 url -> File 변환
-    // 기존 이미지가 없거나 기존 이미지를 삭제할 경우 new Blob
-    // 테스트 필요, CORS 있을 수 있음
-    const prevImageFile = user.imageUrl
-      ? await convertURLtoFile(user.imageUrl)
-      : new Blob();
-    formData.append('file', compressedImageFile ?? prevImageFile);
+    const currentImageFile = await getCurrentImageFile();
+    if (currentImageFile) formData.append('file', currentImageFile);
 
     updateMutation.mutate(formData, {
       onSuccess: () => {
@@ -124,6 +121,7 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
 
   return {
     imagePreview,
+    handleFileChange,
     resetImageFile,
     fieldRules,
     errors,
