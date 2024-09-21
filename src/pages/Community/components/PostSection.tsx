@@ -1,6 +1,7 @@
 import { DownloadSimple } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
+import useBoundStore from '@/stores';
 import { Post } from '@/types/community';
 
 import usePostMutation from '../hooks/usePostMutation';
@@ -23,6 +24,7 @@ export default function PostSection({
   isMine,
 }: PostSectionProps) {
   const { deletePost } = usePostMutation({ category });
+  const user = useBoundStore(state => state.user);
 
   const handleDelete = () => {
     const ok = window.confirm('게시글을 삭제하시겠습니까?');
@@ -31,11 +33,18 @@ export default function PostSection({
     }
   };
 
+  const handleDonwloadLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (user?.role === '새싹') {
+      e.preventDefault();
+      alert('학생 등급 이상만 파일을 다운 받을 수 있습니다.');
+    }
+  };
+
   return (
     <section>
       <hr className='border-1 border-black w-full' />
       <div
-        className='flex flex-col sm:flex-row justify-between px-20 py-4 
+        className='flex flex-col sm:flex-row justify-between px-10 md:px-20 py-4 
         sm:py-10 bg-gray-100 relative'
       >
         <h2 className='text-20 font-bold h-30'>{post?.title}</h2>
@@ -56,7 +65,7 @@ export default function PostSection({
         </div>
         <div className='flex items-center gap-12 ml-auto'>
           {post?.fileUrl && (
-            <Link to={post?.fileUrl}>
+            <Link to={post?.fileUrl} onClick={handleDonwloadLink}>
               <p className='flex-row-center gap-4 text-sm text-gray-500'>
                 파일 다운받기
                 <DownloadSimple className='mt-1 block' size={17} />
