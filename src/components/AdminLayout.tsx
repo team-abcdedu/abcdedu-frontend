@@ -1,11 +1,17 @@
 import { Suspense } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 
 import logo from '@/assets/icons/logo.png';
 
 function AdminLayout() {
-  const LinkStyle =
-    'h-50 flex-row-center gap-20 rounded-lg bg-transparent shadow-2xl shadow-neutral-700 hover:bg-primary-300 transition duration-300';
+  const linkStyle =
+    'h-50 flex-row-center gap-20 rounded-lg shadow-2xl shadow-neutral-700 hover:bg-primary-300 transition duration-300';
+
+  const navLinkStyle = (isActive: boolean) => {
+    return isActive
+      ? `${linkStyle} bg-primary-300`
+      : `${linkStyle} bg-transparent`;
+  };
 
   return (
     <div className={'w-full h-screen p-10 flex bg-primary-50 gap-10'}>
@@ -39,24 +45,30 @@ function AdminLayout() {
             'h-full py-20 flex flex-col gap-10 text-18 font-light text-white'
           }
         >
-          <Link to={'/admin/class'} className={LinkStyle}>
+          <NavLink
+            to={'/admin/class'}
+            className={({ isActive }) => navLinkStyle(isActive)}
+          >
             클래스 관리
-          </Link>
-          <Link to={'/admin/exam'} className={LinkStyle}>
-            시험 관리
-          </Link>
-          <Link to={'/admin/assignment'} className={LinkStyle}>
+          </NavLink>
+          <NavLink
+            to={'/admin/homework'}
+            className={({ isActive }) => navLinkStyle(isActive)}
+          >
             과제 관리
-          </Link>
-          <Link to={'/admin/survey'} className={LinkStyle}>
+          </NavLink>
+          <NavLink
+            to={'/admin/survey'}
+            className={({ isActive }) => navLinkStyle(isActive)}
+          >
             설문 관리
-          </Link>
-          <Link to={'/admin/theory'} className={LinkStyle}>
-            이론 관리
-          </Link>
-          <Link to={'/admin/contact'} className={LinkStyle}>
+          </NavLink>
+          <NavLink
+            to={'/admin/contact'}
+            className={({ isActive }) => navLinkStyle(isActive)}
+          >
             문의 관리
-          </Link>
+          </NavLink>
         </div>
       </aside>
       <section

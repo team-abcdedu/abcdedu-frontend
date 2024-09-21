@@ -1,12 +1,8 @@
-import { ClassInfo } from '../types';
+import SubClassNavigationCard from '@/components/ClassLayout/SubClassNavigationCard';
+import { ClassData } from '@/types/class';
 
-import SubClassNavigationCard from './SubClassNavigationCard';
-
-function ClassOverview({ classInfo }: { classInfo: ClassInfo }) {
-  const { title, subTitle, description, subClasses } = classInfo;
-
-  const classDescription =
-    subTitle && description ? `${subTitle}: ${description}` : '';
+function ClassOverview({ classData }: { classData: ClassData }) {
+  const { title, subTitle, description, subClasses } = classData;
 
   return (
     <div
@@ -14,9 +10,15 @@ function ClassOverview({ classInfo }: { classInfo: ClassInfo }) {
         'w-full min-h-100 p-30 flex flex-col border-2 border-white rounded-[20px]'
       }
     >
-      <h3 className={'text-30 font-semibold text-white'}>{title}</h3>
-      <p className={'mt-5 mb-20 text-20 text-white'}>{classDescription}</p>
-      <SubClassNavigationCard subClasses={subClasses} bgColor={'white'} />
+      <h3 className={'text-30 font-semibold text-white'}>Class {title}</h3>
+      <p className={'mt-5 mb-20 text-20 text-white'}>
+        {subTitle ? `${subTitle} ` : ''} {description ? `: ${description}` : ''}
+      </p>
+      <SubClassNavigationCard
+        classTitle={title}
+        subClasses={subClasses}
+        bgColor={'white'}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
+import ClassLayout from '@/components/ClassLayout';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 
@@ -9,20 +10,19 @@ const Gallery = lazy(() => import('@/pages/AboutUs/Gallery'));
 const History = lazy(() => import('@/pages/AboutUs/History'));
 
 const Classes = lazy(() => import('@/pages/Classes'));
-const Class = lazy(() => import('@/pages/Classes/[classId]'));
 const SubClass = lazy(() => import('@/pages/Classes/[classId]/[subClassId]'));
 
 const Community = lazy(() => import('@/pages/Community'));
 const Board = lazy(() => import('@/pages/Community/Board'));
-const LevelUp = lazy(() => import('@/pages/Community/LevelUp'));
 const PostDetail = lazy(() => import('@/pages/Community/PostDetail'));
-const Project = lazy(() => import('@/pages/Community/Project'));
-const Qna = lazy(() => import('@/pages/Community/Qna'));
 
-const Assignment = lazy(() => import('@/pages/Assignment'));
+const Homework = lazy(() => import('@/pages/Homework'));
+
 const Survey = lazy(() => import('@/pages/Survey'));
 
 const Contact = lazy(() => import('@/pages/Contact'));
+
+const NotFound = lazy(() => import('@/pages/NotFound'));
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -51,46 +51,24 @@ export const publicRoutes: RouteObject[] = [
       },
       {
         path: '/classes/:classId',
-        element: <Class />,
-      },
-      {
-        path: '/classes/:classId/:subClassId',
-        element: <SubClass />,
+        element: <ClassLayout />,
+        children: [
+          {
+            path: '/classes/:classId/:subClassId',
+            element: <SubClass />,
+          },
+        ],
       },
       {
         path: '/community',
         element: <Community />,
       },
       {
-        path: '/community_levelup',
-        element: <LevelUp />,
-      },
-      {
-        path: '/community_levelup/:postId',
-        element: <PostDetail />,
-      },
-      {
-        path: '/community_project',
-        element: <Project />,
-      },
-      {
-        path: '/community_project/:postId',
-        element: <PostDetail />,
-      },
-      {
-        path: '/community_qna',
-        element: <Qna />,
-      },
-      {
-        path: '/community_qna/:postId',
-        element: <PostDetail />,
-      },
-      {
-        path: '/community_bulletin_board',
+        path: '/community/:category',
         element: <Board />,
       },
       {
-        path: '/community_bulletin_board/:popstId',
+        path: '/community/:category/:postId',
         element: <PostDetail />,
       },
       {
@@ -98,13 +76,17 @@ export const publicRoutes: RouteObject[] = [
         element: <Contact />,
       },
       {
-        path: '/assignment',
-        element: <Assignment />,
+        path: '/homework',
+        element: <Homework />,
       },
       {
         path: '/survey',
         element: <Survey />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ];

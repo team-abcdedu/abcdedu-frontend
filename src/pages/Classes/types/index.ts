@@ -24,3 +24,15 @@ export interface ExamInfo {
 export interface ExamInfoMap {
   [classCode: string]: ExamInfo;
 }
+
+export interface TempExamInfoMap {
+  [classCode: string]: {
+    pdf: string;
+    hwp: string;
+  };
+}
+
+export interface SubClassContentState {
+  generalType: 'THEORY' | 'DATA' | 'EXAM' | null;
+  generalFileId: number | null;
+}

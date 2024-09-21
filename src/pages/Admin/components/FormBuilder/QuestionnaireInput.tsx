@@ -1,17 +1,18 @@
 import { useState } from 'react';
 
-interface FlexibleRadioInputItem {
+interface FlexibleInputItem {
   id: number;
 }
 
-interface FlexibleRadioInputProps {
+interface QuestionnaireInputProps {
   type: 'radio' | 'checkbox' | 'textarea';
+  questionIdx: number;
 }
 
-function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
+function QuestionnaireInput({ type, questionIdx }: QuestionnaireInputProps) {
   const textareaStyle = type === 'textarea' ? 'hidden' : 'block';
 
-  const [items, setItems] = useState<FlexibleRadioInputItem[]>([{ id: 0 }]);
+  const [items, setItems] = useState<FlexibleInputItem[]>([{ id: 0 }]);
   const [itemIdx, setItemIdx] = useState(1);
 
   const handleAddItem = () => {
@@ -20,16 +21,20 @@ function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
   };
 
   const handleDeleteItem = (index: number) => {
+    if (items.length === 1) return;
     setItems(items.filter(item => item.id !== index));
   };
 
   return (
-    <div className={'flex-col-center gap-3'}>
-      {items.map(item => (
-        <div key={item.id} className={'w-full flex justify-between'}>
+    <div className={'w-full flex-col-center gap-3'}>
+      {items.map((item, optionIdx) => (
+        <div
+          key={item.id}
+          className={'w-full grid grid-cols-7 justify-items-center'}
+        >
           <div className={'w-[10%] flex-row-center gap-20'}>
-            {type === 'radio' && <input name={'temp'} type='radio' />}
-            {type === 'checkbox' && <input name={'temp'} type='checkbox' />}
+            {type === 'radio' && <input type='radio' required />}
+            {type === 'checkbox' && <input type='checkbox' required />}
             <button
               type={'button'}
               onClick={() => handleDeleteItem(item.id)}
@@ -39,15 +44,16 @@ function QuestionnaireInput({ type }: FlexibleRadioInputProps) {
             </button>
           </div>
           <input
-            type='text'
-            className={`${textareaStyle} w-[85%] px-10 border-1 rounded-md`}
+            name={`${questionIdx}-options-${optionIdx + 1}`}
+            className={`${textareaStyle} w-full col-span-6 px-10 border-1 rounded-md`}
             placeholder={'내용을 입력해주세요'}
+            required
           />
         </div>
       ))}
       <button
         type={'button'}
-        className={`${textareaStyle} w-1/5 px-20 text-13 font-semibold border-2 rounded-2xl`}
+        className={`${textareaStyle} w-1/5 px-20 text-13 font-semibold border-2 rounded-2xl bg-white`}
         onClick={handleAddItem}
       >
         +

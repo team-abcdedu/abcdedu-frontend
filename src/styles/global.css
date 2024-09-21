@@ -141,3 +141,12 @@ textarea {
   word-wrap: break-word;
   box-sizing: border-box;
 }
+
+.pipe-after::after {
+  position: absolute;
+  top: 1px;
+  content: '|';
+  font-size: 12px;
+  padding: 0 6px;
+  color: #9ca3af;
+}

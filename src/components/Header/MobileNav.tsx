@@ -40,7 +40,7 @@ function MobileNav({ onClick }: MobileNavProps) {
             {adminNavItem.text}
           </NavLink>
         )}
-        <HeaderButtons />
+        <HeaderButtons toggleMenu={onClick} />
       </li>
     </div>
   );

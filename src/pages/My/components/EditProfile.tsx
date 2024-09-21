@@ -13,6 +13,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
     'relative w-148 h-148 border-1 border-zinc-300 rounded-md text-center flex-row-center text-14 text-neutral-600/35 lg:hover:border-primary-400 lg:hover:text-primary-400 transition-2 cursor-pointer overflow-hidden';
 
   const {
+    handleFileChange,
     imagePreview,
     resetImageFile,
     errors,
@@ -78,7 +79,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
                 )}
               </label>
               <input
-                {...register('image')}
+                onChange={handleFileChange}
                 id='file-input'
                 type='file'
                 accept='image/*'

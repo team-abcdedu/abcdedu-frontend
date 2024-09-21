@@ -20,7 +20,11 @@ function Hero() {
           <p className={'text-18 text-center text-neutral-400'}>
             AI & Data 사회에서 진로를 준비하기 위한 ABCDEdu만의 특별한 수업!
           </p>
-          <h1 className={'text-80 font-bold text-center text-primary-300 '}>
+          <h1
+            className={
+              'text-60 md:text-80 font-bold text-center text-primary-300 '
+            }
+          >
             ABCD CLASSES
           </h1>
         </div>

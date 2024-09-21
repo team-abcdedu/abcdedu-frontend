@@ -6,7 +6,12 @@ function FooterSns() {
   return (
     <div className='flex justify-center space-x-16 mb-55'>
       {snsItems.map(item => (
-        <Link key={item.to} to={item.to} className='text-black'>
+        <Link
+          key={item.to}
+          to={item.to}
+          aria-label={item.label}
+          className='text-black'
+        >
           {item.icon}
         </Link>
       ))}

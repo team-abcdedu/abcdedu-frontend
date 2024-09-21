@@ -1,10 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
-
-import useClass from './useClass';
 
 interface IClassRegisterForm {
   title: string;
@@ -48,14 +47,21 @@ function useClassRegisterForm({ onClose }: UseClassRegisterFormProps) {
   };
 
   const queryClient = useQueryClient();
-  const { classMutation } = useClass();
+
+  const classMutation = useMutation({
+    mutationFn: (classData: {
+      title: string;
+      type: string;
+      description: string;
+    }) => AdminClassApi.createClass(classData),
+  });
 
   const submitForm: SubmitHandler<IClassRegisterForm> = (data, event) => {
     event?.preventDefault();
     classMutation.mutate(data, {
       onSuccess: () => {
         alert('클래스가 등록되었습니다.');
-        queryClient.invalidateQueries({ queryKey: ['admin-class'] });
+        queryClient.invalidateQueries({ queryKey: ['class'] });
         onClose();
       },
       onError: error => {

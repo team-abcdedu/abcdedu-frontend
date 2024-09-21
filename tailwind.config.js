@@ -52,6 +52,7 @@ export default {
       zIndex: {
         backdrop: 100,
         modal: 101,
+        loader: 1000,
       },
       screens: {
         xs: { min: '480px' },

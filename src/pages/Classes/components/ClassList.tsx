@@ -1,4 +1,6 @@
-import { classInfoMap } from '../constants';
+import { Link } from 'react-router-dom';
+
+import useGetClass from '@/hooks/class/useGetClass';
 
 import ClassOverview from './ClassOverview';
 
@@ -16,29 +18,37 @@ function ClassList() {
     'text-primary-300',
   ];
 
+  const { data, isError, isLoading } = useGetClass();
+
+  if (isError || isLoading) {
+    return null;
+  }
+
   return (
     <>
-      {Object.entries(classInfoMap).map(([id, classInfo], index) => {
-        return (
-          <section
-            key={id}
-            className={`min-h-60 p-50 sm:py-100 sm:px-70 flex flex-col lg:flex-row items-center gap-70 ${bgColors[index]}`}
-          >
-            <div
-              className={
-                'min-w-115 min-h-115 h-115 grid place-items-center bg-white rounded-[100%] text-80'
-              }
+      {data &&
+        data.map((classData, index) => {
+          return (
+            <section
+              key={classData.title}
+              className={`min-h-60 p-50 sm:py-100 sm:px-70 flex flex-col lg:flex-row items-center gap-70 ${bgColors[index]}`}
             >
-              <span
-                className={`text-80 font-bold text-center ${textColors[index]}`}
+              <Link
+                className={
+                  'min-w-115 min-h-115 h-115 grid place-items-center bg-white rounded-[100%] text-80'
+                }
+                to={`/classes/${classData.title.toLowerCase()}`}
               >
-                {id}
-              </span>
-            </div>
-            <ClassOverview classInfo={classInfo} />
-          </section>
-        );
-      })}
+                <span
+                  className={`text-80 font-bold text-center ${textColors[index]}`}
+                >
+                  {classData.title}
+                </span>
+              </Link>
+              <ClassOverview classData={classData} />
+            </section>
+          );
+        })}
     </>
   );
 }

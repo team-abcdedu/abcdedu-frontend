@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { FormEventHandler, useState } from 'react';
+
+import RequiredField from '@/pages/Admin/components/FormBuilder/RequiredField';
 
 import QuestionnaireBuilder from './QuestionnaireBuilder';
 
@@ -6,7 +8,12 @@ interface InputItem {
   id: number;
 }
 
-function Index() {
+interface FormBuilderProps {
+  formName: string;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
+}
+
+function FormBuilder({ formName }: FormBuilderProps) {
   const [inputItems, setInputItems] = useState<InputItem[]>([{ id: 0 }]);
   const [inputIdx, setInputIdx] = useState(1);
 
@@ -20,16 +27,24 @@ function Index() {
   };
 
   return (
-    <form className={'w-full h-full flex flex-col gap-10 overflow-hidden'}>
+    <form
+      id={formName}
+      onSubmit={e => {
+        e.preventDefault();
+      }}
+      className={'w-full h-full flex flex-col gap-10 overflow-hidden'}
+    >
       <ul
         className={
-          'w-full h-[calc(100%_-_50px)] p-5 flex flex-col items-center gap-5 border-3 rounded-xl overflow-y-scroll bg-neutral-100'
+          'w-full h-full p-5 flex flex-col items-center gap-5 border-3 rounded-xl overflow-y-scroll bg-primary-50'
         }
       >
-        {inputItems.map(item => (
+        <RequiredField />
+        {inputItems.map((item, questionIdx) => (
           <QuestionnaireBuilder
             key={item.id}
             deleteHandler={() => handleDeleteItem(item.id)}
+            questionIdx={questionIdx}
           />
         ))}
         <button
@@ -40,13 +55,8 @@ function Index() {
           +
         </button>
       </ul>
-      <button
-        className={'h-40 px-20 text-20 border-2 rounded-lg border-neutral-300'}
-      >
-        등록하기
-      </button>
     </form>
   );
 }
 
-export default Index;
+export default FormBuilder;

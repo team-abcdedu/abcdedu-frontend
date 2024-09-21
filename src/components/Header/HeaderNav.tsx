@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Dropdown from '@/components/Dropdown';
 import { adminNavItem, headerNavItems } from '@/constants/navItems';
@@ -43,13 +43,13 @@ function HeaderNav() {
             >
               {item.list?.map(listItem => {
                 return (
-                  <Link
+                  <NavLink
                     key={listItem.to}
                     to={listItem.to}
-                    className={`${linkStyle}`}
+                    className={({ isActive }) => navLinkStyle(isActive)}
                   >
                     {listItem.text}
-                  </Link>
+                  </NavLink>
                 );
               })}
             </Dropdown>

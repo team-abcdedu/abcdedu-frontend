@@ -1,42 +1,70 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
-import { posts } from '@/mock/Community';
+import AccessError from '@/components/AccessError';
+import Head from '@/components/Head';
+import useModal from '@/hooks/useModal';
+import useBoundStore from '@/stores';
 
-import { PostDetails } from './components/PostData';
-// import { Comment } from './types/Comment';
+import Comments from './components/Comments';
+import LevelUpButton from './components/LevelUpButton';
+import PostFormModal from './components/PostFormModal';
+import PostSection from './components/PostSection';
+import { boardMetaData } from './constants/communityInfo';
+import useGetPost from './hooks/useGetPost';
 
-function PostDetail() {
-  const { postId } = useParams<{ postId: string }>();
-  const numericPostId = parseInt(postId || '0', 10);
-  const post = posts.find(p => p.id === numericPostId);
+export default function PostDetail() {
+  const { isVisible: isEditModalVisible, toggleModal: toggleEditModal } =
+    useModal();
+  const { category, postId } = useParams();
+  const user = useBoundStore(state => state.user);
+  const isPostIdNumeric = !Number.isNaN(Number(postId));
+  const { data: post, isFetched, errorCode } = useGetPost(postId ?? '');
+  const isForbidden = errorCode === 403;
 
-  const [commentText, setCommentText] = useState<string>('');
+  // 경로 예외 처리
+  if (!category || !(category in boardMetaData))
+    return <Navigate to='/community' replace />;
 
-  if (!post) {
-    return <div>게시글을 찾을 수 없습니다.</div>;
+  // postId 패턴 및 API 요청 예외 처리
+  if (!isPostIdNumeric || (isFetched && !isForbidden && !post && user)) {
+    alert('게시글 정보를 찾을 수 없습니다.');
+    return <Navigate to={`/community/${category}`} replace />;
   }
 
+  const isAdminRole = user?.role === '관리자';
+
+  // 등업 게시판 & 관리자 권한일 경우에만 등업시키기 버튼 렌더링
+  const isLevelUpButtonVisible = isAdminRole && category === 'levelup';
+
   return (
-    <div>
-      <PostDetails post={post} onClose={() => {}} />
-      {/* 차후 댓글 수 표기 로직 추가 */}
-      <div className='px-30 mb-20'>
-        <p className='mt-20 text-sm mb-[10px]'>댓글 0</p>
-        <div className='flex flex-row space-x-8 mt-4'>
-          <textarea
-            placeholder='자신의 의견을 자유롭게 표현해주세요.'
-            value={commentText}
-            onChange={e => setCommentText(e.target.value)}
-            className='w-full border rounded p-2 resize-none'
+    <div className='text-left mt-10 min-h-[500px]'>
+      <Head
+        title={`${post?.title ? `${post.title} | ` : ''}ABCDEdu 커뮤니티`}
+      />
+      {isFetched && isForbidden && (
+        <AccessError type='게시글' isPrevPageDirection errorCode={errorCode} />
+      )}
+      {!user && (
+        <AccessError type='게시글' isPrevPageDirection errorCode={401} />
+      )}
+      {post && (
+        <>
+          <PostSection
+            id={Number(postId)}
+            post={post}
+            category={category ?? ''}
+            toggleEditModal={toggleEditModal}
+            isMine={isAdminRole || user?.email === post.writerEmail}
           />
-          <button className='w-1/6 mt-2 py-2 px-4 bg-gray-300 rounded hover:bg-primary-400'>
-            등록
-          </button>
-        </div>
-      </div>
+          <PostFormModal
+            post={post}
+            isVisible={isEditModalVisible}
+            onClose={toggleEditModal}
+          />
+        </>
+      )}
+      {isLevelUpButtonVisible && <LevelUpButton postId={Number(postId)} />}
+      {post && post.commentAllow && <Comments postId={Number(postId)} />}
     </div>
   );
 }
-
-export default PostDetail;

@@ -8,10 +8,24 @@ import useModal from '@/hooks/useModal';
 import useBoundStore from '@/stores';
 import { AuthModalType } from '@/types/auth';
 
+interface ButtonsProps {
+  toggleMenu?: () => void;
+}
+
+interface MemberButtonsProps extends ButtonsProps {
+  name: string;
+}
+
 const btnStyle = 'w-100 h-36 px-20 py-4 flex-row-center rounded-[20px] text-14';
 
-function MemberButtons({ name }: { name: string }) {
+function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
   const { handleLogout } = useLogout();
+
+  const handleClick = () => {
+    handleLogout();
+    if (toggleMenu) toggleMenu();
+  };
+
   return (
     <>
       <Link className={'flex w-fit h-36 text-14 items-center'} to='/mypage'>
@@ -26,7 +40,7 @@ function MemberButtons({ name }: { name: string }) {
       </Link>
       <button
         className={`${btnStyle} bg-primary-400 text-white`}
-        onClick={handleLogout}
+        onClick={handleClick}
       >
         로그아웃
       </button>
@@ -34,13 +48,18 @@ function MemberButtons({ name }: { name: string }) {
   );
 }
 
-function GuestButtons() {
+function GuestButtons({ toggleMenu }: ButtonsProps) {
   const { isVisible, toggleModal } = useModal();
   const [modalType, setModalType] = useState<AuthModalType>('login');
 
   const handleClick = (type: AuthModalType) => {
     toggleModal();
     setModalType(type);
+  };
+
+  const handleClose = () => {
+    toggleModal();
+    if (toggleMenu) toggleMenu();
   };
 
   const toggleModalType = () => {
@@ -77,19 +96,23 @@ function GuestButtons() {
       <AuthModal
         type={modalType}
         isVisible={isVisible}
-        onClose={toggleModal}
+        onClose={handleClose}
         onToggle={toggleModalType}
       />
     </>
   );
 }
 
-function HeaderButtons() {
+function HeaderButtons({ toggleMenu }: ButtonsProps) {
   const user = useBoundStore(state => state.user);
 
   return (
     <div className={'flex flex-col items-center md:flex-row gap-10'}>
-      {user ? <MemberButtons name={user.name} /> : <GuestButtons />}
+      {user ? (
+        <MemberButtons name={user.name} toggleMenu={toggleMenu} />
+      ) : (
+        <GuestButtons toggleMenu={toggleMenu} />
+      )}
     </div>
   );
 }

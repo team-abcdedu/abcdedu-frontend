@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import FormBuilder from '../components/FormBuilder';
+// import FormBuilder from '../components/FormBuilder';
 
 import SurveyTable from './components/SurveyTable';
 
@@ -24,7 +24,7 @@ function Index() {
           {mode === 'list' ? '설문 등록' : '설문 관리'}
         </button>
       </div>
-      {mode === 'list' ? <SurveyTable /> : <FormBuilder />}
+      {mode === 'list' ? <SurveyTable /> : null}
     </div>
   );
 }

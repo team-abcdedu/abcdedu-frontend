@@ -54,26 +54,26 @@ export const headerNavItems: HeaderNavItem[] = [
     text: '커뮤니티',
     list: [
       {
-        to: '/community_levelup',
+        to: '/community/levelup',
         text: '등업 게시판',
       },
       {
-        to: '/community_project',
+        to: '/community/project',
         text: 'ABCD Project',
       },
       {
-        to: '/community_qna',
+        to: '/community/qna',
         text: 'Q & A',
       },
       {
-        to: '/community_bulletin_board',
+        to: '/community/bulletin_board',
         text: '자유게시판',
       },
     ],
   },
   {
     type: 'link',
-    to: '/assignment',
+    to: '/homework',
     text: '과제',
   },
   {
@@ -106,7 +106,7 @@ export const mobileMenuNavItems: MobileMenuNavItem[] = [
     text: '커뮤니티',
   },
   {
-    to: '/assignment',
+    to: '/homework',
     text: '과제',
   },
   {

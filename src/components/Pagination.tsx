@@ -7,6 +7,7 @@ interface Props {
   totalElements: number; // 전체 데이터 개수
   itemCountPerPage?: number; // 페이지 당 데이터 개수
   pageCount?: number; // 한 번에 보여줄 페이지 개수 (e.g. 5, 10 ...)
+  pageQueryKey?: string;
 }
 
 export default function Pagination({
@@ -14,6 +15,7 @@ export default function Pagination({
   totalElements,
   itemCountPerPage = 10,
   pageCount = 5,
+  pageQueryKey = 'page',
 }: Props) {
   const [searchParams] = useSearchParams();
   const { pathname } = useLocation();
@@ -25,7 +27,7 @@ export default function Pagination({
 
   const getUrl = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set('page', page.toString());
+    params.set(pageQueryKey, page.toString());
     return `${pathname}?${params.toString()}`;
   };
 

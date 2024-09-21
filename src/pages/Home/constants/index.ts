@@ -1,6 +1,6 @@
-import Clock from '@/assets/icons/clock.png';
-import School from '@/assets/icons/school.png';
-import Students from '@/assets/icons/students.png';
+import Clock from '@/assets/icons/clock.webp';
+import School from '@/assets/icons/school.webp';
+import Students from '@/assets/icons/students.webp';
 
 import { Achievement, Review, ClassType } from '../types';
 

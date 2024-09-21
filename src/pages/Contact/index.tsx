@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 
 import ContactModal from './components/ContactModal';
@@ -26,6 +27,7 @@ export default function Contact() {
 
   return (
     <div>
+      <Head title='문의 | ABCDEdu' />
       <div className='h-[400px] xs:h-[600px] flex-col-center gap-12 leading-[1.3]'>
         <h2 className='xs:text-18 text-neutral-400'>
           ABCDEdu에 대해 문의 사항이 있으신가요?
