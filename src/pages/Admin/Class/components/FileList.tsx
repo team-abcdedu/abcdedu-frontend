@@ -18,11 +18,7 @@ function FileList({ subLectureId }: FileListProps) {
 
   if (data && data.length > 0) {
     return (
-      <div
-        className={
-          'row-start-5 col-start-2 col-span-4 flex flex-col pt-5 gap-5'
-        }
-      >
+      <div className={'row-start-5 col-span-5 flex flex-col pt-5 gap-5'}>
         {data.map(file => (
           <GeneralFileItem
             key={file.assignmentFileId}

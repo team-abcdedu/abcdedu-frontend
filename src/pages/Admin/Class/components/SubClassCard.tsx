@@ -22,21 +22,17 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
       key={subClass.subClassId}
     >
       <div className={'grid grid-cols-5 items-center'}>
-        <span className={'text-14 text-neutral-500'}>ID</span>
-        <p className={'col-span-2'}>{subClass.subClassId}</p>
+        <span className={'text-14 text-neutral-500'}>이름</span>
+        <p className={'col-span-2'}>
+          {classTitle}-{subClass.orderNumber}
+        </p>
         <button
-          className={'col-span-2 border-2 border-neutral-300 rounded-md'}
+          className={'col-span-2 border-1 border-neutral-300 rounded-md'}
           type={'button'}
           onClick={toggleModal}
         >
           파일 업로드
         </button>
-      </div>
-      <div className={'grid grid-cols-5 items-center'}>
-        <span className={'text-14 text-neutral-500'}>이름</span>
-        <p className={'col-span-4'}>
-          {classTitle}-{subClass.orderNumber}
-        </p>
       </div>
       <div className={'grid grid-cols-5 items-center'}>
         <span className={'text-14 text-neutral-500'}>주제</span>
