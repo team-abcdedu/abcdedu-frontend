@@ -12,7 +12,7 @@ function ClassOverview({ classData }: { classData: ClassData }) {
     >
       <h3 className={'text-30 font-semibold text-white'}>Class {title}</h3>
       <p className={'mt-5 mb-20 text-20 text-white'}>
-        {subTitle ? `${subTitle}: ` : ''} {description}
+        {subTitle ? `${subTitle} ` : ''} {description ? `: ${description}` : ''}
       </p>
       <SubClassNavigationCard
         classTitle={title}
