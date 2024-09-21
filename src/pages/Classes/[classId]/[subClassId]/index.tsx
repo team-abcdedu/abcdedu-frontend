@@ -10,6 +10,7 @@ import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useModal from '@/hooks/useModal';
 import ExamContent from '@/pages/Classes/components/ExamContent';
 import useFileHandler from '@/pages/Classes/hooks/useFileHandler';
+import useBoundStore from '@/stores';
 
 function SubClass() {
   const buttonStyle =
@@ -46,23 +47,26 @@ function SubClass() {
     exam: false,
   });
 
+  const { user } = useBoundStore();
+
   useEffect(() => {
-    if (fileList) {
+    if (user && fileList) {
+      setFileState({ theory: false, data: false, exam: false });
       fileList.forEach(file => {
         const { assignmentType } = file;
-        if (assignmentType === 'THEORY') {
+        if (assignmentType === '이론') {
           setFileState(prev => ({
             ...prev,
             theory: true,
           }));
         }
-        if (assignmentType === 'DATA') {
+        if (assignmentType === '자료') {
           setFileState(prev => ({
             ...prev,
             data: true,
           }));
         }
-        if (assignmentType === 'EXAM') {
+        if (assignmentType === '시험') {
           setFileState(prev => ({
             ...prev,
             exam: true,
@@ -70,7 +74,7 @@ function SubClass() {
         }
       });
     }
-  }, [fileList]);
+  }, [fileList, user, classId, subClassId]);
 
   return (
     <>
@@ -82,7 +86,7 @@ function SubClass() {
         {fileState.theory && (
           <button
             className={buttonStyle}
-            onClick={() => handleDownloadFile('THEORY')}
+            onClick={() => handleDownloadFile('이론')}
           >
             <div className={iconWrapperStyle}>
               <Book className={iconStyle} />
@@ -94,7 +98,7 @@ function SubClass() {
         {fileState.data && (
           <button
             className={buttonStyle}
-            onClick={() => handleDownloadFile('DATA')}
+            onClick={() => handleDownloadFile('자료')}
           >
             <div className={iconWrapperStyle}>
               <Paperclip className={iconStyle} />
