@@ -17,7 +17,14 @@ function useGetSurveyList({
   sortDirection = 'desc',
 }: UseGetSurveyListProps) {
   const { data, isError, isLoading, error } = useQuery({
-    queryKey: ['surveyList', page, size, sortBy, sortDirection],
+    queryKey: [
+      'survey',
+      'list',
+      `page-${page}`,
+      `size-${size}`,
+      `sortBy-${sortBy}`,
+      `sortDirection-${sortDirection}`,
+    ],
     queryFn: () =>
       SurveyApi.getSurveyList({ page, size, sortBy, sortDirection }),
   });
