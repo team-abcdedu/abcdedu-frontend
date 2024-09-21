@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { clearAllQueries } from '@/libs/react-query';
+import { clearSelectedQueries } from '@/libs/react-query';
 import auth from '@/services/auth';
 import useBoundStore from '@/stores';
 
@@ -18,8 +18,7 @@ export default function useLogout() {
       resetAuthState();
       resetUser();
       navigate('/');
-      // queryClient.removeQueries({ queryKey: ['user'] });
-      clearAllQueries('class');
+      clearSelectedQueries(['user', 'homework', 'survey']);
     } catch (error) {
       console.log('error with logout: ', error);
     }

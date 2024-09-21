@@ -2,7 +2,7 @@ import axios from 'axios';
 import memoize from 'memoize';
 
 import { BASE_URL } from '@/config';
-import { clearAllQueries } from '@/libs/react-query';
+import { clearSelectedQueries } from '@/libs/react-query';
 import useBoundStore from '@/stores';
 
 // access token 재발급
@@ -25,7 +25,7 @@ const reissueAccessToken = memoize(
         baseURL: BASE_URL,
         withCredentials: true,
       });
-      clearAllQueries('class');
+      clearSelectedQueries(['user', 'homework', 'survey']);
       return Promise.reject(refreshError);
     }
   },

@@ -10,11 +10,14 @@ const queryConfig: DefaultOptions = {
 
 export const queryClient = new QueryClient({ defaultOptions: queryConfig });
 
-export const clearAllQueries = (except: string = '') => {
-  const allQueries = queryClient.getQueryCache().getAll();
-  allQueries.forEach(query => {
-    if (!query.queryKey.includes(except)) {
-      queryClient.removeQueries({ queryKey: query.queryKey });
-    }
-  });
+export const clearSelectedQueries = (selectedQueries: string[] = []) => {
+  queryClient
+    .getQueryCache()
+    .getAll()
+    .filter(query =>
+      selectedQueries.some(selectedQuery =>
+        query.queryKey.includes(selectedQuery),
+      ),
+    )
+    .forEach(query => queryClient.removeQueries({ queryKey: query.queryKey }));
 };
