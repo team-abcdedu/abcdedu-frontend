@@ -105,7 +105,7 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
 
     // 이미지 처리
     const currentImageFile = await getCurrentImageFile();
-    formData.append('file', currentImageFile ?? new Blob());
+    if (currentImageFile) formData.append('file', currentImageFile);
 
     updateMutation.mutate(formData, {
       onSuccess: () => {
