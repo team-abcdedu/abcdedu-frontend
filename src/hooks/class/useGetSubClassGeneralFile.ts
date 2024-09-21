@@ -10,7 +10,7 @@ function useGetSubClassGeneralFile({
   assignmentFileId,
 }: UseSubClassGeneralFileProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['sub-class-general-file', assignmentFileId],
+    queryKey: ['class', 'sub-class-general-file', assignmentFileId],
     queryFn: () => ClassApi.getSubClassFile(assignmentFileId),
     enabled: !!assignmentFileId,
   });

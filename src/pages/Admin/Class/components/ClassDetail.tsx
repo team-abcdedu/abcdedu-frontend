@@ -1,6 +1,3 @@
-import useModal from '@/hooks/useModal';
-import GeneralFileUploadModal from '@/pages/Admin/Class/components/GeneralFileUploadModal';
-import StudentFileUploadModal from '@/pages/Admin/Class/components/StudentFileUploadModal';
 import SubClassCard from '@/pages/Admin/Class/components/SubClassCard';
 import { ClassData } from '@/types/class';
 
@@ -9,15 +6,6 @@ interface ClassDetailProps {
 }
 
 function ClassDetail({ classData }: ClassDetailProps) {
-  const {
-    isVisible: isGeneralUploadVisible,
-    toggleModal: isGeneralUploadToggle,
-  } = useModal();
-  const {
-    isVisible: isStudentUploadVisible,
-    toggleModal: isStudentUploadToggle,
-  } = useModal();
-
   if (!classData) return null;
   return (
     <div
@@ -54,20 +42,6 @@ function ClassDetail({ classData }: ClassDetailProps) {
         <div className={'col-start-3 text-20 text-center font-medium'}>
           서브 클래스
         </div>
-        <div className={'col-span-2 px-10 flex justify-end gap-20'}>
-          <button
-            className={'px-10 text-15 border-2 rounded-lg border-neutral-300'}
-            onClick={isGeneralUploadToggle}
-          >
-            파일 업로드
-          </button>
-          <button
-            className={'px-10 text-15 border-2 rounded-lg border-neutral-300'}
-            onClick={isStudentUploadToggle}
-          >
-            학생 제출용 파일 업로드
-          </button>
-        </div>
       </div>
 
       <div
@@ -85,14 +59,6 @@ function ClassDetail({ classData }: ClassDetailProps) {
           ))}
         </ul>
       </div>
-      <GeneralFileUploadModal
-        isVisible={isGeneralUploadVisible}
-        onClose={isGeneralUploadToggle}
-      />
-      <StudentFileUploadModal
-        isVisible={isStudentUploadVisible}
-        onClose={isStudentUploadToggle}
-      />
     </div>
   );
 }

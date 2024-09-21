@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useModal from '@/hooks/useModal';
+import GeneralFileUploadModal from '@/pages/Admin/Class/components/GeneralFileUploadModal';
 import { SubClassData } from '@/types/class';
 
 import FileList from './FileList';
@@ -12,6 +14,8 @@ interface SubClassCardProps {
 function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
   const [openFileList, setOpenFileList] = useState<boolean>(false);
 
+  const { isVisible, toggleModal } = useModal();
+
   return (
     <li
       className={'w-full p-10 border-2 rounded-lg bg-white'}
@@ -19,7 +23,14 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
     >
       <div className={'grid grid-cols-5 items-center'}>
         <span className={'text-14 text-neutral-500'}>ID</span>
-        <p className={'col-span-4'}>{subClass.subClassId}</p>
+        <p className={'col-span-2'}>{subClass.subClassId}</p>
+        <button
+          className={'col-span-2 border-2 border-neutral-300 rounded-md'}
+          type={'button'}
+          onClick={toggleModal}
+        >
+          파일 업로드
+        </button>
       </div>
       <div className={'grid grid-cols-5 items-center'}>
         <span className={'text-14 text-neutral-500'}>이름</span>
@@ -40,7 +51,7 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
         <button
           type={'button'}
           className={
-            'col-span-2 px-10 text-12 border-2 rounded-lg border-neutral-300'
+            'col-span-2 px-10 text-13 border-1 rounded-md border-neutral-300'
           }
           onClick={() => setOpenFileList(prev => !prev)}
         >
@@ -48,6 +59,12 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
         </button>
         {openFileList && <FileList subLectureId={subClass.subClassId} />}
       </div>
+
+      <GeneralFileUploadModal
+        subClassId={subClass.subClassId}
+        isVisible={isVisible}
+        onClose={toggleModal}
+      />
     </li>
   );
 }

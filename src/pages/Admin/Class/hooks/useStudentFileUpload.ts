@@ -1,46 +1,54 @@
 import { useMutation } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { queryClient } from '@/libs/react-query';
 import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
 
 export interface IStudentFileUploadForm {
-  assignmentFileId: number;
-  file: File;
+  file: FileList;
 }
 
-function useStudentFileUpload() {
+interface UseStudentFileUploadProps {
+  assignmentFileId: number;
+}
+
+function useStudentFileUpload({ assignmentFileId }: UseStudentFileUploadProps) {
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<IStudentFileUploadForm>({ mode: 'onSubmit' });
 
   const fieldRules: FieldRules<IStudentFileUploadForm> = {
-    assignmentFileId: {
-      required: '파일 ID를 입력해주세요',
-    },
     file: {
       required: '파일을 첨부해주세요',
     },
   };
 
   const fileMutation = useMutation({
-    mutationFn: (data: { assignmentFileId: number; file: File }) =>
-      AdminClassApi.uploadStudentFile(data),
-    onError: error => {
-      alert('제출용 파일 등록에 실패했습니다.');
-      if (isAxiosError(error)) {
-        console.error(error.response?.data.result.message);
-        return;
-      }
-      console.error(error);
+    mutationFn: (data: { file: File }) =>
+      AdminClassApi.uploadStudentFile({ assignmentFileId, file: data.file }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['class', 'sub-class-student-file', assignmentFileId],
+      });
+      alert('파일이 등록되었습니다.');
+    },
+    onError: () => {
+      alert('파일 등록 중 문제가 발생했습니다.');
     },
   });
 
-  return { register, errors, handleSubmit, reset, fieldRules, fileMutation };
+  const submitForm: SubmitHandler<IStudentFileUploadForm> = (data, e) => {
+    e?.preventDefault();
+    const file = data.file[0];
+    fileMutation.mutate({ file });
+  };
+
+  const onSubmit = handleSubmit(submitForm);
+
+  return { register, errors, fieldRules, onSubmit };
 }
 
 export default useStudentFileUpload;

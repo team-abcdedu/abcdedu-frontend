@@ -41,7 +41,7 @@ function SubClass() {
       >
         <button
           className={buttonStyle}
-          onClick={() => handleDownloadFile('이론')}
+          onClick={() => handleDownloadFile('THEORY')}
         >
           <div className={iconWrapperStyle}>
             <Book className={iconStyle} />
@@ -51,7 +51,7 @@ function SubClass() {
 
         <button
           className={buttonStyle}
-          onClick={() => handleDownloadFile('자료')}
+          onClick={() => handleDownloadFile('DATA')}
         >
           <div className={iconWrapperStyle}>
             <Paperclip className={iconStyle} />
