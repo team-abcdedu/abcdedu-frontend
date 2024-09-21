@@ -43,6 +43,7 @@ function useStudentFileUpload({ assignmentFileId }: UseStudentFileUploadProps) {
   const submitForm: SubmitHandler<IStudentFileUploadForm> = (data, e) => {
     e?.preventDefault();
     const file = data.file[0];
+    console.log(file);
     fileMutation.mutate({ file });
   };
 

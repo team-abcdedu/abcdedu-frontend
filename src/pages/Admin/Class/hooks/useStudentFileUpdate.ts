@@ -20,6 +20,7 @@ function useStudentFileUpdate({
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IStudentFileUpDateForm>({ mode: 'onSubmit' });
 
   const fieldRules: FieldRules<IStudentFileUpDateForm> = {
@@ -50,7 +51,7 @@ function useStudentFileUpdate({
 
   const onSubmit = handleSubmit(submitForm);
 
-  return { register, errors, fieldRules, onSubmit };
+  return { register, errors, fieldRules, onSubmit, reset };
 }
 
 export default useStudentFileUpdate;
