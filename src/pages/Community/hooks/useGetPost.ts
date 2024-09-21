@@ -13,7 +13,7 @@ export default function useGetPost(postId: string) {
   const { data, isLoading, isFetched, error } = useQuery({
     queryKey: ['board', Number(postId), user?.email],
     queryFn: () => communityApi.getPost(Number(postId)),
-    enabled: /^\d+$/.test(postId) && !!user && !!accessToken,
+    enabled: /^\d+$/.test(postId) && !!accessToken,
   });
 
   const errorCode =

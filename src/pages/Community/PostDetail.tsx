@@ -44,7 +44,7 @@ export default function PostDetail() {
       {isFetched && isForbidden && (
         <AccessError type='게시글' isPrevPageDirection errorCode={errorCode} />
       )}
-      {!isFetched && !user && (
+      {!user && (
         <AccessError type='게시글' isPrevPageDirection errorCode={401} />
       )}
       {post && (
