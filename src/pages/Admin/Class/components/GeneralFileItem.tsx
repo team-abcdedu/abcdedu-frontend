@@ -18,10 +18,10 @@ function GeneralFileItem({
   assignmentFileId: number;
 }) {
   const fileTypeStyle = () => {
-    if (assignmentType === '이론') {
+    if (assignmentType === 'THEORY') {
       return 'bg-green-100';
     }
-    if (assignmentType === '시험') {
+    if (assignmentType === 'EXAM') {
       return 'bg-blue-100';
     }
     return 'bg-yellow-100';
@@ -35,7 +35,7 @@ function GeneralFileItem({
 
   const { data: studentFile } = useGetSubClassStudentFile({
     assignmentAnswerFileId: assignmentFileId,
-    enabled: assignmentType === '시험',
+    enabled: assignmentType === 'EXAM',
   });
 
   const { register, fieldRules, errors, onSubmit } = useGeneralFileUpdate({
@@ -63,7 +63,7 @@ function GeneralFileItem({
         수정
       </button>
 
-      {assignmentType === '시험' && (
+      {assignmentType === 'EXAM' && (
         <>
           <button
             type={'button'}

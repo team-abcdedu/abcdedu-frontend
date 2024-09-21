@@ -41,9 +41,9 @@ function GeneralFileUploadModal({
                 {...register('type', fieldRules.type)}
                 className={'p-5 font-medium'}
               >
-                <option value={'이론'}>이론</option>
-                <option value={'자료'}>자료</option>
-                <option value={'시험'}>시험</option>
+                <option value={'THEORY'}>이론</option>
+                <option value={'DATA'}>자료</option>
+                <option value={'EXAM'}>시험</option>
               </select>
               {errors.type && (
                 <span className={'text-13 text-red-700'}>
