@@ -19,14 +19,17 @@ function MediaContents() {
       >
         {mediaList.map(media => {
           return (
-            <button
-              key={media}
+            <a
+              key={media.title}
               className={
-                'w-full lg:w-150 h-60 px-16 py-8 text-15 font-medium text-primary-300 btn-white-pb !border-2 rounded-[10px]'
+                'w-full lg:w-150 h-60 px-16 py-8 flex-row-center text-center text-15 font-medium text-primary-300 btn-white-pb !border-2 rounded-[10px]'
               }
+              href={media.url}
+              target='_blank'
+              rel='noreferrer noopener'
             >
-              {media}
-            </button>
+              {media.title}
+            </a>
           );
         })}
       </div>
