@@ -22,6 +22,7 @@ function useGeneralFileUpdate({
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IFileUpdateForm>({ mode: 'onSubmit' });
 
   const fieldRules: FieldRules<IFileUpdateForm> = {
@@ -55,7 +56,7 @@ function useGeneralFileUpdate({
 
   const onSubmit = handleSubmit(submitForm);
 
-  return { register, errors, onSubmit, fieldRules };
+  return { register, errors, onSubmit, fieldRules, reset };
 }
 
 export default useGeneralFileUpdate;

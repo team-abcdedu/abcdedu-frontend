@@ -14,12 +14,12 @@ class ClassApi {
 
   static async getSubClassFile(
     assignmentFileId: number | null,
-  ): Promise<{ filePresignedUrl: string; assignmentAnswerFileId: string }> {
+  ): Promise<{ filePresignedUrl: string; assignmentAnswerFileId: number }> {
     return get(`/lectures/file/${assignmentFileId}`);
   }
 
   static async getSubClassAnswerFile(
-    assignmentAnswerFileId: number | null,
+    assignmentAnswerFileId: number | undefined,
   ): Promise<{ filePresignedUrl: string }> {
     return get(`/lectures/answer-file/${assignmentAnswerFileId}`);
   }

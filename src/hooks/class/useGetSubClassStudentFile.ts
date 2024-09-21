@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import ClassApi from '@/services/class';
 
 interface UseGetSubClassStudentFileProps {
-  assignmentAnswerFileId: number | null;
+  assignmentAnswerFileId: number | undefined;
   enabled: boolean;
 }
 

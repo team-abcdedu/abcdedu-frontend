@@ -34,39 +34,38 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
         </tr>
       </thead>
       <tbody>
-        {isError && (
+        {(isError || isLoading) && (
+          <tr className={'text-center'}>
+            <td colSpan={4}>
+              {isError
+                ? '데이터를 불러오는 중 문제가 발생했습니다.'
+                : '데이터를 불러오는 중입니다.'}
+            </td>
+          </tr>
+        )}
+
+        {data && data.length > 0 ? (
+          data.map(row => (
+            <tr
+              key={row.title}
+              className={'cursor-pointer hover:bg-neutral-200'}
+              onClick={() => handleRowClick({ ...row })}
+            >
+              {tableColumns.class.map(column => (
+                <td
+                  key={column}
+                  className={'text-center px-10 overflow-hidden'}
+                >
+                  <div className={'truncate'}>{fieldValue(column, row)}</div>
+                </td>
+              ))}
+            </tr>
+          ))
+        ) : (
           <tr className={'text-center'}>
             <td colSpan={4}>데이터가 없습니다.</td>
           </tr>
         )}
-        {isLoading && (
-          <tr className={'text-center'}>
-            <td colSpan={4}>데이터를 불러오는 중입니다.</td>
-          </tr>
-        )}
-        {!isLoading &&
-          (data && data.length > 0 ? (
-            data.map(row => (
-              <tr
-                key={row.title}
-                className={'cursor-pointer hover:bg-neutral-200'}
-                onClick={() => handleRowClick({ ...row })}
-              >
-                {tableColumns.class.map(column => (
-                  <td
-                    key={column}
-                    className={'text-center px-10 overflow-hidden'}
-                  >
-                    <div className={'truncate'}>{fieldValue(column, row)}</div>
-                  </td>
-                ))}
-              </tr>
-            ))
-          ) : (
-            <tr className={'text-center'}>
-              <td colSpan={4}>데이터가 없습니다.</td>
-            </tr>
-          ))}
       </tbody>
     </table>
   );
