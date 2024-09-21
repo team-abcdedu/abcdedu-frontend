@@ -38,35 +38,35 @@ function SubClass() {
   });
 
   const [fileState, setFileState] = useState<{
-    theory: number | null;
-    data: number | null;
-    exam: number | null;
+    theory: boolean;
+    data: boolean;
+    exam: boolean;
   }>({
-    theory: null,
-    data: null,
-    exam: null,
+    theory: false,
+    data: false,
+    exam: false,
   });
 
   useEffect(() => {
     if (fileList) {
       fileList.forEach(file => {
-        const { assignmentType, assignmentFileId } = file;
+        const { assignmentType } = file;
         if (assignmentType === 'THEORY') {
-          setFileState(prevState => ({
-            ...prevState,
-            theory: assignmentFileId,
+          setFileState(prev => ({
+            ...prev,
+            theory: true,
           }));
         }
         if (assignmentType === 'DATA') {
-          setFileState(prevState => ({
-            ...prevState,
-            data: assignmentFileId,
+          setFileState(prev => ({
+            ...prev,
+            data: true,
           }));
         }
         if (assignmentType === 'EXAM') {
-          setFileState(prevState => ({
-            ...prevState,
-            exam: assignmentFileId,
+          setFileState(prev => ({
+            ...prev,
+            exam: true,
           }));
         }
       });
