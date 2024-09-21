@@ -51,7 +51,7 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
         <button
           type={'button'}
           className={
-            'col-span-2 px-10 text-12 border-2 rounded-lg border-neutral-300'
+            'col-span-2 px-10 text-13 border-1 rounded-md border-neutral-300'
           }
           onClick={() => setOpenFileList(prev => !prev)}
         >
