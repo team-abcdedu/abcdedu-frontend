@@ -4,6 +4,7 @@ import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
 import { SubClassContentState } from '@/pages/Classes/types';
 import useBoundStore from '@/stores';
+import { getFileName } from '@/utils/getFileName';
 
 interface UseFileHandlerProps {
   subClassId: number;
@@ -80,7 +81,7 @@ function useFileHandler({
       // 파일 다운로드
       const linkEle = document.createElement('a');
       linkEle.href = generalFile?.filePresignedUrl ?? '';
-      linkEle.download = `${contentState.generalType}.pdf`;
+      linkEle.download = getFileName(generalFile?.filePresignedUrl ?? '') ?? '';
       linkEle.click();
     }
   }, [generalFile, contentState]);

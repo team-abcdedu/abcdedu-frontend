@@ -1,39 +1,40 @@
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
+import { getFileName } from '@/utils/getFileName';
 
 interface ExamContentProps {
-  pdfUrl: string | undefined;
-  pdfFileId: number | null;
+  examFileUrl: string | undefined;
+  examFileId: number | null;
 }
 
-function ExamContent({ pdfUrl, pdfFileId }: ExamContentProps) {
-  const { data: hwp } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: pdfFileId,
-    enabled: !!pdfFileId,
+function ExamContent({ examFileUrl, examFileId }: ExamContentProps) {
+  const { data: examStudentFile } = useGetSubClassStudentFile({
+    assignmentAnswerFileId: examFileId,
+    enabled: !!examFileId,
   });
 
   return (
     <div className={'w-full pb-100'}>
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
         <a
-          href={pdfUrl}
-          target={'_blank'}
-          rel={'noreferrer noopener'}
+          href={examFileUrl}
+          download={getFileName(examFileUrl ?? '')}
           className={
             'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
           }
         >
-          메뉴얼 pdf 다운로드
+          시험 파일 다운로드
         </a>
-        <a
-          href={hwp?.filePresignedUrl}
-          target={'_blank'}
-          rel={'noreferrer noopener'}
-          className={
-            'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
-          }
-        >
-          제출용 hwp 다운로드
-        </a>
+        {examStudentFile && (
+          <a
+            href={examStudentFile.filePresignedUrl}
+            download={getFileName(examStudentFile.filePresignedUrl)}
+            className={
+              'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
+            }
+          >
+            제출용 파일 다운로드
+          </a>
+        )}
       </div>
     </div>
   );
