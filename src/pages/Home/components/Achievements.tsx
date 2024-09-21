@@ -24,7 +24,7 @@ export default function Achievements() {
               <img
                 src={a.imgUrl}
                 alt={`icon-${i + 1}`}
-                className={`${i === 2 ? 'w-36' : 'w-18'} h-fit`}
+                className={`${i === 2 ? 'w-36' : 'w-18'} h-18`}
               />
             </div>
             <div>
