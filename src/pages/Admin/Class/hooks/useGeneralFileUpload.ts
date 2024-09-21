@@ -1,17 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 
+import { queryClient } from '@/libs/react-query';
 import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
 
 export interface IFileUploadForm {
-  subLectureId: number;
   type: string;
   file: File;
 }
 
-function useGeneralFileUpload() {
+interface UseGeneralFileUploadProps {
+  subLectureId: number;
+}
+
+function useGeneralFileUpload({ subLectureId }: UseGeneralFileUploadProps) {
   const {
     register,
     formState: { errors },
@@ -20,9 +23,6 @@ function useGeneralFileUpload() {
   } = useForm<IFileUploadForm>({ mode: 'onSubmit' });
 
   const fieldRules: FieldRules<IFileUploadForm> = {
-    subLectureId: {
-      required: '클래스 ID를 입력해주세요',
-    },
     type: {
       required: '타입을 선택해주세요',
     },
@@ -32,15 +32,16 @@ function useGeneralFileUpload() {
   };
 
   const fileMutation = useMutation({
-    mutationFn: (data: { subLectureId: number; type: string; file: File }) =>
-      AdminClassApi.uploadGeneralFile(data),
-    onError: error => {
+    mutationFn: (data: IFileUploadForm) =>
+      AdminClassApi.uploadGeneralFile({ ...data, subLectureId }),
+    onSuccess: () => {
+      alert('파일이 등록되었습니다.');
+      queryClient.invalidateQueries({
+        queryKey: ['class', 'sub-class-file-list', subLectureId],
+      });
+    },
+    onError: () => {
       alert('파일 등록에 실패했습니다.');
-      if (isAxiosError(error)) {
-        console.error(error.response?.data.result.message);
-        return;
-      }
-      console.error(error);
     },
   });
 

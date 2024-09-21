@@ -1,6 +1,4 @@
 import { X } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { ChangeEvent, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import Modal from '@/components/Modal';
@@ -9,43 +7,27 @@ import useGeneralFileUpload, {
 } from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
 
 interface FileUploadModalProps {
+  subClassId: number;
   isVisible: boolean;
   onClose: () => void;
 }
 
-function GeneralFileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
-  const inputWrapperStyle = 'w-full flex flex-col gap-5 p-5';
-  const [file, setFile] = useState<File | null>(null);
-
+function GeneralFileUploadModal({
+  subClassId,
+  isVisible,
+  onClose,
+}: FileUploadModalProps) {
   const { register, fieldRules, reset, errors, handleSubmit, fileMutation } =
-    useGeneralFileUpload();
+    useGeneralFileUpload({ subLectureId: subClassId });
 
   const closeModal = () => {
-    setFile(null);
     reset();
     onClose();
   };
 
-  const fileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputFile = e.target?.files?.[0] as File;
-    if (!inputFile) return;
-    setFile(inputFile);
-  };
-
-  const queryClient = useQueryClient();
   const onSubmit: SubmitHandler<IFileUploadForm> = (data, e) => {
     e?.preventDefault();
-    const fileData = { ...data };
-    fileData.file = file as File;
-    fileMutation.mutate(fileData, {
-      onSuccess: () => {
-        alert('파일이 등록되었습니다.');
-        queryClient.invalidateQueries({
-          queryKey: ['sub-class-file-list', fileData.subLectureId],
-        });
-        closeModal();
-      },
-    });
+    fileMutation.mutate(data);
   };
 
   return (
@@ -63,28 +45,14 @@ function GeneralFileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
           >
             <X size={20} />
           </button>
-          <div className={`${inputWrapperStyle}`}>
-            <label htmlFor={'title'} className={`w-fit px-5`}>
-              서브 클래스 ID
-            </label>
-            <input
-              {...register('subLectureId', fieldRules.subLectureId)}
-              id={'subclass-id'}
-              type='number'
-              className={'p-5 border-2 rounded-md'}
-            />
-            {errors.subLectureId && (
-              <span className={'text-13 text-red-700'}>
-                {errors.subLectureId.message || ''}
-              </span>
-            )}
-          </div>
 
-          <div className={`${inputWrapperStyle}`}>
-            <div
-              className={`w-full px-5 flex justify-between items-center gap-20`}
-            >
-              <select {...register('type', fieldRules.type)}>
+          <div className={'w-full flex-col-center gap-20'}>
+            <div className={`w-2/3 flex justify-between items-center px-10`}>
+              <span className={'text-neutral-500'}>파일 유형</span>
+              <select
+                {...register('type', fieldRules.type)}
+                className={'p-5 font-medium'}
+              >
                 <option value={'이론'}>이론</option>
                 <option value={'자료'}>자료</option>
                 <option value={'시험'}>시험</option>
@@ -94,28 +62,13 @@ function GeneralFileUploadModal({ isVisible, onClose }: FileUploadModalProps) {
                   {errors.type.message || ''}
                 </span>
               )}
-              <label
-                htmlFor={'file'}
-                className={
-                  'py-2 px-5 text-14 text-neutral-100 border-2 rounded-md bg-neutral-300'
-                }
-              >
-                파일 찾기
-              </label>
             </div>
-            <div className={'w-full flex justify-between'}>
-              <input
-                type={'text'}
-                value={file?.name ?? ''}
-                readOnly
-                className={'w-full p-5 text-neutral-500 border-2 rounded-md'}
-              />
+            <div className={'w-2/3'}>
               <input
                 {...register('file', fieldRules.file)}
                 id={'file'}
                 type={'file'}
-                onChange={fileChangeHandler}
-                className={'hidden'}
+                className={'w-full border-1'}
                 accept={'.zip,.rar,.7z,.tar,.gz,.pdf,.hwp,.doc,.docx'}
               />
               {errors.file && (
