@@ -1,6 +1,24 @@
+import MessageModal from '@/components/MessageModal';
+import useModal from '@/hooks/useModal';
+import useBoundStore from '@/stores';
+
 import { mediaList } from '../constants';
 
 function MediaContents() {
+  const { isVisible, toggleModal } = useModal();
+  const { user } = useBoundStore();
+
+  const handleMediaClick = (url: string) => {
+    if (user && user.role === '관리자') {
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+      if (newWindow) {
+        newWindow.opener = null;
+      }
+    } else {
+      toggleModal();
+    }
+  };
+
   return (
     <section
       className={
@@ -19,20 +37,25 @@ function MediaContents() {
       >
         {mediaList.map(media => {
           return (
-            <a
+            <button
               key={media.title}
               className={
                 'w-full lg:w-150 h-60 px-16 py-8 flex-row-center text-center text-15 font-medium text-primary-300 btn-white-pb !border-2 rounded-[10px]'
               }
-              href={media.url}
-              target='_blank'
-              rel='noreferrer noopener'
+              type={'button'}
+              onClick={() => handleMediaClick(media.url)}
             >
               {media.title}
-            </a>
+            </button>
           );
         })}
       </div>
+      <MessageModal
+        isVisible={isVisible}
+        onClose={toggleModal}
+        type={'error'}
+        message={'관리자만 접근 가능합니다.'}
+      />
     </section>
   );
 }
