@@ -37,7 +37,7 @@ function useFileHandler({
     return fileList?.find(file => file.assignmentType === type);
   };
 
-  const handleDownloadFile = (type: 'THEORY' | 'DATA') => {
+  const handleDownloadFile = (type: '이론' | '자료') => {
     if (user?.role === '관리자') {
       const file = findFile(type);
       if (!file) {
@@ -56,14 +56,14 @@ function useFileHandler({
   };
 
   const handleExamClick = () => {
-    const file = findFile('EXAM');
+    const file = findFile('시험');
     if (!file) {
       setModalMessage('시험 정보가 없습니다.');
       toggleModal();
       return;
     }
     setContentState({
-      generalType: 'EXAM',
+      generalType: '시험',
       generalFileId: file.assignmentFileId,
     });
     setOpenExam(prev => !prev);
@@ -75,14 +75,15 @@ function useFileHandler({
 
   useEffect(() => {
     if (
-      contentState.generalType === 'THEORY' ||
-      contentState.generalType === 'DATA'
+      contentState.generalType === '이론' ||
+      contentState.generalType === '자료'
     ) {
       // 파일 다운로드
-      const linkEle = document.createElement('a');
-      linkEle.href = generalFile?.filePresignedUrl ?? '';
-      linkEle.download = getFileName(generalFile?.filePresignedUrl ?? '') ?? '';
-      linkEle.click();
+      const fileName = `${getFileName(generalFile?.filePresignedUrl ?? '')}_${contentState.generalType}`;
+      const a = document.createElement('a');
+      a.href = generalFile?.filePresignedUrl || '';
+      a.download = fileName;
+      a.click();
     }
   }, [generalFile, contentState]);
 

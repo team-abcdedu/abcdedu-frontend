@@ -18,10 +18,10 @@ function GeneralFileItem({
   assignmentFileId: number;
 }) {
   const fileTypeStyle = () => {
-    if (assignmentType === 'THEORY') {
+    if (assignmentType === '이론') {
       return 'bg-green-50';
     }
-    if (assignmentType === 'EXAM') {
+    if (assignmentType === '시험') {
       return 'bg-blue-50';
     }
     return 'bg-yellow-50';
@@ -35,7 +35,7 @@ function GeneralFileItem({
 
   const { data: studentFile } = useGetSubClassStudentFile({
     assignmentAnswerFileId: generalFile?.assignmentAnswerFileId ?? 0,
-    enabled: assignmentType === 'EXAM' && !!generalFile?.assignmentAnswerFileId,
+    enabled: assignmentType === '시험' && !!generalFile?.assignmentAnswerFileId,
   });
 
   const { register, fieldRules, errors, onSubmit, reset } =
@@ -68,14 +68,14 @@ function GeneralFileItem({
         수정
       </button>
 
-      {assignmentType === 'EXAM' && (
+      {assignmentType === '시험' && (
         <>
           <button
             type={'button'}
             className={`col-span-2 text-13 text-center font-normal text-sky-800`}
             onClick={toggleModal}
           >
-            제출용 파일 업로드
+            학생용 파일 업로드
           </button>
           <StudentFileUploadModal
             isVisible={isVisible}
@@ -116,7 +116,7 @@ function GeneralFileItem({
 
       {studentFile && (
         <StudentFileItem
-          type={'제출용'}
+          type={'학생용'}
           assignmentAnswerFileId={generalFile.assignmentAnswerFileId}
           url={studentFile.filePresignedUrl}
         />
