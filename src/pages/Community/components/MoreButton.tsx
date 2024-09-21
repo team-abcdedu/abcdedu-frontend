@@ -41,7 +41,7 @@ export default function MoreButton({
       {menuVisible && (
         <>
           <Backdrop isDark={false} onClick={toggleMenu} />
-          <div className='absolute right-8 mt-2 w-80 bg-white shadow-lg z-[101] rounded-lg border'>
+          <div className='absolute right-8 mt-2 w-80 bg-white shadow-lg z-modal rounded-lg border'>
             <button
               onClick={handleEdit}
               className='block w-full py-6 text-sm text-gray-700 hover:bg-gray-100'
