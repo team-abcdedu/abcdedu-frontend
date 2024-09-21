@@ -17,10 +17,8 @@ const Board = lazy(() => import('@/pages/Community/Board'));
 const PostDetail = lazy(() => import('@/pages/Community/PostDetail'));
 
 const Homework = lazy(() => import('@/pages/Homework'));
-// const HomeworkDetail = lazy(() => import('@/pages/Homework/[homeworkId]'));
 
 const Survey = lazy(() => import('@/pages/Survey'));
-const SurveyDetail = lazy(() => import('@/pages/Survey/[surveyId]'));
 
 const Contact = lazy(() => import('@/pages/Contact'));
 
@@ -81,17 +79,9 @@ export const publicRoutes: RouteObject[] = [
         path: '/homework',
         element: <Homework />,
       },
-      // {
-      //   path: '/homework/:homeworkId',
-      //   element: <HomeworkDetail />,
-      // },
       {
         path: '/survey',
         element: <Survey />,
-      },
-      {
-        path: '/survey/:surveyId',
-        element: <SurveyDetail />,
       },
     ],
   },
