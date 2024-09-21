@@ -1,10 +1,7 @@
 import { X } from '@phosphor-icons/react';
-import { SubmitHandler } from 'react-hook-form';
 
 import Modal from '@/components/Modal';
-import useGeneralFileUpload, {
-  IFileUploadForm,
-} from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
+import useGeneralFileUpload from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
 
 interface FileUploadModalProps {
   subClassId: number;
@@ -17,31 +14,22 @@ function GeneralFileUploadModal({
   isVisible,
   onClose,
 }: FileUploadModalProps) {
-  const { register, fieldRules, reset, errors, handleSubmit, fileMutation } =
-    useGeneralFileUpload({ subLectureId: subClassId });
-
-  const closeModal = () => {
-    reset();
-    onClose();
-  };
-
-  const onSubmit: SubmitHandler<IFileUploadForm> = (data, e) => {
-    e?.preventDefault();
-    fileMutation.mutate(data);
-  };
+  const { register, fieldRules, errors, onSubmit } = useGeneralFileUpload({
+    subLectureId: subClassId,
+  });
 
   return (
-    <Modal size={'sm'} isVisible={isVisible} onClose={closeModal}>
+    <Modal size={'sm'} isVisible={isVisible} onClose={onClose}>
       <Modal.Content>
         <form
           id={'file-upload'}
           className={'w-full pt-10 flex flex-col gap-10 text-16'}
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={onSubmit}
         >
           <button
             type='button'
             className='absolute top-12 right-12'
-            onClick={closeModal}
+            onClick={onClose}
           >
             <X size={20} />
           </button>
