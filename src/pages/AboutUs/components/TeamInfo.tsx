@@ -27,7 +27,7 @@ export default function TeamInfo() {
             <img
               src={teamImage[0]}
               alt='한서현'
-              className='block w-150 h-fit object-center scale-125 -mt-30 -ml-8'
+              className='block w-150 h-auto object-center scale-125 -mt-30 -ml-8'
             />
           </div>
           <div className={profileCardStyle}>
