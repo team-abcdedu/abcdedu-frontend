@@ -78,6 +78,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   };
 
   const handleDeleteFileUrl = () => {
+    setFile(null);
     setFileUrl(null);
   };
 
@@ -95,14 +96,18 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     formData.append('secret', data.secret.toString());
     formData.append('commentAllow', data.commentAllow.toString());
 
-    const prevFileUrl = fileUrl ?? '';
-    formData.append('file', file ?? prevFileUrl);
+    formData.append('file', file ?? '');
 
     // 게시글 수정
     if (post && postId) {
       // 파일을 삭제하는 경우
       if (post?.fileUrl && !fileUrl) {
-        communityApi.deletePostFile(Number(postId));
+        try {
+          await communityApi.deletePostFile(Number(postId));
+        } catch (error) {
+          alert('파일을 삭제할 수 없습니다.');
+          console.log(error);
+        }
       }
       const postUpdateData = { id: Number(postId), form: formData };
       updatePost.mutate(postUpdateData, {
