@@ -57,7 +57,7 @@ function SurveyTable() {
             ))
           ) : (
             <tr className={'text-center'}>
-              <td>데이터가 없습니다.</td>
+              <td colSpan={4}>데이터가 없습니다.</td>
             </tr>
           )}
         </tbody>
