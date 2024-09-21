@@ -10,9 +10,14 @@ import MoreButton from './MoreButton';
 interface CommentCardProps {
   postId: number;
   comment: Comment;
+  isMine: boolean;
 }
 
-export default function CommentCard({ postId, comment }: CommentCardProps) {
+export default function CommentCard({
+  postId,
+  comment,
+  isMine,
+}: CommentCardProps) {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const toggleEditMode = () => setIsEditMode(prev => !prev);
@@ -35,11 +40,13 @@ export default function CommentCard({ postId, comment }: CommentCardProps) {
             {comment.createdAt.split('T')[0]}
           </p>
         </div>
-        <MoreButton
-          iconSize='sm'
-          onEdit={() => setIsEditMode(true)}
-          onDelete={handleDelete}
-        />
+        {isMine && (
+          <MoreButton
+            iconSize='sm'
+            onEdit={() => setIsEditMode(true)}
+            onDelete={handleDelete}
+          />
+        )}
       </div>
       {isEditMode ? (
         <CommentForm

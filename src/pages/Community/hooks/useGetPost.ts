@@ -5,12 +5,15 @@ import communityApi from '@/services/community';
 import useBoundStore from '@/stores';
 
 export default function useGetPost(postId: string) {
-  const user = useBoundStore(state => state.user);
+  const { accessToken, user } = useBoundStore(state => ({
+    accessToken: state.accessToken,
+    user: state.user,
+  }));
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['board', Number(postId)],
+  const { data, isLoading, isFetched, error } = useQuery({
+    queryKey: ['board', Number(postId), user?.email],
     queryFn: () => communityApi.getPost(Number(postId)),
-    enabled: /^\d+$/.test(postId) && !!user,
+    enabled: /^\d+$/.test(postId) && !!accessToken,
   });
 
   const errorCode =
@@ -18,5 +21,5 @@ export default function useGetPost(postId: string) {
       ? error.response?.status
       : null;
 
-  return { data, isLoading, errorCode };
+  return { data, isLoading, isFetched, errorCode };
 }

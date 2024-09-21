@@ -19,6 +19,8 @@ export default function Comments({ postId }: { postId: number }) {
     page,
   });
 
+  const isAdminRole = user?.role === '관리자';
+
   return (
     <div className='px-20 mb-20'>
       <p className='font-semibold text-zinc-600 mt-20 text-sm mb-16'>
@@ -28,7 +30,11 @@ export default function Comments({ postId }: { postId: number }) {
       <div>
         {list.map(comment => (
           <div key={comment.commentId} className='border-b py-16'>
-            <CommentCard postId={postId} comment={comment} />
+            <CommentCard
+              postId={postId}
+              comment={comment}
+              isMine={isAdminRole || user?.email === comment.writerEmail}
+            />
           </div>
         ))}
         <Pagination
