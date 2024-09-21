@@ -48,8 +48,8 @@ export default function Comments({ postId }: { postId: number }) {
           <CommentForm postId={postId} mode='create' />
         ) : (
           <p className='text-center'>
-            <span className='text-primary-400 font-bold'>학생</span> 등급 이상만
-            댓글을 작성할 수 있어요.
+            <span className='text-primary-400 font-bold'>학생</span>
+            &nbsp;등급 이상만 댓글을 작성할 수 있습니다.
           </p>
         )}
       </div>
