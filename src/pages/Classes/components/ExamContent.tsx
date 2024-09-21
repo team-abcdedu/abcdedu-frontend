@@ -3,13 +3,13 @@ import { getFileName } from '@/utils/getFileName';
 
 interface ExamContentProps {
   examFileUrl: string | undefined;
-  examFileId: number | null;
+  studentFileId: number | undefined;
 }
 
-function ExamContent({ examFileUrl, examFileId }: ExamContentProps) {
+function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
   const { data: examStudentFile } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: examFileId,
-    enabled: !!examFileId,
+    assignmentAnswerFileId: studentFileId,
+    enabled: !!studentFileId,
   });
 
   return (

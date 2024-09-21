@@ -25,13 +25,12 @@ function SubClass() {
   const [modalMessage, setModalMessage] = useState('');
   const [openExam, setOpenExam] = useState(false);
 
-  const { handleDownloadFile, handleExamClick, contentState, generalFile } =
-    useFileHandler({
-      subClassId: subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`],
-      toggleModal,
-      setModalMessage,
-      setOpenExam,
-    });
+  const { handleDownloadFile, handleExamClick, generalFile } = useFileHandler({
+    subClassId: subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`],
+    toggleModal,
+    setModalMessage,
+    setOpenExam,
+  });
 
   const { data: fileList } = useGetSubClassFileList({
     subLectureId: subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`],
@@ -127,7 +126,7 @@ function SubClass() {
       {fileState.exam && openExam && (
         <ExamContent
           examFileUrl={generalFile?.filePresignedUrl}
-          examFileId={contentState.generalFileId}
+          studentFileId={generalFile?.assignmentAnswerFileId}
         />
       )}
     </>
