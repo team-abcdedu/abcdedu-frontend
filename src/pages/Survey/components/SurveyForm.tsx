@@ -27,8 +27,8 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
       <AccessError
         type={'설문'}
         errorCode={errorCode}
-        linkUrl={'/survey'}
-        linkString={'설문 목록으로'}
+        linkUrl={'/'}
+        linkString={'홈으로'}
       />
     );
   }
