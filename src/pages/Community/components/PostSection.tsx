@@ -12,6 +12,7 @@ interface PostSectionProps {
   post: Post;
   category: string;
   toggleEditModal: () => void;
+  isMine: boolean;
 }
 
 export default function PostSection({
@@ -19,6 +20,7 @@ export default function PostSection({
   post,
   category,
   toggleEditModal,
+  isMine,
 }: PostSectionProps) {
   const { deletePost } = usePostMutation({ category });
 
@@ -61,7 +63,9 @@ export default function PostSection({
               </p>
             </Link>
           )}
-          <MoreButton onEdit={toggleEditModal} onDelete={handleDelete} />
+          {isMine && (
+            <MoreButton onEdit={toggleEditModal} onDelete={handleDelete} />
+          )}
         </div>
       </div>
       <hr className='border-1 border-gray-300 w-full' />

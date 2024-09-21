@@ -15,9 +15,9 @@ export default function useLogout() {
   const handleLogout = async () => {
     try {
       await auth.logout();
+      navigate('/');
       resetAuthState();
       resetUser();
-      navigate('/');
       clearSelectedQueries(['user', 'homework', 'survey']);
     } catch (error) {
       console.log('error with logout: ', error);

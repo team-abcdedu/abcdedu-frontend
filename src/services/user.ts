@@ -6,6 +6,10 @@ class UserApi {
     return get<User>('/members/info/name-and-role');
   }
 
+  static async getUserBasicInfo() {
+    return get<User>('/members/basic-info');
+  }
+
   static async getUserInfo() {
     return get<UserInfo>('/members/info');
   }
