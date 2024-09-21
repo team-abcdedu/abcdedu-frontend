@@ -46,7 +46,7 @@ export default function MyPage() {
             <img
               src={user.imageUrl}
               alt='profile-img'
-              className='object-cover'
+              className='w-full h-full object-cover'
             />
           )}
         </div>
