@@ -9,13 +9,13 @@ function MediaContents() {
   const { user } = useBoundStore();
 
   const handleMediaClick = (url: string) => {
-    if (user && user.role === '관리자') {
-      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-      if (newWindow) {
-        newWindow.opener = null;
-      }
-    } else {
+    if (!user || user?.role !== '관리자') {
       toggleModal();
+      return;
+    }
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) {
+      newWindow.opener = null;
     }
   };
 
