@@ -13,7 +13,7 @@ function FileItemDetails({ type, url }: FileItemDetailsProps) {
       </div>
       <a
         href={url}
-        download={getFileName(url)}
+        download={`${getFileName(url)}_${type}`}
         className={'text-14 text-primary-300'}
       >
         다운로드

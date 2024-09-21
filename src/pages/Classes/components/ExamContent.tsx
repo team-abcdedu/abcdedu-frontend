@@ -17,7 +17,7 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
         <a
           href={examFileUrl}
-          download={getFileName(examFileUrl ?? '')}
+          download={`${getFileName(examFileUrl ?? '')}_시험`}
           className={
             'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
           }
@@ -27,7 +27,7 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
         {examStudentFile && (
           <a
             href={examStudentFile.filePresignedUrl}
-            download={getFileName(examStudentFile.filePresignedUrl)}
+            download={`${getFileName(examStudentFile.filePresignedUrl)}_학생용`}
             className={
               'p-10 text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50'
             }
