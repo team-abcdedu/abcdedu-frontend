@@ -1,4 +1,8 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import communityApi from '@/services/community';
@@ -14,6 +18,7 @@ export default function useGetComments({ postId, page }: UseGetCommentsProps) {
   const { data, isLoading } = useQuery({
     queryKey: ['comments', postId, `page-${page}`],
     queryFn: () => communityApi.getComments(postId, page),
+    placeholderData: keepPreviousData,
   });
 
   const list = data?.content || [];
