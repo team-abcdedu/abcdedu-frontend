@@ -37,7 +37,7 @@ class CommunityApi {
 
   static async getComments(postId: number, page: number) {
     return get<PaginatedResponse<Comment>>(`/posts/${postId}/comments`, {
-      params: { page },
+      params: { page, sort: 'createdAt', sortDirection: 'asc' },
     });
   }
 
