@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import useBoundStore from '@/stores';
 import { Post } from '@/types/community';
+import { formatDate } from '@/utils/formatDate';
 
 import usePostMutation from '../hooks/usePostMutation';
 
@@ -59,7 +60,7 @@ export default function PostSection({
             {post?.writer ?? '사용자'}
           </p>
           <p className='text-gray-400 relative text-sm pipe-after'>
-            {post?.createdAt ? post?.createdAt.split('T')[0] : 'YYYY-MM-DD'}
+            {post?.createdAt ? formatDate(post.createdAt) : 'YYYY-MM-DD hh:mm'}
           </p>
           <p className='text-gray-400 text-sm'>{`조회 ${post?.viewCount ?? 0}`}</p>
         </div>
