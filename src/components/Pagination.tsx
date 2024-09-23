@@ -48,7 +48,7 @@ export default function Pagination({
 
   const handlePage = () => {
     if (scrollTarget && scrollTarget.current) {
-      scrollTarget.current.scrollIntoView({ behavior: 'smooth' });
+      scrollTarget.current.scrollIntoView();
       return;
     }
     window.scrollTo(0, 0);
