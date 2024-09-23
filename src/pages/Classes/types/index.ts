@@ -33,6 +33,6 @@ export interface TempExamInfoMap {
 }
 
 export interface SubClassContentState {
-  generalType: 'THEORY' | 'DATA' | 'EXAM' | null;
+  generalType: '이론' | '자료' | '시험' | null;
   generalFileId: number | null;
 }
