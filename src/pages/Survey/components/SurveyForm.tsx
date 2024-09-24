@@ -16,7 +16,7 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
     data: survey,
     isError,
     isLoading,
-    errorCode,
+    errorStatus,
   } = useGetSurvey({ surveyId });
 
   const { register, errors, onSubmit } = useSurveyForm({
@@ -27,11 +27,11 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
     return <SurveyLoading />;
   }
 
-  if (errorCode) {
+  if (errorStatus) {
     return (
       <AccessError
         type={'설문'}
-        errorCode={errorCode}
+        status={errorStatus}
         linkUrl={'/'}
         linkString={'홈으로'}
       />
