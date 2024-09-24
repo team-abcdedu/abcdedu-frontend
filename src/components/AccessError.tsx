@@ -28,7 +28,8 @@ export default function AccessError({
           `로그인 후 ${type}${isEndWithConsonant(type) ? '을' : '를'} 열람할 수 있습니다.`}
         {errorCode === 403 &&
           `학생 등급 이상만 ${type}${isEndWithConsonant(type) ? '을' : '를'} 열람할 수 있습니다.`}
-        {errorCode === 404 && `${type}이(가) 존재하지 않습니다.`}
+        {errorCode === 404 &&
+          `${type}${isEndWithConsonant(type) ? '이' : '가'} 존재하지 않습니다.`}
       </p>
       {linkUrl && linkString && (
         <Link to={linkUrl} className={linkStyle}>
