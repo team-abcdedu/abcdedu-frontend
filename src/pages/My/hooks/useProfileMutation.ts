@@ -11,11 +11,9 @@ export default function useProfileMutation() {
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: error => {
-      if (error instanceof ApiError && error.status) {
-        console.log(error.message);
-      }
+      if (error instanceof ApiError) console.log(error.message);
+      else console.log(error);
       alert('프로필 수정에 실패했습니다.');
-      console.log(error);
     },
   });
 }

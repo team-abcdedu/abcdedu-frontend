@@ -32,8 +32,7 @@ function useGetSurveyList({
   const list = data?.content || [];
   const totalElements = data?.totalElements || 0;
 
-  const errorStatus =
-    error instanceof ApiError && error.status ? error.status : null;
+  const errorStatus = error instanceof ApiError ? error.status : null;
 
   return {
     list,

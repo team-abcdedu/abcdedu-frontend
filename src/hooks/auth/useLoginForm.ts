@@ -50,7 +50,7 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
       onSuccess();
     },
     onError: error => {
-      if (error instanceof ApiError && error.status) {
+      if (error instanceof ApiError) {
         if (error.status === 400)
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
       } else alert('로그인에 실패했습니다.');

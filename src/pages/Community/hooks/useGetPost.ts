@@ -16,8 +16,7 @@ export default function useGetPost(postId: string) {
     enabled: /^\d+$/.test(postId) && !!accessToken,
   });
 
-  const status =
-    error instanceof ApiError && error.status ? error.status : null;
+  const status = error instanceof ApiError ? error.status : null;
   const code =
     error instanceof ApiError && error.errorCode ? error.errorCode : null;
 

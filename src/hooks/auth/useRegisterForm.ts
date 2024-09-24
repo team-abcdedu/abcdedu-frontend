@@ -59,7 +59,7 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
       alert('회원가입이 완료되었습니다.');
       onSuccess();
     } catch (error) {
-      if (error instanceof ApiError && error.status) {
+      if (error instanceof ApiError) {
         if (error.status === 409) alert(error.message);
       } else alert('로그인에 실패했습니다.');
       console.log(error);

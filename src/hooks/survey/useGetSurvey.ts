@@ -25,8 +25,7 @@ function useGetSurvey({ surveyId }: UseGetSurveyProps) {
     }
   }, [user, accessToken]);
 
-  const errorStatus =
-    error instanceof ApiError && error.status ? error.status : null;
+  const errorStatus = error instanceof ApiError ? error.status : null;
 
   return { data, isLoading, isError, errorStatus };
 }

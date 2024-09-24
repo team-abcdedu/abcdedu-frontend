@@ -21,10 +21,8 @@ export default function usePostMutation({
   const navigate = useNavigate();
 
   const handleAPIError = (error: Error) => {
-    if (error instanceof ApiError && error.status) {
-      console.log(error.message);
-    }
-    console.log(error);
+    if (error instanceof ApiError) console.log(error.message);
+    else console.log(error);
   };
 
   const createPost = useMutation({

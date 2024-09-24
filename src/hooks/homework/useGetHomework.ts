@@ -25,8 +25,7 @@ function useGetHomework({ homeworkId }: UseGetHomeworkProps) {
     }
   }, [user, accessToken]);
 
-  const errorStatus =
-    error instanceof ApiError && error.status ? error.status : null;
+  const errorStatus = error instanceof ApiError ? error.status : null;
 
   return { data, isLoading, isError, errorStatus };
 }
