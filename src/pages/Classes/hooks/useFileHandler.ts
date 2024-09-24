@@ -58,6 +58,7 @@ function useFileHandler({
         generalType: type,
         generalFileId: file.assignmentFileId,
       });
+      setOpenExam(false);
     } else {
       setModalMessage('관리자만 이용 가능합니다.');
       toggleModal();
