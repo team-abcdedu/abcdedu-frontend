@@ -4,7 +4,11 @@ import { IHomeworkForm } from '@/pages/Homework/hooks/useHomeworkForm';
 import { HomeworkQuestion } from '@/types/homework';
 
 function RedDot() {
-  return <span className={'font-bold text-red-500'}>&nbsp;*</span>;
+  return (
+    <span className={'font-bold text-red-500'} aria-label={'필수 항목'}>
+      &nbsp;*
+    </span>
+  );
 }
 
 interface HomeworkFormBodyProps {
@@ -33,8 +37,9 @@ function HomeworkFormBody({
 
         <div className={'py-30 flex flex-col gap-40'}>
           {questions.map(question => (
-            <div
+            <label
               key={question.orderNumber}
+              htmlFor={`question-${question.orderNumber}`}
               className={'w-full flex flex-col gap-30'}
             >
               <div className={`w-full flex flex-col gap-20`}>
@@ -54,15 +59,20 @@ function HomeworkFormBody({
                 {...register(`${question.orderNumber}`, {
                   required: '답안을 입력해주세요.',
                 })}
+                id={`question-${question.orderNumber}`}
                 className={'w-full min-h-[150px] p-10 font-normal'}
                 placeholder={'답안 입력하기'}
               />
               {errors?.[`${question.orderNumber}`] && (
-                <span className={'text-14 text-red-700'}>
+                <span
+                  className={'text-14 text-red-700'}
+                  role={'alert'}
+                  aria-live={'assertive'}
+                >
                   {errors?.[`${question.orderNumber}`]?.message}
                 </span>
               )}
-            </div>
+            </label>
           ))}
         </div>
 

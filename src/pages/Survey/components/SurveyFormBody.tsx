@@ -5,7 +5,11 @@ import { ISurveyForm } from '@/pages/Survey/hooks/useSurveyForm';
 import { SurveyQuestion } from '@/types/survey';
 
 function RedDot() {
-  return <span className={'font-bold text-red-500'}>&nbsp;*</span>;
+  return (
+    <span className={'font-bold text-red-500'} aria-label={'필수 항목'}>
+      &nbsp;*
+    </span>
+  );
 }
 
 interface SurveyFormBodyProps {
@@ -23,9 +27,7 @@ function SurveyFormBody({ questions, register, errors }: SurveyFormBodyProps) {
         'w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100'
       }
     >
-      <div
-        className={'w-full min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}
-      >
+      <div className={'w-full md:min-w-[700px] flex flex-col gap-20'}>
         <div className={`w-full ${formTextStyle} font-semibold`}>
           <RedDot /> 표시는 필수 입력 항목입니다.
         </div>
@@ -43,7 +45,11 @@ function SurveyFormBody({ questions, register, errors }: SurveyFormBodyProps) {
                 <div className={'w-full h-full pl-10'}>
                   <SurveyFormItem question={question} register={register} />
                   {errors?.[`${question.orderNumber}#${question.type}`] && (
-                    <span className={'text-14 text-red-500'}>
+                    <span
+                      className={'text-14 text-red-500'}
+                      role={'alert'}
+                      aria-live={'assertive'}
+                    >
                       {
                         errors?.[`${question.orderNumber}#${question.type}`]
                           ?.message
