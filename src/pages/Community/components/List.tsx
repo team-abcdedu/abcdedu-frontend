@@ -46,7 +46,7 @@ export default function List({
             {posts.map((post, i) => (
               <tr
                 key={post.postId}
-                className='first:border-t border-b border-gray-400'
+                className='first:border-t border-b border-gray-400 hover:bg-gray-600/5'
               >
                 <td className='max-md:hidden px-10 py-10 text-14 text-gray-500'>
                   <p>{totalElements - (page - 1) * itemCountPerPage - i}</p>
