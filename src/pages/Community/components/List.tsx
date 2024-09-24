@@ -1,6 +1,8 @@
+import { Lock } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
+import useBoundStore from '@/stores';
 import { PostSummary } from '@/types/community';
 
 interface ListProps {
@@ -17,6 +19,7 @@ export default function List({
   totalElements,
 }: ListProps) {
   const itemCountPerPage = 10;
+  const user = useBoundStore(state => state.user);
 
   return (
     <>
@@ -50,7 +53,19 @@ export default function List({
                 </td>
                 <td className='px-16 md:px-5 py-10 text-left md:w-[50%]'>
                   <Link to={`${post.postId}`}>
-                    <p>{post.secret ? '비밀글입니다.' : post.title}</p>
+                    <div className='flex items-center gap-4'>
+                      <p className='truncate'>
+                        {post.secret && user?.email !== post.writerEmail
+                          ? '비밀글입니다.'
+                          : post.title}
+                      </p>
+                      {post.secret && (
+                        <Lock
+                          weight='fill'
+                          className='text-neutral-300 shrink-0'
+                        />
+                      )}
+                    </div>
                     <div className='block md:hidden text-xs text-gray-500 mt-4'>
                       <p>
                         {post.writer} | {post.createdAt.split('T')[0]} |
