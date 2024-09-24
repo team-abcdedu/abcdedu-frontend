@@ -1,5 +1,6 @@
 import { X } from '@phosphor-icons/react';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 import useLoginForm from '@/hooks/auth/useLoginForm';
 import { AuthModalActions } from '@/types/auth';
@@ -7,9 +8,10 @@ import { AuthModalActions } from '@/types/auth';
 export default function Login({ onClose, onToggle }: AuthModalActions) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
 
-  const { fieldRules, errors, register, onSubmit } = useLoginForm({
-    onSuccess: onClose,
-  });
+  const { isLoginButtonDisabled, fieldRules, errors, register, onSubmit } =
+    useLoginForm({
+      onSuccess: onClose,
+    });
 
   return (
     <form onSubmit={onSubmit}>
@@ -33,11 +35,7 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
                 className='input-primary'
                 placeholder='johndoe@gmail.com'
               />
-              {errors.email && (
-                <span className='text-12 text-red-500'>
-                  {errors.email.message}
-                </span>
-              )}
+              {errors.email && <FormErrorMessage fieldErrors={errors.email} />}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='password'>비밀번호</label>
@@ -50,9 +48,7 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
                 autoComplete='false'
               />
               {errors.password && (
-                <span className='text-12 text-red-500'>
-                  {errors.password.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.password} />
               )}
             </div>
           </div>
@@ -66,7 +62,8 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
         <button
           type='submit'
           className='w-full h-45 px-24 bg-primary-300 text-15 
-        text-white font-semibold rounded-md'
+        text-white font-semibold rounded-md disabled:bg-primary-400/15'
+          disabled={isLoginButtonDisabled}
         >
           로그인
         </button>
