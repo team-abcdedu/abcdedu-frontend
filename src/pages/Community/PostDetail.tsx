@@ -18,14 +18,17 @@ export default function PostDetail() {
   const { category, postId } = useParams();
   const user = useBoundStore(state => state.user);
   const isPostIdNumeric = !Number.isNaN(Number(postId));
-  const { data: post, errorCode } = useGetPost(postId ?? '');
+  const {
+    data: post,
+    errorResult: { status, code },
+  } = useGetPost(postId ?? '');
 
   // 경로 예외 처리
   if (!category || !(category in boardMetaData))
     return <Navigate to='/community' replace />;
 
   // postId 패턴 및 API 요청 예외 처리
-  if (!isPostIdNumeric || (errorCode && errorCode >= 500 && !post)) {
+  if (!isPostIdNumeric || (status && status >= 500 && !post)) {
     alert('게시글 정보를 찾을 수 없습니다.');
     return <Navigate to={`/community/${category}`} replace />;
   }
@@ -40,12 +43,15 @@ export default function PostDetail() {
       <Head
         title={`${post?.title ? `${post.title} | ` : ''}ABCDEdu 커뮤니티`}
       />
-      {errorCode && errorCode >= 400 && (
-        <AccessError type='게시글' isPrevPageDirection errorCode={errorCode} />
+      {status && status >= 400 && (
+        <AccessError
+          type={status === 403 ? '비밀글' : '게시글'}
+          isPrevPageDirection
+          status={status}
+          errorCode={code}
+        />
       )}
-      {!user && (
-        <AccessError type='게시글' isPrevPageDirection errorCode={401} />
-      )}
+      {!user && <AccessError type='게시글' isPrevPageDirection status={401} />}
       {post && (
         <>
           <PostSection

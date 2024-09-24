@@ -1,5 +1,6 @@
 import { X } from '@phosphor-icons/react';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 import { ContactType } from '@/types/contact';
 
@@ -18,7 +19,14 @@ export default function ContactModal({
 }: ContactModalProps) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14 [&>label]:pb-4';
 
-  const { errors, fieldRules, register, reset, onSubmit } = useContactForm({
+  const {
+    isSubmitButtonDisabled,
+    errors,
+    fieldRules,
+    register,
+    reset,
+    onSubmit,
+  } = useContactForm({
     contactType: selected.type,
     onSuccess: onClose,
   });
@@ -53,9 +61,7 @@ export default function ContactModal({
                 placeholder='John Doe'
               />
               {errors.userName && (
-                <span className='text-12 text-red-500'>
-                  {errors.userName.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.userName} />
               )}
             </div>
             <div className={fieldStyle}>
@@ -70,9 +76,7 @@ export default function ContactModal({
                 placeholder='01012345678'
               />
               {errors.phoneNumber && (
-                <span className='text-12 text-red-500'>
-                  {errors.phoneNumber.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.phoneNumber} />
               )}
             </div>
             <div className={fieldStyle}>
@@ -84,11 +88,7 @@ export default function ContactModal({
                 className='input-primary'
                 placeholder='johndoe@gmail.com'
               />
-              {errors.email && (
-                <span className='text-12 text-red-500'>
-                  {errors.email.message}
-                </span>
-              )}
+              {errors.email && <FormErrorMessage fieldErrors={errors.email} />}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='title'>제목</label>
@@ -99,11 +99,7 @@ export default function ContactModal({
                 className='input-primary'
                 placeholder='title'
               />
-              {errors.title && (
-                <span className='text-12 text-red-500'>
-                  {errors.title.message}
-                </span>
-              )}
+              {errors.title && <FormErrorMessage fieldErrors={errors.title} />}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='content'>내용</label>
@@ -114,9 +110,7 @@ export default function ContactModal({
                 placeholder='Type here...'
               />
               {errors.content && (
-                <span className='text-12 text-red-500'>
-                  {errors.content.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.content} />
               )}
             </div>
           </form>
@@ -126,8 +120,9 @@ export default function ContactModal({
         <button
           type='submit'
           className='max-w-285 w-full h-50 px-24 bg-primary-300 text-15 
-        text-white font-semibold rounded-[20px]'
+        text-white font-semibold rounded-[20px] disabled:bg-primary-400/15'
           onClick={onSubmit}
+          disabled={isSubmitButtonDisabled}
         >
           보내기
         </button>

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 
+import { ApiError } from '@/libs/errors';
 import communityApi from '@/services/community';
 import useBoundStore from '@/stores';
 
@@ -16,10 +16,9 @@ export default function useGetPost(postId: string) {
     enabled: /^\d+$/.test(postId) && !!accessToken,
   });
 
-  const errorCode =
-    isAxiosError(error) && error.response?.status
-      ? error.response?.status
-      : null;
+  const status = error instanceof ApiError ? error.status : null;
+  const code =
+    error instanceof ApiError && error.errorCode ? error.errorCode : null;
 
-  return { data, isLoading, isFetched, errorCode };
+  return { data, isLoading, isFetched, errorResult: { status, code } };
 }

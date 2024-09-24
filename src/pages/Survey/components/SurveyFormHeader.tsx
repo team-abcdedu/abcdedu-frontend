@@ -28,7 +28,7 @@ function SurveyFormHeader({ title, description }: SurveyFormHeaderProps) {
       </p>
       <fieldset
         className={
-          'min-w-[400px] md:min-w-[600px] border-2 rounded border-primary-300'
+          'min-w-[400px] md:min-w-[600px] mb-20 border-2 rounded border-primary-300'
         }
       >
         <legend className={`px-20 text-20 md:text-24 font-medium text-center`}>

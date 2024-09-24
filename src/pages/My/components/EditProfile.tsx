@@ -1,5 +1,6 @@
 import { X, XCircle } from '@phosphor-icons/react';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 
 import useProfileForm from '../hooks/useProfileForm';
@@ -13,6 +14,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
     'relative w-148 h-148 border-1 border-zinc-300 rounded-md text-center flex-row-center text-14 text-neutral-600/35 lg:hover:border-primary-400 lg:hover:text-primary-400 transition-2 cursor-pointer overflow-hidden';
 
   const {
+    isSubmitButtonDisabled,
     handleFileChange,
     imagePreview,
     resetImageFile,
@@ -50,11 +52,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
                 type='text'
                 className={inputStyle}
               />
-              {errors.name && (
-                <span className='text-12 mt-4 text-red-500'>
-                  {errors.name.message}
-                </span>
-              )}
+              {errors.name && <FormErrorMessage fieldErrors={errors.name} />}
             </div>
             <div className='flex-col-center gap-8'>
               <span className='w-full text-14'>프로필 사진 업로드</span>
@@ -95,9 +93,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
                 className={inputStyle}
               />
               {errors.school && (
-                <span className='text-12 mt-4 text-red-500'>
-                  {errors.school.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.school} />
               )}
             </div>
             <div className={fieldStyle}>
@@ -124,8 +120,9 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
         <button
           type='submit'
           className='w-full h-45 px-24 bg-primary-300 text-15 
-        text-white font-semibold rounded-md'
+        text-white font-semibold rounded-md disabled:bg-primary-400/15'
           onClick={onSubmit}
+          disabled={isSubmitButtonDisabled}
         >
           변경사항 저장
         </button>
