@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { useForm, FieldValues } from 'react-hook-form';
 
+import { ApiError } from '@/libs/errors';
 import auth from '@/services/auth';
 import useBoundStore from '@/stores';
 import { FieldRules } from '@/types';
@@ -50,10 +50,10 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
       onSuccess();
     },
     onError: error => {
-      if (isAxiosError(error) && error.response?.status) {
-        const { status } = error.response;
-        if (status === 400) alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-      }
+      if (error instanceof ApiError && error.status) {
+        if (error.status === 400)
+          alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      } else alert('로그인에 실패했습니다.');
       console.log(error);
     },
   });

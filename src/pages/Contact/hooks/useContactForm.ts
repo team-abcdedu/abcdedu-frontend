@@ -45,6 +45,7 @@ export default function useContactForm({
       onSuccess();
       reset();
     } catch (error) {
+      alert('문의 등록에 실패했습니다.');
       console.log(error);
     } finally {
       setIsSubmitButtonDisabled(false);

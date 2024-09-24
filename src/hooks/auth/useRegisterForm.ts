@@ -1,7 +1,7 @@
-import { isAxiosError } from 'axios';
 import { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 
+import { ApiError } from '@/libs/errors';
 import auth from '@/services/auth';
 import { FieldRules } from '@/types';
 import { UseAuthFormProps } from '@/types/auth';
@@ -59,13 +59,9 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
       alert('회원가입이 완료되었습니다.');
       onSuccess();
     } catch (error) {
-      if (isAxiosError(error) && error.response?.status) {
-        const { status } = error.response;
-        const {
-          result: { message },
-        } = error.response.data;
-        if (status === 409) alert(message);
-      }
+      if (error instanceof ApiError && error.status) {
+        if (error.status === 409) alert(error.message);
+      } else alert('로그인에 실패했습니다.');
       console.log(error);
     } finally {
       setIsRegisterButtonDisabled(false);

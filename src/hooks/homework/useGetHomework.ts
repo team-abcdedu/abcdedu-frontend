@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
+import { ApiError } from '@/libs/errors';
 import HomeworkApi from '@/services/homework';
 import useBoundStore from '@/stores';
 
@@ -25,9 +25,10 @@ function useGetHomework({ homeworkId }: UseGetHomeworkProps) {
     }
   }, [user, accessToken]);
 
-  const errorCode = isAxiosError(error) ? error.response?.status : null;
+  const errorStatus =
+    error instanceof ApiError && error.status ? error.status : null;
 
-  return { data, isLoading, isError, errorCode };
+  return { data, isLoading, isError, errorStatus };
 }
 
 export default useGetHomework;

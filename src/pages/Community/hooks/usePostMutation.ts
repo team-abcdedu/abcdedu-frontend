@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { ApiError } from '@/libs/errors';
 import communityApi from '@/services/community';
 
 import { boardMetaData, Category } from '../constants/communityInfo';
@@ -21,14 +21,8 @@ export default function usePostMutation({
   const navigate = useNavigate();
 
   const handleAPIError = (error: Error) => {
-    if (isAxiosError(error) && error.response?.status) {
-      const { status } = error.response;
-      if (status >= 400) {
-        const {
-          result: { message },
-        } = error.response.data;
-        alert(message);
-      }
+    if (error instanceof ApiError && error.status) {
+      console.log(error.message);
     }
     console.log(error);
   };
@@ -43,6 +37,7 @@ export default function usePostMutation({
     },
     onError: error => {
       handleAPIError(error);
+      alert('게시글 등록에 실패했습니다.');
     },
   });
 
@@ -61,6 +56,7 @@ export default function usePostMutation({
     },
     onError: error => {
       handleAPIError(error);
+      alert('게시글 수정에 실패했습니다.');
     },
   });
 
@@ -72,6 +68,7 @@ export default function usePostMutation({
     },
     onError: error => {
       handleAPIError(error);
+      alert('게시글 삭제에 실패했습니다.');
     },
   });
 
