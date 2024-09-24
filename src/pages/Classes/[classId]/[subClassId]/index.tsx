@@ -10,14 +10,14 @@ import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useModal from '@/hooks/useModal';
 import ExamContent from '@/pages/Classes/components/ExamContent';
 import useFileHandler from '@/pages/Classes/hooks/useFileHandler';
-import useBoundStore from '@/stores';
 
 function SubClass() {
   const buttonStyle =
     'w-100 min-h-[140px] flex flex-col justify-start items-center place-self-center';
   const iconWrapperStyle = 'w-100 h-100 flex-row-center';
-  const iconStyle = 'w-70 h-70 sm:w-90 sm:h-90 text-primary-300';
-  const textStyle = 'text-20 sm:text-25 font-semibold text-center';
+  const iconStyle =
+    'w-80 h-80 sm:w-85 sm:h-85 md:w-90 md:h-90 text-primary-300';
+  const textStyle = 'text-20 sm:text-22 md:text-25 font-semibold text-center';
 
   const { classId, subClassId } = useParams();
   const subClassIdMap = useSubClassIdMap();
@@ -47,10 +47,8 @@ function SubClass() {
     exam: false,
   });
 
-  const { user } = useBoundStore();
-
   useEffect(() => {
-    if (user && fileList) {
+    if (fileList) {
       setFileState({ theory: false, data: false, exam: false });
       fileList.forEach(file => {
         const { assignmentType } = file;
@@ -74,13 +72,13 @@ function SubClass() {
         }
       });
     }
-  }, [fileList, user, classId, subClassId]);
+  }, [fileList, classId, subClassId]);
 
   return (
     <>
       <div
         className={
-          'mt-0 mb-40 sm:mt-30 sm:mb-100 px-50 grid grid-cols-2 sm:flex-row-center gap-20 sm:gap-50'
+          'mt-0 mb-60 px-50 grid grid-cols-2 sm:flex-row-center gap-20 sm:gap-50'
         }
       >
         {fileState.theory && (
