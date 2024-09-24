@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
+import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import useBoundStore from '@/stores';
 
 interface ExamContentProps {
@@ -16,6 +17,8 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
     assignmentAnswerFileId: studentFileId,
     enabled: !!studentFileId,
   });
+
+  const { pdfUrl } = useGetPdfUrl({ examFileUrl });
 
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
@@ -47,9 +50,6 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
   return (
     <div className={'w-full pb-50 flex-col-center gap-30'}>
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
-        <a href={examFileUrl} download className={buttonStyle}>
-          시험 파일 다운로드
-        </a>
         {examStudentFile && (
           <a
             href={examStudentFile.filePresignedUrl}
@@ -65,7 +65,7 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
       >
         <iframe
           ref={iframeRef}
-          src={examFileUrl}
+          src={pdfUrl}
           title={'exam'}
           className={'w-full h-full'}
         />
