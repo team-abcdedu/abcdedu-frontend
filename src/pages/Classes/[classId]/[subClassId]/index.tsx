@@ -15,8 +15,9 @@ function SubClass() {
   const buttonStyle =
     'w-100 min-h-[140px] flex flex-col justify-start items-center place-self-center';
   const iconWrapperStyle = 'w-100 h-100 flex-row-center';
-  const iconStyle = 'w-70 h-70 sm:w-90 sm:h-90 text-primary-300';
-  const textStyle = 'text-20 sm:text-25 font-semibold text-center';
+  const iconStyle =
+    'w-80 h-80 sm:w-85 sm:h-85 md:w-90 md:h-90 text-primary-300';
+  const textStyle = 'text-20 sm:text-22 md:text-25 font-semibold text-center';
 
   const { classId, subClassId } = useParams();
   const subClassIdMap = useSubClassIdMap();

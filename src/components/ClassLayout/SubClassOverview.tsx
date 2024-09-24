@@ -34,15 +34,15 @@ function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
         <p className={'text-18 text-neutral-400'}>ABCD Classes</p>
         <h1
           className={
-            'text-80 text-primary-300 font-bold whitespace-pre-wrap sm:whitespace-normal'
+            'text-60 sm:text-70 md:text-80 text-primary-300 font-bold whitespace-pre-wrap sm:whitespace-normal'
           }
         >
           {title}
         </h1>
-        <h3 className={'text-25 font-semibold whitespace-pre-wrap'}>
+        <h3 className={'text-22 sm:text-25 font-semibold whitespace-pre-wrap'}>
           {subTitle}
         </h3>
-        <h4 className={'text-18 text-neutral-400'}>{description}</h4>
+        <h4 className={'text-16 sm:text-18 text-neutral-400'}>{description}</h4>
       </div>
     </div>
   );
