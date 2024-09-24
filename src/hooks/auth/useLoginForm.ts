@@ -69,6 +69,7 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
   };
 
   return {
+    isLoginButtonDisabled: loginMutation.isPending,
     fieldRules,
     errors,
     register,

@@ -50,6 +50,8 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   const [fileUrl, setFileUrl] = useState(post?.fileUrl ?? null);
   const [isFileInputVisible, setIsFileInputVisible] = useState(!fileUrl);
 
+  const isSubmitButtonDisabled = createPost.isPending || updatePost.isPending;
+
   // 수정 후 다시 모달을 열였을 때 updated 된 데이터 fetch
   useEffect(() => {
     if (post) {
@@ -133,6 +135,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   };
 
   return {
+    isSubmitButtonDisabled,
     register,
     errors,
     reset,

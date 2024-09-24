@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 
 import contactApi from '@/services/contact';
@@ -20,6 +21,8 @@ export default function useContactForm({
     handleSubmit,
   } = useForm<ContactForm>({ mode: 'onBlur' });
 
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
+
   const fieldRules: FieldRules<ContactForm> = {
     userName: { required: '이름을 입력하세요.' },
     phoneNumber: { required: '연락처를 입력하세요.' },
@@ -35,6 +38,7 @@ export default function useContactForm({
   };
 
   const submitForm = async (data: FieldValues) => {
+    setIsSubmitButtonDisabled(true);
     try {
       await contactApi.createContact(data as ContactForm, contactType);
       alert('문의가 접수되었습니다.');
@@ -42,6 +46,8 @@ export default function useContactForm({
       reset();
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsSubmitButtonDisabled(false);
     }
   };
 
@@ -50,6 +56,7 @@ export default function useContactForm({
   };
 
   return {
+    isSubmitButtonDisabled,
     errors,
     fieldRules,
     register,
