@@ -5,6 +5,8 @@ import { BASE_URL } from '@/config';
 import { clearSelectedQueries } from '@/libs/react-query';
 import useBoundStore from '@/stores';
 
+import { ApiError } from './errors';
+
 // access token 재발급
 const reissueAccessToken = memoize(
   async (): Promise<string> => {
@@ -64,14 +66,16 @@ instance.interceptors.response.use(
     const { isAutoLogin } = useBoundStore.getState();
     console.log(error.response);
 
+    const { status, data } = error.response;
+
     // 관리자 페이지 내 조회 요청 권한 오류 (403)
-    if (error.response?.status === 403) {
-      const { data } = error.response;
+    if (status === 403) {
+      // const { data } = error.response;
       const { errorCode } = data.result;
       if (errorCode === 'ADMIN_VALID_PERMISSION') window.location.href = '/';
     }
 
-    if (error.response?.status === 401 && isAutoLogin) {
+    if (status === 401 && isAutoLogin) {
       // isAutoLogin: 로그인 하지 않은 사용자의 토큰 재발급 요청을 방지합니다.
       const originalRequest = error.config;
 
@@ -81,6 +85,13 @@ instance.interceptors.response.use(
 
       // 이전 요청 재요청
       return instance(originalRequest);
+    }
+
+    if (status >= 400 && status < 500) {
+      const { message, errorCode } = data.result;
+      return Promise.reject(
+        new ApiError(message ?? 'API Error', status, errorCode),
+      );
     }
 
     return Promise.reject(error);
