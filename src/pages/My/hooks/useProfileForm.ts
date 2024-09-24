@@ -120,6 +120,7 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
   };
 
   return {
+    isSubmitButtonDisabled: updateMutation.isPending,
     imagePreview,
     handleFileChange,
     resetImageFile,
