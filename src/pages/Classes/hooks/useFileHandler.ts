@@ -94,7 +94,8 @@ function useFileHandler({
       contentState.generalType === '자료'
     ) {
       if (isFileError) {
-        alert(errorMessage);
+        setModalMessage(errorMessage);
+        toggleModal();
         return;
       }
       // 파일 다운로드
@@ -108,7 +109,14 @@ function useFileHandler({
         newWindow.opener = null;
       }
     }
-  }, [generalFile, contentState, isFileError, errorMessage]);
+  }, [
+    generalFile,
+    contentState,
+    isFileError,
+    errorMessage,
+    setModalMessage,
+    toggleModal,
+  ]);
 
   return { handleDownloadFile, handleExamClick, contentState, generalFile };
 }
