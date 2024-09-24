@@ -8,6 +8,7 @@ interface Props {
   itemCountPerPage?: number; // 페이지 당 데이터 개수
   pageCount?: number; // 한 번에 보여줄 페이지 개수 (e.g. 5, 10 ...)
   pageQueryKey?: string;
+  scrollTarget?: React.RefObject<HTMLElement>; // 페이지 이동 시 스크롤 이동할 target
 }
 
 export default function Pagination({
@@ -16,6 +17,7 @@ export default function Pagination({
   itemCountPerPage = 10,
   pageCount = 5,
   pageQueryKey = 'page',
+  scrollTarget,
 }: Props) {
   const [searchParams] = useSearchParams();
   const { pathname } = useLocation();
@@ -44,13 +46,25 @@ export default function Pagination({
     if (currentPage < start) setStart(prev => prev - pageCount);
   }, [currentPage, pageCount, start]);
 
+  const handlePage = () => {
+    if (scrollTarget && scrollTarget.current) {
+      scrollTarget.current.scrollIntoView();
+      return;
+    }
+    window.scrollTo(0, 0);
+  };
+
   if (totalPages === 1) return null;
 
   return (
     <div className='flex-row-center text-14 text-neutral-500 mt-30'>
       <ul className='flex-row-center [&>li]:h-30 [&>li]:leading-[30px]'>
         <li className={`${noPrev && 'invisible'}`}>
-          <Link to={getUrl(start - 1)} className={moveLinkStyle}>
+          <Link
+            className={moveLinkStyle}
+            to={getUrl(start - 1)}
+            onClick={handlePage}
+          >
             <CaretLeft size={20} />
             이전
           </Link>
@@ -65,6 +79,7 @@ export default function Pagination({
                       currentPage === start + i,
                     )}`}
                   to={getUrl(start + i)}
+                  onClick={handlePage}
                 >
                   {start + i}
                 </Link>
@@ -73,7 +88,11 @@ export default function Pagination({
           </Fragment>
         ))}
         <li className={`${noNext && 'invisible'}`}>
-          <Link to={getUrl(start + pageCount)} className={moveLinkStyle}>
+          <Link
+            className={moveLinkStyle}
+            to={getUrl(start + pageCount)}
+            onClick={handlePage}
+          >
             다음
             <CaretRight size={20} />
           </Link>

@@ -11,10 +11,7 @@ export interface Post {
   secret: boolean;
 }
 
-export type PostSummary = Omit<
-  Post,
-  'fileUrl' | 'content' | 'commentAllow' | 'writerEmail'
-> & {
+export type PostSummary = Omit<Post, 'fileUrl' | 'content' | 'commentAllow'> & {
   postId: number;
 };
 

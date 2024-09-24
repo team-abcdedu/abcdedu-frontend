@@ -1,7 +1,6 @@
 import { DownloadSimple } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-import useBoundStore from '@/stores';
 import { Post } from '@/types/community';
 
 import usePostMutation from '../hooks/usePostMutation';
@@ -24,19 +23,11 @@ export default function PostSection({
   isMine,
 }: PostSectionProps) {
   const { deletePost } = usePostMutation({ category });
-  const user = useBoundStore(state => state.user);
 
   const handleDelete = () => {
     const ok = window.confirm('게시글을 삭제하시겠습니까?');
     if (ok && post) {
       deletePost.mutate(id);
-    }
-  };
-
-  const handleDonwloadLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (user?.role === '새싹') {
-      e.preventDefault();
-      alert('학생 등급 이상만 파일을 다운 받을 수 있습니다.');
     }
   };
 
@@ -59,13 +50,13 @@ export default function PostSection({
             {post?.writer ?? '사용자'}
           </p>
           <p className='text-gray-400 relative text-sm pipe-after'>
-            {post?.createdAt ? post?.createdAt.split('T')[0] : 'YYYY-MM-DD'}
+            {post?.createdAt ? post.createdAt.split('T')[0] : 'YYYY-MM-DD'}
           </p>
           <p className='text-gray-400 text-sm'>{`조회 ${post?.viewCount ?? 0}`}</p>
         </div>
         <div className='flex items-center gap-12 ml-auto'>
           {post?.fileUrl && (
-            <Link to={post?.fileUrl} onClick={handleDonwloadLink}>
+            <Link to={post?.fileUrl}>
               <p className='flex-row-center gap-4 text-sm text-gray-500'>
                 파일 다운받기
                 <DownloadSimple className='mt-1 block' size={17} />
