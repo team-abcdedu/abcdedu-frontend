@@ -1,8 +1,8 @@
 import { InstagramLogo, YoutubeLogo } from '@phosphor-icons/react';
 
 import kakaoTalk from '@/assets/icons/kakaotalk.svg';
-import naverBand from '@/assets/icons/naver band.png';
-import naverBlog from '@/assets/icons/naver blog.jpg';
+import naverBand from '@/assets/icons/naver-band.png';
+import naverBlog from '@/assets/icons/naver-blog.png';
 
 export const snsItems = [
   {
