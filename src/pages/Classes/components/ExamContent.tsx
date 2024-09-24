@@ -8,8 +8,6 @@ interface ExamContentProps {
   studentFileId: number | undefined;
 }
 
-const url = 'https://karf.or.kr/wp-content/uploads/2022/03/Download_Sample.pdf';
-
 function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
@@ -67,8 +65,7 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
       >
         <iframe
           ref={iframeRef}
-          // src={examFileUrl}
-          src={url}
+          src={examFileUrl}
           title={'exam'}
           className={'w-full h-full'}
         />
