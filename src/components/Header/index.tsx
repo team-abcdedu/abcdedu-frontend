@@ -2,14 +2,14 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '@/assets/icons/logo.png';
-import useHeaderStore from '@/stores/headerStore';
+import useBoundStore from '@/stores';
 
 import HeaderMenu from './HeaderMenu';
 import MobileMenu from './MobileMenu';
 
 function Header() {
   const headerRef = useRef<HTMLElement | null>(null);
-  const { setHeaderRef } = useHeaderStore();
+  const { setHeaderRef } = useBoundStore();
 
   useEffect(() => {
     if (headerRef.current) {

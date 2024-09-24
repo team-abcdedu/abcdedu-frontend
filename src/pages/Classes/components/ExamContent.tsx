@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
-import useHeaderStore from '@/stores/headerStore';
+import useBoundStore from '@/stores';
 
 interface ExamContentProps {
   examFileUrl: string | undefined;
@@ -19,7 +19,7 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
 
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  const { headerRef } = useHeaderStore();
+  const { headerRef } = useBoundStore();
   const handleIntersect = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
