@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
+import { ApiError } from '@/libs/errors';
 import { SubClassContentState } from '@/pages/Classes/types';
 import useBoundStore from '@/stores';
 
@@ -29,7 +30,7 @@ function useFileHandler({
   const {
     data: generalFile,
     isError: isFileError,
-    errorMessage,
+    error: FileError,
   } = useGetSubClassGeneralFile({
     assignmentFileId: contentState?.generalFileId,
   });
@@ -95,7 +96,11 @@ function useFileHandler({
       contentState.generalType === '자료'
     ) {
       if (isFileError) {
-        setModalMessage(errorMessage);
+        if (FileError instanceof ApiError) {
+          setModalMessage(FileError.message);
+        } else {
+          setModalMessage('파일을 불러오는 중 오류가 발생했습니다.');
+        }
         toggleModal();
         return;
       }
@@ -114,7 +119,7 @@ function useFileHandler({
     generalFile,
     contentState,
     isFileError,
-    errorMessage,
+    FileError,
     setModalMessage,
     toggleModal,
   ]);
