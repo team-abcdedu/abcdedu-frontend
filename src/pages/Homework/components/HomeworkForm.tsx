@@ -17,7 +17,7 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     data: homework,
     isLoading,
     isError,
-    errorCode,
+    errorStatus,
   } = useGetHomework({ homeworkId });
 
   const { register, errors, reset, onSubmit } = useHomeworkForm({
@@ -32,11 +32,11 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     return <HomeworkLoading />;
   }
 
-  if (errorCode) {
+  if (errorStatus) {
     return (
       <AccessError
         type={'과제'}
-        errorCode={errorCode}
+        status={errorStatus}
         linkUrl={'/'}
         linkString={'홈으로'}
       />
