@@ -1,5 +1,6 @@
 import { X } from '@phosphor-icons/react';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 import useRegisterForm from '@/hooks/auth/useRegisterForm';
 import { AuthModalActions } from '@/types/auth';
@@ -7,9 +8,10 @@ import { AuthModalActions } from '@/types/auth';
 export default function Register({ onClose, onToggle }: AuthModalActions) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
 
-  const { errors, fieldRules, register, onSubmit } = useRegisterForm({
-    onSuccess: onToggle,
-  });
+  const { isRegisterButtonDisabled, errors, fieldRules, register, onSubmit } =
+    useRegisterForm({
+      onSuccess: onToggle,
+    });
 
   return (
     <>
@@ -33,11 +35,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
                 className='input-primary'
                 placeholder='John Doe'
               />
-              {errors.name && (
-                <span className='text-12 text-red-500'>
-                  {errors.name.message}
-                </span>
-              )}
+              {errors.name && <FormErrorMessage fieldErrors={errors.name} />}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='email'>이메일</label>
@@ -48,11 +46,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
                 className='input-primary'
                 placeholder='johndoe@gmail.com'
               />
-              {errors.email && (
-                <span className='text-12 text-red-500'>
-                  {errors.email.message}
-                </span>
-              )}
+              {errors.email && <FormErrorMessage fieldErrors={errors.email} />}
             </div>
             <div className={fieldStyle}>
               <label htmlFor='password'>비밀번호</label>
@@ -65,9 +59,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
                 autoComplete='false'
               />
               {errors.password && (
-                <span className='text-12 text-red-500'>
-                  {errors.password.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.password} />
               )}
             </div>
             <div className={fieldStyle}>
@@ -81,9 +73,7 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
                 autoComplete='false'
               />
               {errors.confirmPw && (
-                <span className='text-12 text-red-500'>
-                  {errors.confirmPw.message}
-                </span>
+                <FormErrorMessage fieldErrors={errors.confirmPw} />
               )}
             </div>
           </form>
@@ -93,8 +83,9 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
         <button
           type='submit'
           className='w-full h-45 px-24 bg-primary-300 text-15 
-        text-white font-semibold rounded-md'
+        text-white font-semibold rounded-md disabled:bg-primary-400/15'
           onClick={onSubmit}
+          disabled={isRegisterButtonDisabled}
         >
           가입하기
         </button>
