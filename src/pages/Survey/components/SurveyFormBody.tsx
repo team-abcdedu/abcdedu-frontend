@@ -45,11 +45,7 @@ function SurveyFormBody({ questions, register, errors }: SurveyFormBodyProps) {
                 <div className={'w-full h-full pl-10'}>
                   <SurveyFormItem question={question} register={register} />
                   {errors?.[`${question.orderNumber}#${question.type}`] && (
-                    <span
-                      className={'text-14 text-red-500'}
-                      role={'alert'}
-                      aria-live={'assertive'}
-                    >
+                    <span className={'text-14 text-red-500'} role={'alert'}>
                       {
                         errors?.[`${question.orderNumber}#${question.type}`]
                           ?.message

@@ -64,11 +64,7 @@ function HomeworkFormBody({
                 placeholder={'답안 입력하기'}
               />
               {errors?.[`${question.orderNumber}`] && (
-                <span
-                  className={'text-14 text-red-700'}
-                  role={'alert'}
-                  aria-live={'assertive'}
-                >
+                <span className={'text-14 text-red-700'} role={'alert'}>
                   {errors?.[`${question.orderNumber}`]?.message}
                 </span>
               )}
