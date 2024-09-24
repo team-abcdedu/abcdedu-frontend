@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { ApiError } from '@/libs/errors';
 import AdminClassApi from '@/services/admin/class';
 import { FieldRules } from '@/types';
 
@@ -67,8 +67,8 @@ function useSubClassRegisterForm({ onClose }: UseSubClassRegisterFormProps) {
       },
       onError: error => {
         alert('서브 클래스 등록에 실패했습니다.');
-        if (isAxiosError(error)) {
-          console.error(error.response?.data.result.message);
+        if (error instanceof ApiError) {
+          console.error(error.message);
           return;
         }
         console.error(error);

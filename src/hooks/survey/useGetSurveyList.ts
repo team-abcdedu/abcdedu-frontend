@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 
+import { ApiError } from '@/libs/errors';
 import SurveyApi from '@/services/survey';
 
 interface UseGetSurveyListProps {
@@ -32,14 +32,14 @@ function useGetSurveyList({
   const list = data?.content || [];
   const totalElements = data?.totalElements || 0;
 
-  const errorCode = isAxiosError(error) ? error.response?.status : null;
+  const errorStatus = error instanceof ApiError ? error.status : null;
 
   return {
     list,
     totalElements,
     isError,
     isLoading,
-    errorCode,
+    errorStatus,
   };
 }
 

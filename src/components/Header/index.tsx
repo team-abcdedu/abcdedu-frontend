@@ -26,13 +26,13 @@ function Header() {
     >
       <Link to={'/'} className={'flex items-center w-fit'}>
         <img src={logo} alt={'logo'} className={'w-20 h-32 mr-[10px]'} />
-        <span
+        <h1
           className={
             'text-16 font-bold bg-gradient-to-r from-primary-400 via-primary-400 to-sky-600 text-transparent bg-clip-text'
           }
         >
           ABCDEdu
-        </span>
+        </h1>
       </Link>
       <HeaderMenu />
       <MobileMenu />
