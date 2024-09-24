@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { Comment } from '@/types/community';
-import { formatDate } from '@/utils/formatDate';
 
 import useCommentMutation from '../hooks/useCommentMutation';
 
@@ -38,7 +37,7 @@ export default function CommentCard({
         <div className='flex items-center gap-2'>
           <p className='font-semibold mr-4 text-sm'>{comment.writerName}</p>
           <p className='text-xs text-gray-500'>
-            {formatDate(comment.createdAt)}
+            {comment.createdAt.split('T')[0]}
           </p>
         </div>
         {isMine && (
