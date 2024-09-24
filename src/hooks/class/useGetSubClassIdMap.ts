@@ -7,7 +7,7 @@ function useGetSubClassIdMap({ classes }: { classes: ClassData[] }) {
 
   // ClassId-subClassOrderNumber 를 key 로, subClassId를 value 로 하는 객체를 만들어줍니다.
   useEffect(() => {
-    if (classes) {
+    if (classes && classes.length > 0) {
       const newObj: SubClassIdMap = {};
       classes?.forEach(c => {
         c.subClasses.forEach(sc => {

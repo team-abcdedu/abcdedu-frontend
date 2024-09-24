@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
@@ -10,6 +11,7 @@ import CommentForm from './CommentForm';
 
 export default function Comments({ postId }: { postId: number }) {
   const user = useBoundStore(state => state.user);
+  const scrollTargetRef = useRef<HTMLDivElement>(null);
 
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('comments_page')) || 1;
@@ -22,8 +24,11 @@ export default function Comments({ postId }: { postId: number }) {
   const isAdminRole = user?.role === '관리자';
 
   return (
-    <div className='px-20 mb-20'>
-      <p className='font-semibold text-zinc-600 mt-20 text-sm mb-16'>
+    <div
+      ref={scrollTargetRef}
+      className='px-20 pt-20 md:scroll-mt-110 scroll-mt-80'
+    >
+      <p className='font-semibold text-zinc-600 text-sm mb-16'>
         댓글{' '}
         <span className='text-primary-400'>{!isLoading && totalElements}</span>
       </p>
@@ -41,6 +46,7 @@ export default function Comments({ postId }: { postId: number }) {
           currentPage={page}
           totalElements={totalElements}
           pageQueryKey='comments_page'
+          scrollTarget={scrollTargetRef}
         />
       </div>
       <div className='mt-40'>

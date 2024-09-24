@@ -1,5 +1,6 @@
 import { Trash, X } from '@phosphor-icons/react';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 import { Post } from '@/types/community';
 import { getFileName } from '@/utils/getFileName';
@@ -18,6 +19,7 @@ export default function PostFormModal({
   onClose,
 }: WritePostModalProps) {
   const {
+    isSubmitButtonDisabled,
     fileUrl,
     isFileInputVisible,
     handleDeleteFileUrl,
@@ -40,26 +42,26 @@ export default function PostFormModal({
               <X size={24} />
             </button>
           </div>
-          <div className='p-4 [&_span]:text-14 [&_span]:text-red-500'>
-            <div className='my-8'>
+          <div className='p-4'>
+            <div className='my-8 flex flex-col gap-4'>
               <input
                 id='title'
-                {...register('title', { required: true })}
+                {...register('title', { required: '제목을 입력하세요.' })}
                 type='text'
                 placeholder='제목을 입력하세요.'
                 className='w-full border rounded py-6 px-8'
               />
-              {errors.title && <span>제목을 입력하세요.</span>}
+              {errors.title && <FormErrorMessage fieldErrors={errors.title} />}
             </div>
-            <div className='mb-20'>
+            <div className='mb-20 flex flex-col gap-4'>
               <textarea
                 id='content'
-                {...register('content', { required: true })}
+                {...register('content', { required: '내용을 입력하세요.' })}
                 placeholder='내용을 입력하세요.'
                 className='w-full h-64 border rounded py-6 px-8 min-h-[384px]'
               />
               {errors.content && (
-                <span className='block -mt-4'>내용을 입력하세요.</span>
+                <FormErrorMessage fieldErrors={errors.content} />
               )}
             </div>
             {isFileInputVisible && (
@@ -104,8 +106,10 @@ export default function PostFormModal({
               </label>
             </div>
             <button
-              className='block w-160 py-8 px-16 rounded-2xl bg-primary-400 text-white mx-auto'
+              className='block w-160 py-8 px-16 rounded-2xl bg-primary-400 
+              disabled:bg-primary-400/15 text-white mx-auto'
               type='submit'
+              disabled={isSubmitButtonDisabled}
             >
               {!post ? '등록' : '수정'}
             </button>

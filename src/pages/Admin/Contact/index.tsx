@@ -64,7 +64,7 @@ export default function ContactList() {
           {list.map(item => (
             <tr
               key={item.contactId}
-              className='text-center cursor-pointer'
+              className='text-center cursor-pointer hover:bg-gray-600/5'
               onClick={() => handleItemClick(item.contactId)}
             >
               {tableColumns.contact.map(column => (

@@ -5,6 +5,7 @@ import AccessError from '@/components/AccessError';
 import useGetHomework from '@/hooks/homework/useGetHomework';
 import HomeworkFormBody from '@/pages/Homework/components/HomeworkFormBody';
 import HomeworkFormHeader from '@/pages/Homework/components/HomeworkFormHeader';
+import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
 import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
 
 interface HomeworkFormProps {
@@ -16,7 +17,7 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     data: homework,
     isLoading,
     isError,
-    errorCode,
+    errorStatus,
   } = useGetHomework({ homeworkId });
 
   const { register, errors, reset, onSubmit } = useHomeworkForm({
@@ -27,39 +28,39 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     reset();
   }, [reset]);
 
-  if (errorCode) {
+  if (isLoading) {
+    return <HomeworkLoading />;
+  }
+
+  if (errorStatus) {
     return (
       <AccessError
         type={'과제'}
-        errorCode={errorCode}
+        status={errorStatus}
         linkUrl={'/'}
         linkString={'홈으로'}
       />
     );
   }
 
-  if (isError || isLoading) {
+  if (isError || !homework) {
     return (
-      <div
-        className={
-          'w-full h-[500px] flex-col-center gap-10 text-center text-18'
-        }
-      >
-        {isError ? '에러가 발생했습니다.' : '로딩중...'}
-        {isError && (
-          <Link
-            to='/'
-            className='px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white'
-          >
-            홈으로
-          </Link>
-        )}
+      <div className='flex-col-center h-[500px] gap-10 py-120'>
+        <p className='text-center'>
+          {isError
+            ? '과제 정보를 불러오는 중에 문제가 발생했습니다.'
+            : '과제 정보가 없습니다.'}
+        </p>
+        <Link
+          to={'/'}
+          className={
+            'px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white'
+          }
+        >
+          홈으로
+        </Link>
       </div>
     );
-  }
-
-  if (!homework) {
-    return null;
   }
 
   return (

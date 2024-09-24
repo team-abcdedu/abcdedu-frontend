@@ -1,4 +1,8 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import communityApi from '@/services/community';
@@ -14,6 +18,7 @@ export default function useGetPosts({ boardId, page }: UseGetPostsProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['board', 'list', boardId, `page-${page}`],
     queryFn: () => communityApi.getPosts(boardId, page),
+    placeholderData: keepPreviousData,
     enabled: [1, 2, 3, 4].includes(boardId),
   });
 
