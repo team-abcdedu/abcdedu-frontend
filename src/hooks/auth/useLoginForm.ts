@@ -58,8 +58,6 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
     },
   });
 
-  const isLoginButtonDisabled = loginMutation.isPending;
-
   const login = async (data: FieldValues) => {
     const { email, password } = data;
     loginMutation.mutate({ email, password });
@@ -71,7 +69,7 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
   };
 
   return {
-    isLoginButtonDisabled,
+    isLoginButtonDisabled: loginMutation.isPending,
     fieldRules,
     errors,
     register,
