@@ -26,7 +26,11 @@ function useFileHandler({
   const { data: fileList } = useGetSubClassFileList({
     subLectureId: subClassId,
   });
-  const { data: generalFile } = useGetSubClassGeneralFile({
+  const {
+    data: generalFile,
+    isError: isFileError,
+    errorMessage,
+  } = useGetSubClassGeneralFile({
     assignmentFileId: contentState?.generalFileId,
   });
 
@@ -37,7 +41,13 @@ function useFileHandler({
   };
 
   const handleDownloadFile = (type: '이론' | '자료') => {
-    if (user?.role === '관리자') {
+    if (user?.role !== '관리자' && user?.role !== '학생') {
+      setModalMessage('학생 이상만 이용 가능합니다.');
+      toggleModal();
+      return;
+    }
+
+    if (user?.role === '관리자' || (user?.role === '학생' && type === '자료')) {
       const file = findFile(type);
       if (!file) {
         setModalMessage(`${type} 파일이 없습니다.`);
@@ -55,6 +65,12 @@ function useFileHandler({
   };
 
   const handleExamClick = () => {
+    if (user?.role !== '관리자' && user?.role !== '학생') {
+      setModalMessage('학생 이상만 이용 가능합니다.');
+      toggleModal();
+      return;
+    }
+
     const file = findFile('시험');
     if (!file) {
       setModalMessage('시험 정보가 없습니다.');
@@ -77,6 +93,10 @@ function useFileHandler({
       contentState.generalType === '이론' ||
       contentState.generalType === '자료'
     ) {
+      if (isFileError) {
+        alert(errorMessage);
+        return;
+      }
       // 파일 다운로드
       const newWindow = window.open(
         generalFile?.filePresignedUrl || '',
@@ -88,7 +108,7 @@ function useFileHandler({
         newWindow.opener = null;
       }
     }
-  }, [generalFile, contentState]);
+  }, [generalFile, contentState, isFileError, errorMessage]);
 
   return { handleDownloadFile, handleExamClick, contentState, generalFile };
 }
