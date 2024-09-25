@@ -65,7 +65,7 @@ function SubClassFileItem({
 
     const newWindow =
       type === '이론'
-        ? window.open(pdfUrl, '', 'noopener,noreferrer')
+        ? window.open(pdfUrl, '_blank', 'noopener,noreferrer')
         : window.open(data?.filePresignedUrl, '_self', 'noopener,noreferrer');
 
     if (newWindow) {
