@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { ApiError } from '@/libs/errors';
 import SurveyApi from '@/services/survey';
 import useBoundStore from '@/stores';
 import { SurveyAnswer } from '@/types/survey';
@@ -35,7 +36,9 @@ function useSurveyForm({ surveyId }: UseSurveyFormProps) {
       alert('설문이 제출되었습니다.');
       navigate('/survey');
     },
-    onError: () => {
+    onError: error => {
+      if (error instanceof ApiError) console.log(error.message);
+      else console.log(error);
       alert('설문 제출 중 문제가 발생했습니다.');
     },
   });
@@ -60,7 +63,7 @@ function useSurveyForm({ surveyId }: UseSurveyFormProps) {
 
   const onSubmit = handleSubmit(submitHandler);
 
-  return { register, reset, errors, onSubmit };
+  return { register, reset, errors, onSubmit, isPending: mutation.isPending };
 }
 
 export default useSurveyForm;
