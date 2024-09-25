@@ -16,7 +16,9 @@ function useGetPdfUrl({
       if (!s3Url || !enabled) {
         return;
       }
-      const file = await convertURLtoFile(s3Url, 'pdf');
+      const file = await convertURLtoFile(s3Url, 'pdf', {
+        type: 'application/pdf',
+      });
       const fileUrl = URL.createObjectURL(file);
       setPdfUrl(fileUrl);
     } catch (error) {
