@@ -1,27 +1,31 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import useBoundStore from '@/stores';
 import { getFileName } from '@/utils/getFileName';
 
 interface ExamContentProps {
-  examFileUrl: string | undefined;
-  studentFileId: number | undefined;
+  assignmentFileId: number;
 }
 
-function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
+function ExamContent({ assignmentFileId }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
   const [isPdf, setIsPdf] = useState(false);
 
-  const { data: examStudentFile } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: studentFileId,
-    enabled: !!studentFileId,
+  const { data: examFile } = useGetSubClassGeneralFile({
+    assignmentFileId,
   });
 
-  const { pdfUrl } = useGetPdfUrl({ examFileUrl });
+  const { data: examStudentFile } = useGetSubClassStudentFile({
+    assignmentAnswerFileId: examFile?.assignmentAnswerFileId,
+    enabled: !!examFile?.assignmentAnswerFileId,
+  });
+
+  const { pdfUrl } = useGetPdfUrl({ s3Url: examFile?.filePresignedUrl });
 
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
@@ -51,16 +55,19 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
   }, [handleIntersect, headerRef]);
 
   useEffect(() => {
-    if (examFileUrl && getFileName(examFileUrl)?.split('.').pop() === 'pdf') {
+    if (
+      examFile?.filePresignedUrl &&
+      getFileName(examFile?.filePresignedUrl)?.split('.').pop() === 'pdf'
+    ) {
       setIsPdf(true);
     }
-  }, [examFileUrl]);
+  }, [examFile]);
 
   return (
     <div className={'w-full pb-50 flex-col-center gap-30'}>
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
         {!isPdf && (
-          <a href={examFileUrl} download className={buttonStyle}>
+          <a href={examFile?.filePresignedUrl} download className={buttonStyle}>
             시험 파일 다운로드
           </a>
         )}
