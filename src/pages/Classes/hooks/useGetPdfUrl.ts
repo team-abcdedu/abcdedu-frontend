@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
+
+import { convertURLtoFile } from '@/utils/convertURLtoFile';
 
 function useGetPdfUrl({
   s3Url,
@@ -10,21 +11,12 @@ function useGetPdfUrl({
 }) {
   const [pdfUrl, setPdfUrl] = useState<string | undefined>(undefined);
 
-  const convertURLtoPdfFile = async (url: string) => {
-    const response = await axios.get(url, {
-      responseType: 'blob',
-      withCredentials: true,
-    });
-    const blob = response.data;
-    return new File([blob], 'exam-pdf', { type: 'application/pdf' });
-  };
-
   const getPdfUrl = useCallback(async () => {
     try {
       if (!s3Url || !enabled) {
         return;
       }
-      const file = await convertURLtoPdfFile(s3Url);
+      const file = await convertURLtoFile(s3Url, 'pdf');
       const fileUrl = URL.createObjectURL(file);
       setPdfUrl(fileUrl);
     } catch (error) {
