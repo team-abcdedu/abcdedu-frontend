@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { ApiError } from '@/libs/errors';
 import HomeworkApi from '@/services/homework';
 import useBoundStore from '@/stores';
 import { HomeworkAnswer } from '@/types/homework';
@@ -26,9 +27,11 @@ function useHomeworkForm({ homeworkId }: UseHomeworkFormProps) {
       HomeworkApi.postHomework({ homeworkId, answers: data }),
     onSuccess: () => {
       reset();
-      alert('과제 제출이 완료되었습니다.');
+      alert('과제가 제출되었습니다..');
     },
-    onError: () => {
+    onError: error => {
+      if (error instanceof ApiError) console.log(error.message);
+      else console.log(error);
       alert('과제 제출 중 문제가 발생했습니다.');
     },
   });
@@ -55,7 +58,7 @@ function useHomeworkForm({ homeworkId }: UseHomeworkFormProps) {
 
   const onSubmit = handleSubmit(submitHandler);
 
-  return { register, errors, reset, onSubmit };
+  return { register, errors, reset, onSubmit, isPending: mutation.isPending };
 }
 
 export default useHomeworkForm;

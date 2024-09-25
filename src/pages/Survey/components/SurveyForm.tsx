@@ -19,7 +19,7 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
     errorStatus,
   } = useGetSurvey({ surveyId });
 
-  const { register, errors, onSubmit } = useSurveyForm({
+  const { register, errors, onSubmit, isPending } = useSurveyForm({
     surveyId,
   });
 
@@ -66,6 +66,7 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
         questions={survey.questionGetResponses}
         register={register}
         errors={errors}
+        isPending={isPending}
       />
     </form>
   );

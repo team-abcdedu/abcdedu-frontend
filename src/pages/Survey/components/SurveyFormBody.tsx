@@ -1,5 +1,6 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import SurveyFormItem from '@/pages/Survey/components/SurveyFormItem';
 import { ISurveyForm } from '@/pages/Survey/hooks/useSurveyForm';
 import { SurveyQuestion } from '@/types/survey';
@@ -16,9 +17,15 @@ interface SurveyFormBodyProps {
   questions: SurveyQuestion[];
   register: UseFormRegister<ISurveyForm>;
   errors: FieldErrors<ISurveyForm>;
+  isPending: boolean;
 }
 
-function SurveyFormBody({ questions, register, errors }: SurveyFormBodyProps) {
+function SurveyFormBody({
+  questions,
+  register,
+  errors,
+  isPending,
+}: SurveyFormBodyProps) {
   const formTextStyle = 'text-16 md:text-20';
 
   return (
@@ -45,12 +52,13 @@ function SurveyFormBody({ questions, register, errors }: SurveyFormBodyProps) {
                 <div className={'w-full h-full pl-10'}>
                   <SurveyFormItem question={question} register={register} />
                   {errors?.[`${question.orderNumber}#${question.type}`] && (
-                    <span className={'text-14 text-red-500'} role={'alert'}>
-                      {
-                        errors?.[`${question.orderNumber}#${question.type}`]
-                          ?.message
+                    <FormErrorMessage
+                      fieldErrors={
+                        errors[
+                          `${question.orderNumber}#${question.type}`
+                        ] as FieldError
                       }
-                    </span>
+                    />
                   )}
                 </div>
               </div>
@@ -60,6 +68,7 @@ function SurveyFormBody({ questions, register, errors }: SurveyFormBodyProps) {
 
         <button
           className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] bg-primary-300 ${formTextStyle} text-white`}
+          disabled={isPending}
         >
           제출하기
         </button>
