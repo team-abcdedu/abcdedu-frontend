@@ -92,7 +92,10 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
 
   const getCurrentImageFile = async () => {
     if (compressedImageFile) return compressedImageFile;
-    if (imagePreview && user.imageUrl) return convertURLtoFile(user.imageUrl);
+    if (imagePreview && user.imageUrl)
+      return convertURLtoFile(user.imageUrl, 'profile-image', {
+        headers: { 'Cache-Control': 'no-cache' },
+      });
     return null;
   };
 
