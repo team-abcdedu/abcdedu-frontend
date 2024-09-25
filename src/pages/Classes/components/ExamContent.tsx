@@ -53,11 +53,11 @@ function ExamContent({ assignmentFileId }: ExamContentProps) {
             className={buttonStyle}
             onClick={handleFileOpen}
           >
-            새 탭에서 열기 ({getFileName(examFile?.filePresignedUrl)})
+            문제 확인하기
           </button>
         ) : (
           <a href={examFile?.filePresignedUrl} download className={buttonStyle}>
-            파일 다운로드 ({getFileName(examFile?.filePresignedUrl)})
+            답안 제출 파일 다운로드
           </a>
         )}
 
@@ -67,7 +67,7 @@ function ExamContent({ assignmentFileId }: ExamContentProps) {
             download
             className={buttonStyle}
           >
-            파일 다운로드 ({getFileName(examStudentFile.filePresignedUrl)})
+            답안 제출 파일 다운로드
           </a>
         )}
       </div>
