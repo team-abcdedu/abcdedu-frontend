@@ -8,6 +8,7 @@ import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useModal from '@/hooks/useModal';
 import ExamContent from '@/pages/Classes/components/ExamContent';
 import SubClassFileItem from '@/pages/Classes/components/SubClassFileItem';
+import useBoundStore from '@/stores';
 import { FileData } from '@/types/class';
 
 function SubClass() {
@@ -36,9 +37,25 @@ function SubClass() {
     [fileList],
   );
 
+  const { user } = useBoundStore();
+
   const [theoryFiles, setTheoryFiles] = useState<FileData[]>([]);
   const [dataFiles, setDataFiles] = useState<FileData[]>([]);
   const [examFiles, setExamFiles] = useState<FileData[]>([]);
+
+  const handleExamClick = () => {
+    if (user?.role !== '관리자' && user?.role !== '학생') {
+      setModalMessage('학생 이상만 이용 가능합니다.');
+      toggleModal();
+      return;
+    }
+    if (examFiles.length < 1) {
+      setModalMessage('시험 파일이 없습니다.');
+      toggleModal();
+      return;
+    }
+    setOpenExam(prev => !prev);
+  };
 
   useEffect(() => {
     if (fileList) {
@@ -78,10 +95,7 @@ function SubClass() {
         )}
 
         {examFiles.length > 0 && (
-          <button
-            className={buttonStyle}
-            onClick={() => setOpenExam(prev => !prev)}
-          >
+          <button className={buttonStyle} onClick={handleExamClick}>
             <div className={iconWrapperStyle}>
               <CheckToSlot className={iconStyle} />
             </div>
