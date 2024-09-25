@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 
-function useGetPdfUrl({ examFileUrl }: { examFileUrl: string | undefined }) {
+function useGetPdfUrl({
+  s3Url,
+  enabled = true,
+}: {
+  s3Url: string | undefined;
+  enabled?: boolean;
+}) {
   const [pdfUrl, setPdfUrl] = useState<string | undefined>(undefined);
 
   const convertURLtoPdfFile = async (url: string) => {
@@ -15,23 +21,23 @@ function useGetPdfUrl({ examFileUrl }: { examFileUrl: string | undefined }) {
 
   const getPdfUrl = useCallback(async () => {
     try {
-      if (!examFileUrl) {
+      if (!s3Url || !enabled) {
         return;
       }
-      const file = await convertURLtoPdfFile(examFileUrl);
+      const file = await convertURLtoPdfFile(s3Url);
       const fileUrl = URL.createObjectURL(file);
       setPdfUrl(fileUrl);
     } catch (error) {
       alert('시험 파일을 불러오는데 실패했습니다.');
       console.log('파일 변환 실패 : ', error);
     }
-  }, [examFileUrl]);
+  }, [s3Url]);
 
   useEffect(() => {
-    if (examFileUrl) {
+    if (s3Url) {
       getPdfUrl();
     }
-  }, [examFileUrl, getPdfUrl]);
+  }, [s3Url, getPdfUrl]);
 
   return { pdfUrl };
 }
