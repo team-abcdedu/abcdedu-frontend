@@ -68,9 +68,9 @@ export default function AboutUs() {
       </div>
       <div
         className='w-full h-[900px] flex-col-center gap-48 max-w-[678] text-center 
-        leading-[1.3] max-md:h-[1060px]'
+        leading-[1.3] max-md:h-[1020px]'
       >
-        <h2 className='text-center text-40 font-extrabold tracking-tight max-md:text-24'>
+        <h2 className='text-center text-40 font-extrabold tracking-tight max-md:text-24 max-md:mb-70'>
           고교학점제 시대, <br className='md:hidden' />
           중고등학생들을 위한 <br />
           데이터 사이언스 교육의 선두 주자!

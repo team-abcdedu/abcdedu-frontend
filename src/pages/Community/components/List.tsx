@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
 import useBoundStore from '@/stores';
 import { PostSummary } from '@/types/community';
+import { formatDate } from '@/utils/formatDate';
 
 interface ListProps {
   isLoading: boolean;
@@ -81,7 +82,7 @@ export default function List({
                   </Link>
                 </td>
                 <td className='max-md:hidden px-5 py-10 text-14 text-gray-500'>
-                  <p>{post.createdAt.split('T')[0]}</p>
+                  <p>{formatDate(post.createdAt)}</p>
                 </td>
                 <td className='max-md:hidden px-5 py-10 text-14 text-gray-500'>
                   <p>{post.viewCount}</p>
