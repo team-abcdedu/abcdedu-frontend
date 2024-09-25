@@ -87,7 +87,7 @@ function SubClassFileItem({
       <div
         className={'text-20 sm:text-22 md:text-25 font-semibold text-center'}
       >
-        이론
+        {type}
       </div>
     </button>
   );
