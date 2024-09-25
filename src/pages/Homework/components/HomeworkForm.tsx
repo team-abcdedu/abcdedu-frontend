@@ -20,7 +20,7 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     errorStatus,
   } = useGetHomework({ homeworkId });
 
-  const { register, errors, reset, onSubmit } = useHomeworkForm({
+  const { register, errors, reset, onSubmit, isPending } = useHomeworkForm({
     homeworkId,
   });
 
@@ -75,6 +75,7 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
         questions={homework.questionGetResponses}
         register={register}
         errors={errors}
+        isPending={isPending}
       />
     </form>
   );
