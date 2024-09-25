@@ -13,3 +13,8 @@ export interface ClassData {
 }
 
 export type SubClassIdMap = { [key: string]: number };
+
+export type FileData = {
+  assignmentType: string;
+  assignmentFileId: number;
+};

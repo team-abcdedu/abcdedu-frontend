@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Book from '@/assets/icons/book.svg?react';
 import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
-import Paperclip from '@/assets/icons/paperclip.svg?react';
 import { useSubClassIdMap } from '@/components/ClassLayout';
 import MessageModal from '@/components/MessageModal';
 import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useModal from '@/hooks/useModal';
 import ExamContent from '@/pages/Classes/components/ExamContent';
-import useFileHandler from '@/pages/Classes/hooks/useFileHandler';
+import SubClassFileItem from '@/pages/Classes/components/SubClassFileItem';
+import useBoundStore from '@/stores';
+import { FileData } from '@/types/class';
 
 function SubClass() {
   const buttonStyle =
@@ -26,53 +26,48 @@ function SubClass() {
   const [modalMessage, setModalMessage] = useState('');
   const [openExam, setOpenExam] = useState(false);
 
-  const { handleDownloadFile, handleExamClick, generalFile } = useFileHandler({
-    subClassId: subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`],
-    toggleModal,
-    setModalMessage,
-    setOpenExam,
-  });
-
   const { data: fileList } = useGetSubClassFileList({
     subLectureId: subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`],
   });
 
-  const [fileState, setFileState] = useState<{
-    theory: boolean;
-    data: boolean;
-    exam: boolean;
-  }>({
-    theory: false,
-    data: false,
-    exam: false,
-  });
+  const findFiles = useCallback(
+    (type: string) => {
+      return fileList?.filter(file => file.assignmentType === type);
+    },
+    [fileList],
+  );
+
+  const { user } = useBoundStore();
+
+  const [theoryFiles, setTheoryFiles] = useState<FileData[]>([]);
+  const [dataFiles, setDataFiles] = useState<FileData[]>([]);
+  const [examFiles, setExamFiles] = useState<FileData[]>([]);
+
+  const handleExamClick = () => {
+    if (user?.role !== '관리자' && user?.role !== '학생') {
+      setModalMessage('학생 이상만 이용 가능합니다.');
+      toggleModal();
+      return;
+    }
+    if (examFiles.length < 1) {
+      setModalMessage('시험 파일이 없습니다.');
+      toggleModal();
+      return;
+    }
+    setOpenExam(prev => !prev);
+  };
 
   useEffect(() => {
     if (fileList) {
-      setFileState({ theory: false, data: false, exam: false });
-      fileList.forEach(file => {
-        const { assignmentType } = file;
-        if (assignmentType === '이론') {
-          setFileState(prev => ({
-            ...prev,
-            theory: true,
-          }));
-        }
-        if (assignmentType === '자료') {
-          setFileState(prev => ({
-            ...prev,
-            data: true,
-          }));
-        }
-        if (assignmentType === '시험') {
-          setFileState(prev => ({
-            ...prev,
-            exam: true,
-          }));
-        }
-      });
+      setTheoryFiles(findFiles('이론') ?? []);
+      setDataFiles(findFiles('자료') ?? []);
+      setExamFiles(findFiles('시험') ?? []);
     }
-  }, [fileList, classId, subClassId]);
+  }, [fileList, classId, subClassId, findFiles]);
+
+  useEffect(() => {
+    setOpenExam(false);
+  }, [classId, subClassId]);
 
   return (
     <>
@@ -81,31 +76,25 @@ function SubClass() {
           'mt-0 mb-60 px-50 grid grid-cols-2 sm:flex-row-center gap-20 sm:gap-50'
         }
       >
-        {fileState.theory && (
-          <button
-            className={buttonStyle}
-            onClick={() => handleDownloadFile('이론')}
-          >
-            <div className={iconWrapperStyle}>
-              <Book className={iconStyle} />
-            </div>
-            <div className={textStyle}>이론</div>
-          </button>
+        {theoryFiles.length > 0 && (
+          <SubClassFileItem
+            type={'이론'}
+            files={theoryFiles}
+            toggleModal={toggleModal}
+            setModalMessage={setModalMessage}
+          />
         )}
 
-        {fileState.data && (
-          <button
-            className={buttonStyle}
-            onClick={() => handleDownloadFile('자료')}
-          >
-            <div className={iconWrapperStyle}>
-              <Paperclip className={iconStyle} />
-            </div>
-            <div className={textStyle}>자료</div>
-          </button>
+        {dataFiles.length > 0 && (
+          <SubClassFileItem
+            type={'자료'}
+            files={dataFiles}
+            toggleModal={toggleModal}
+            setModalMessage={setModalMessage}
+          />
         )}
 
-        {fileState.exam && (
+        {examFiles.length > 0 && (
           <button className={buttonStyle} onClick={handleExamClick}>
             <div className={iconWrapperStyle}>
               <CheckToSlot className={iconStyle} />
@@ -114,6 +103,9 @@ function SubClass() {
           </button>
         )}
       </div>
+      {examFiles.length > 0 && openExam && (
+        <ExamContent assignmentFileId={examFiles[0].assignmentFileId} />
+      )}
 
       <MessageModal
         isVisible={isVisible}
@@ -121,16 +113,6 @@ function SubClass() {
         type={'error'}
         message={modalMessage}
       />
-      {/* form exam */}
-      {/* {openExam && examInfo && <ExamForm examInfo={examInfo} />} */}
-
-      {/* pdf, hwp exam */}
-      {fileState.exam && openExam && (
-        <ExamContent
-          examFileUrl={generalFile?.filePresignedUrl}
-          studentFileId={generalFile?.assignmentAnswerFileId}
-        />
-      )}
     </>
   );
 }

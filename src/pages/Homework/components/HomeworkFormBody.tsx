@@ -1,5 +1,6 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import { IHomeworkForm } from '@/pages/Homework/hooks/useHomeworkForm';
 import { HomeworkQuestion } from '@/types/homework';
 
@@ -15,12 +16,14 @@ interface HomeworkFormBodyProps {
   questions: HomeworkQuestion[];
   register: UseFormRegister<IHomeworkForm>;
   errors: FieldErrors<IHomeworkForm>;
+  isPending: boolean;
 }
 
 function HomeworkFormBody({
   questions,
   register,
   errors,
+  isPending,
 }: HomeworkFormBodyProps) {
   const formTextStyle = 'text-16 md:text-20 whitespace-pre-wrap';
 
@@ -55,19 +58,23 @@ function HomeworkFormBody({
                   ))}
                 </div>
               </div>
-              <textarea
-                {...register(`${question.orderNumber}`, {
-                  required: '답안을 입력해주세요.',
-                })}
-                id={`question-${question.orderNumber}`}
-                className={'w-full min-h-[150px] p-10 font-normal'}
-                placeholder={'답안 입력하기'}
-              />
-              {errors?.[`${question.orderNumber}`] && (
-                <span className={'text-14 text-red-700'} role={'alert'}>
-                  {errors?.[`${question.orderNumber}`]?.message}
-                </span>
-              )}
+              <div className={'w-full h-fit flex flex-col gap-10'}>
+                <textarea
+                  {...register(`${question.orderNumber}`, {
+                    required: '답안을 입력해주세요.',
+                  })}
+                  id={`question-${question.orderNumber}`}
+                  className={'w-full min-h-[150px] p-10 font-normal'}
+                  placeholder={'답안 입력하기'}
+                />
+                {errors?.[`${question.orderNumber}`] && (
+                  <FormErrorMessage
+                    fieldErrors={
+                      errors?.[`${question.orderNumber}`] as FieldError
+                    }
+                  />
+                )}
+              </div>
             </label>
           ))}
         </div>
@@ -82,6 +89,7 @@ function HomeworkFormBody({
 
         <button
           className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] text-white bg-primary-400`}
+          disabled={isPending}
         >
           제출하기
         </button>

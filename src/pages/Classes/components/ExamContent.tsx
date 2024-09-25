@@ -1,67 +1,63 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback } from 'react';
 
+import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
 import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
-import useBoundStore from '@/stores';
 import { getFileName } from '@/utils/getFileName';
 
 interface ExamContentProps {
-  examFileUrl: string | undefined;
-  studentFileId: number | undefined;
+  assignmentFileId: number;
 }
 
-function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
+function ExamContent({ assignmentFileId }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
-  const [isPdf, setIsPdf] = useState(false);
-
-  const { data: examStudentFile } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: studentFileId,
-    enabled: !!studentFileId,
+  const { data: examFile } = useGetSubClassGeneralFile({
+    assignmentFileId,
   });
 
-  const { pdfUrl } = useGetPdfUrl({ examFileUrl });
+  const { data: examStudentFile } = useGetSubClassStudentFile({
+    assignmentAnswerFileId: examFile?.assignmentAnswerFileId,
+    enabled: !!examFile?.assignmentAnswerFileId,
+  });
 
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const getFileExtension = useCallback((fileName: string | undefined) => {
+    return fileName?.split('.').pop();
+  }, []);
 
-  const { headerRef } = useBoundStore();
-  const handleIntersect = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          headerRef?.classList.add('hidden');
-        } else {
-          headerRef?.classList.remove('hidden');
-        }
-      });
-    },
-    [headerRef],
-  );
+  const { pdfUrl } = useGetPdfUrl({
+    s3Url: examFile?.filePresignedUrl,
+    enabled:
+      examFile &&
+      getFileExtension(getFileName(examFile?.filePresignedUrl)) === 'pdf',
+  });
 
-  useEffect(() => {
-    if (iframeRef.current && headerRef) {
-      const observer = new IntersectionObserver(handleIntersect, {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      });
-      observer.observe(iframeRef.current);
+  const handleFileOpen = () => {
+    const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    if (newWindow) {
+      newWindow.opener = null;
     }
-  }, [handleIntersect, headerRef]);
+  };
 
-  useEffect(() => {
-    if (examFileUrl && getFileName(examFileUrl)?.split('.').pop() === 'pdf') {
-      setIsPdf(true);
-    }
-  }, [examFileUrl]);
+  if (!examFile) {
+    return null;
+  }
 
   return (
     <div className={'w-full pb-50 flex-col-center gap-30'}>
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
-        {!isPdf && (
-          <a href={examFileUrl} download className={buttonStyle}>
-            시험 파일 다운로드
+        {getFileExtension(getFileName(examFile?.filePresignedUrl)) === 'pdf' ? (
+          <button
+            type={'button'}
+            className={buttonStyle}
+            onClick={handleFileOpen}
+          >
+            문제 확인하기
+          </button>
+        ) : (
+          <a href={examFile?.filePresignedUrl} download className={buttonStyle}>
+            답안 제출 파일 다운로드
           </a>
         )}
 
@@ -71,25 +67,10 @@ function ExamContent({ examFileUrl, studentFileId }: ExamContentProps) {
             download
             className={buttonStyle}
           >
-            제출용 파일 다운로드
+            답안 제출 파일 다운로드
           </a>
         )}
       </div>
-
-      {isPdf && (
-        <div
-          className={
-            'min-w-[300px] w-[85%] h-[500px] sm:h-[700px] md:h-[900px]'
-          }
-        >
-          <iframe
-            ref={iframeRef}
-            src={pdfUrl}
-            title={'exam'}
-            className={'w-full h-full'}
-          />
-        </div>
-      )}
     </div>
   );
 }
