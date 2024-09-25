@@ -67,6 +67,9 @@ function SubClass() {
 
   useEffect(() => {
     setOpenExam(false);
+    setTheoryFiles([]);
+    setDataFiles([]);
+    setExamFiles([]);
   }, [classId, subClassId]);
 
   return (
