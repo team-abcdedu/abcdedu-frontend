@@ -54,7 +54,7 @@ export default function Pagination({
     window.scrollTo(0, 0);
   };
 
-  if (totalPages === 1) return null;
+  if (totalPages <= 1) return null;
 
   return (
     <div className='flex-row-center text-14 text-neutral-500 mt-30'>
