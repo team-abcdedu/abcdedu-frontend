@@ -33,7 +33,12 @@ export default function PostFormModal({
     onSuccess: onClose,
   });
   return (
-    <Modal isVisible={isVisible} onClose={handleClose} size='lg'>
+    <Modal
+      isVisible={isVisible}
+      onClose={handleClose}
+      size='lg'
+      enableBackdropClick={false}
+    >
       <Modal.Content>
         <form className='flex flex-col' onSubmit={onSubmit}>
           <div className='flex justify-between items-center'>

@@ -37,7 +37,12 @@ export default function ContactModal({
   };
 
   return (
-    <Modal size='lg' isVisible={isVisible} onClose={handleClose}>
+    <Modal
+      size='lg'
+      isVisible={isVisible}
+      onClose={handleClose}
+      enableBackdropClick={false}
+    >
       <Modal.Content>
         <div className='pt-16'>
           <button
