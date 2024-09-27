@@ -1,6 +1,6 @@
-import { MobileMenuNavItem, HeaderNavItem } from '@/types/navTypes';
+import { NavItem } from '@/types/navTypes';
 
-export const headerNavItems: HeaderNavItem[] = [
+export const headerNavItems: NavItem[] = [
   {
     type: 'link',
     to: '/',
@@ -88,38 +88,7 @@ export const headerNavItems: HeaderNavItem[] = [
   },
 ];
 
-export const mobileMenuNavItems: MobileMenuNavItem[] = [
-  {
-    to: '/',
-    text: '홈',
-  },
-  {
-    to: '/about_us',
-    text: '회사소개',
-  },
-  {
-    to: '/classes',
-    text: '클래스',
-  },
-  {
-    to: '/community',
-    text: '커뮤니티',
-  },
-  {
-    to: '/homework',
-    text: '과제',
-  },
-  {
-    to: '/survey',
-    text: '설문',
-  },
-  {
-    to: '/contact',
-    text: '문의',
-  },
-];
-
-export const adminNavItem: MobileMenuNavItem = {
+export const adminNavItem: NavItem = {
   to: '/admin',
   text: '관리자',
 };

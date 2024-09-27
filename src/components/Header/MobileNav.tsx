@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { HeaderNavItem } from '@/types/navTypes';
+import { NavItem } from '@/types/navTypes';
 
 const listVariants = {
   open: {
@@ -17,7 +17,7 @@ const listVariants = {
 };
 
 interface MobileNavProps {
-  item: HeaderNavItem;
+  item: NavItem;
 }
 
 function MobileNav({ item }: MobileNavProps) {
