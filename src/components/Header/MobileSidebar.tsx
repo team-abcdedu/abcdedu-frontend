@@ -13,7 +13,7 @@ function MobileSidebar() {
         'absolute w-[200px] h-dvh top-[-25.76px] right-[-220px] pt-60 pb-30 flex flex-col gap-20 bg-white z-modal'
       }
     >
-      <nav className={'w-full h-[85%] relative overflow-hidden'}>
+      <nav className={'w-full h-[80%] relative overflow-hidden'}>
         <ul
           className={
             'relative w-full h-full px-30 py-20 flex flex-col gap-8 overflow-scroll'
