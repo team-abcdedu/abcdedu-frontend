@@ -1,7 +1,9 @@
 import { CaretDown } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+
+import { HeaderNavItem } from '@/types/navTypes';
 
 const listVariants = {
   open: {
@@ -15,14 +17,11 @@ const listVariants = {
 };
 
 interface MobileNavProps {
-  item: {
-    to: string;
-    text: string;
-    list?: { to: string; text: string }[];
-  };
+  item: HeaderNavItem;
 }
 
 function MobileNav({ item }: MobileNavProps) {
+  const { pathname } = useLocation();
   const [listOpen, setListOpen] = useState(false);
 
   const navLinkStyle = (isActive: boolean) => {
@@ -31,7 +30,7 @@ function MobileNav({ item }: MobileNavProps) {
 
   useEffect(() => {
     setListOpen(false);
-  }, []);
+  }, [pathname]);
 
   return (
     <div className={'w-full h-fit'}>
