@@ -33,14 +33,14 @@ function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-fit px-10 xl:px-14 h-36 flex-row-center text-18 xl:text-14  font-semibold text-primary-400'
+            'w-fit h-46 xl:h-36 px-20 xl:px-14 py-4 xl:py-0 flex-row-center text-18 xl:text-14 font-semibold text-primary-400'
           }
         >
           {name}
         </div>
       </Link>
       <button
-        className={`${btnStyle} bg-primary-400 text-18 xl:text-14 w-fit text-white`}
+        className={`${btnStyle} bg-primary-400 text-18 xl:text-14 text-white`}
         onClick={handleClick}
       >
         로그아웃
