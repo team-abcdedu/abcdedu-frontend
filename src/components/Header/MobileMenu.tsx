@@ -1,26 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Backdrop from '@/components/Backdrop';
 import MenuToggle from '@/components/Header/MenuToggle';
 import MobileSidebar from '@/components/Header/MobileSidebar';
 import useMenuAnimation from '@/hooks/useMenuAnimation';
+import useBoundStore from '@/stores';
 
 function MobileMenu() {
   const { pathname } = useLocation();
+  const { isSidebarOpen, setIsSidebarOpen } = useBoundStore();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const scope = useMenuAnimation(isOpen);
+  const scope = useMenuAnimation(isSidebarOpen);
 
   useEffect(() => {
-    setIsOpen(false);
+    setIsSidebarOpen(false);
   }, [pathname]);
 
   return (
     <div ref={scope} className={'xl:hidden flex flex-end relative'}>
-      {isOpen && <Backdrop onClick={() => setIsOpen(prev => !prev)} />}
+      {isSidebarOpen && <Backdrop onClick={() => setIsSidebarOpen(false)} />}
       <MobileSidebar />
-      <MenuToggle toggle={() => setIsOpen(prev => !prev)} />
+      <MenuToggle toggle={() => setIsSidebarOpen(prev => !prev)} />
     </div>
   );
 }
