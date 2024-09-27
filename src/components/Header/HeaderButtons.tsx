@@ -16,7 +16,8 @@ interface MemberButtonsProps extends ButtonsProps {
   name: string;
 }
 
-const btnStyle = 'w-100 h-36 px-20 py-4 flex-row-center rounded-[20px] text-14';
+const btnStyle =
+  'w-120 xl:w-100 h-46 xl:h-36 px-20 py-4 flex-row-center rounded-[20px] text-18 xl:text-14';
 
 function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
   const { handleLogout } = useLogout();
@@ -28,18 +29,18 @@ function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
 
   return (
     <>
-      <Link className={'flex w-fit h-36 text-14 items-center'} to='/mypage'>
+      <Link className={'flex w-fit h-36 items-center'} to='/mypage'>
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-fit px-10 xl:px-14 h-36 flex-row-center text-14 font-semibold text-primary-400'
+            'w-fit px-10 xl:px-14 h-36 flex-row-center text-18 xl:text-14  font-semibold text-primary-400'
           }
         >
           {name}
         </div>
       </Link>
       <button
-        className={`${btnStyle} bg-primary-400 text-white`}
+        className={`${btnStyle} bg-primary-400 text-18 xl:text-14 w-fit text-white`}
         onClick={handleClick}
       >
         로그아웃
@@ -69,13 +70,13 @@ function GuestButtons({ toggleMenu }: ButtonsProps) {
   return (
     <>
       <button
-        className={'hidden xl:flex w-100 h-36 text-14 items-center gap-4'}
+        className={'hidden xl:flex w-100 h-36 items-center gap-4'}
         onClick={() => handleClick('login')}
       >
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-64 h-36 flex-row-center text-14 font-semibold text-primary-400'
+            'w-64 h-36 flex-row-center text-18 xl:text-14 font-semibold text-primary-400'
           }
         >
           로그인
@@ -88,7 +89,7 @@ function GuestButtons({ toggleMenu }: ButtonsProps) {
         로그인
       </button>
       <button
-        className={`${btnStyle} bg-primary-400 text-white`}
+        className={`${btnStyle} bg-primary-400 text-white w-full`}
         onClick={() => handleClick('register')}
       >
         회원가입

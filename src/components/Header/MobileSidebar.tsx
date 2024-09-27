@@ -10,7 +10,7 @@ function MobileSidebar() {
     <div
       id={'mobile-sidebar'}
       className={
-        'absolute w-[200px] h-dvh top-[-25.76px] right-[-220px] pt-60 pb-30 flex flex-col-center bg-white z-modal'
+        'absolute w-[300px] h-dvh top-[-25.76px] right-[-320px] pt-60 pb-30 flex flex-col-center bg-white z-modal'
       }
     >
       <div className={'w-1/2 h-1 bg-neutral-100 mt-10'}></div>

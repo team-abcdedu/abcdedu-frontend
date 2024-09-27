@@ -33,7 +33,7 @@ function MobileNav({ item }: MobileNavProps) {
   }, [pathname]);
 
   return (
-    <div className={'w-full h-fit'}>
+    <div className={'w-full h-fit text-20'}>
       <div className={'w-full p-5 flex justify-between'}>
         <NavLink
           to={item.to}
@@ -53,7 +53,7 @@ function MobileNav({ item }: MobileNavProps) {
                 transition={{ duration: 0.4 }}
                 animate={listOpen ? 'open' : 'closed'}
               >
-                <CaretDown />
+                <CaretDown className={'w-25 h-25'} />
               </motion.div>
             </button>
           )}
