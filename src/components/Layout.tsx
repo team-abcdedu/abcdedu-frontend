@@ -14,7 +14,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <section className={'relative top-[70px] md:top-[100px]'}>
+      <section className={'relative top-[70px] xl:top-[100px]'}>
         <Suspense fallback={<div className='w-full h-[100dvh]'></div>}>
           <Outlet />
         </Suspense>

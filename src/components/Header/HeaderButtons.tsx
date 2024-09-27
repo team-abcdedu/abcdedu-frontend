@@ -32,7 +32,7 @@ function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
         <UserLogin className={'w-30 h-30'} />
         <div
           className={
-            'w-fit px-10 md:px-14 h-36 flex-row-center text-14 font-semibold text-primary-400'
+            'w-fit px-10 xl:px-14 h-36 flex-row-center text-14 font-semibold text-primary-400'
           }
         >
           {name}
@@ -69,7 +69,7 @@ function GuestButtons({ toggleMenu }: ButtonsProps) {
   return (
     <>
       <button
-        className={'hidden md:flex w-100 h-36 text-14 items-center gap-4'}
+        className={'hidden xl:flex w-100 h-36 text-14 items-center gap-4'}
         onClick={() => handleClick('login')}
       >
         <UserLogin className={'w-30 h-30'} />
@@ -82,7 +82,7 @@ function GuestButtons({ toggleMenu }: ButtonsProps) {
         </div>
       </button>
       <button
-        className={`block md:hidden ${btnStyle} btn-white-pb`}
+        className={`block xl:hidden ${btnStyle} btn-white-pb`}
         onClick={() => handleClick('login')}
       >
         로그인
@@ -107,7 +107,7 @@ function HeaderButtons({ toggleMenu }: ButtonsProps) {
   const user = useBoundStore(state => state.user);
 
   return (
-    <div className={'flex flex-col items-center md:flex-row gap-10'}>
+    <div className={'flex flex-col items-center xl:flex-row gap-10'}>
       {user ? (
         <MemberButtons name={user.name} toggleMenu={toggleMenu} />
       ) : (

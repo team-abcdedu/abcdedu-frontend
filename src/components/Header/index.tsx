@@ -20,7 +20,7 @@ function Header() {
   return (
     <header
       className={
-        'top-0 fixed w-full h-70 md:h-100 pl-26 pr-17 md:px-43 lg:px-103 py-17 md:pt-22 md:pb-10 flex justify-between items-center md:flex-col md:items-stretch bg-white z-10'
+        'top-0 fixed w-full h-70 xl:h-100 pl-35 pr-20 xl:px-103 py-17 xl:pt-22 xl:pb-10 flex justify-between items-center xl:flex-col xl:items-stretch bg-white z-10'
       }
       ref={headerRef}
     >
