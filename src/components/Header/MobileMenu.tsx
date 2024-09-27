@@ -1,35 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
-import MenuIcon from '@/assets/icons/menu.svg?react';
-
-import MobileNav from './MobileNav';
+import Backdrop from '@/components/Backdrop';
+import MenuToggle from '@/components/Header/MenuToggle';
+import MobileSidebar from '@/components/Header/MobileSidebar';
+import useMenuAnimation from '@/hooks/useMenuAnimation';
 
 function MobileMenu() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setIsMenuOpen(false);
-      }
-    }
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  const scope = useMenuAnimation(isOpen);
 
   return (
-    <div className={'md:hidden flex flex-end'} ref={menuRef}>
-      <div>
-        <div className={'grid place-items-center'}>
-          <MenuIcon className={'w-32 h-32'} onClick={toggleMenu} />
-        </div>
-        {isMenuOpen && <MobileNav onClick={toggleMenu} />}
-      </div>
+    <div ref={scope} className={'xl:hidden flex flex-end relative'}>
+      {isOpen && <Backdrop onClick={() => setIsOpen(false)} />}
+      <MobileSidebar />
+      <MenuToggle toggle={() => setIsOpen(prev => !prev)} />
     </div>
   );
 }
