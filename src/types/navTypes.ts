@@ -4,7 +4,7 @@ export interface MobileMenuNavItem {
 }
 
 export interface HeaderNavItem extends MobileMenuNavItem {
-  type: 'link' | 'dropdown';
+  type?: 'link' | 'dropdown';
   list?: {
     to: string;
     text: string;
