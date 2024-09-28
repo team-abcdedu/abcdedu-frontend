@@ -5,7 +5,6 @@ import useBoundStore from '@/stores';
 
 function MobileSidebar() {
   const { user } = useBoundStore();
-  const { setIsSidebarOpen } = useBoundStore();
 
   return (
     <div
@@ -29,7 +28,7 @@ function MobileSidebar() {
       </nav>
       <div className={'w-1/2 h-1 bg-neutral-100 mb-10'}></div>
       <div className={'h-[15%] flex-row-center'}>
-        <HeaderButtons toggleMenu={() => setIsSidebarOpen(false)} />
+        <HeaderButtons />
       </div>
     </div>
   );

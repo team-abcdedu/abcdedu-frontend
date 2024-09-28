@@ -8,23 +8,20 @@ import useModal from '@/hooks/useModal';
 import useBoundStore from '@/stores';
 import { AuthModalType } from '@/types/auth';
 
-interface ButtonsProps {
-  toggleMenu?: () => void;
-}
-
-interface MemberButtonsProps extends ButtonsProps {
+interface MemberButtonsProps {
   name: string;
 }
 
 const btnStyle =
   'w-120 xl:w-100 h-46 xl:h-36 px-20 py-4 flex-row-center rounded-[20px] text-18 xl:text-14';
 
-function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
+function MemberButtons({ name }: MemberButtonsProps) {
   const { handleLogout } = useLogout();
+  const setIsSidebarOpen = useBoundStore(state => state.setIsSidebarOpen);
 
   const handleClick = () => {
     handleLogout();
-    if (toggleMenu) toggleMenu();
+    setIsSidebarOpen(false);
   };
 
   return (
@@ -49,9 +46,10 @@ function MemberButtons({ name, toggleMenu }: MemberButtonsProps) {
   );
 }
 
-function GuestButtons({ toggleMenu }: ButtonsProps) {
+function GuestButtons() {
   const { isVisible, toggleModal } = useModal();
   const [modalType, setModalType] = useState<AuthModalType>('login');
+  const setIsSidebarOpen = useBoundStore(state => state.setIsSidebarOpen);
 
   const handleClick = (type: AuthModalType) => {
     toggleModal();
@@ -60,7 +58,7 @@ function GuestButtons({ toggleMenu }: ButtonsProps) {
 
   const handleClose = () => {
     toggleModal();
-    if (toggleMenu) toggleMenu();
+    setIsSidebarOpen(false);
   };
 
   const toggleModalType = () => {
@@ -104,16 +102,12 @@ function GuestButtons({ toggleMenu }: ButtonsProps) {
   );
 }
 
-function HeaderButtons({ toggleMenu }: ButtonsProps) {
+function HeaderButtons() {
   const user = useBoundStore(state => state.user);
 
   return (
     <div className={'flex flex-col items-center xl:flex-row gap-10'}>
-      {user ? (
-        <MemberButtons name={user.name} toggleMenu={toggleMenu} />
-      ) : (
-        <GuestButtons toggleMenu={toggleMenu} />
-      )}
+      {user ? <MemberButtons name={user.name} /> : <GuestButtons />}
     </div>
   );
 }
