@@ -3,7 +3,7 @@ import HeaderNav from './HeaderNav';
 
 function HeaderMenu() {
   return (
-    <div className={'hidden md:flex justify-between items-end'}>
+    <div className={'hidden xl:flex justify-between items-end'}>
       <HeaderNav />
       <HeaderButtons />
     </div>
