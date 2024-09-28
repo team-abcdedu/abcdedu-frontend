@@ -4,7 +4,7 @@ import { adminNavItem, headerNavItems } from '@/constants/navItems';
 import useBoundStore from '@/stores';
 
 function MobileSidebar() {
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   return (
     <div

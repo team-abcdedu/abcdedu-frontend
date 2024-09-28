@@ -9,7 +9,7 @@ import MobileMenu from './MobileMenu';
 
 function Header() {
   const headerRef = useRef<HTMLElement | null>(null);
-  const { setHeaderRef } = useBoundStore();
+  const setHeaderRef = useBoundStore(state => state.setHeaderRef);
 
   useEffect(() => {
     if (headerRef.current) {

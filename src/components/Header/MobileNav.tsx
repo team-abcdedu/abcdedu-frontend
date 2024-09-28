@@ -28,7 +28,7 @@ function MobileNav({ item }: MobileNavProps) {
     return isActive ? `text-primary-400 font-medium` : `text-neutral-400`;
   };
 
-  const { isSidebarOpen } = useBoundStore();
+  const isSidebarOpen = useBoundStore(state => state.isSidebarOpen);
 
   useEffect(() => {
     if (!isSidebarOpen) {

@@ -9,7 +9,8 @@ import useBoundStore from '@/stores';
 
 function MobileMenu() {
   const { pathname } = useLocation();
-  const { isSidebarOpen, setIsSidebarOpen } = useBoundStore();
+  const isSidebarOpen = useBoundStore(state => state.isSidebarOpen);
+  const setIsSidebarOpen = useBoundStore(state => state.setIsSidebarOpen);
 
   const scope = useMenuAnimation(isSidebarOpen);
 
