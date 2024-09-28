@@ -65,7 +65,7 @@ function MobileNav({ item }: MobileNavProps) {
       </div>
 
       <AnimatePresence>
-        {item.list && (
+        {item.list && listOpen && (
           <ul className={`flex flex-col`}>
             {item.list?.map(listItem => (
               <motion.li
@@ -73,6 +73,7 @@ function MobileNav({ item }: MobileNavProps) {
                 initial={'closed'}
                 variants={listVariants}
                 animate={listOpen ? 'open' : 'closed'}
+                exit={'closed'}
                 transition={{ duration: 0.8, ease: [0.01, 0.52, 0.4, 0.98] }}
                 className={'flex'}
               >
