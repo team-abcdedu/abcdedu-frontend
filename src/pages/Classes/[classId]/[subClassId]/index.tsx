@@ -37,7 +37,7 @@ function SubClass() {
     [fileList],
   );
 
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const [theoryFiles, setTheoryFiles] = useState<FileData[]>([]);
   const [dataFiles, setDataFiles] = useState<FileData[]>([]);

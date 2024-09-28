@@ -10,7 +10,7 @@ interface UseSubClassGeneralFileProps {
 function useGetSubClassGeneralFile({
   assignmentFileId,
 }: UseSubClassGeneralFileProps) {
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['class', 'sub-class-general-file', assignmentFileId],

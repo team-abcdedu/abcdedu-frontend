@@ -6,7 +6,7 @@ import { mediaList } from '../constants';
 
 function MediaContents() {
   const { isVisible, toggleModal } = useModal();
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const handleMediaClick = (url: string) => {
     if (!user || user?.role !== '관리자') {

@@ -35,7 +35,7 @@ function useFileHandler({
     assignmentFileId: contentState?.generalFileId,
   });
 
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const findFile = (type: string) => {
     return fileList?.find(file => file.assignmentType === type);

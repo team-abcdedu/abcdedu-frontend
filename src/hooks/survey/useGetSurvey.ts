@@ -11,7 +11,8 @@ interface UseGetSurveyProps {
 
 function useGetSurvey({ surveyId }: UseGetSurveyProps) {
   const [queryEnabled, setQueryEnabled] = useState(false);
-  const { user, accessToken } = useBoundStore.getState();
+  const user = useBoundStore(state => state.user);
+  const accessToken = useBoundStore(state => state.accessToken);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['survey', surveyId],
