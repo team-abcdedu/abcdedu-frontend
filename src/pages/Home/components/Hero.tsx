@@ -48,15 +48,6 @@ export default function Hero() {
                 {review.grade}
               </span>
             </div>
-            {/* <p
-              className='text-neutral-300 [&>strong]:text-primary-400 
-              [&>strong]:font-medium max-xs:text-11'
-            >
-              &quot;수업은 세 번이었지만 엄청 <strong>알찬 수업</strong>이라
-              정말 큰 도움이 되었습니다.. 오늘 진로 시간에 AI에 관련된 책을
-              읽었는데, 수업에서 다 배운 내용이라 <strong>쉽게 읽혀서</strong>{' '}
-              내심 <strong>뿌듯하고 감사했어요!</strong>&quot;
-            </p> */}
             <p
               className='text-neutral-300 [&>strong]:text-primary-400 
               [&>strong]:font-medium text-16 max-xs:text-11'
