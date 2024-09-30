@@ -17,7 +17,7 @@ function MobileSidebar() {
       <nav className={'w-full h-[80%] relative overflow-hidden'}>
         <ul
           className={
-            'relative w-full h-full px-30 py-20 flex flex-col gap-8 overflow-scroll'
+            'relative w-full h-full px-30 py-20 flex flex-col gap-8 overflow-y-auto'
           }
         >
           {headerNavItems.map(item => (
