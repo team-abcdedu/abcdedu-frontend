@@ -7,7 +7,7 @@ import { getFileName } from '@/utils/getFileName';
 
 import usePostForm from '../hooks/usePostForm';
 
-export interface WritePostModalProps {
+export interface PostFormModalProps {
   post?: Post;
   isVisible: boolean;
   onClose: () => void;
@@ -17,7 +17,7 @@ export default function PostFormModal({
   post,
   isVisible,
   onClose,
-}: WritePostModalProps) {
+}: PostFormModalProps) {
   const {
     isSubmitButtonDisabled,
     fileUrl,
@@ -32,19 +32,31 @@ export default function PostFormModal({
     post,
     onSuccess: onClose,
   });
+
+  const submitButtonStyle =
+    'px-16 bg-primary-400 disabled:bg-primary-400/15 text-white';
+
   return (
     <Modal
       isVisible={isVisible}
       onClose={handleClose}
       size='lg'
       enableBackdropClick={false}
+      mobileFullScreen
     >
       <Modal.Content>
         <form className='flex flex-col' onSubmit={onSubmit}>
-          <div className='flex justify-between items-center'>
-            <h2 className='text-lg font-bold'>글쓰기</h2>
+          <div className='flex justify-between items-center max-sm:pb-12'>
+            <h2 className='hidden sm:block text-lg font-bold'>글쓰기</h2>
             <button type='button' aria-label='닫기' onClick={handleClose}>
               <X size={24} />
+            </button>
+            <button
+              className={`${submitButtonStyle} block sm:hidden rounded-full w-80 py-6`}
+              type='submit'
+              disabled={isSubmitButtonDisabled}
+            >
+              {!post ? '등록' : '수정'}
             </button>
           </div>
           <div className='p-4'>
@@ -63,7 +75,7 @@ export default function PostFormModal({
                 id='content'
                 {...register('content', { required: '내용을 입력하세요.' })}
                 placeholder='내용을 입력하세요.'
-                className='w-full h-64 border rounded py-6 px-8 min-h-[384px]'
+                className='w-full h-[384px] max-h-[45vh] border rounded py-6 px-8'
               />
               {errors.content && (
                 <FormErrorMessage fieldErrors={errors.content} />
@@ -94,25 +106,26 @@ export default function PostFormModal({
                 </button>
               </div>
             )}
-            <div className='flex mb-4 items-center gap-4'>
-              <input type='checkbox' id='secret' {...register('secret')} />
-              <label htmlFor='secret' className='text-14'>
-                비밀글 설정
-              </label>
-            </div>
-            <div className='flex items-center mb-20 gap-4'>
-              <input
-                type='checkbox'
-                id='commentAllow'
-                {...register('commentAllow')}
-              />
-              <label htmlFor='commentAllow' className='text-14'>
-                댓글 허용
-              </label>
+            <div className='sm:block flex mb-20'>
+              <div className='flex sm:mb-4 flex-1 items-center gap-4'>
+                <input type='checkbox' id='secret' {...register('secret')} />
+                <label htmlFor='secret' className='text-14'>
+                  비밀글 설정
+                </label>
+              </div>
+              <div className='flex flex-1 items-center gap-4'>
+                <input
+                  type='checkbox'
+                  id='commentAllow'
+                  {...register('commentAllow')}
+                />
+                <label htmlFor='commentAllow' className='text-14'>
+                  댓글 허용
+                </label>
+              </div>
             </div>
             <button
-              className='block w-160 py-8 px-16 rounded-2xl bg-primary-400 
-              disabled:bg-primary-400/15 text-white mx-auto'
+              className={`${submitButtonStyle} hidden sm:block mx-auto w-160 py-8 rounded-full`}
               type='submit'
               disabled={isSubmitButtonDisabled}
             >
