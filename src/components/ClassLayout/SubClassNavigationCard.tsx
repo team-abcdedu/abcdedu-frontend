@@ -32,7 +32,7 @@ function SubClassNavigationCard({
           <h5 className={'text-20 font-semibold text-primary-300'}>
             {classTitle}-{subClass.orderNumber}
           </h5>
-          <h5 className={'h-full text-20 font-semibold whitespace-pre-wrap'}>
+          <h5 className={'h-full text-20 font-semibold break-keep'}>
             {subClass.title}
           </h5>
           <Link
