@@ -42,7 +42,7 @@ export default function Hero() {
             <div className='font-semibold flex items-center gap-14 pt-4 pb-20'>
               <span className='text-20'>{review.school}</span>
               <span
-                className='text-primary-400 text-12 block h-22 px-8 
+                className='text-primary-400 text-12 block min-h-22 px-8 flex-row-center
               bg-primary-400/15 rounded-[10px] border-1 border-primary-400'
               >
                 {review.grade}
@@ -50,7 +50,7 @@ export default function Hero() {
             </div>
             <p
               className='text-neutral-300 [&>strong]:text-primary-400 
-              [&>strong]:font-medium text-16 max-xs:text-11'
+              [&>strong]:font-medium max-xs:text-11'
               dangerouslySetInnerHTML={{ __html: review.content }}
             />
           </div>
