@@ -13,7 +13,7 @@ export default function EditModal({
   onToggle,
 }: ProfileEditModalProps) {
   return (
-    <Modal isVisible={isVisible} onClose={onClose}>
+    <Modal isVisible={isVisible}>
       <EditProfile user={user} onClose={onClose} onToggle={onToggle} />
     </Modal>
   );

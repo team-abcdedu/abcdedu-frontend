@@ -8,7 +8,7 @@ interface BackdropProps {
    * @default true
    */
   isDark?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const variants: Variants = {

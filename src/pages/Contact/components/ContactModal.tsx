@@ -37,16 +37,14 @@ export default function ContactModal({
   };
 
   return (
-    <Modal size='lg' isVisible={isVisible} onClose={handleClose}>
+    <Modal size='lg' isVisible={isVisible}>
+      <Modal.Header>
+        <button type='button' className='block ml-auto' onClick={handleClose}>
+          <X size={24} />
+        </button>
+      </Modal.Header>
       <Modal.Content>
-        <div className='pt-16'>
-          <button
-            type='button'
-            className='absolute top-12 right-12'
-            onClick={handleClose}
-          >
-            <X size={24} />
-          </button>
+        <div className='-mt-20'>
           <h2 className='text-30 font-semibold mb-24 text-center'>
             {selected.label}
           </h2>

@@ -15,15 +15,17 @@ export default function Register({ onClose, onToggle }: AuthModalActions) {
 
   return (
     <>
+      <Modal.Header>
+        <button
+          type='button'
+          className='block ml-auto mt-4 p-2'
+          onClick={onClose}
+        >
+          <X size={24} />
+        </button>
+      </Modal.Header>
       <Modal.Content>
-        <div>
-          <button
-            type='button'
-            className='block ml-auto -mt-6 -mr-10'
-            onClick={onClose}
-          >
-            <X size={24} />
-          </button>
+        <div className='-mt-28'>
           <h2 className='text-24 font-semibold mb-24'>회원가입</h2>
           <form className='flex flex-col gap-12'>
             <div className={fieldStyle}>
