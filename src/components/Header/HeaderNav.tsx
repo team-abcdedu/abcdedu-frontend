@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import Dropdown from '@/components/Dropdown';
 import { adminNavItem, headerNavItems } from '@/constants/navItems';
 import useBoundStore from '@/stores';
-import { HeaderNavItem } from '@/types/navTypes';
 
 function HeaderNav() {
   const linkStyle = 'text-13 font-bold';
@@ -15,8 +14,8 @@ function HeaderNav() {
   const user = useBoundStore(state => state.user);
 
   return (
-    <div className={'flex items-center gap-30 lg:gap-40'}>
-      {headerNavItems.map((item: HeaderNavItem) => {
+    <div className={'flex items-center gap-40'}>
+      {headerNavItems.map(item => {
         if (item.type === 'link') {
           return (
             <NavLink

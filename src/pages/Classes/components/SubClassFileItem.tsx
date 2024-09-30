@@ -26,7 +26,7 @@ function SubClassFileItem({
     assignmentFileId: files[0].assignmentFileId,
   });
 
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const { pdfUrl } = useGetPdfUrl({
     s3Url: data?.filePresignedUrl,
