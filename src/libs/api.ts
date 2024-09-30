@@ -31,7 +31,6 @@ const logout = async () => {
   resetUser();
   clearSelectedQueries(['user', 'homework', 'survey']);
 
-  if (!getAccessToken()) return;
   await axios.delete('/auth/logout', {
     baseURL: BASE_URL,
     withCredentials: true,
@@ -70,7 +69,7 @@ instance.interceptors.request.use(async config => {
     // isAutoLogin이 false이면서 user가 있는 경우(local storage에 user 정보가 남아있는 경우)
     if (user) {
       await logout();
-      window.location.href = '/';
+      // window.location.href = '/';
     }
     return config;
   }
