@@ -37,12 +37,7 @@ export default function ContactModal({
   };
 
   return (
-    <Modal
-      size='lg'
-      isVisible={isVisible}
-      onClose={handleClose}
-      enableBackdropClick={false}
-    >
+    <Modal size='lg' isVisible={isVisible}>
       <Modal.Header>
         <button type='button' className='block ml-auto' onClick={handleClose}>
           <X size={24} />

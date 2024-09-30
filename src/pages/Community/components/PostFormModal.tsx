@@ -37,13 +37,7 @@ export default function PostFormModal({
     'px-16 bg-primary-400 disabled:bg-primary-400/15 text-white';
 
   return (
-    <Modal
-      isVisible={isVisible}
-      onClose={handleClose}
-      size='lg'
-      enableBackdropClick={false}
-      mobileFullScreen
-    >
+    <Modal isVisible={isVisible} size='lg' mobileFullScreen>
       <Modal.Content>
         <form className='flex flex-col' onSubmit={onSubmit}>
           <div className='flex justify-between items-center max-sm:pb-12'>

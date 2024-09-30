@@ -14,8 +14,7 @@ type ModalSize = 'xs' | 'sm' | 'md' | 'lg';
 interface ModalProps {
   isVisible: boolean;
   showBackdrop?: boolean;
-  enableBackdropClick?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   size?: ModalSize;
   mobileFullScreen?: boolean;
 }
@@ -29,7 +28,6 @@ export default function Modal({
   isVisible,
   size = 'md',
   showBackdrop = true,
-  enableBackdropClick = true,
   onClose,
   children,
   mobileFullScreen = false,
@@ -51,9 +49,7 @@ export default function Modal({
       {isVisible && (
         <Portal>
           <div id='modal'>
-            {showBackdrop && (
-              <Backdrop onClick={enableBackdropClick ? onClose : undefined} />
-            )}
+            {showBackdrop && <Backdrop onClick={onClose} />}
             <motion.div
               role='dialog'
               className={`fixed z-modal bg-white position-center rounded-md 

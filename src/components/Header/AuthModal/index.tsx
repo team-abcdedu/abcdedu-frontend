@@ -13,7 +13,7 @@ export default function AuthModal({
   const IS_LOGIN_MODAL = type === 'login';
 
   return (
-    <Modal isVisible={isVisible} onClose={onClose} enableBackdropClick={false}>
+    <Modal isVisible={isVisible}>
       {IS_LOGIN_MODAL ? (
         <Login onToggle={onToggle} onClose={onClose} />
       ) : (
