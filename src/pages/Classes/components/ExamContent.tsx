@@ -1,25 +1,24 @@
 import { useCallback } from 'react';
 
 import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
-import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import { getFileName } from '@/utils/getFileName';
 
 interface ExamContentProps {
-  assignmentFileId: number;
+  examFileId: number | undefined;
+  examPaperFileId: number | undefined;
 }
 
-function ExamContent({ assignmentFileId }: ExamContentProps) {
+function ExamContent({ examFileId, examPaperFileId }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
   const { data: examFile } = useGetSubClassGeneralFile({
-    assignmentFileId,
+    assignmentFileId: examFileId || null,
   });
 
-  const { data: examStudentFile } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: examFile?.assignmentAnswerFileId,
-    enabled: !!examFile?.assignmentAnswerFileId,
+  const { data: examPaperFile } = useGetSubClassGeneralFile({
+    assignmentFileId: examPaperFileId || null,
   });
 
   const getFileExtension = useCallback((fileName: string | undefined) => {
@@ -61,9 +60,9 @@ function ExamContent({ assignmentFileId }: ExamContentProps) {
           </a>
         )}
 
-        {examStudentFile && (
+        {examPaperFile && (
           <a
-            href={examStudentFile.filePresignedUrl}
+            href={examPaperFile.filePresignedUrl}
             download
             className={buttonStyle}
           >
