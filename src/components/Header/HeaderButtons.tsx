@@ -8,14 +8,27 @@ import useModal from '@/hooks/useModal';
 import useBoundStore from '@/stores';
 import { AuthModalType } from '@/types/auth';
 
-interface MemberButtonsProps {
-  name: string;
+const btnStyle =
+  'w-120 xl:w-100 h-46 xl:h-36 px-20 py-4 rounded-[20px] text-18 xl:text-14';
+
+function AuthButton() {
+  const user = useBoundStore(state => state.user);
+
+  return (
+    <>
+      <UserLogin className={'w-36 h-36 xl:w-30 xl:h-30'} />
+      <div
+        className={
+          'w-fit h-46 xl:h-36 px-20 xl:px-14 py-4 xl:py-0 flex-row-center text-18 xl:text-14 font-semibold text-primary-400'
+        }
+      >
+        {user ? user.name : '로그인'}
+      </div>
+    </>
+  );
 }
 
-const btnStyle =
-  'w-120 xl:w-100 h-46 xl:h-36 px-20 py-4 flex-row-center rounded-[20px] text-18 xl:text-14';
-
-function MemberButtons({ name }: MemberButtonsProps) {
+function MemberButtons() {
   const { handleLogout } = useLogout();
   const setIsSidebarOpen = useBoundStore(state => state.setIsSidebarOpen);
 
@@ -27,17 +40,10 @@ function MemberButtons({ name }: MemberButtonsProps) {
   return (
     <>
       <Link className={'flex w-fit h-36 items-center'} to='/mypage'>
-        <UserLogin className={'w-30 h-30'} />
-        <div
-          className={
-            'w-fit h-46 xl:h-36 px-20 xl:px-14 py-4 xl:py-0 flex-row-center text-18 xl:text-14 font-semibold text-primary-400'
-          }
-        >
-          {name}
-        </div>
+        <AuthButton />
       </Link>
       <button
-        className={`${btnStyle} bg-primary-400 text-18 xl:text-14 text-white`}
+        className={`${btnStyle} flex-row-center bg-primary-400 text-18 xl:text-14 text-white`}
         onClick={handleClick}
       >
         로그아웃
@@ -68,26 +74,13 @@ function GuestButtons() {
   return (
     <>
       <button
-        className={'hidden xl:flex w-100 h-36 items-center gap-4'}
+        className={'flex w-130 xl:w-100 h-36 items-center gap-4'}
         onClick={() => handleClick('login')}
       >
-        <UserLogin className={'w-30 h-30'} />
-        <div
-          className={
-            'w-64 h-36 flex-row-center text-18 xl:text-14 font-semibold text-primary-400'
-          }
-        >
-          로그인
-        </div>
+        <AuthButton />
       </button>
       <button
-        className={`block xl:hidden ${btnStyle} btn-white-pb`}
-        onClick={() => handleClick('login')}
-      >
-        로그인
-      </button>
-      <button
-        className={`${btnStyle} bg-primary-400 text-white w-full`}
+        className={`hidden xl:block ${btnStyle} bg-primary-400 text-white w-full`}
         onClick={() => handleClick('register')}
       >
         회원가입
@@ -107,7 +100,7 @@ function HeaderButtons() {
 
   return (
     <div className={'flex flex-col items-center xl:flex-row gap-10'}>
-      {user ? <MemberButtons name={user.name} /> : <GuestButtons />}
+      {user ? <MemberButtons /> : <GuestButtons />}
     </div>
   );
 }

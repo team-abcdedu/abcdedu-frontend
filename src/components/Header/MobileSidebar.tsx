@@ -10,10 +10,13 @@ function MobileSidebar() {
     <div
       id={'mobile-sidebar'}
       className={
-        'absolute w-[300px] h-dvh top-[-25.76px] right-[-320px] pt-60 pb-30 flex flex-col-center bg-white z-modal'
+        'absolute w-[300px] h-dvh top-[-25.76px] right-[-320px] pt-60 pb-30 flex-col-center gap-10 bg-white z-modal'
       }
     >
-      <div className={'w-1/2 h-1 bg-neutral-100 mt-10'}></div>
+      <div className={'h-[15%] flex-row-center'}>
+        <HeaderButtons />
+      </div>
+      <div className={'w-1/2 h-1 bg-neutral-200 mt-10'}></div>
       <nav className={'w-full h-[80%] relative overflow-hidden'}>
         <ul
           className={
@@ -26,10 +29,6 @@ function MobileSidebar() {
           {user?.role === '관리자' && <MobileNav item={adminNavItem} />}
         </ul>
       </nav>
-      <div className={'w-1/2 h-1 bg-neutral-100 mb-10'}></div>
-      <div className={'h-[15%] flex-row-center'}>
-        <HeaderButtons />
-      </div>
     </div>
   );
 }
