@@ -1,11 +1,7 @@
 import { useState } from 'react';
 
 import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
-import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
-import useModal from '@/hooks/useModal';
 import FileItemDetails from '@/pages/Admin/Class/components/FileItemDetails';
-import StudentFileItem from '@/pages/Admin/Class/components/StudentFileItem';
-import StudentFileUploadModal from '@/pages/Admin/Class/components/StudentFileUploadModal';
 import useGeneralFileUpdate from '@/pages/Admin/Class/hooks/useGeneralFileUpdate';
 
 function GeneralFileItem({
@@ -24,18 +20,15 @@ function GeneralFileItem({
     if (assignmentType === '시험') {
       return 'bg-blue-50';
     }
+    if (assignmentType === '시험지') {
+      return 'bg-red-50';
+    }
     return 'bg-yellow-50';
   };
-  const { isVisible, toggleModal } = useModal();
-  const [updateFileInput, setUpdateFileInput] = useState(false);
+  const [updateFileInputOpen, setUpdateFileInputOpen] = useState(false);
 
   const { data: generalFile } = useGetSubClassGeneralFile({
     assignmentFileId,
-  });
-
-  const { data: studentFile } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: generalFile?.assignmentAnswerFileId ?? 0,
-    enabled: assignmentType === '시험' && !!generalFile?.assignmentAnswerFileId,
   });
 
   const { register, fieldRules, errors, onSubmit, reset } =
@@ -45,15 +38,15 @@ function GeneralFileItem({
     });
 
   const handleOpenUpdateFileInput = () => {
-    setUpdateFileInput(prev => !prev);
-    if (updateFileInput) reset();
+    setUpdateFileInputOpen(prev => !prev);
+    if (updateFileInputOpen) reset();
   };
 
   if (!generalFile) return null;
 
   return (
     <div
-      className={`grid grid-cols-5 gap-10 place-items-center p-5 rounded-md text-15 text-center ${fileTypeStyle()}`}
+      className={`grid grid-cols-5 gap-10 p-5 rounded-md text-15 text-center ${fileTypeStyle()}`}
     >
       <FileItemDetails
         type={assignmentType}
@@ -65,29 +58,12 @@ function GeneralFileItem({
         className={`text-14 text-center font-normal text-red-500`}
         onClick={handleOpenUpdateFileInput}
       >
-        수정
+        {updateFileInputOpen ? '닫기' : '수정'}
       </button>
 
-      {assignmentType === '시험' && (
-        <>
-          <button
-            type={'button'}
-            className={`col-span-2 text-13 text-center font-normal text-sky-800`}
-            onClick={toggleModal}
-          >
-            학생용 파일 업로드
-          </button>
-          <StudentFileUploadModal
-            isVisible={isVisible}
-            onClose={toggleModal}
-            assignmentFileId={assignmentFileId}
-          />
-        </>
-      )}
-
-      {updateFileInput && (
+      {updateFileInputOpen && (
         <form
-          className={'row-start-2 col-span-5 flex gap-10 text-13'}
+          className={'row-start-2 col-span-4 col-start-2 flex gap-10 text-13'}
           onSubmit={onSubmit}
         >
           <div className={'flex flex-col'}>
@@ -112,14 +88,6 @@ function GeneralFileItem({
             파일 수정
           </button>
         </form>
-      )}
-
-      {studentFile && (
-        <StudentFileItem
-          type={'학생용'}
-          assignmentAnswerFileId={generalFile.assignmentAnswerFileId}
-          url={studentFile.filePresignedUrl}
-        />
       )}
     </div>
   );

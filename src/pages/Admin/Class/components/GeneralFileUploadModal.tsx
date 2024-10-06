@@ -44,6 +44,7 @@ function GeneralFileUploadModal({
                 <option value={'THEORY'}>이론</option>
                 <option value={'DATA'}>자료</option>
                 <option value={'EXAM'}>시험</option>
+                <option value={'ANSWER'}>시험지</option>
               </select>
               {errors.type && (
                 <span className={'text-13 text-red-700'}>
