@@ -9,7 +9,7 @@ interface FileUploadModalProps {
   onClose: () => void;
 }
 
-function GeneralFileUploadModal({
+function FileUploadModal({
   subClassId,
   isVisible,
   onClose,
@@ -82,4 +82,4 @@ function GeneralFileUploadModal({
   );
 }
 
-export default GeneralFileUploadModal;
+export default FileUploadModal;

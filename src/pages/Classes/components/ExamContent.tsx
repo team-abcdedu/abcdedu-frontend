@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
+import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import { getFileName } from '@/utils/getFileName';
 
@@ -13,11 +13,11 @@ function ExamContent({ examFileId, examPaperFileId }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
-  const { data: examFile } = useGetSubClassGeneralFile({
+  const { data: examFile } = useGetSubClassFile({
     assignmentFileId: examFileId || null,
   });
 
-  const { data: examPaperFile } = useGetSubClassGeneralFile({
+  const { data: examPaperFile } = useGetSubClassFile({
     assignmentFileId: examPaperFileId || null,
   });
 

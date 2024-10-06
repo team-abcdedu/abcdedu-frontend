@@ -7,9 +7,7 @@ interface UseSubClassGeneralFileProps {
   assignmentFileId: number | null;
 }
 
-function useGetSubClassGeneralFile({
-  assignmentFileId,
-}: UseSubClassGeneralFileProps) {
+function useGetSubClassFile({ assignmentFileId }: UseSubClassGeneralFileProps) {
   const user = useBoundStore(state => state.user);
 
   const { data, isLoading, isError, error } = useQuery({
@@ -22,4 +20,4 @@ function useGetSubClassGeneralFile({
   return { data, isLoading, isError, error };
 }
 
-export default useGetSubClassGeneralFile;
+export default useGetSubClassFile;

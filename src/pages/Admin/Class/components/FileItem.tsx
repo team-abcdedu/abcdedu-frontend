@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
+import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
 import FileItemDetails from '@/pages/Admin/Class/components/FileItemDetails';
 import useGeneralFileUpdate from '@/pages/Admin/Class/hooks/useGeneralFileUpdate';
 
-function GeneralFileItem({
+function FileItem({
   subLectureId,
   assignmentType,
   assignmentFileId,
@@ -27,7 +27,7 @@ function GeneralFileItem({
   };
   const [updateFileInputOpen, setUpdateFileInputOpen] = useState(false);
 
-  const { data: generalFile } = useGetSubClassGeneralFile({
+  const { data: generalFile } = useGetSubClassFile({
     assignmentFileId,
   });
 
@@ -93,4 +93,4 @@ function GeneralFileItem({
   );
 }
 
-export default GeneralFileItem;
+export default FileItem;

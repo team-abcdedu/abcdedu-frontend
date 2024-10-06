@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
 import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
-import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
 import { ApiError } from '@/libs/errors';
 import { SubClassContentState } from '@/pages/Classes/types';
 import useBoundStore from '@/stores';
@@ -31,7 +31,7 @@ function useFileHandler({
     data: generalFile,
     isError: isFileError,
     error: FileError,
-  } = useGetSubClassGeneralFile({
+  } = useGetSubClassFile({
     assignmentFileId: contentState?.generalFileId,
   });
 
