@@ -1,4 +1,4 @@
-import { get, post } from '@/libs/api';
+import { get } from '@/libs/api';
 import { ClassData } from '@/types/class';
 
 class ClassApi {
@@ -16,24 +16,6 @@ class ClassApi {
     assignmentFileId: number | null,
   ): Promise<{ filePresignedUrl: string; assignmentAnswerFileId: number }> {
     return get(`/lectures/file/${assignmentFileId}`);
-  }
-
-  static async getSubClassAnswerFile(
-    assignmentAnswerFileId: number | undefined,
-  ): Promise<{ filePresignedUrl: string }> {
-    return get(`/lectures/answer-file/${assignmentAnswerFileId}`);
-  }
-
-  static async submitAssignment() {
-    return post('/classes');
-  }
-
-  static async submitExam() {
-    return post('/classes');
-  }
-
-  static async submitSurvey() {
-    return post('/classes');
   }
 }
 
