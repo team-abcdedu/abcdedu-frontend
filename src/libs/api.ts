@@ -92,6 +92,7 @@ instance.interceptors.response.use(
     return result;
   },
   async error => {
+    const { isAutoLogin } = useBoundStore.getState();
     console.log(error.response);
 
     const { status, data } = error.response;
@@ -101,6 +102,18 @@ instance.interceptors.response.use(
       // const { data } = error.response;
       const { errorCode } = data.result;
       if (errorCode === 'ADMIN_VALID_PERMISSION') window.location.href = '/';
+    }
+
+    if (status === 401 && isAutoLogin) {
+      // isAutoLogin: 로그인 하지 않은 사용자의 토큰 재발급 요청을 방지합니다.
+      const originalRequest = error.config;
+
+      const newToken = await reissueAccessToken();
+      setAccessToken(newToken);
+      originalRequest.headers.authorization = getAccessToken();
+
+      // 이전 요청 재요청
+      return instance(originalRequest);
     }
 
     if (status >= 400 && status < 500) {
