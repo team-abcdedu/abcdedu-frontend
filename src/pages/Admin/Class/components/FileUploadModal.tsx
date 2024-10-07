@@ -1,7 +1,7 @@
 import { X } from '@phosphor-icons/react';
 
 import Modal from '@/components/Modal';
-import useGeneralFileUpload from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
+import useFileUpload from '@/pages/Admin/Class/hooks/useFileUpload';
 
 interface FileUploadModalProps {
   subClassId: number;
@@ -9,12 +9,12 @@ interface FileUploadModalProps {
   onClose: () => void;
 }
 
-function GeneralFileUploadModal({
+function FileUploadModal({
   subClassId,
   isVisible,
   onClose,
 }: FileUploadModalProps) {
-  const { register, fieldRules, errors, onSubmit } = useGeneralFileUpload({
+  const { register, fieldRules, errors, onSubmit } = useFileUpload({
     subLectureId: subClassId,
   });
 
@@ -44,6 +44,7 @@ function GeneralFileUploadModal({
                 <option value={'THEORY'}>이론</option>
                 <option value={'DATA'}>자료</option>
                 <option value={'EXAM'}>시험</option>
+                <option value={'ANSWER'}>시험지</option>
               </select>
               {errors.type && (
                 <span className={'text-13 text-red-700'}>
@@ -81,4 +82,4 @@ function GeneralFileUploadModal({
   );
 }
 
-export default GeneralFileUploadModal;
+export default FileUploadModal;
