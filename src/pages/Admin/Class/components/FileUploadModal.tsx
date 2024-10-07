@@ -1,7 +1,7 @@
 import { X } from '@phosphor-icons/react';
 
 import Modal from '@/components/Modal';
-import useGeneralFileUpload from '@/pages/Admin/Class/hooks/useGeneralFileUpload';
+import useFileUpload from '@/pages/Admin/Class/hooks/useFileUpload';
 
 interface FileUploadModalProps {
   subClassId: number;
@@ -14,7 +14,7 @@ function FileUploadModal({
   isVisible,
   onClose,
 }: FileUploadModalProps) {
-  const { register, fieldRules, errors, onSubmit } = useGeneralFileUpload({
+  const { register, fieldRules, errors, onSubmit } = useFileUpload({
     subLectureId: subClassId,
   });
 

@@ -9,15 +9,12 @@ export interface IFileUpdateForm {
   file: FileList;
 }
 
-interface UseGeneralFileUpdateProps {
+interface UseFileUpdateProps {
   subLectureId: number;
   assignmentFileId: number;
 }
 
-function useGeneralFileUpdate({
-  subLectureId,
-  assignmentFileId,
-}: UseGeneralFileUpdateProps) {
+function useFileUpdate({ subLectureId, assignmentFileId }: UseFileUpdateProps) {
   const {
     register,
     formState: { errors },
@@ -59,4 +56,4 @@ function useGeneralFileUpdate({
   return { register, errors, onSubmit, fieldRules, reset };
 }
 
-export default useGeneralFileUpdate;
+export default useFileUpdate;

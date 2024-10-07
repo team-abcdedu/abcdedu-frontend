@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
 import FileItemDetails from '@/pages/Admin/Class/components/FileItemDetails';
-import useGeneralFileUpdate from '@/pages/Admin/Class/hooks/useGeneralFileUpdate';
+import useFileUpdate from '@/pages/Admin/Class/hooks/useFileUpdate';
 
 function FileItem({
   subLectureId,
@@ -31,11 +31,10 @@ function FileItem({
     assignmentFileId,
   });
 
-  const { register, fieldRules, errors, onSubmit, reset } =
-    useGeneralFileUpdate({
-      subLectureId,
-      assignmentFileId,
-    });
+  const { register, fieldRules, errors, onSubmit, reset } = useFileUpdate({
+    subLectureId,
+    assignmentFileId,
+  });
 
   const handleOpenUpdateFileInput = () => {
     setUpdateFileInputOpen(prev => !prev);
