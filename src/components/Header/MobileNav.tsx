@@ -74,7 +74,7 @@ function MobileNav({ item }: MobileNavProps) {
                 variants={listVariants}
                 animate={listOpen ? 'open' : 'closed'}
                 exit={'closed'}
-                transition={{ duration: 0.8, ease: [0.01, 0.52, 0.4, 0.98] }}
+                transition={{ duration: 0.4, ease: [0.01, 0.52, 0.4, 0.98] }}
                 className={'flex'}
               >
                 <NavLink
