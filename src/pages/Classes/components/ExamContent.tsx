@@ -56,7 +56,7 @@ function ExamContent({ examFileId, examPaperFileId }: ExamContentProps) {
           </button>
         ) : (
           <a href={examFile?.filePresignedUrl} download className={buttonStyle}>
-            답안 제출 파일 다운로드
+            문제 확인하기
           </a>
         )}
 
