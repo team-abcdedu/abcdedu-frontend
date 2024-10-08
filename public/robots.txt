@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /homework
+Disallow: /survey
+sitemap: https://abcdedu.com/sitemap.xml
