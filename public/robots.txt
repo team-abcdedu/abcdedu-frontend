@@ -3,4 +3,5 @@ Allow: /
 Disallow: /admin/
 Disallow: /homework
 Disallow: /survey
+Disallow: /mypage
 sitemap: https://abcdedu.com/sitemap.xml
