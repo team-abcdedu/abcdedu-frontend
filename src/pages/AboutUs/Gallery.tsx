@@ -55,8 +55,8 @@ export default function Gallery() {
               >
                 <img
                   src={image.url}
-                  className='w-full h-full object-cover'
-                  alt='photo2'
+                  className='w-full h-full object-cover bg-neutral-100'
+                  alt={`${image.school}-${image.date}`}
                 />
               </button>
             ))}
