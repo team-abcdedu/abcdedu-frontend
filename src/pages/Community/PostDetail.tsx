@@ -1,3 +1,4 @@
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { Navigate, useParams } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
@@ -12,6 +13,7 @@ export default function PostDetail() {
   const { category, postId } = useParams();
   const user = useBoundStore(state => state.user);
   const isPostIdNumeric = !Number.isNaN(Number(postId));
+  const { reset } = useQueryErrorResetBoundary();
 
   // 경로 예외 처리
   if (!category || !(category in boardMetaData))
@@ -36,6 +38,7 @@ export default function PostDetail() {
         accessErrorFallback={
           <AccessError type={'게시글'} isPrevPageDirection />
         }
+        onReset={reset}
       >
         <Post postId={postId} category={category} />
       </ErrorBoundary>
