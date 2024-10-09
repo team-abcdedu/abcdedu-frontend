@@ -96,10 +96,6 @@ instance.interceptors.response.use(
       const requestUrl = error.config?.url || 'URL 정보 없음';
       Sentry.withScope(scope => {
         scope.setLevel('error');
-        scope.setContext(
-          'Request Url',
-          error.config?.url || 'URL 정보 가져올 수 없음',
-        );
         scope.setTag('error type', 'Network Error');
         Sentry.captureMessage(
           `[Network Error] /api/v1${requestUrl} \n${error.message ?? `네트워크 오류`}`,
