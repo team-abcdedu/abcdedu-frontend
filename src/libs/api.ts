@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react';
 import axios from 'axios';
 import memoize from 'memoize';
 
@@ -69,7 +70,6 @@ instance.interceptors.request.use(async config => {
     // isAutoLogin이 false이면서 user가 있는 경우(local storage에 user 정보가 남아있는 경우)
     if (user) {
       await logout();
-      // window.location.href = '/';
     }
     return config;
   }
@@ -92,14 +92,27 @@ instance.interceptors.response.use(
     return result;
   },
   async error => {
-    const { isAutoLogin } = useBoundStore.getState();
-    console.log(error.response);
+    if (!error.response) {
+      const requestUrl = error.config?.url || 'URL 정보 없음';
+      Sentry.withScope(scope => {
+        scope.setLevel('error');
+        scope.setContext(
+          'Request Url',
+          error.config?.url || 'URL 정보 가져올 수 없음',
+        );
+        scope.setTag('error type', 'Network Error');
+        Sentry.captureMessage(
+          `[Network Error] /api/v1${requestUrl} \n${error.message ?? `네트워크 오류`}`,
+        );
+      });
+      return Promise.reject(error);
+    }
 
+    const { isAutoLogin } = useBoundStore.getState();
     const { status, data } = error.response;
 
     // 관리자 페이지 내 조회 요청 권한 오류 (403)
     if (status === 403) {
-      // const { data } = error.response;
       const { errorCode } = data.result;
       if (errorCode === 'ADMIN_VALID_PERMISSION') window.location.href = '/';
     }
@@ -116,11 +129,25 @@ instance.interceptors.response.use(
       return instance(originalRequest);
     }
 
-    if (status >= 400 && status < 500) {
+    if (data && data.result && status >= 400 && status < 500) {
       const { message, errorCode } = data.result;
       return Promise.reject(
         new ApiError(message ?? 'API Error', status, errorCode),
       );
+    }
+
+    // 401, 403, 409 제외한 4~500번대 오류 로깅
+    // 400번대 오류는 응답이 ApiError 구조가 아닌 경우(예기치 못한 오류인 경우)에만 로깅됩니다.
+    if (status >= 400 && ![401, 403, 409].includes(status)) {
+      const isServerError = status >= 500;
+      const errorType = isServerError ? 'Server Error' : 'Api Error';
+      Sentry.withScope(scope => {
+        scope.setLevel('error');
+        scope.setTag('error type', errorType);
+        Sentry.captureMessage(
+          `[${errorType}] /api/v1${error.config.url} \n${error.message}`,
+        );
+      });
     }
 
     return Promise.reject(error);
