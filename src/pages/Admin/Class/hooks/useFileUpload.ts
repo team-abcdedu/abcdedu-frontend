@@ -10,11 +10,11 @@ export interface IFileUploadForm {
   file: FileList;
 }
 
-interface UseGeneralFileUploadProps {
+interface UseFileUploadProps {
   subLectureId: number;
 }
 
-function useGeneralFileUpload({ subLectureId }: UseGeneralFileUploadProps) {
+function useFileUpload({ subLectureId }: UseFileUploadProps) {
   const {
     register,
     formState: { errors },
@@ -55,4 +55,4 @@ function useGeneralFileUpload({ subLectureId }: UseGeneralFileUploadProps) {
   return { register, errors, fieldRules, onSubmit };
 }
 
-export default useGeneralFileUpload;
+export default useFileUpload;

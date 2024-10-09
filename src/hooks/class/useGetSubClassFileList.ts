@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import ClassApi from '@/services/class';
 
-interface UseSubClassProps {
+interface useGetSubClassFileListProps {
   subLectureId: number;
 }
 
-function useGetSubClassFileList({ subLectureId }: UseSubClassProps) {
+function useGetSubClassFileList({ subLectureId }: useGetSubClassFileListProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['class', 'sub-class-file-list', subLectureId],
     queryFn: () => ClassApi.getSubClassFileList(subLectureId),

@@ -42,6 +42,7 @@ function SubClass() {
   const [theoryFiles, setTheoryFiles] = useState<FileData[]>([]);
   const [dataFiles, setDataFiles] = useState<FileData[]>([]);
   const [examFiles, setExamFiles] = useState<FileData[]>([]);
+  const [examPaperFiles, setExamPaperFiles] = useState<FileData[]>([]);
 
   const handleExamClick = () => {
     if (user?.role !== '관리자' && user?.role !== '학생') {
@@ -49,7 +50,7 @@ function SubClass() {
       toggleModal();
       return;
     }
-    if (examFiles.length < 1) {
+    if (examFiles.length < 1 && examPaperFiles.length < 1) {
       setModalMessage('시험 파일이 없습니다.');
       toggleModal();
       return;
@@ -62,6 +63,7 @@ function SubClass() {
       setTheoryFiles(findFiles('이론') ?? []);
       setDataFiles(findFiles('자료') ?? []);
       setExamFiles(findFiles('시험') ?? []);
+      setExamPaperFiles(findFiles('시험지') ?? []);
     }
   }, [fileList, classId, subClassId, findFiles]);
 
@@ -94,7 +96,7 @@ function SubClass() {
           />
         )}
 
-        {examFiles.length > 0 && (
+        {(examFiles.length > 0 || examPaperFiles.length > 0) && (
           <button className={buttonStyle} onClick={handleExamClick}>
             <div className={iconWrapperStyle}>
               <CheckToSlot className={iconStyle} />
@@ -103,8 +105,11 @@ function SubClass() {
           </button>
         )}
       </div>
-      {examFiles.length > 0 && openExam && (
-        <ExamContent assignmentFileId={examFiles[0].assignmentFileId} />
+      {(examFiles.length > 0 || examPaperFiles.length > 0) && openExam && (
+        <ExamContent
+          examFileId={examFiles[0]?.assignmentFileId}
+          examPaperFileId={examPaperFiles[0]?.assignmentFileId}
+        />
       )}
 
       <MessageModal
