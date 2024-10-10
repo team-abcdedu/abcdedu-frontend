@@ -52,7 +52,7 @@ export default function Post({ postId, category }: PostProps) {
         </>
       )}
       {isLevelUpButtonVisible && <LevelUpButton postId={Number(postId)} />}
-      {post && (
+      {post && post.commentAllow && (
         <ErrorBoundary onReset={reset}>
           <Comments postId={Number(postId)} commentAllow={post.commentAllow} />
         </ErrorBoundary>
