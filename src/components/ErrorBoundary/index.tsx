@@ -15,6 +15,7 @@ import { AccessErrorProps } from './AccessError';
 import DefaultFallback from './DefaultFallback';
 
 interface ErrorBoundaryProps {
+  fullScreenFallback?: boolean;
   fallback?: ReactNode;
   accessErrorFallback?: ReactElement<AccessErrorProps>;
   onReset?: () => void;
@@ -65,7 +66,13 @@ export default class ErrorBoundary extends Component<
 
   render() {
     const { error, hasError } = this.state;
-    const { fallback, accessErrorFallback, children, onReset } = this.props;
+    const {
+      fullScreenFallback,
+      fallback,
+      accessErrorFallback,
+      children,
+      onReset,
+    } = this.props;
 
     if (hasError) {
       if (fallback) return fallback;
@@ -78,6 +85,7 @@ export default class ErrorBoundary extends Component<
 
       return (
         <DefaultFallback
+          fullScreen={fullScreenFallback}
           onReset={onReset && (() => this.onResetErrorBoundary(onReset))}
         />
       );
