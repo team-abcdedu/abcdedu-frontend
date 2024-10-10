@@ -1,12 +1,18 @@
 import { ArrowClockwise } from '@phosphor-icons/react';
 
 interface DefaultFallbackProps {
+  fullScreen?: boolean;
   onReset?: () => void;
 }
 
-export default function DefaultFallback({ onReset }: DefaultFallbackProps) {
+export default function DefaultFallback({
+  fullScreen,
+  onReset,
+}: DefaultFallbackProps) {
   return (
-    <div className='flex-col-center py-80 gap-24 text-neutral-300'>
+    <div
+      className={`flex-col-center py-80 gap-24 text-neutral-300 ${fullScreen && 'h-vh h-dvh'}`}
+    >
       <ArrowClockwise size={36} />
       <div className='text-center text-zinc-600 mb-16'>
         <span className='text-18 font-semibold' role='alert'>
