@@ -1,11 +1,12 @@
 import { Suspense } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import logo from '@/assets/icons/logo.png';
 
 import ErrorBoundary from './ErrorBoundary';
 
 function AdminLayout() {
+  const location = useLocation();
   const linkStyle =
     'h-50 flex-row-center gap-20 rounded-lg shadow-2xl shadow-neutral-700 hover:bg-primary-300 transition duration-300';
 
@@ -78,7 +79,10 @@ function AdminLayout() {
           'w-full h-full pt-20 pb-10 px-20 flex flex-col gap-30 bg-white rounded-lg shadow-md'
         }
       >
-        <ErrorBoundary onReset={() => window.location.reload()}>
+        <ErrorBoundary
+          key={`${location.pathname}`}
+          onReset={() => window.location.reload()}
+        >
           <Suspense fallback={<div className='w-full h-[100dvh]'></div>}>
             <Outlet />
           </Suspense>
