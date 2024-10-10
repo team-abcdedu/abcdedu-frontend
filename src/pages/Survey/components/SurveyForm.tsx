@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import AccessError from '@/components/AccessError';
 import useGetSurvey from '@/hooks/survey/useGetSurvey';
 import SurveyFormBody from '@/pages/Survey/components/SurveyFormBody';
 import SurveyFormHeader from '@/pages/Survey/components/SurveyFormHeader';
@@ -12,12 +11,7 @@ interface SurveyFormProps {
 }
 
 function SurveyForm({ surveyId }: SurveyFormProps) {
-  const {
-    data: survey,
-    isError,
-    isLoading,
-    errorStatus,
-  } = useGetSurvey({ surveyId });
+  const { data: survey, isError, isLoading } = useGetSurvey({ surveyId });
 
   const { register, errors, onSubmit, isPending } = useSurveyForm({
     surveyId,
@@ -25,17 +19,6 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
 
   if (isLoading) {
     return <SurveyLoading />;
-  }
-
-  if (errorStatus) {
-    return (
-      <AccessError
-        type={'설문'}
-        status={errorStatus}
-        linkUrl={'/'}
-        linkString={'홈으로'}
-      />
-    );
   }
 
   if (isError || !survey) {
