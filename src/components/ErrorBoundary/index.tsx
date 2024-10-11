@@ -50,7 +50,8 @@ export default class ErrorBoundary extends Component<
     console.log(error.message, errorInfo.componentStack);
     // JS 및 렌더링 과정에서 발생한 오류에 대해 sentry 로깅
     Sentry.withScope(scope => {
-      scope.setExtra('componentStack', errorInfo);
+      scope.setLevel('error');
+      scope.setTag('error type', 'Runtime Error');
       Sentry.captureException(error);
     });
   }
