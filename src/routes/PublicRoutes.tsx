@@ -38,6 +38,10 @@ export const publicRoutes: RouteObject[] = [
         element: <AboutUs />,
       },
       {
+        path: '/about_us/business',
+        element: <AboutUs />,
+      },
+      {
         path: '/about_us/gallery',
         element: <Gallery />,
       },
