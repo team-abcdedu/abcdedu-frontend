@@ -25,9 +25,14 @@ export const initSentry = () => {
     ],
     tracesSampleRate: 1.0,
     tracePropagationTargets: [
-      'localhost',
       /^https:\/\/(dev\.abcdedu\.com|abcdedu\.com|www\.abcdedu\.com)$/,
     ],
-    ignoreErrors: [/AxiosError/i, /토큰/i, /학생등급/i],
+    ignoreErrors: [
+      /AxiosError/i,
+      /토큰/i,
+      /인증이 필요/i,
+      /학생등급/i,
+      /본인/i,
+    ],
   });
 };
