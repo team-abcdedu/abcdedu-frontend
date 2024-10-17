@@ -12,7 +12,7 @@ interface HomeworkFormProps {
 }
 
 function HomeworkForm({ homeworkId }: HomeworkFormProps) {
-  const { data: homework, isLoading, isError } = useGetHomework({ homeworkId });
+  const { data: homework, isLoading } = useGetHomework({ homeworkId });
 
   const { register, errors, reset, onSubmit, isPending } = useHomeworkForm({
     homeworkId,
@@ -26,14 +26,10 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
     return <HomeworkLoading />;
   }
 
-  if (isError || !homework) {
+  if (!homework) {
     return (
       <div className='flex-col-center h-[500px] gap-10 py-120'>
-        <p className='text-center'>
-          {isError
-            ? '과제 정보를 불러오는 중에 문제가 발생했습니다.'
-            : '과제 정보가 없습니다.'}
-        </p>
+        <p className='text-center'>과제 정보가 없습니다.</p>
         <Link
           to={'/'}
           className={
