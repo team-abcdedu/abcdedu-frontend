@@ -82,6 +82,7 @@ function MobileNav({ item }: MobileNavProps) {
                   className={({ isActive }) =>
                     `${navLinkStyle(isActive)} px-20 pb-5 font-light`
                   }
+                  end
                 >
                   {listItem.text}
                 </NavLink>
