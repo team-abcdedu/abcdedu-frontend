@@ -46,6 +46,7 @@ function HeaderNav() {
                     key={listItem.to}
                     to={listItem.to}
                     className={({ isActive }) => navLinkStyle(isActive)}
+                    end
                   >
                     {listItem.text}
                   </NavLink>
