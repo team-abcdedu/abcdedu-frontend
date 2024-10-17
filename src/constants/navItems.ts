@@ -12,7 +12,7 @@ export const headerNavItems: NavItem[] = [
     text: '회사소개',
     list: [
       {
-        to: '/about_us/business',
+        to: '/about_us',
         text: '비즈니스',
       },
       {
