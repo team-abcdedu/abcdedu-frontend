@@ -11,7 +11,7 @@ interface SurveyFormProps {
 }
 
 function SurveyForm({ surveyId }: SurveyFormProps) {
-  const { data: survey, isError, isLoading } = useGetSurvey({ surveyId });
+  const { data: survey, isLoading } = useGetSurvey({ surveyId });
 
   const { register, errors, onSubmit, isPending } = useSurveyForm({
     surveyId,
@@ -21,14 +21,10 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
     return <SurveyLoading />;
   }
 
-  if (isError || !survey) {
+  if (!survey) {
     return (
       <div className='flex-col-center h-[500px] gap-10 py-120'>
-        <p className='text-center'>
-          {isError
-            ? '설문 정보를 불러오는 중에 문제가 발생했습니다.'
-            : '설문 정보가 없습니다.'}
-        </p>
+        <p className='text-center'>설문 정보가 없습니다.</p>
         <Link
           to={'/'}
           className={

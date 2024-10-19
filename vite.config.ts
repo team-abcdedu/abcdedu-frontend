@@ -11,7 +11,8 @@ export default defineConfig(({ mode }) => {
       svgr(),
       sentryVitePlugin({
         org: 'abcdedu',
-        project: 'abcdedu-frontend',
+        project: env.SENTRY_PROJECT,
+        // project: 'abcdedu-frontend',
         authToken: env.SENTRY_AUTH_TOKEN,
         // 생성된 sourcemap sentry에 업로드 후 삭제
         sourcemaps: {
