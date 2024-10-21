@@ -20,6 +20,11 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+    resolve: {
+      alias: {
+        '@': '/src',
+      },
+    },
     build: {
       sourcemap: mode === 'production', // Production에서만 sourcemap 생성
       rollupOptions: {
@@ -50,10 +55,10 @@ export default defineConfig(({ mode }) => {
           }
         : {}),
     },
-    resolve: {
-      alias: {
-        '@': '/src',
-      },
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './vitest.setup.ts',
     },
   };
 });
