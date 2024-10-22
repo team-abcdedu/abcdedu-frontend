@@ -1,25 +1,24 @@
 import { useCallback } from 'react';
 
-import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
-import useGetSubClassStudentFile from '@/hooks/class/useGetSubClassStudentFile';
+import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import { getFileName } from '@/utils/getFileName';
 
 interface ExamContentProps {
-  assignmentFileId: number;
+  examFileId: number | undefined;
+  examPaperFileId: number | undefined;
 }
 
-function ExamContent({ assignmentFileId }: ExamContentProps) {
+function ExamContent({ examFileId, examPaperFileId }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
-  const { data: examFile } = useGetSubClassGeneralFile({
-    assignmentFileId,
+  const { data: examFile } = useGetSubClassFile({
+    assignmentFileId: examFileId || null,
   });
 
-  const { data: examStudentFile } = useGetSubClassStudentFile({
-    assignmentAnswerFileId: examFile?.assignmentAnswerFileId,
-    enabled: !!examFile?.assignmentAnswerFileId,
+  const { data: examPaperFile } = useGetSubClassFile({
+    assignmentFileId: examPaperFileId || null,
   });
 
   const getFileExtension = useCallback((fileName: string | undefined) => {
@@ -57,13 +56,13 @@ function ExamContent({ assignmentFileId }: ExamContentProps) {
           </button>
         ) : (
           <a href={examFile?.filePresignedUrl} download className={buttonStyle}>
-            답안 제출 파일 다운로드
+            문제 확인하기
           </a>
         )}
 
-        {examStudentFile && (
+        {examPaperFile && (
           <a
-            href={examStudentFile.filePresignedUrl}
+            href={examPaperFile.filePresignedUrl}
             download
             className={buttonStyle}
           >

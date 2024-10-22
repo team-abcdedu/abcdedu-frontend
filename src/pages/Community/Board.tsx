@@ -1,5 +1,7 @@
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { Navigate, useParams, useSearchParams } from 'react-router-dom';
 
+import ErrorBoundary from '@/components/ErrorBoundary';
 import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
 import useBoundStore from '@/stores';
@@ -7,7 +9,6 @@ import useBoundStore from '@/stores';
 import List from './components/List';
 import PostFormModal from './components/PostFormModal';
 import { boardMetaData, Category } from './constants/communityInfo';
-import useGetPosts from './hooks/useGetPosts';
 
 export default function Board() {
   const { isVisible, toggleModal } = useModal();
@@ -18,7 +19,7 @@ export default function Board() {
   const page = Number(searchParams.get('page')) || 1;
   const { id: boardId, label } = boardMetaData[category as Category];
 
-  const { isLoading, list, totalElements } = useGetPosts({ boardId, page });
+  const { reset } = useQueryErrorResetBoundary();
 
   if (!category || !(category in boardMetaData)) {
     return <Navigate to='/community' replace />;
@@ -48,12 +49,9 @@ export default function Board() {
       {isVisible && (
         <PostFormModal isVisible={isVisible} onClose={toggleModal} />
       )}
-      <List
-        isLoading={isLoading}
-        posts={list}
-        page={page}
-        totalElements={totalElements}
-      />
+      <ErrorBoundary onReset={reset}>
+        <List boardId={boardId} page={page} />
+      </ErrorBoundary>
     </div>
   );
 }

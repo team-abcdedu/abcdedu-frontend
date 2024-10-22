@@ -9,7 +9,17 @@ import useGetComments from '../hooks/useGetComments';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 
-export default function Comments({ postId }: { postId: number }) {
+interface CommentsProps {
+  postId: number;
+  hasComments: boolean;
+  commentAllow: boolean;
+}
+
+export default function Comments({
+  postId,
+  hasComments,
+  commentAllow,
+}: CommentsProps) {
   const user = useBoundStore(state => state.user);
   const scrollTargetRef = useRef<HTMLDivElement>(null);
 
@@ -19,6 +29,7 @@ export default function Comments({ postId }: { postId: number }) {
   const { list, totalElements, isLoading } = useGetComments({
     postId,
     page,
+    enabled: hasComments,
   });
 
   const isAdminRole = user?.role === '관리자';
@@ -49,16 +60,18 @@ export default function Comments({ postId }: { postId: number }) {
           scrollTarget={scrollTargetRef}
         />
       </div>
-      <div className='mt-40'>
-        {user && user.role !== '새싹' ? (
-          <CommentForm postId={postId} mode='create' />
-        ) : (
-          <p className='text-center'>
-            <span className='text-primary-400 font-bold'>학생</span>
-            &nbsp;등급 이상만 댓글을 작성할 수 있습니다.
-          </p>
-        )}
-      </div>
+      {commentAllow && (
+        <div className='mt-40'>
+          {user && user.role !== '새싹' ? (
+            <CommentForm postId={postId} mode='create' />
+          ) : (
+            <p className='text-center'>
+              <span className='text-primary-400 font-bold'>학생</span>
+              &nbsp;등급 이상만 댓글을 작성할 수 있습니다.
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

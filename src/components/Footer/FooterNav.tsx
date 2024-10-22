@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { HeaderNavItem } from '@/types/navTypes';
+import { NavItem } from '@/types/navTypes';
 
-export const footerNavItems: HeaderNavItem[] = [
+export const footerNavItems: NavItem[] = [
   {
     type: 'link',
     to: '/',

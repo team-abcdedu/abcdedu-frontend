@@ -43,7 +43,7 @@ function useSurveyForm({ surveyId }: UseSurveyFormProps) {
     },
   });
 
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const submitHandler: SubmitHandler<ISurveyForm> = (data: ISurveyForm, e) => {
     e?.preventDefault();

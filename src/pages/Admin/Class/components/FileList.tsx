@@ -1,5 +1,5 @@
 import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
-import GeneralFileItem from '@/pages/Admin/Class/components/GeneralFileItem';
+import FileItem from '@/pages/Admin/Class/components/FileItem';
 
 interface FileListProps {
   subLectureId: number;
@@ -20,7 +20,7 @@ function FileList({ subLectureId }: FileListProps) {
     return (
       <div className={'row-start-5 col-span-5 flex flex-col pt-5 gap-5'}>
         {data.map(file => (
-          <GeneralFileItem
+          <FileItem
             key={file.assignmentFileId}
             subLectureId={subLectureId}
             assignmentType={file.assignmentType}

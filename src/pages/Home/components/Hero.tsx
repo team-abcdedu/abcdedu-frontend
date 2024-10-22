@@ -30,7 +30,7 @@ export default function Hero() {
         {reviews.map(review => (
           <div
             key={review.keyword}
-            className='relative max-w-[385px] h-220 rounded-[20px] bg-white 
+            className='relative max-w-[385px] min-h-220 rounded-[20px] bg-white 
             px-32 py-36 shadow-card-md max-xs:w-240'
           >
             <span
@@ -42,7 +42,7 @@ export default function Hero() {
             <div className='font-semibold flex items-center gap-14 pt-4 pb-20'>
               <span className='text-20'>{review.school}</span>
               <span
-                className='text-primary-400 text-12 block h-22 px-8 py-4 
+                className='text-primary-400 text-12 block min-h-22 px-8 flex-row-center
               bg-primary-400/15 rounded-[10px] border-1 border-primary-400'
               >
                 {review.grade}

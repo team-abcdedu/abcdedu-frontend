@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 
+import { ApiError } from '@/libs/errors';
 import { isEndWithConsonant } from '@/utils/isEndWithConsonant';
 
-interface AccessErrorProps {
+export interface AccessErrorProps {
   type: string;
-  status: number;
-  errorCode?: string | null;
+  error?: ApiError;
   linkUrl?: string;
   linkString?: string;
   isPrevPageDirection?: boolean;
@@ -13,8 +13,7 @@ interface AccessErrorProps {
 
 export default function AccessError({
   type,
-  status,
-  errorCode,
+  error,
   linkUrl,
   linkString,
   isPrevPageDirection = false,
@@ -22,6 +21,9 @@ export default function AccessError({
   const navigate = useNavigate();
   const linkStyle =
     'px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white';
+
+  if (!error) return null;
+  const { status, errorCode } = error;
 
   return (
     <div className='flex-col-center h-[500px] gap-10 py-120'>
@@ -33,7 +35,7 @@ export default function AccessError({
           `학생 등급 이상만 ${type}${isEndWithConsonant(type) ? '을' : '를'} 열람할 수 있습니다.`}
         {status === 403 &&
           errorCode === 'ADMIN_OR_WRITER_PERMISSION' &&
-          `${type}${isEndWithConsonant(type) ? '은' : '는'} 작성자와 관리자만 열람할 수 있습니다.`}
+          `${type === '게시글' ? '비밀글' : type}${isEndWithConsonant(type) ? '은' : '는'} 작성자와 관리자만 열람할 수 있습니다.`}
         {status === 404 &&
           `${type}${isEndWithConsonant(type) ? '이' : '가'} 존재하지 않습니다.`}
       </p>

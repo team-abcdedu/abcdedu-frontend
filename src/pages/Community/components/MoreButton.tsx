@@ -41,20 +41,20 @@ export default function MoreButton({
       {menuVisible && (
         <>
           <Backdrop isDark={false} onClick={toggleMenu} />
-          <div className='absolute right-8 mt-2 w-80 bg-white shadow-lg z-modal rounded-lg border'>
+          <div className='absolute right-8 mt-2 w-120 bg-white shadow-lg z-modal rounded-lg border'>
             <button
               aria-label='더보기'
               onClick={handleEdit}
-              className='block w-full py-6 text-sm text-gray-700 hover:bg-gray-100'
+              className='block w-full py-10 text-base text-gray-700 hover:bg-gray-100'
             >
-              수정
+              수정하기
             </button>
             <hr />
             <button
               onClick={handleDelete}
-              className='block w-full px-4 py-6 text-sm text-red-600 hover:bg-gray-100'
+              className='block w-full px-4 py-10 text-base text-red-600 hover:bg-gray-100'
             >
-              삭제
+              삭제하기
             </button>
           </div>
         </>

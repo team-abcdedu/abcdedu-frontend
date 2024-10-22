@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useForm, FieldValues } from 'react-hook-form';
 
+import { setAccessToken } from '@/libs/api';
 import { ApiError } from '@/libs/errors';
 import auth from '@/services/auth';
 import useBoundStore from '@/stores';
@@ -45,7 +46,8 @@ export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
   const loginMutation = useMutation({
     mutationFn: ({ email, password }: ILoginFormInput) =>
       auth.login(email, password),
-    onSuccess: () => {
+    onSuccess: data => {
+      setAccessToken(data.accessToken);
       setIsAutoLogin();
       onSuccess();
     },

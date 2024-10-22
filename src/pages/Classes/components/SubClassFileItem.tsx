@@ -1,6 +1,6 @@
 import Book from '@/assets/icons/book.svg?react';
 import Paperclip from '@/assets/icons/paperclip.svg?react';
-import useGetSubClassGeneralFile from '@/hooks/class/useGetSubClassGeneralFile';
+import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
 import { ApiError } from '@/libs/errors';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import useBoundStore from '@/stores';
@@ -22,11 +22,11 @@ function SubClassFileItem({
   const iconStyle =
     'w-80 h-80 sm:w-85 sm:h-85 md:w-90 md:h-90 text-primary-300';
 
-  const { data, isError, error } = useGetSubClassGeneralFile({
+  const { data, isError, error } = useGetSubClassFile({
     assignmentFileId: files[0].assignmentFileId,
   });
 
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const { pdfUrl } = useGetPdfUrl({
     s3Url: data?.filePresignedUrl,

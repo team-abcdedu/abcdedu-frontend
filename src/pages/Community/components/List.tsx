@@ -3,24 +3,20 @@ import { Link } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
 import useBoundStore from '@/stores';
-import { PostSummary } from '@/types/community';
 import { formatDate } from '@/utils/formatDate';
 
+import useGetPosts from '../hooks/useGetPosts';
+
 interface ListProps {
-  isLoading: boolean;
   page: number;
-  posts: PostSummary[];
-  totalElements: number;
+  boardId: number;
 }
 
-export default function List({
-  isLoading,
-  page,
-  posts,
-  totalElements,
-}: ListProps) {
+export default function List({ page, boardId }: ListProps) {
   const itemCountPerPage = 10;
   const user = useBoundStore(state => state.user);
+
+  const { isLoading, list, totalElements } = useGetPosts({ boardId, page });
 
   return (
     <>
@@ -44,7 +40,7 @@ export default function List({
                 </td>
               </tr>
             )}
-            {posts.map((post, i) => (
+            {list.map((post, i) => (
               <tr
                 key={post.postId}
                 className='first:border-t border-b border-gray-400 hover:bg-gray-600/5'

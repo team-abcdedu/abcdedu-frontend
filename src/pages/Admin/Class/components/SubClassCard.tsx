@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import useModal from '@/hooks/useModal';
-import GeneralFileUploadModal from '@/pages/Admin/Class/components/GeneralFileUploadModal';
+import FileUploadModal from '@/pages/Admin/Class/components/FileUploadModal';
 import { SubClassData } from '@/types/class';
 
 import FileList from './FileList';
@@ -56,7 +56,7 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
         {openFileList && <FileList subLectureId={subClass.subClassId} />}
       </div>
 
-      <GeneralFileUploadModal
+      <FileUploadModal
         subClassId={subClass.subClassId}
         isVisible={isVisible}
         onClose={toggleModal}
