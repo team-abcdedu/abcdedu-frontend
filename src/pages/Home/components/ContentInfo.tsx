@@ -2,7 +2,7 @@ import LaurelWreath from '@/assets/icons/laurel-wreath.svg?react';
 
 export default function ContentInfo() {
   return (
-    <section
+    <div
       className='bg-white px-16 flex-col-center text-center gap-30 
       h-[800px] max-sm:h-[520px]'
     >
@@ -21,6 +21,6 @@ export default function ContentInfo() {
         2022년부터 연간 30회 이상씩 누적된 강의를 통해 계속해서 다듬어지고,
         업데이트되어 최상의 퀄리티를 유지하고 있습니다.
       </p>
-    </section>
+    </div>
   );
 }
