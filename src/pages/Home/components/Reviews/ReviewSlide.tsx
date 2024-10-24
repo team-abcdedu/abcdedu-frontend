@@ -31,7 +31,7 @@ export default function ReviewSlide({ reviews }: { reviews: Review[] }) {
   }, [xTranslation]);
 
   return (
-    <div id='slide-container' className='w-full overflow-hidden pb-40'>
+    <div id='slide-container' className='w-full overflow-hidden pb-38'>
       <motion.div
         className='w-[max-content] flex flex-nowrap gap-32 items-center'
         ref={ref}
