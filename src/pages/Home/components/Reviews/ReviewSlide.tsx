@@ -1,4 +1,4 @@
-import { animate, motion, useMotionValue } from 'framer-motion';
+import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 import { Review } from '../../types';
@@ -8,6 +8,11 @@ import ReivewCard from './ReivewCard';
 export default function ReviewSlide({ reviews }: { reviews: Review[] }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const xTranslation = useMotionValue(0);
+
+  const translate3d = useTransform(
+    xTranslation,
+    x => `translate3d(${x}px, 0, 0)`,
+  );
 
   useEffect(() => {
     if (!ref.current) return;
@@ -30,7 +35,9 @@ export default function ReviewSlide({ reviews }: { reviews: Review[] }) {
       <motion.div
         className='w-[max-content] flex flex-nowrap gap-32 items-center'
         ref={ref}
-        style={{ x: xTranslation }}
+        style={{
+          transform: translate3d,
+        }}
       >
         {[...reviews, ...reviews].map((review, index) => (
           <ReivewCard key={index} review={review} />
