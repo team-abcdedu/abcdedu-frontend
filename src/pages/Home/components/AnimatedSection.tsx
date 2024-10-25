@@ -1,37 +1,24 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { StrictPropsWithChildren } from '@/types';
 
 export default function AnimatedSection({ children }: StrictPropsWithChildren) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // viewport 안에 들어올 때 fade in 모션 수행
+  const onIntersect = () => setIsVisible(true);
+
+  useIntersectionObserver({ ref, onIntersect });
+
   useEffect(() => {
-    const target = ref.current;
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    if (target) observer.observe(target);
-
     // 이미 화면에 있을 경우에도 애니메이션 트리거
     // (새로고침 시 section의 일부가 viewport에 포함되지만, target이 viewport에 포함되지 않은 경우 대비)
+    const target = ref.current;
     if (target && target.getBoundingClientRect().top < window.innerHeight) {
       setIsVisible(true);
     }
-
-    return () => {
-      if (target) observer.unobserve(target);
-    };
   }, []);
 
   return (
