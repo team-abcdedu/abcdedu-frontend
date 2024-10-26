@@ -35,7 +35,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
       title: post?.title ?? '',
       content: post?.content ?? '',
       secret: post?.secret ?? false,
-      commentAllow: post?.commentAllow ?? false,
+      commentAllow: post?.commentAllow ?? true,
     },
   });
 

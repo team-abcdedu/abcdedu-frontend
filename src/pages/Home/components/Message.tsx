@@ -1,6 +1,8 @@
+// import AnimatedSection from './AnimatedSection';
+
 export default function Message() {
   return (
-    <section
+    <div
       className='h-[824px] max-xs:h-[624px] bg-primary-400 flex-col-center 
       px-24 tracking-tight'
     >
@@ -24,6 +26,6 @@ export default function Message() {
           하겠습니다.
         </p>
       </div>
-    </section>
+    </div>
   );
 }
