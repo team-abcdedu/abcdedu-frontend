@@ -20,6 +20,10 @@ class UserApi {
     });
   }
 
+  static async updatePassword(email: string, newPassword: string) {
+    return patch('/members/password', { email, newPassword });
+  }
+
   static async upgradeMembership(postId: number) {
     // 1차 개발에선 학생 등업만 진행
     return post(`/posts/${postId}/levelup/STUDENT`);
