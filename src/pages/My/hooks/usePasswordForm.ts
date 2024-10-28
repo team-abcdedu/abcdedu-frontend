@@ -1,5 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import userApi from '@/services/user';
+import useBoundStore from '@/stores';
 import { FieldRules } from '@/types';
 import { UseAuthFormProps } from '@/types/auth';
 
@@ -15,6 +17,8 @@ export default function usePasswordForm({ onSuccess }: UseAuthFormProps) {
     formState: { errors },
     handleSubmit,
   } = useForm<IPasswordFormInput>({ mode: 'onChange' });
+
+  const user = useBoundStore(state => state.user);
 
   const fieldRules: FieldRules<IPasswordFormInput> = {
     // password: {
@@ -62,8 +66,17 @@ export default function usePasswordForm({ onSuccess }: UseAuthFormProps) {
     e,
   ) => {
     e?.preventDefault();
-    console.log(data);
-    onSuccess();
+    const { newPw } = data;
+    if (!user) return;
+
+    try {
+      await userApi.updatePassword(user.email, newPw);
+      alert('비밀번호가 변경되었습니다.');
+      onSuccess();
+    } catch (error) {
+      console.log(error);
+      alert('비밀번호 변경에 실패했습니다.');
+    }
   };
 
   const onSubmit = handleSubmit(updateAccountInfo);
