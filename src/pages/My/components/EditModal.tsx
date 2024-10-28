@@ -2,19 +2,22 @@ import Modal from '@/components/Modal';
 
 import { ProfileEditModalProps } from '../types';
 
-// import EditAccount from './EditAccount';
+import ChangePassword from './ChangePassword';
 import EditProfile from './EditProfile';
 
 export default function EditModal({
-  // type = 'profile',
+  type = 'profile',
   user,
   isVisible,
   onClose,
-  onToggle,
 }: ProfileEditModalProps) {
   return (
     <Modal isVisible={isVisible}>
-      <EditProfile user={user} onClose={onClose} onToggle={onToggle} />
+      {type === 'profile' ? (
+        <EditProfile user={user} onClose={onClose} />
+      ) : (
+        <ChangePassword onClose={onClose} />
+      )}
     </Modal>
   );
 }

@@ -7,10 +7,6 @@ export interface ProfileEditModalProps {
   user: UserInfo;
   isVisible: boolean;
   onClose: () => void;
-  onToggle: () => void;
 }
 
-export type ProfileEditProps = Pick<
-  ProfileEditModalProps,
-  'user' | 'onClose' | 'onToggle'
->;
+export type ProfileEditProps = Pick<ProfileEditModalProps, 'user' | 'onClose'>;

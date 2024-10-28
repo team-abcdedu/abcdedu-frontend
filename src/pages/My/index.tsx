@@ -15,13 +15,13 @@ export default function MyPage() {
 
   const [infoType, setInfoType] = useState<ProfileEditInfoType>('profile');
 
-  const toggleModalType = () => {
-    setInfoType(infoType === 'profile' ? 'account' : 'profile');
+  const handleOpen = (type: ProfileEditInfoType) => {
+    setInfoType(type);
+    toggleModal();
   };
 
   const handleClose = () => {
     toggleModal();
-    setInfoType('profile'); // 프로필 수정 모달로 초기화
   };
 
   if (isLoading) return <ProfileLoading />;
@@ -36,7 +36,6 @@ export default function MyPage() {
         user={user}
         isVisible={isVisible}
         onClose={handleClose}
-        onToggle={toggleModalType}
       />
       <div className='flex items-center gap-16'>
         <div
@@ -87,9 +86,16 @@ export default function MyPage() {
         type='button'
         className='w-150 m-auto mt-36 px-16 py-8 rounded-full 
       bg-primary-400 text-white font-semibold'
-        onClick={toggleModal}
+        onClick={() => handleOpen('profile')}
       >
         정보 수정하기
+      </button>
+      <button
+        type='button'
+        className='w-150 m-auto -mt-8 px-16 py-8 rounded-full btn-white-pb text-primary-400'
+        onClick={() => handleOpen('account')}
+      >
+        비밀번호 변경
       </button>
     </div>
   );
