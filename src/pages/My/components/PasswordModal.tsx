@@ -3,14 +3,9 @@ import { X } from '@phosphor-icons/react';
 import Modal from '@/components/Modal';
 
 import usePasswordForm from '../hooks/usePasswordForm';
+import { EditModalProps } from '../types';
 
-export default function PasswordModal({
-  isVisible,
-  onClose,
-}: {
-  isVisible: boolean;
-  onClose: () => void;
-}) {
+export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
   const fieldStyle = 'flex flex-col focus-within:text-primary-300 transition-2';
   const inputStyle =
     'px-0 py-4 rounded-none border-b-1 border-zinc-300 border-neutral-500 focus:border-primary-300 text-neutral-600 transition-2';
