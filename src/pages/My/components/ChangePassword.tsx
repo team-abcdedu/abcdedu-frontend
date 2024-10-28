@@ -2,15 +2,14 @@ import { X } from '@phosphor-icons/react';
 
 import Modal from '@/components/Modal';
 
-import useAccountForm from '../hooks/useAccountForm';
-import { ProfileEditProps } from '../types';
+import usePasswordForm from '../hooks/usePasswordForm';
 
-export default function EditAccount({ onClose, onToggle }: ProfileEditProps) {
+export default function ChangePassword({ onClose }: { onClose: () => void }) {
   const fieldStyle = 'flex flex-col focus-within:text-primary-300 transition-2';
   const inputStyle =
     'px-0 py-4 rounded-none border-b-1 border-zinc-300 border-neutral-500 focus:border-primary-300 text-neutral-600 transition-2';
 
-  const { errors, fieldRules, register, onSubmit } = useAccountForm({
+  const { errors, fieldRules, register, onSubmit } = usePasswordForm({
     onSuccess: onClose,
   });
 
@@ -26,38 +25,9 @@ export default function EditAccount({ onClose, onToggle }: ProfileEditProps) {
             <X size={24} />
           </button>
           <h2 className='text-20 text-center font-semibold pt-12 mb-24'>
-            회원 정보 수정
+            비밀번호 변경
           </h2>
           <div className='flex flex-col gap-20 mb-4 [&_span]:text-14'>
-            <div className={fieldStyle}>
-              <span>이메일</span>
-              <input
-                {...register('email', fieldRules.email)}
-                id='email'
-                type='text'
-                className={inputStyle}
-              />
-              {errors.email && (
-                <span className='!text-12 mt-2 text-red-500'>
-                  {errors.email.message}
-                </span>
-              )}
-            </div>
-            <div className={fieldStyle}>
-              <span>현재 비밀번호</span>
-              <input
-                {...register('password', fieldRules.password)}
-                id='currentPw'
-                type='password'
-                autoComplete='false'
-                className={inputStyle}
-              />
-              {errors.password && (
-                <span className='!text-12 mt-2 text-red-500'>
-                  {errors.password.message}
-                </span>
-              )}
-            </div>
             <div className={fieldStyle}>
               <span>새 비밀번호</span>
               <input
@@ -89,13 +59,6 @@ export default function EditAccount({ onClose, onToggle }: ProfileEditProps) {
               )}
             </div>
           </div>
-          <button
-            type='button'
-            className='block mx-auto mt-20 text-14 font-bold underline text-neutral-500 underline-offset-2'
-            onClick={onToggle}
-          >
-            프로필 정보 수정하기
-          </button>
         </div>
       </Modal.Content>
       <Modal.Actions direction='row'>
