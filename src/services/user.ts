@@ -20,8 +20,8 @@ class UserApi {
     });
   }
 
-  static async updatePassword(email: string, newPassword: string) {
-    return patch('/members/password', { email, newPassword });
+  static async updatePassword(newPassword: string) {
+    return patch('/members/password', { newPassword });
   }
 
   static async upgradeMembership(postId: number) {
