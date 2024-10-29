@@ -1,16 +1,10 @@
 import { UserInfo } from '@/types/user';
 
-export type ProfileEditInfoType = 'profile' | 'account';
-
-export interface ProfileEditModalProps {
-  type?: ProfileEditInfoType;
-  user: UserInfo;
+export interface EditModalProps {
   isVisible: boolean;
   onClose: () => void;
-  onToggle: () => void;
 }
 
-export type ProfileEditProps = Pick<
-  ProfileEditModalProps,
-  'user' | 'onClose' | 'onToggle'
->;
+export interface ProfileEditModalProps extends EditModalProps {
+  user: UserInfo;
+}

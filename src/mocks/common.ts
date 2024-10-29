@@ -8,4 +8,10 @@ export const common = [
   http.post('*', () => {
     return;
   }),
+  http.patch('*', () => {
+    return;
+  }),
+  http.delete('*', () => {
+    return;
+  }),
 ];
