@@ -7,6 +7,15 @@ export const tableColumns: TableColumns = {
   homework: ['id', 'title', 'description'],
   survey: ['id', 'createdAt', 'class', 'name'],
   contact: ['contactId', 'type', 'title', 'userName', 'createdAt'],
+  user: [
+    'memberId',
+    'role',
+    'name',
+    'email',
+    'school',
+    'studentId',
+    'createdAt',
+  ],
 };
 
 export const tableColumnMap: TableColumnMap = {
@@ -33,6 +42,15 @@ export const tableColumnMap: TableColumnMap = {
     title: '문의 제목',
     userName: '작성자',
     createdAt: '작성일',
+  },
+  user: {
+    memberId: '회원번호',
+    role: '등급',
+    name: '이름',
+    email: '이메일',
+    school: '학교',
+    studentId: '학번',
+    createdAt: '생성일',
   },
 };
 
