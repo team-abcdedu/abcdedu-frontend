@@ -1,12 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 
-function RoleUpdater() {
-  const roleSelectList = [
-    { value: 'BASIC', name: '새싹' },
-    { value: 'STUDENT', name: '학생' },
-    { value: 'ADMIN', name: '관리자' },
-  ];
+import { roleSelectList } from '@/pages/Admin/constants/user';
 
+function RoleUpdater() {
   const [selectedRole, setSelectedRole] = useState('BASIC');
 
   const handleRoleSelect = (e: ChangeEvent<HTMLSelectElement>) => {

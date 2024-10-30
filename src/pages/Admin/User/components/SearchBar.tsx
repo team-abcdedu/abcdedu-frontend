@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState, KeyboardEvent } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 
+import { roleSelectList } from '@/pages/Admin/constants/user';
 import { UserSearchCategory } from '@/types/user';
 
 interface SearchBarProps {
@@ -19,12 +20,6 @@ function SearchBar({
     { value: 'school', name: '학교' },
     { value: 'studentId', name: '학번' },
     { value: 'role', name: '등급' },
-  ];
-
-  const roleSelectList = [
-    { value: 'BASIC', name: '새싹' },
-    { value: 'STUDENT', name: '학생' },
-    { value: 'ADMIN', name: '관리자' },
   ];
 
   const [selectedCategory, setSelectedCategory] =
