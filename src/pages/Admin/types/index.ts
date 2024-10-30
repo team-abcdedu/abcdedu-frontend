@@ -1,6 +1,7 @@
 import { ClassData } from '@/types/class';
 import { ContactSummary } from '@/types/contact';
 import { HomeworkSummary } from '@/types/homework';
+import { UserSummary } from '@/types/user';
 
 export interface SurveyTableData {
   id: string;
@@ -14,6 +15,7 @@ export interface TableColumns {
   homework: Array<keyof HomeworkSummary>;
   survey: Array<keyof SurveyTableData>;
   contact: Array<keyof ContactSummary>;
+  user: Array<keyof UserSummary>;
 }
 
 export interface TableColumnMap {
@@ -39,6 +41,15 @@ export interface TableColumnMap {
     type: string;
     title: string;
     userName: string;
+    createdAt: string;
+  };
+  user: {
+    memberId: string;
+    role: string;
+    name: string;
+    email: string;
+    school: string;
+    studentId: string;
     createdAt: string;
   };
 }

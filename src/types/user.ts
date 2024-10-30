@@ -12,3 +12,20 @@ export interface UserInfo extends User {
   createPostCount: number;
   createCommentCount: number;
 }
+
+export interface UserSummary {
+  memberId: number;
+  role: 'BASIC' | 'STUDENT' | 'ADMIN';
+  name: string;
+  email: string;
+  school: string;
+  studentId: number;
+  createdAt: string;
+}
+
+export type UserSearchCategory =
+  | 'school'
+  | 'name'
+  | 'studentId'
+  | 'role'
+  | null;

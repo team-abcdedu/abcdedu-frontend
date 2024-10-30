@@ -72,6 +72,12 @@ function AdminLayout() {
           >
             문의 관리
           </NavLink>
+          <NavLink
+            to={'/admin/user'}
+            className={({ isActive }) => navLinkStyle(isActive)}
+          >
+            멤버 관리
+          </NavLink>
         </div>
       </aside>
       <section

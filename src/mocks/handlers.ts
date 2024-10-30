@@ -1,5 +1,7 @@
 // import { delay, http, HttpResponse } from 'msw';
 
+import { mockUserResponse } from '@/mocks/user';
+
 import { common } from './common';
 
 export const handlers = [
@@ -25,4 +27,7 @@ export const handlers = [
   //   await delay('infinite');
   //   return new Response();
   // }),
+
+  // 유저 조회
+  mockUserResponse,
 ];

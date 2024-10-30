@@ -9,6 +9,7 @@ const Homework = lazy(() => import('@/pages/Admin/Homework'));
 const Class = lazy(() => import('@/pages/Admin/Class'));
 const ContactList = lazy(() => import('@/pages/Admin/Contact'));
 const Survey = lazy(() => import('@/pages/Admin/Survey'));
+const UserList = lazy(() => import('@/pages/Admin/User'));
 
 export const adminRoutes: RouteObject[] = [
   {
@@ -38,6 +39,10 @@ export const adminRoutes: RouteObject[] = [
       {
         path: '/admin/contact',
         element: <ContactList />,
+      },
+      {
+        path: '/admin/user',
+        element: <UserList />,
       },
     ],
   },
