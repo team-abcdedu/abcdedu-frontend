@@ -1,11 +1,24 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import AdminUserApi from '@/services/admin/user';
+import { UserSearchCategory } from '@/types/user';
 
-function useGetUserList(currentPage: number) {
+interface UseGetUserListProps {
+  currentPage: number;
+  searchCategory: UserSearchCategory;
+  searchKey: string;
+}
+
+function useGetUserList(props: UseGetUserListProps) {
+  const { currentPage, searchCategory, searchKey } = props;
+
+  const filteringKey = searchCategory
+    ? `${searchCategory}-${searchKey}`
+    : 'no-filtering';
+
   const { data, isError, isLoading } = useQuery({
-    queryKey: ['user', 'list', currentPage],
-    queryFn: () => AdminUserApi.getUsers(currentPage),
+    queryKey: ['user', 'list', currentPage, filteringKey],
+    queryFn: () => AdminUserApi.getUsers(props),
     placeholderData: keepPreviousData,
   });
 
