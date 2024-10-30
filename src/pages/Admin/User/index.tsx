@@ -10,7 +10,7 @@ import { UserSearchCategory, UserSummary } from '@/types/user';
 import { formatDate } from '@/utils/formatDate';
 
 function UserList() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
   const [searchCategory, setSearchCategory] =
@@ -45,6 +45,7 @@ function UserList() {
       <SearchBar
         setSearchCategory={setSearchCategory}
         setSearchKey={setSearchKey}
+        setSearchParams={setSearchParams}
       />
 
       <div className={'w-full'}>

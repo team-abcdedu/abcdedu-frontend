@@ -1,13 +1,19 @@
 import { Dispatch, SetStateAction, useState, KeyboardEvent } from 'react';
+import { SetURLSearchParams } from 'react-router-dom';
 
 import { UserSearchCategory } from '@/types/user';
 
 interface SearchBarProps {
   setSearchCategory: Dispatch<SetStateAction<UserSearchCategory>>;
   setSearchKey: Dispatch<SetStateAction<string>>;
+  setSearchParams: SetURLSearchParams;
 }
 
-function SearchBar({ setSearchCategory, setSearchKey }: SearchBarProps) {
+function SearchBar({
+  setSearchCategory,
+  setSearchKey,
+  setSearchParams,
+}: SearchBarProps) {
   const searchSelectList = [
     { value: 'name', name: '이름' },
     { value: 'school', name: '학교' },
@@ -35,6 +41,7 @@ function SearchBar({ setSearchCategory, setSearchKey }: SearchBarProps) {
       setSearchKey(inputText);
     }
     setSearchCategory(selectedCategory);
+    setSearchParams({ page: '1' });
   };
 
   const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
