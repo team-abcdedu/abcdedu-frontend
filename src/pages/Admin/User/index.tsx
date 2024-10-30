@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
@@ -5,15 +6,22 @@ import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
 import RoleUpdater from '@/pages/Admin/User/components/RoleUpdater';
 import SearchBar from '@/pages/Admin/User/components/SearchBar';
 import useGetUserList from '@/pages/Admin/User/hooks/useGetUserList';
-import { UserSummary } from '@/types/user';
+import { UserSearchCategory, UserSummary } from '@/types/user';
 import { formatDate } from '@/utils/formatDate';
 
 function UserList() {
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
-  const { list, totalElements, isLoading, isError } =
-    useGetUserList(currentPage);
+  const [searchCategory, setSearchCategory] =
+    useState<UserSearchCategory>(null);
+  const [searchKey, setSearchKey] = useState('');
+
+  const { list, totalElements, isLoading, isError } = useGetUserList({
+    currentPage,
+    searchCategory,
+    searchKey,
+  });
 
   const tableColStyle = (col: string) => {
     if (col === 'memberId') return ' w-[5%]';
@@ -34,7 +42,10 @@ function UserList() {
   return (
     <div className='w-full h-full flex flex-col gap-20'>
       <h1 className='text-30 font-semibold'>멤버 관리</h1>
-      <SearchBar />
+      <SearchBar
+        setSearchCategory={setSearchCategory}
+        setSearchKey={setSearchKey}
+      />
 
       <div className={'w-full'}>
         <RoleUpdater />
@@ -87,7 +98,7 @@ function UserList() {
               ))
             ) : (
               <tr className={'text-center'}>
-                <td colSpan={5}>데이터가 없습니다.</td>
+                <td colSpan={7}>데이터가 없습니다.</td>
               </tr>
             )}
           </tbody>

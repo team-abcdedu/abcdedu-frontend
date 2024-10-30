@@ -1,6 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { Dispatch, SetStateAction, useState, KeyboardEvent } from 'react';
 
-function SearchBar() {
+import { UserSearchCategory } from '@/types/user';
+
+interface SearchBarProps {
+  setSearchCategory: Dispatch<SetStateAction<UserSearchCategory>>;
+  setSearchKey: Dispatch<SetStateAction<string>>;
+}
+
+function SearchBar({ setSearchCategory, setSearchKey }: SearchBarProps) {
   const searchSelectList = [
     { value: 'name', name: '이름' },
     { value: 'school', name: '학교' },
@@ -14,16 +21,26 @@ function SearchBar() {
     { value: 'ADMIN', name: '관리자' },
   ];
 
-  const [searchCategory, setSearchCategory] = useState('name');
+  const [selectedCategory, setSelectedCategory] =
+    useState<Exclude<UserSearchCategory, null>>('name');
+  const [selectedRole, setSelectedRole] = useState('BASIC');
+  const [inputText, setInputText] = useState('');
 
-  const handleSearchSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSearchCategory(e.target.value);
+  const handleSearch = () => {
+    if (selectedCategory !== 'role' && inputText === '') return;
+
+    if (selectedCategory === 'role') {
+      setSearchKey(selectedRole);
+    } else {
+      setSearchKey(inputText);
+    }
+    setSearchCategory(selectedCategory);
   };
 
-  const [selectedRole, setSelectedRole] = useState('BASIC');
-
-  const handleRoleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedRole(e.target.value);
+  const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -35,8 +52,12 @@ function SearchBar() {
       <span className={'font-medium'}>멤버 검색</span>
       <select
         className={'w-100 h-30 border-1 border-black rounded-md text-center'}
-        onChange={handleSearchSelect}
-        value={searchCategory}
+        onChange={e =>
+          setSelectedCategory(
+            e.target.value as Exclude<UserSearchCategory, null>,
+          )
+        }
+        value={selectedCategory}
       >
         {searchSelectList.map(item => (
           <option key={item.value} value={item.value}>
@@ -46,12 +67,12 @@ function SearchBar() {
       </select>
 
       <div className={'w-[300px] h-40'}>
-        {searchCategory === 'role' ? (
+        {selectedCategory === 'role' ? (
           <select
             className={
               'w-full h-full text-center border-1 rounded border-black'
             }
-            onChange={handleRoleSelect}
+            onChange={e => setSelectedRole(e.target.value)}
             value={selectedRole}
           >
             {roleSelectList.map(item => (
@@ -63,12 +84,18 @@ function SearchBar() {
         ) : (
           <input
             type={'text'}
+            onChange={e => setInputText(e.target.value)}
+            onKeyDown={pressEnter}
             className={'h-full border-1 p-5 rounded border-black w-full'}
           />
         )}
       </div>
 
-      <button className={'w-100 h-40 bg-slate-300 rounded text-center'}>
+      <button
+        type={'button'}
+        onClick={handleSearch}
+        className={'w-100 h-40 bg-slate-300 rounded text-center'}
+      >
         검색
       </button>
     </div>
