@@ -76,7 +76,7 @@ function AdminLayout() {
             to={'/admin/user'}
             className={({ isActive }) => navLinkStyle(isActive)}
           >
-            유저 관리
+            멤버 관리
           </NavLink>
         </div>
       </aside>
