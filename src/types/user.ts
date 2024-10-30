@@ -22,3 +22,10 @@ export interface UserSummary {
   studentId: number;
   createdAt: string;
 }
+
+export type UserSearchCategory =
+  | 'school'
+  | 'name'
+  | 'studentId'
+  | 'role'
+  | null;
