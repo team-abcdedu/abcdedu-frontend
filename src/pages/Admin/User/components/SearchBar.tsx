@@ -50,6 +50,15 @@ function SearchBar({
     }
   };
 
+  const handleReset = () => {
+    setSelectedCategory('name');
+    setSelectedRole('BASIC');
+    setInputText('');
+    setSearchCategory(null);
+    setSearchKey('');
+    setSearchParams({ page: '1' });
+  };
+
   return (
     <div
       className={
@@ -58,7 +67,9 @@ function SearchBar({
     >
       <span className={'font-medium'}>멤버 검색</span>
       <select
-        className={'w-100 h-30 border-1 border-black rounded-md text-center'}
+        className={
+          'w-100 h-30 border-1 border-black rounded-md text-center cursor-pointer'
+        }
         onChange={e =>
           setSelectedCategory(
             e.target.value as Exclude<UserSearchCategory, null>,
@@ -77,7 +88,7 @@ function SearchBar({
         {selectedCategory === 'role' ? (
           <select
             className={
-              'w-full h-full text-center border-1 rounded border-black'
+              'w-full h-full text-center border-1 rounded border-black cursor-pointer'
             }
             onChange={e => setSelectedRole(e.target.value)}
             value={selectedRole}
@@ -91,9 +102,12 @@ function SearchBar({
         ) : (
           <input
             type={'text'}
+            value={inputText}
             onChange={e => setInputText(e.target.value)}
             onKeyDown={pressEnter}
-            className={'h-full border-1 p-5 rounded border-black w-full'}
+            className={
+              'h-full border-1 p-5 rounded border-black w-full cursor-pointer'
+            }
           />
         )}
       </div>
@@ -101,9 +115,17 @@ function SearchBar({
       <button
         type={'button'}
         onClick={handleSearch}
-        className={'w-100 h-40 bg-slate-300 rounded text-center'}
+        className={'w-100 h-40 bg-slate-300 rounded text-center cursor-pointer'}
       >
         검색
+      </button>
+
+      <button
+        type={'button'}
+        onClick={handleReset}
+        className={'w-100 h-40 bg-red-100 rounded text-center cursor-pointer'}
+      >
+        초기화
       </button>
     </div>
   );
