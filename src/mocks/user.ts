@@ -12,22 +12,22 @@ const idGenerator = generateId();
 
 function generateMockUser() {
   const id = idGenerator().toString();
+  const idxFromId = Number(id) % 3;
 
   return {
     memberId: id,
-    role: 'BASIC',
+    role: ['BASIC', 'STUDENT', 'ADMIN'][idxFromId],
     name: `학생${id.toString()}`,
     email: 'test@email.com',
-    school: 'abcdedu 중학교',
+    school: `${['a', 'b', 'c'][idxFromId]} 중학교`,
     studentId: id,
     createdAt: new Date().toISOString().toString(),
   };
 }
 
-const mockPageOneContent = Array(10)
-  .fill(null)
-  .map(() => generateMockUser());
-const mockPageTwoContent = Array(3)
+const mockDataSize = 45;
+
+const mockData = Array(mockDataSize)
   .fill(null)
   .map(() => generateMockUser());
 
@@ -36,41 +36,47 @@ export const mockUserResponse = http.get(
   ({ request }) => {
     const url = new URL(request.url);
     const page = url.searchParams.get('page');
+    const name = url.searchParams.get('name');
+    const school = url.searchParams.get('school');
+    const studentId = url.searchParams.get('studentId');
+    const role = url.searchParams.get('role');
 
-    if (page === '1') {
-      return HttpResponse.json(
-        {
-          resultCode: 'SUCCESS',
-          result: {
-            content: mockPageOneContent,
-            currentPage: 1,
-            pageSize: 10,
-            totalElements: 13,
-            totalPages: 2,
-            last: false,
-          },
-        },
-        { status: 200 },
-      );
+    let data = null;
+
+    if (name) {
+      data = mockData.filter(v => v.name.includes(name));
+    } else if (school) {
+      data = mockData.filter(v => v.school.includes(school));
+    } else if (studentId) {
+      data = mockData.filter(v => v.studentId.includes(studentId));
+    } else if (role) {
+      data = mockData.filter(v => v.role === role);
     }
 
-    if (page === '2') {
-      return HttpResponse.json(
-        {
-          resultCode: 'SUCCESS',
-          result: {
-            content: mockPageTwoContent,
-            currentPage: 1,
-            pageSize: 10,
-            totalElements: 13,
-            totalPages: 2,
-            last: false,
-          },
-        },
-        { status: 200 },
-      );
-    }
+    if (!data) data = mockData;
 
-    return HttpResponse.json({ message: 'Page not found' }, { status: 404 });
+    const size = data.length;
+    const currentPage = Number(page);
+    const totalPages = size / 10 + 1;
+
+    if (currentPage > totalPages)
+      return HttpResponse.json({ message: 'Page not found' }, { status: 404 });
+
+    const isLastPage = currentPage === totalPages;
+    const content = isLastPage
+      ? data.slice(10 * (currentPage - 1))
+      : data.slice(10 * (currentPage - 1), 10 * currentPage);
+
+    return HttpResponse.json({
+      resultCode: 'SUCCESS',
+      result: {
+        content,
+        currentPage,
+        pageSize: 10,
+        totalElements: size,
+        totalPages,
+        last: isLastPage,
+      },
+    });
   },
 );
