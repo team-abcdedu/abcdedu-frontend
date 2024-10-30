@@ -34,7 +34,14 @@ function UserList() {
   };
 
   const rowData = (column: keyof UserSummary, row: UserSummary) => {
+    const roleEnum = new Map([
+      ['BASIC', '새싹'],
+      ['STUDENT', '학생'],
+      ['ADMIN', '관리자'],
+    ]);
+
     if (column === 'memberId') return <input type={'checkbox'} />;
+    if (column === 'role') return roleEnum.get(row[column]);
     if (column === 'createdAt') return formatDate(row[column], true);
     return row[column];
   };
