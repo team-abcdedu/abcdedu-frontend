@@ -50,7 +50,7 @@ export const tableColumnMap: TableColumnMap = {
     email: '이메일',
     school: '학교',
     studentId: '학번',
-    createdAt: '생성일',
+    createdAt: '가입일',
   },
 };
 
