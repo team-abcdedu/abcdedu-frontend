@@ -36,7 +36,7 @@ function useHomeworkForm({ homeworkId }: UseHomeworkFormProps) {
     },
   });
 
-  const { user } = useBoundStore();
+  const user = useBoundStore(state => state.user);
 
   const submitHandler: SubmitHandler<IHomeworkForm> = (
     data: IHomeworkForm,

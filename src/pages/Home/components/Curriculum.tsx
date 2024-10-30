@@ -9,7 +9,7 @@ export default function Curriculum() {
   const active = 'bg-primary-400 text-white';
 
   return (
-    <section
+    <div
       className='w-full min-h-[1500px] flex-col-center gap-30 
       md:px-50 px-18 py-100 max-md:pb-120 bg-neutral-100'
     >
@@ -97,6 +97,6 @@ export default function Curriculum() {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

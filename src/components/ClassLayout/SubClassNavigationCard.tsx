@@ -32,11 +32,11 @@ function SubClassNavigationCard({
           <h5 className={'text-20 font-semibold text-primary-300'}>
             {classTitle}-{subClass.orderNumber}
           </h5>
-          <h5 className={'h-full text-20 font-semibold whitespace-pre-wrap'}>
+          <h5 className={'h-full text-20 font-semibold break-keep'}>
             {subClass.title}
           </h5>
           <Link
-            to={`/classes/${classTitle}/${subClass.orderNumber}`}
+            to={`/classes/${classTitle.toLowerCase()}/${subClass.orderNumber}`}
             className={'pt-10 flex items-center self-end'}
           >
             <span className={'text-15 underline'}>바로가기</span>

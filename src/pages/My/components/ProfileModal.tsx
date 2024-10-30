@@ -4,13 +4,17 @@ import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 
 import useProfileForm from '../hooks/useProfileForm';
-import { ProfileEditProps } from '../types';
+import { ProfileEditModalProps } from '../types';
 
-export default function EditProfile({ user, onClose }: ProfileEditProps) {
+export default function ProfileModal({
+  user,
+  isVisible,
+  onClose,
+}: ProfileEditModalProps) {
   const fieldStyle = 'flex flex-col focus-within:text-primary-300 transition-2';
   const inputStyle =
     'px-0 py-4 rounded-none border-b-1 border-zinc-300 border-neutral-500 focus:border-primary-300 text-neutral-600 transition-2';
-  const labelStyle =
+  const filelabelStyle =
     'relative w-148 h-148 border-1 border-zinc-300 rounded-md text-center flex-row-center text-14 text-neutral-600/35 lg:hover:border-primary-400 lg:hover:text-primary-400 transition-2 cursor-pointer overflow-hidden';
 
   const {
@@ -30,7 +34,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
   };
 
   return (
-    <>
+    <Modal isVisible={isVisible}>
       <Modal.Content>
         <div className='px-16 pb-12'>
           <button
@@ -56,7 +60,7 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
             </div>
             <div className='flex-col-center gap-8'>
               <span className='w-full text-14'>프로필 사진 업로드</span>
-              <label htmlFor='file-input' className={labelStyle}>
+              <label htmlFor='file-input' className={filelabelStyle}>
                 {imagePreview ? (
                   <>
                     <img
@@ -127,6 +131,6 @@ export default function EditProfile({ user, onClose }: ProfileEditProps) {
           변경사항 저장
         </button>
       </Modal.Actions>
-    </>
+    </Modal>
   );
 }

@@ -16,3 +16,11 @@ export interface UseAuthFormProps {
 export interface TokenResponse {
   accessToken: string;
 }
+
+export interface RegisterForm {
+  name: string;
+  email: string;
+  school?: string;
+  studentId?: number;
+  password: string;
+}

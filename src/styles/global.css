@@ -57,7 +57,7 @@ body {
     transition: background-color 0.2s;
   }
   .input-primary {
-    @apply px-6 text-14 h-48 rounded-md border-1 border-[#bdbdbd] focus:border-primary-300 transition duration-200;
+    @apply px-6 text-14 max-sm:text-base h-48 rounded-md border-1 border-[#bdbdbd] focus:border-primary-300 transition duration-200;
   }
 
   .transition-2 {

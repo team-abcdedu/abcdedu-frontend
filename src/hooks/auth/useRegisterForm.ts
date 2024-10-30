@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { ApiError } from '@/libs/errors';
 import auth from '@/services/auth';
 import { FieldRules } from '@/types';
-import { UseAuthFormProps } from '@/types/auth';
+import { RegisterForm, UseAuthFormProps } from '@/types/auth';
 
-interface IRegisterFormInput {
-  name: string;
-  email: string;
-  password: string;
+interface IRegisterFormInput extends RegisterForm {
   confirmPw: string;
 }
 
@@ -31,6 +28,13 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
         message: '올바르지 않은 이메일 형식입니다.',
       },
     },
+    school: {
+      maxLength: {
+        value: 10,
+        message: '학교는 최대 10자까지 입력할 수 있습니다.',
+      },
+    },
+    studentId: {},
     password: {
       required: '비밀번호를 입력하세요.',
       minLength: {
@@ -51,11 +55,13 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
     },
   };
 
-  const signUp = async (data: FieldValues) => {
-    const { name, email, password } = data;
+  const signUp: SubmitHandler<IRegisterFormInput> = async data => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPw, ...form } = data;
+
     setIsRegisterButtonDisabled(true);
     try {
-      await auth.signUp(name, email, password);
+      await auth.signUp(form);
       alert('회원가입이 완료되었습니다.');
       onSuccess();
     } catch (error) {
@@ -68,9 +74,7 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
     }
   };
 
-  const onSubmit = async () => {
-    handleSubmit(signUp)();
-  };
+  const onSubmit = handleSubmit(signUp);
 
   return {
     isRegisterButtonDisabled,

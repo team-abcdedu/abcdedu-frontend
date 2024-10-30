@@ -7,14 +7,16 @@ import Portal from '../Portal';
 
 import ModalActions from './ModalActions';
 import ModalContent from './ModalContent';
+import ModalHeader from './ModalHeader';
 
 type ModalSize = 'xs' | 'sm' | 'md' | 'lg';
 
 interface ModalProps {
   isVisible: boolean;
   showBackdrop?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   size?: ModalSize;
+  mobileFullScreen?: boolean;
 }
 
 const variants: Variants = {
@@ -28,6 +30,7 @@ export default function Modal({
   showBackdrop = true,
   onClose,
   children,
+  mobileFullScreen = false,
 }: StrictPropsWithChildren<ModalProps>) {
   const getSizingStyle = () => {
     if (size === 'xs') return `min-w-240`;
@@ -36,6 +39,10 @@ export default function Modal({
     if (size === 'lg') return `md:min-w-[700px] max-md:w-[calc(100vw_-_16px)]`;
     return `min-w-[480px] max-xs:w-[calc(100vw_-_16px)] max-xs:min-w-0`;
   };
+
+  const mobileFullStyle = mobileFullScreen
+    ? `max-sm:min-w-[100vw] max-sm:h-[100vh] max-sm:h-[100dvh] max-sm:max-h-[100vh] max-sm:max-h-[100dvh] max-sm:rounded-none`
+    : ``;
 
   return (
     <AnimatePresence>
@@ -46,7 +53,7 @@ export default function Modal({
             <motion.div
               role='dialog'
               className={`fixed z-modal bg-white position-center rounded-md 
-                max-h-[calc(100dvh_-_16px)] flex flex-col ${getSizingStyle()}`}
+                max-h-[calc(100dvh_-_16px)] flex flex-col ${getSizingStyle()} ${mobileFullStyle}`}
               onClick={e => e.stopPropagation()}
               initial='hidden'
               animate='visible'
@@ -63,5 +70,6 @@ export default function Modal({
   );
 }
 
+Modal.Header = ModalHeader;
 Modal.Content = ModalContent;
 Modal.Actions = ModalActions;

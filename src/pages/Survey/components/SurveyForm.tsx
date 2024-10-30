@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import AccessError from '@/components/AccessError';
 import useGetSurvey from '@/hooks/survey/useGetSurvey';
 import SurveyFormBody from '@/pages/Survey/components/SurveyFormBody';
 import SurveyFormHeader from '@/pages/Survey/components/SurveyFormHeader';
@@ -12,12 +11,7 @@ interface SurveyFormProps {
 }
 
 function SurveyForm({ surveyId }: SurveyFormProps) {
-  const {
-    data: survey,
-    isError,
-    isLoading,
-    errorStatus,
-  } = useGetSurvey({ surveyId });
+  const { data: survey, isLoading } = useGetSurvey({ surveyId });
 
   const { register, errors, onSubmit, isPending } = useSurveyForm({
     surveyId,
@@ -27,25 +21,10 @@ function SurveyForm({ surveyId }: SurveyFormProps) {
     return <SurveyLoading />;
   }
 
-  if (errorStatus) {
-    return (
-      <AccessError
-        type={'설문'}
-        status={errorStatus}
-        linkUrl={'/'}
-        linkString={'홈으로'}
-      />
-    );
-  }
-
-  if (isError || !survey) {
+  if (!survey) {
     return (
       <div className='flex-col-center h-[500px] gap-10 py-120'>
-        <p className='text-center'>
-          {isError
-            ? '설문 정보를 불러오는 중에 문제가 발생했습니다.'
-            : '설문 정보가 없습니다.'}
-        </p>
+        <p className='text-center'>설문 정보가 없습니다.</p>
         <Link
           to={'/'}
           className={

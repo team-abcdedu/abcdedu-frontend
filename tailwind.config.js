@@ -67,9 +67,9 @@ export default {
       },
       boxShadow: {
         lg: '2px 2px 4px 0px rgb(170, 170, 170)',
-        'btn-primary': '0px 7px 30px -10px #1f3c9c',
-        'card-lg': '0px 12px 40px 2px rgba(0,0,0,0.08);',
-        'card-md': '0px 20.98px 41.96px -10.49px rgba(41, 37, 110, 0.1);',
+        'btn-light': '2px 2px 4px 0px rgba(41, 37, 110, 0.1)',
+        'card-lg': '0px 12px 40px 2px rgba(0,0,0,0.08)',
+        'card-md': '0px 20.98px 41.96px -10.49px rgba(41, 37, 110, 0.1)',
       },
     },
   },

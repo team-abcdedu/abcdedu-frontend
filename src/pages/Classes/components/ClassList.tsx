@@ -35,7 +35,7 @@ function ClassList() {
             >
               <Link
                 className={
-                  'min-w-115 min-h-115 h-115 grid place-items-center bg-white rounded-[100%] text-80'
+                  'min-w-115 min-h-115 h-115 flex-row-center bg-white rounded-[100%] text-80'
                 }
                 to={`/classes/${classData.title.toLowerCase()}`}
               >

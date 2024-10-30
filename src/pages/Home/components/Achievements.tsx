@@ -1,5 +1,7 @@
 import { achievements } from '../constants';
 
+import AnimatedCounter from './AnimatedCounter';
+
 export default function Achievements() {
   const cardContainerStyle = (i: number) => {
     if (i % 3 === 2)
@@ -36,12 +38,12 @@ export default function Achievements() {
               </p>
             </div>
           </div>
-          <span
+          <AnimatedCounter
+            from={0}
+            to={a.value}
             className={`${i === 2 && 'absolute bottom-16 right-36'} 
             text-24 font-extrabold text-orange text-right`}
-          >
-            {a.value.toLocaleString()}+
-          </span>
+          />
         </div>
       ))}
     </div>

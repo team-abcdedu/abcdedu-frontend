@@ -1,5 +1,5 @@
 export interface Review {
-  keyword: string;
+  keyword?: string;
   school: string;
   grade: string;
   content: string;

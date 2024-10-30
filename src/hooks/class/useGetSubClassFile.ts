@@ -3,14 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import ClassApi from '@/services/class';
 import useBoundStore from '@/stores';
 
-interface UseSubClassGeneralFileProps {
+interface UseGetSubClassFileProps {
   assignmentFileId: number | null;
 }
 
-function useGetSubClassGeneralFile({
-  assignmentFileId,
-}: UseSubClassGeneralFileProps) {
-  const { user } = useBoundStore();
+function useGetSubClassFile({ assignmentFileId }: UseGetSubClassFileProps) {
+  const user = useBoundStore(state => state.user);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['class', 'sub-class-general-file', assignmentFileId],
@@ -22,4 +20,4 @@ function useGetSubClassGeneralFile({
   return { data, isLoading, isError, error };
 }
 
-export default useGetSubClassGeneralFile;
+export default useGetSubClassFile;
