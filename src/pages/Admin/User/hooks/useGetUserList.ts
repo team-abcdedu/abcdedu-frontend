@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import AdminUserApi from '@/services/admin/user';
 import { UserSearchCategory } from '@/types/user';
@@ -19,7 +19,6 @@ function useGetUserList(props: UseGetUserListProps) {
   const { data, isError, isLoading } = useQuery({
     queryKey: ['user', 'list', currentPage, filteringKey],
     queryFn: () => AdminUserApi.getUsers(props),
-    placeholderData: keepPreviousData,
   });
 
   const list = data?.content || [];
