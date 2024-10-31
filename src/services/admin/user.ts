@@ -19,13 +19,19 @@ class AdminUserApi {
     else if (searchCategory === 'studentId') params.studentId = searchKey;
     else if (searchCategory === 'role') params.role = searchKey;
 
-    return get<PaginatedResponse<UserSummary>>(`/admin/members/`, {
+    return get<PaginatedResponse<UserSummary>>(`/admin/members`, {
       params,
     });
   }
 
-  static async patchUserRole(roleName: 'STUDENT') {
-    return patch(`/admin/members/role/${roleName}`);
+  static async patchUserRole({
+    members,
+    roleName,
+  }: {
+    members: { memberId: number }[];
+    roleName: 'BASIC' | 'STUDENT' | 'ADMIN';
+  }) {
+    return patch(`/admin/members/role/${roleName}`, members);
   }
 }
 
