@@ -1,6 +1,6 @@
 import { get, patch } from '@/libs/api';
 import { PaginatedResponse } from '@/types';
-import { UserSearchCategory, UserSummary } from '@/types/user';
+import { UserRoleType, UserSearchCategory, UserSummary } from '@/types/user';
 
 class AdminUserApi {
   static async getUsers({
@@ -29,7 +29,7 @@ class AdminUserApi {
     roleName,
   }: {
     members: { memberId: number }[];
-    roleName: 'BASIC' | 'STUDENT' | 'ADMIN';
+    roleName: UserRoleType;
   }) {
     return patch(`/admin/members/role/${roleName}`, members);
   }

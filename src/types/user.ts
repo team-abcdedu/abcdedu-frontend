@@ -13,9 +13,11 @@ export interface UserInfo extends User {
   createCommentCount: number;
 }
 
+export type UserRoleType = 'BASIC' | 'STUDENT' | 'ADMIN';
+
 export interface UserSummary {
   memberId: number;
-  role: 'BASIC' | 'STUDENT' | 'ADMIN';
+  role: UserRoleType;
   name: string;
   email: string;
   school: string;

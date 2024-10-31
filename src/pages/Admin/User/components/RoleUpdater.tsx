@@ -4,8 +4,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { queryClient } from '@/libs/react-query';
 import { roleSelectList } from '@/pages/Admin/constants/user';
 import AdminUserApi from '@/services/admin/user';
-
-type UserRoleType = 'BASIC' | 'STUDENT' | 'ADMIN';
+import { UserRoleType } from '@/types/user';
 
 function RoleUpdater({
   selectedUser,
