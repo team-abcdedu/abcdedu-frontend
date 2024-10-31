@@ -13,8 +13,11 @@ function UserList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
+  // 검색 항목 관리
   const [searchCategory, setSearchCategory] =
     useState<UserSearchCategory>(null);
+
+  // 검색값 관리
   const [searchKey, setSearchKey] = useState('');
 
   const { list, totalElements, isLoading, isError } = useGetUserList({
@@ -23,18 +26,25 @@ function UserList() {
     searchKey,
   });
 
+  // 등업 멤버 체크 박스 상태
   const [checkedBoxes, setCheckedBoxes] = useState(
     Array(list.length).fill(false),
   );
 
+  // 등업 멤버 체크 박스 초기화 - 등업 성공 시 사용
   const resetCheckedBoxes = () => {
     const updateState = checkedBoxes.map(() => false);
     setCheckedBoxes(updateState);
   };
 
+  // 등업 멤버 memberId 관리
   const [selectedUser, setSelectedUser] = useState<Set<number>>(new Set());
 
-  const checkHandler = (e: ChangeEvent<HTMLInputElement>, rowIdx: number) => {
+  // 체크 박스 클릭 시 체크 여부, memberId 관리
+  const checkBoxHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+    rowIdx: number,
+  ) => {
     const updateCheckedBoxes = [...checkedBoxes];
     updateCheckedBoxes[rowIdx] = !updateCheckedBoxes[rowIdx];
     setCheckedBoxes(updateCheckedBoxes);
@@ -76,7 +86,7 @@ function UserList() {
           type={'checkbox'}
           value={row[column]}
           checked={checkedBoxes[rowIdx]}
-          onChange={e => checkHandler(e, rowIdx)}
+          onChange={e => checkBoxHandler(e, rowIdx)}
         />
       );
     if (column === 'role') return roleEnum.get(row[column]);
