@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
@@ -23,6 +23,32 @@ function UserList() {
     searchKey,
   });
 
+  const [checkedBoxes, setCheckedBoxes] = useState(
+    Array(list.length).fill(false),
+  );
+
+  const resetCheckedBoxes = () => {
+    const updateState = checkedBoxes.map(() => false);
+    setCheckedBoxes(updateState);
+  };
+
+  const [selectedUser, setSelectedUser] = useState<Set<number>>(new Set());
+
+  const checkHandler = (e: ChangeEvent<HTMLInputElement>, rowIdx: number) => {
+    const updateCheckedBoxes = [...checkedBoxes];
+    updateCheckedBoxes[rowIdx] = !updateCheckedBoxes[rowIdx];
+    setCheckedBoxes(updateCheckedBoxes);
+
+    const memberId = Number(e.target.value);
+    const updateSelectedUser = new Set([...selectedUser]);
+    if (updateSelectedUser.has(memberId)) {
+      updateSelectedUser.delete(memberId);
+    } else {
+      updateSelectedUser.add(memberId);
+    }
+    setSelectedUser(updateSelectedUser);
+  };
+
   const tableColStyle = (col: string) => {
     if (col === 'memberId') return ' w-[5%]';
     if (col === 'role') return ' w-[10%]';
@@ -33,14 +59,26 @@ function UserList() {
     if (col === 'createdAt') return ' w-[15%]';
   };
 
-  const rowData = (column: keyof UserSummary, row: UserSummary) => {
+  const rowData = (
+    column: keyof UserSummary,
+    row: UserSummary,
+    rowIdx: number,
+  ) => {
     const roleEnum = new Map([
       ['BASIC', '새싹'],
       ['STUDENT', '학생'],
       ['ADMIN', '관리자'],
     ]);
 
-    if (column === 'memberId') return <input type={'checkbox'} />;
+    if (column === 'memberId')
+      return (
+        <input
+          type={'checkbox'}
+          value={row[column]}
+          checked={checkedBoxes[rowIdx]}
+          onChange={e => checkHandler(e, rowIdx)}
+        />
+      );
     if (column === 'role') return roleEnum.get(row[column]);
     if (column === 'createdAt') return formatDate(row[column], true);
     return row[column];
@@ -56,7 +94,11 @@ function UserList() {
       />
 
       <div className={'w-full'}>
-        <RoleUpdater />
+        <RoleUpdater
+          selectedUser={selectedUser}
+          setSelectedUser={setSelectedUser}
+          resetCheckedBoxes={resetCheckedBoxes}
+        />
         <table
           className={
             'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
@@ -89,9 +131,9 @@ function UserList() {
               </tr>
             )}
             {list && list.length > 0 ? (
-              list.map(row => (
+              list.map((row, rowIdx) => (
                 <tr
-                  key={row.name + row.studentId}
+                  key={row.name + row.email}
                   className={'cursor-pointer hover:bg-neutral-200'}
                 >
                   {tableColumns.user.map(column => (
@@ -99,7 +141,9 @@ function UserList() {
                       key={column}
                       className={'text-center px-10 overflow-hidden'}
                     >
-                      <div className={'truncate'}>{rowData(column, row)}</div>
+                      <div className={'truncate'}>
+                        {rowData(column, row, rowIdx)}
+                      </div>
                     </td>
                   ))}
                 </tr>
