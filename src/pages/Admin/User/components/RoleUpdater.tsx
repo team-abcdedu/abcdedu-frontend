@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
+import { ApiError } from '@/libs/errors';
 import { queryClient } from '@/libs/react-query';
 import { roleSelectList } from '@/pages/Admin/constants/user';
 import AdminUserApi from '@/services/admin/user';
@@ -35,10 +36,23 @@ function RoleUpdater({
       resetCheckedBoxes();
       alert('등급이 변경되었습니다.');
     },
-    onError: () => {
-      alert('등급 변경에 실패했습니다.');
+    onError: (error: ApiError) => {
+      // 관리자로 등급 변경 차단
+      if (error.errorCode === 'TO_ADMIN_REQUEST_IS_NOT_ALLOWED') {
+        alert(error.message);
+      } else {
+        alert('등급 변경에 실패했습니다.');
+      }
     },
   });
+
+  const handleClickUpdate = () => {
+    if (selectedUser.size < 1) {
+      alert('선택된 멤버가 없습니다.');
+      return;
+    }
+    mutation.mutate();
+  };
 
   return (
     <div className={'w-full h-30 pl-10 mb-10 flex items-center gap-20'}>
@@ -57,7 +71,7 @@ function RoleUpdater({
       <span>(으)로</span>
       <button
         type={'button'}
-        onClick={() => mutation.mutate()}
+        onClick={handleClickUpdate}
         className={'w-80 h-30 rounded bg-slate-300'}
       >
         변경
