@@ -10,9 +10,14 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
   const inputStyle =
     'px-0 py-4 rounded-none border-b-1 border-zinc-300 border-neutral-500 focus:border-primary-300 text-neutral-600 transition-2';
 
-  const { errors, fieldRules, register, onSubmit } = usePasswordForm({
+  const { errors, fieldRules, register, reset, onSubmit } = usePasswordForm({
     onSuccess: onClose,
   });
+
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
 
   return (
     <Modal isVisible={isVisible}>
@@ -22,7 +27,7 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
             <button
               type='button'
               className='absolute top-12 right-12'
-              onClick={onClose}
+              onClick={handleClose}
             >
               <X size={24} />
             </button>
@@ -68,13 +73,13 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
             type='button'
             className='w-full h-45 px-24 text-15 
         text-primary-400 btn-white-pb font-semibold rounded-md'
-            onClick={onClose}
+            onClick={handleClose}
           >
             취소
           </button>
           <button
             type='submit'
-            className='w-full h-45 px-24 bg-primary-300 text-15 
+            className='w-full h-45 px-24 bg-primary-400 text-15 
         text-white font-semibold rounded-md'
           >
             변경사항 저장
