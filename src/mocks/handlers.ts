@@ -1,6 +1,6 @@
 // import { delay, http, HttpResponse } from 'msw';
 
-import { mockUserResponse } from '@/mocks/user';
+// import { mockUserResponse } from '@/mocks/user';
 
 import { common } from './common';
 
@@ -29,5 +29,5 @@ export const handlers = [
   // }),
 
   // 유저 조회
-  mockUserResponse,
+  // mockUserResponse,
 ];

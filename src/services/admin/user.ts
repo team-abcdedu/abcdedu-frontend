@@ -1,6 +1,6 @@
 import { get, patch } from '@/libs/api';
 import { PaginatedResponse } from '@/types';
-import { UserSearchCategory, UserSummary } from '@/types/user';
+import { UserRoleType, UserSearchCategory, UserSummary } from '@/types/user';
 
 class AdminUserApi {
   static async getUsers({
@@ -19,13 +19,19 @@ class AdminUserApi {
     else if (searchCategory === 'studentId') params.studentId = searchKey;
     else if (searchCategory === 'role') params.role = searchKey;
 
-    return get<PaginatedResponse<UserSummary>>(`/admin/members/`, {
+    return get<PaginatedResponse<UserSummary>>(`/admin/members`, {
       params,
     });
   }
 
-  static async patchUserRole(roleName: 'STUDENT') {
-    return patch(`/admin/members/role/${roleName}`);
+  static async patchUserRole({
+    members,
+    roleName,
+  }: {
+    members: { memberId: number }[];
+    roleName: UserRoleType;
+  }) {
+    return patch(`/admin/members/role/${roleName}`, members);
   }
 }
 

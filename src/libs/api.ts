@@ -10,7 +10,7 @@ import { ApiError } from './errors';
 
 const instance = axios.create({
   baseURL: BASE_URL,
-  timeout: 3 * 1000,
+  timeout: 5 * 1000,
   withCredentials: true,
 });
 

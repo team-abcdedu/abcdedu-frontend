@@ -5,6 +5,7 @@ import Pagination from '@/components/Pagination';
 import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
 import RoleUpdater from '@/pages/Admin/User/components/RoleUpdater';
 import SearchBar from '@/pages/Admin/User/components/SearchBar';
+import useCheckbox from '@/pages/Admin/User/hooks/useCheckbox';
 import useGetUserList from '@/pages/Admin/User/hooks/useGetUserList';
 import { UserSearchCategory, UserSummary } from '@/types/user';
 import { formatDate } from '@/utils/formatDate';
@@ -13,8 +14,11 @@ function UserList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
+  // 검색 항목 관리
   const [searchCategory, setSearchCategory] =
     useState<UserSearchCategory>(null);
+
+  // 검색값 관리
   const [searchKey, setSearchKey] = useState('');
 
   const { list, totalElements, isLoading, isError } = useGetUserList({
@@ -22,6 +26,16 @@ function UserList() {
     searchCategory,
     searchKey,
   });
+
+  const {
+    selectedUser,
+    setSelectedUser,
+    checkedBoxes,
+    checkAll,
+    checkAllBoxes,
+    resetCheckedBoxes,
+    checkBoxHandler,
+  } = useCheckbox({ list });
 
   const tableColStyle = (col: string) => {
     if (col === 'memberId') return ' w-[5%]';
@@ -33,14 +47,26 @@ function UserList() {
     if (col === 'createdAt') return ' w-[15%]';
   };
 
-  const rowData = (column: keyof UserSummary, row: UserSummary) => {
+  const rowData = (
+    column: keyof UserSummary,
+    row: UserSummary,
+    rowIdx: number,
+  ) => {
     const roleEnum = new Map([
       ['BASIC', '새싹'],
       ['STUDENT', '학생'],
       ['ADMIN', '관리자'],
     ]);
 
-    if (column === 'memberId') return <input type={'checkbox'} />;
+    if (column === 'memberId')
+      return (
+        <input
+          type={'checkbox'}
+          value={row[column]}
+          checked={checkedBoxes[rowIdx]}
+          onChange={e => checkBoxHandler(e, rowIdx)}
+        />
+      );
     if (column === 'role') return roleEnum.get(row[column]);
     if (column === 'createdAt') return formatDate(row[column], true);
     return row[column];
@@ -56,7 +82,11 @@ function UserList() {
       />
 
       <div className={'w-full'}>
-        <RoleUpdater />
+        <RoleUpdater
+          selectedUser={selectedUser}
+          setSelectedUser={setSelectedUser}
+          resetCheckedBoxes={resetCheckedBoxes}
+        />
         <table
           className={
             'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
@@ -70,7 +100,11 @@ function UserList() {
                   className={`font-medium ${tableColStyle(column)}`}
                 >
                   {column === 'memberId' ? (
-                    <input type={'checkbox'} disabled />
+                    <input
+                      type={'checkbox'}
+                      checked={checkAll}
+                      onChange={checkAllBoxes}
+                    />
                   ) : (
                     tableColumnMap.user[column]
                   )}
@@ -81,34 +115,38 @@ function UserList() {
           <tbody>
             {(isError || isLoading) && (
               <tr className={'text-center'}>
-                <td colSpan={4}>
+                <td colSpan={7}>
                   {isError
                     ? '데이터를 불러오는 중 문제가 발생했습니다.'
                     : '데이터를 불러오는 중입니다.'}
                 </td>
               </tr>
             )}
-            {list && list.length > 0 ? (
-              list.map(row => (
-                <tr
-                  key={row.name + row.studentId}
-                  className={'cursor-pointer hover:bg-neutral-200'}
-                >
-                  {tableColumns.user.map(column => (
-                    <td
-                      key={column}
-                      className={'text-center px-10 overflow-hidden'}
-                    >
-                      <div className={'truncate'}>{rowData(column, row)}</div>
-                    </td>
-                  ))}
+            {!isError &&
+              !isLoading &&
+              (list && list.length > 0 ? (
+                list.map((row, rowIdx) => (
+                  <tr
+                    key={row.name + row.email}
+                    className={'cursor-pointer hover:bg-neutral-200'}
+                  >
+                    {tableColumns.user.map(column => (
+                      <td
+                        key={column}
+                        className={'text-center px-10 overflow-hidden'}
+                      >
+                        <div className={'truncate'}>
+                          {rowData(column, row, rowIdx)}
+                        </div>
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr className={'text-center'}>
+                  <td colSpan={7}>데이터가 없습니다.</td>
                 </tr>
-              ))
-            ) : (
-              <tr className={'text-center'}>
-                <td colSpan={7}>데이터가 없습니다.</td>
-              </tr>
-            )}
+              ))}
           </tbody>
         </table>
         <Pagination currentPage={currentPage} totalElements={totalElements} />

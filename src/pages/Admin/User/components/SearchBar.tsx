@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useState, KeyboardEvent } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  KeyboardEvent,
+  useEffect,
+} from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
 
 import { roleSelectList } from '@/pages/Admin/constants/user';
@@ -29,6 +35,10 @@ function SearchBar({
 
   const handleSearch = () => {
     if (selectedCategory !== 'role' && inputText === '') return;
+    if (selectedCategory === 'studentId' && Number.isNaN(Number(inputText))) {
+      alert('학번 검색은 숫자만 가능합니다');
+      return;
+    }
 
     if (selectedCategory === 'role') {
       setSearchKey(selectedRole);
@@ -53,6 +63,10 @@ function SearchBar({
     setSearchKey('');
     setSearchParams({ page: '1' });
   };
+
+  useEffect(() => {
+    setInputText('');
+  }, [selectedCategory]);
 
   return (
     <div
