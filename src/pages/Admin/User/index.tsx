@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
 import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
 import RoleUpdater from '@/pages/Admin/User/components/RoleUpdater';
 import SearchBar from '@/pages/Admin/User/components/SearchBar';
+import useCheckbox from '@/pages/Admin/User/hooks/useCheckbox';
 import useGetUserList from '@/pages/Admin/User/hooks/useGetUserList';
 import { UserSearchCategory, UserSummary } from '@/types/user';
 import { formatDate } from '@/utils/formatDate';
@@ -26,63 +27,15 @@ function UserList() {
     searchKey,
   });
 
-  // 등업 멤버 memberId 관리
-  const [selectedUser, setSelectedUser] = useState<Set<number>>(new Set());
-
-  // 등업 멤버 체크 박스들 체크여부 관리 - 한 페이지에 보여지는 아이템 개수를 배열 길이로
-  const [checkedBoxes, setCheckedBoxes] = useState<Array<boolean>>(
-    Array(10).fill(false),
-  );
-
-  // 등업 멤버 체크 박스 세팅 - 전체 선택 시 사용
-  const setAllCheckedBoxes = (state: boolean) => {
-    const updateState = checkedBoxes.map(() => state);
-    setCheckedBoxes(updateState);
-  };
-
-  // 전체 선택 체크여부 관리
-  const [checkAll, setCheckAll] = useState(false);
-
-  // 전체 선택 체크 클릭 로직
-  const checkAllBoxes = () => {
-    if (checkAll) {
-      setAllCheckedBoxes(false);
-      setSelectedUser(new Set());
-      setCheckAll(false);
-    } else {
-      setAllCheckedBoxes(true);
-      const checkedAllMemberId = new Set(
-        list.map(user => Number(user.memberId)),
-      );
-      setSelectedUser(checkedAllMemberId);
-      setCheckAll(true);
-    }
-  };
-
-  // 모든 박스 체크 해제 - 등업 요청 성공 시 사용
-  const resetCheckedBoxes = () => {
-    setAllCheckedBoxes(false);
-    setCheckAll(false);
-  };
-
-  // 단일 체크 박스 클릭 시 체크 상태, memberId 관리
-  const checkBoxHandler = (
-    e: ChangeEvent<HTMLInputElement>,
-    rowIdx: number,
-  ) => {
-    const updateCheckedBoxes = [...checkedBoxes];
-    updateCheckedBoxes[rowIdx] = !updateCheckedBoxes[rowIdx];
-    setCheckedBoxes(updateCheckedBoxes);
-
-    const memberId = Number(e.target.value);
-    const updateSelectedUser = new Set([...selectedUser]);
-    if (updateSelectedUser.has(memberId)) {
-      updateSelectedUser.delete(memberId);
-    } else {
-      updateSelectedUser.add(memberId);
-    }
-    setSelectedUser(updateSelectedUser);
-  };
+  const {
+    selectedUser,
+    setSelectedUser,
+    checkedBoxes,
+    checkAll,
+    checkAllBoxes,
+    resetCheckedBoxes,
+    checkBoxHandler,
+  } = useCheckbox({ list });
 
   const tableColStyle = (col: string) => {
     if (col === 'memberId') return ' w-[5%]';
