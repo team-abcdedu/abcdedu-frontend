@@ -26,21 +26,46 @@ function UserList() {
     searchKey,
   });
 
-  // 등업 멤버 체크 박스 상태
-  const [checkedBoxes, setCheckedBoxes] = useState(
-    Array(list.length).fill(false),
-  );
-
-  // 등업 멤버 체크 박스 초기화 - 등업 성공 시 사용
-  const resetCheckedBoxes = () => {
-    const updateState = checkedBoxes.map(() => false);
-    setCheckedBoxes(updateState);
-  };
-
   // 등업 멤버 memberId 관리
   const [selectedUser, setSelectedUser] = useState<Set<number>>(new Set());
 
-  // 체크 박스 클릭 시 체크 여부, memberId 관리
+  // 등업 멤버 체크 박스들 체크여부 관리 - 한 페이지에 보여지는 아이템 개수를 배열 길이로
+  const [checkedBoxes, setCheckedBoxes] = useState<Array<boolean>>(
+    Array(10).fill(false),
+  );
+
+  // 등업 멤버 체크 박스 세팅 - 전체 선택 시 사용
+  const setAllCheckedBoxes = (state: boolean) => {
+    const updateState = checkedBoxes.map(() => state);
+    setCheckedBoxes(updateState);
+  };
+
+  // 전체 선택 체크여부 관리
+  const [checkAll, setCheckAll] = useState(false);
+
+  // 전체 선택 체크 클릭 로직
+  const checkAllBoxes = () => {
+    if (checkAll) {
+      setAllCheckedBoxes(false);
+      setSelectedUser(new Set());
+      setCheckAll(false);
+    } else {
+      setAllCheckedBoxes(true);
+      const checkedAllMemberId = new Set(
+        list.map(user => Number(user.memberId)),
+      );
+      setSelectedUser(checkedAllMemberId);
+      setCheckAll(true);
+    }
+  };
+
+  // 모든 박스 체크 해제 - 등업 요청 성공 시 사용
+  const resetCheckedBoxes = () => {
+    setAllCheckedBoxes(false);
+    setCheckAll(false);
+  };
+
+  // 단일 체크 박스 클릭 시 체크 상태, memberId 관리
   const checkBoxHandler = (
     e: ChangeEvent<HTMLInputElement>,
     rowIdx: number,
@@ -122,7 +147,11 @@ function UserList() {
                   className={`font-medium ${tableColStyle(column)}`}
                 >
                   {column === 'memberId' ? (
-                    <input type={'checkbox'} disabled />
+                    <input
+                      type={'checkbox'}
+                      checked={checkAll}
+                      onChange={checkAllBoxes}
+                    />
                   ) : (
                     tableColumnMap.user[column]
                   )}
@@ -133,36 +162,38 @@ function UserList() {
           <tbody>
             {(isError || isLoading) && (
               <tr className={'text-center'}>
-                <td colSpan={4}>
+                <td colSpan={7}>
                   {isError
                     ? '데이터를 불러오는 중 문제가 발생했습니다.'
                     : '데이터를 불러오는 중입니다.'}
                 </td>
               </tr>
             )}
-            {list && list.length > 0 ? (
-              list.map((row, rowIdx) => (
-                <tr
-                  key={row.name + row.email}
-                  className={'cursor-pointer hover:bg-neutral-200'}
-                >
-                  {tableColumns.user.map(column => (
-                    <td
-                      key={column}
-                      className={'text-center px-10 overflow-hidden'}
-                    >
-                      <div className={'truncate'}>
-                        {rowData(column, row, rowIdx)}
-                      </div>
-                    </td>
-                  ))}
+            {!isError &&
+              !isLoading &&
+              (list && list.length > 0 ? (
+                list.map((row, rowIdx) => (
+                  <tr
+                    key={row.name + row.email}
+                    className={'cursor-pointer hover:bg-neutral-200'}
+                  >
+                    {tableColumns.user.map(column => (
+                      <td
+                        key={column}
+                        className={'text-center px-10 overflow-hidden'}
+                      >
+                        <div className={'truncate'}>
+                          {rowData(column, row, rowIdx)}
+                        </div>
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr className={'text-center'}>
+                  <td colSpan={7}>데이터가 없습니다.</td>
                 </tr>
-              ))
-            ) : (
-              <tr className={'text-center'}>
-                <td colSpan={7}>데이터가 없습니다.</td>
-              </tr>
-            )}
+              ))}
           </tbody>
         </table>
         <Pagination currentPage={currentPage} totalElements={totalElements} />
