@@ -14,6 +14,7 @@ export default function usePasswordForm({ onSuccess }: UseAuthFormProps) {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IPasswordFormInput>({ mode: 'onChange' });
 
   const fieldRules: FieldRules<IPasswordFormInput> = {
@@ -46,6 +47,7 @@ export default function usePasswordForm({ onSuccess }: UseAuthFormProps) {
       await userApi.updatePassword(newPw);
       alert('비밀번호가 변경되었습니다.');
       onSuccess();
+      reset();
     } catch (error) {
       console.log(error);
       alert('비밀번호 변경에 실패했습니다.');
@@ -55,6 +57,7 @@ export default function usePasswordForm({ onSuccess }: UseAuthFormProps) {
   const onSubmit = handleSubmit(updateAccountInfo);
 
   return {
+    reset,
     errors,
     fieldRules,
     register,
