@@ -3,21 +3,32 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { ApiError } from '@/libs/errors';
 import auth from '@/services/auth';
+import useBoundStore from '@/stores';
 import { FieldRules } from '@/types';
-import { RegisterForm, UseAuthFormProps } from '@/types/auth';
+import { RegisterForm } from '@/types/auth';
 
 interface IRegisterFormInput extends RegisterForm {
   confirmPw: string;
 }
 
-export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
+interface UseRegisterFormProps {
+  email: string;
+}
+
+export default function useRegisterForm({ email }: UseRegisterFormProps) {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IRegisterFormInput>({ mode: 'onBlur' }); // blur 시 유효성 검사, 재검증 onChange(default)
+  } = useForm<IRegisterFormInput>({ mode: 'onBlur', defaultValues: { email } }); // blur 시 유효성 검사, 재검증 onChange(default)
+
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState(false);
+
+  const { setAuthModalType, resetVerificationState } = useBoundStore(state => ({
+    setAuthModalType: state.setAuthModalType,
+    resetVerificationState: state.resetVerificationState,
+  }));
 
   const fieldRules: FieldRules<IRegisterFormInput> = {
     name: { required: '이름을 입력하세요.' },
@@ -55,7 +66,8 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
     },
   };
 
-  const signUp: SubmitHandler<IRegisterFormInput> = async data => {
+  const signUp: SubmitHandler<IRegisterFormInput> = async (data, e) => {
+    e?.preventDefault();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPw, ...form } = data;
 
@@ -63,7 +75,8 @@ export default function useRegisterForm({ onSuccess }: UseAuthFormProps) {
     try {
       await auth.signUp(form);
       alert('회원가입이 완료되었습니다.');
-      onSuccess();
+      setAuthModalType('login');
+      resetVerificationState();
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.status === 409) alert(error.message);
