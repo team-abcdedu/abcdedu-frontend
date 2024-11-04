@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import UserLogin from '@/assets/icons/user-login.svg?react';
@@ -54,21 +53,21 @@ function MemberButtons() {
 
 function GuestButtons() {
   const { isVisible, toggleModal } = useModal();
-  const [modalType, setModalType] = useState<AuthModalType>('login');
-  const setIsSidebarOpen = useBoundStore(state => state.setIsSidebarOpen);
+
+  const { setIsSidebarOpen, setAuthModalType } = useBoundStore(state => ({
+    setIsSidebarOpen: state.setIsSidebarOpen,
+    setAuthModalType: state.setAuthModalType,
+  }));
 
   const handleClick = (type: AuthModalType) => {
     toggleModal();
-    setModalType(type);
+    setAuthModalType(type);
   };
 
   const handleClose = () => {
     toggleModal();
+    setAuthModalType('login');
     setIsSidebarOpen(false);
-  };
-
-  const toggleModalType = () => {
-    setModalType(modalType === 'login' ? 'register' : 'login');
   };
 
   return (
@@ -85,12 +84,7 @@ function GuestButtons() {
       >
         회원가입
       </button>
-      <AuthModal
-        type={modalType}
-        isVisible={isVisible}
-        onClose={handleClose}
-        onToggle={toggleModalType}
-      />
+      <AuthModal isVisible={isVisible} onClose={handleClose} />
     </>
   );
 }

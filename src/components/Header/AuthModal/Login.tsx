@@ -1,29 +1,23 @@
-import { X } from '@phosphor-icons/react';
-
 import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 import useLoginForm from '@/hooks/auth/useLoginForm';
-import { AuthModalActions } from '@/types/auth';
+import useBoundStore from '@/stores';
+import { AuthFormProps } from '@/types/auth';
 
-export default function Login({ onClose, onToggle }: AuthModalActions) {
+export default function Login({ onSuccess }: AuthFormProps) {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
+
+  const setAuthModalType = useBoundStore(state => state.setAuthModalType);
 
   const { isLoginButtonDisabled, fieldRules, errors, register, onSubmit } =
     useLoginForm({
-      onSuccess: onClose,
+      onSuccess,
     });
 
   return (
     <form onSubmit={onSubmit}>
       <Modal.Content>
-        <div>
-          <button
-            type='button'
-            className='block ml-auto -mt-6 -mr-10'
-            onClick={onClose}
-          >
-            <X size={24} />
-          </button>
+        <div className='-mt-28'>
           <h2 className='text-24 font-semibold mb-24'>로그인</h2>
           <div className='flex flex-col gap-12 mb-4'>
             <div className={fieldStyle}>
@@ -52,28 +46,34 @@ export default function Login({ onClose, onToggle }: AuthModalActions) {
               )}
             </div>
           </div>
-          {/* 고도화 단계에서 개발 */}
-          {/* <Link className='flex justify-end text-14 text-primary-300' to='/'>
-            비밀번호 찾기
-          </Link> */}
         </div>
       </Modal.Content>
       <Modal.Actions>
         <button
           type='submit'
-          className='w-full h-45 px-24 bg-primary-300 text-15 
+          className='w-full h-45 px-24 bg-primary-400 text-15 
         text-white font-semibold rounded-md disabled:bg-primary-400/15'
           disabled={isLoginButtonDisabled}
         >
           로그인
         </button>
-        <button
-          type='button'
-          className='w-full text-14 text-primary-300'
-          onClick={onToggle}
-        >
-          계정 생성하기
-        </button>
+        <div className='w-full flex-row-center text-14'>
+          <button
+            type='button'
+            className='mx-8 relative text-14 text-primary-400'
+            onClick={() => setAuthModalType('register')}
+          >
+            계정 생성하기
+          </button>
+          <p className='w-1 h-21 relative pipe-after'></p>
+          <button
+            type='button'
+            className='ml-21 text-14 text-primary-400'
+            onClick={() => setAuthModalType('reset_password')}
+          >
+            비밀번호 재설정
+          </button>
+        </div>
       </Modal.Actions>
     </form>
   );
