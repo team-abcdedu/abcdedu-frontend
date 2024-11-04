@@ -47,6 +47,7 @@ export default function useEmailVerification() {
     e,
   ) => {
     e?.preventDefault();
+    setIsMailSent(false);
     setIsPending(true);
 
     try {
