@@ -21,7 +21,7 @@ export default function EmailVerification() {
 
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
   const btnStyle =
-    'w-full h-45 px-24 bg-primary-400 text-15 text-white font-semibold rounded-md disabled:bg-primary-400/15';
+    'bg-primary-400 text-white rounded-md disabled:bg-primary-400/15';
 
   return (
     <form>
@@ -31,64 +31,62 @@ export default function EmailVerification() {
           <div className='flex flex-col gap-12'>
             <div className={fieldStyle}>
               <label htmlFor='email'>이메일</label>
-              <input
-                {...register('email', fieldRules.email)}
-                id='email'
-                type='text'
-                className='input-primary'
-                placeholder='johndoe@gmail.com'
-              />
+              <div className='flex justify-between gap-8'>
+                <input
+                  {...register('email', fieldRules.email)}
+                  id='email'
+                  type='text'
+                  className='input-primary w-full !pr-40'
+                  placeholder='johndoe@gmail.com'
+                />
+                <button
+                  type='button'
+                  className={`${btnStyle} w-104 h-45 px-12 text-14 shrink-0 font-medium`}
+                  onClick={onRequestCodeSubmit}
+                  disabled={isPending}
+                >
+                  {isMailSent ? '재요청' : '인증번호 요청'}
+                </button>
+              </div>
               {errors.email && <FormErrorMessage fieldErrors={errors.email} />}
             </div>
-            {isMailSent && (
-              <>
-                <div className={fieldStyle}>
-                  <label htmlFor='code'>인증번호</label>
-                  <div className='flex justify-between gap-8'>
-                    <div className='w-full relative'>
-                      <input
-                        {...register('code', fieldRules.code)}
-                        id='code'
-                        type='text'
-                        className='input-primary w-full !pr-40'
-                      />
-                      <Timer
-                        initialTime={timer}
-                        timerKey={timerKey}
-                        className='absolute right-6 text-12 h-48 leading-[48px] text-red-500'
-                      />
-                    </div>
-                    <button
-                      type='button'
-                      value='requestCode'
-                      className='text-14 btn-white-pb w-fit shrink-0 px-12 rounded-md 
-                    text-primary-400 font-medium'
-                      onClick={onRequestCodeSubmit}
-                      disabled={isPending}
-                    >
-                      인증번호 재요청
-                    </button>
-                  </div>
-                  {errors.code && (
-                    <FormErrorMessage fieldErrors={errors.code} />
+            <div className={fieldStyle}>
+              <label htmlFor='code'>인증번호</label>
+              <div className='flex justify-between gap-8'>
+                <div className='w-full relative'>
+                  <input
+                    {...register('code', fieldRules.code)}
+                    id='code'
+                    type='text'
+                    className='input-primary w-full !pr-40'
+                  />
+                  {isMailSent && (
+                    <Timer
+                      initialTime={timer}
+                      timerKey={timerKey}
+                      className='absolute right-6 text-12 h-48 leading-[48px] text-red-500'
+                    />
                   )}
                 </div>
-                <p className='text-13 text-neutral-500'>
-                  인증번호가 메일로 발송되었습니다.
-                </p>
-              </>
+              </div>
+              {errors.code && <FormErrorMessage fieldErrors={errors.code} />}
+            </div>
+            {isMailSent && (
+              <p className='text-13 text-neutral-500'>
+                인증번호가 메일로 발송되었습니다.
+              </p>
             )}
           </div>
         </div>
       </Modal.Content>
       <Modal.Actions>
         <button
-          type='submit'
-          onClick={isMailSent ? onVerifyFormSubmit : onRequestCodeSubmit}
-          className={btnStyle}
-          disabled={isPending}
+          type='button'
+          onClick={onVerifyFormSubmit}
+          className={`${btnStyle} w-full h-45 px-24 text-15 font-semibold`}
+          disabled={isPending || !isMailSent}
         >
-          {isMailSent ? '인증번호 확인' : '인증번호 요청'}
+          다음
         </button>
         <button
           type='button'
