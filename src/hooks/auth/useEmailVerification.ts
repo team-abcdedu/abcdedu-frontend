@@ -71,7 +71,11 @@ export default function useEmailVerification() {
     const { email, code } = data;
 
     if (!code) {
-      setError('code', { type: 'manual', message: '인증번호를 입력하세요.' });
+      setError(
+        'code',
+        { type: 'manual', message: '인증번호를 입력하세요.' },
+        { shouldFocus: true },
+      );
       return;
     }
 
