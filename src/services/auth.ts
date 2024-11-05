@@ -14,6 +14,10 @@ class AuthApi {
     return get('/mail/code', { params: { email, code } });
   }
 
+  static async requestTempPassword(email: string) {
+    return post('/mail/temp-password', { email });
+  }
+
   static async login(email: string, password: string) {
     return post<TokenResponse>('/auth/login', {
       email,
