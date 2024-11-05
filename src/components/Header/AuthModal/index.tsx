@@ -7,6 +7,7 @@ import { AuthModalProps } from '@/types/auth';
 import EmailVerification from './EmailVerification';
 import Login from './Login';
 import Register from './Register';
+import ResetPassword from './ResetPassword';
 
 export default function AuthModal({ isVisible, onClose }: AuthModalProps) {
   const { authModalType, isEmailVerified, resetVerificationState } =
@@ -36,6 +37,7 @@ export default function AuthModal({ isVisible, onClose }: AuthModalProps) {
       {authModalType === 'register' && (
         <>{isEmailVerified ? <Register /> : <EmailVerification />}</>
       )}
+      {authModalType === 'reset_password' && <ResetPassword />}
     </Modal>
   );
 }
