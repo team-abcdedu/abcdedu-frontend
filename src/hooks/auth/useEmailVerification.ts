@@ -6,6 +6,8 @@ import authApi from '@/services/auth';
 import useBoundStore from '@/stores';
 import { FieldRules } from '@/types';
 
+import useModal from '../useModal';
+
 interface EmailVerificationInput {
   email: string;
   code: string;
@@ -17,6 +19,11 @@ export default function useEmailVerification() {
 
   const [timer, setTimer] = useState(300); // 5분 타이머
   const [timerKey, setTimerKey] = useState(1);
+
+  const [resultErrorMsg, setResultErrorMsg] = useState(''); // 검증 실패 시 오류 메시지
+
+  const { isVisible: isMsgModalVisible, toggleModal: toggleMsgModal } =
+    useModal();
 
   const { setIsEmailVerified, setVerifiedEmail } = useBoundStore(state => ({
     setIsEmailVerified: state.setIsEmailVerified,
@@ -89,15 +96,17 @@ export default function useEmailVerification() {
       setVerifiedEmail(email);
     } catch (error) {
       if (error instanceof ApiError) {
-        if (error.status === 400) alert('인증번호가 일치하지 않습니다.');
+        if (error.status === 400)
+          setResultErrorMsg('인증번호가 일치하지 않습니다.');
         if (error.status === 404)
-          alert(
+          setResultErrorMsg(
             '인증번호가 유효하지 않거나 만료되었습니다.\n인증번호를 다시 요청해 주세요.',
           );
       } else {
         console.log(error);
         alert('이메일 인증에 실패했습니다.');
       }
+      toggleMsgModal();
     } finally {
       setIsPending(false);
     }
@@ -116,5 +125,8 @@ export default function useEmailVerification() {
     onRequestCodeSubmit,
     timer,
     timerKey,
+    isMsgModalVisible,
+    toggleMsgModal,
+    resultErrorMsg,
   };
 }

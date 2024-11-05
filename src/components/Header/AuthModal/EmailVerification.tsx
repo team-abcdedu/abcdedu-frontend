@@ -1,4 +1,5 @@
 import FormErrorMessage from '@/components/FormErrorMessage';
+import MessageModal from '@/components/MessageModal';
 import Modal from '@/components/Modal';
 import Timer from '@/components/Timer';
 import useEmailVerification from '@/hooks/auth/useEmailVerification';
@@ -17,6 +18,9 @@ export default function EmailVerification() {
     onVerifyFormSubmit,
     timer,
     timerKey,
+    isMsgModalVisible,
+    toggleMsgModal,
+    resultErrorMsg,
   } = useEmailVerification();
 
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
@@ -96,6 +100,13 @@ export default function EmailVerification() {
           이미 계정이 있으신가요? 로그인하기
         </button>
       </Modal.Actions>
+      <MessageModal
+        isVisible={isMsgModalVisible}
+        onClose={toggleMsgModal}
+        type={'error'}
+        backdrop={false}
+        message={resultErrorMsg}
+      />
     </form>
   );
 }
