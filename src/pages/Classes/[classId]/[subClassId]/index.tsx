@@ -60,7 +60,9 @@ function SubClass() {
 
   useEffect(() => {
     if (fileList) {
-      setTheoryFiles(findFiles('이론') ?? []);
+      if (user?.role === '관리자') {
+        setTheoryFiles(findFiles('이론') ?? []);
+      }
       setDataFiles(findFiles('자료') ?? []);
       setExamFiles(findFiles('시험') ?? []);
       setExamPaperFiles(findFiles('시험지') ?? []);
