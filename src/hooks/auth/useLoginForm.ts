@@ -6,14 +6,14 @@ import { ApiError } from '@/libs/errors';
 import auth from '@/services/auth';
 import useBoundStore from '@/stores';
 import { FieldRules } from '@/types';
-import { UseAuthFormProps } from '@/types/auth';
+import { AuthFormProps } from '@/types/auth';
 
 interface ILoginFormInput {
   email: string;
   password: string;
 }
 
-export default function useLoginForm({ onSuccess }: UseAuthFormProps) {
+export default function useLoginForm({ onSuccess }: AuthFormProps) {
   const setIsAutoLogin = useBoundStore(state => state.setIsAutoLogin);
 
   const {

@@ -70,6 +70,8 @@ export default {
         'btn-light': '2px 2px 4px 0px rgba(41, 37, 110, 0.1)',
         'card-lg': '0px 12px 40px 2px rgba(0,0,0,0.08)',
         'card-md': '0px 20.98px 41.96px -10.49px rgba(41, 37, 110, 0.1)',
+        modal:
+          '0px 10px 32px 4px rgba(24, 39, 75, 0.05), 0px 6px 14px 4px rgba(24, 39, 75, 0.12)',
       },
     },
   },

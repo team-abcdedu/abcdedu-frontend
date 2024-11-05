@@ -2,14 +2,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import userApi from '@/services/user';
 import { FieldRules } from '@/types';
-import { UseAuthFormProps } from '@/types/auth';
+import { AuthFormProps } from '@/types/auth';
 
 interface IPasswordFormInput {
   newPw: string;
   confirmPw: string;
 }
 
-export default function usePasswordForm({ onSuccess }: UseAuthFormProps) {
+export default function usePasswordForm({ onSuccess }: AuthFormProps) {
   const {
     register,
     formState: { errors },
