@@ -42,7 +42,7 @@ export default function ResetPassword() {
           rounded-md disabled:bg-primary-400/15'
           disabled={isPending}
         >
-          임시 비밀번호 발급
+          {isMailSent ? '재발급' : '임시 비밀번호 발급'}
         </button>
         <button
           type='button'
