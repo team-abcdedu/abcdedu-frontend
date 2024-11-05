@@ -69,6 +69,10 @@ export const headerNavItems: NavItem[] = [
         to: '/community/bulletin_board',
         text: '자유게시판',
       },
+      {
+        to: '/community/reference_room',
+        text: '자료실',
+      },
     ],
   },
   {

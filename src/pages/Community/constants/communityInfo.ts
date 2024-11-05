@@ -24,6 +24,7 @@ export const boardMetaData = {
   qna: { id: 2, label: 'Q & A' },
   project: { id: 3, label: 'ABCD 프로젝트' },
   levelup: { id: 4, label: '등업 게시판' },
+  reference_room: { id: 5, label: '자료실' },
 };
 
 export type Category = keyof typeof boardMetaData;
