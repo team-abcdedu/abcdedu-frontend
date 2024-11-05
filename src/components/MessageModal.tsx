@@ -44,7 +44,9 @@ function MessageModal({
             <ExclamationMark className={'w-55 h-55 text-primary-300'} />
           )}
 
-          <div className={'text-18 font-semibold'}>{message}</div>
+          <div className='text-18 font-semibold whitespace-pre-line text-center'>
+            {message}
+          </div>
         </div>
       </Modal.Content>
     </Modal>
