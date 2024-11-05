@@ -1,4 +1,5 @@
 import { Trash, X } from '@phosphor-icons/react';
+import { useParams } from 'react-router-dom';
 
 import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
@@ -32,6 +33,8 @@ export default function PostFormModal({
     post,
     onSuccess: onClose,
   });
+  const { category } = useParams();
+  const isCommentAllowButtonVisible = category !== 'reference_room';
 
   const submitButtonStyle =
     'px-16 bg-primary-400 disabled:bg-primary-400/15 text-white';
@@ -107,16 +110,18 @@ export default function PostFormModal({
                   비밀글 설정
                 </label>
               </div>
-              <div className='flex flex-1 items-center gap-4'>
-                <input
-                  type='checkbox'
-                  id='commentAllow'
-                  {...register('commentAllow')}
-                />
-                <label htmlFor='commentAllow' className='text-14'>
-                  댓글 허용
-                </label>
-              </div>
+              {isCommentAllowButtonVisible && (
+                <div className='flex flex-1 items-center gap-4'>
+                  <input
+                    type='checkbox'
+                    id='commentAllow'
+                    {...register('commentAllow')}
+                  />
+                  <label htmlFor='commentAllow' className='text-14'>
+                    댓글 허용
+                  </label>
+                </div>
+              )}
             </div>
             <button
               className={`${submitButtonStyle} hidden sm:block mx-auto w-160 py-8 rounded-full`}
