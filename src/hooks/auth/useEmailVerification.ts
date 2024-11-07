@@ -63,8 +63,12 @@ export default function useEmailVerification() {
       setTimerKey(prev => prev + 1);
       setIsMailSent(true);
     } catch (error) {
-      console.log(error);
-      alert('인증번호 요청에 실패했습니다.');
+      if (error instanceof ApiError) {
+        if (error.status === 409) alert('이미 존재하는 이메일입니다.');
+      } else {
+        console.log(error);
+        alert('인증번호 요청에 실패했습니다.');
+      }
     } finally {
       setIsPending(false);
     }
