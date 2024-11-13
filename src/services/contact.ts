@@ -13,13 +13,13 @@ class ContactApi {
   }
 
   static async getContactList(page: number) {
-    return get<PaginatedResponse<ContactSummary>>('/contacts/', {
+    return get<PaginatedResponse<ContactSummary>>('/admin/contacts', {
       params: { page },
     });
   }
 
   static async getContactDetail(id: number) {
-    return get<Contact>(`/contacts/${id}`);
+    return get<Contact>(`/admin/contacts/${id}`);
   }
 }
 
