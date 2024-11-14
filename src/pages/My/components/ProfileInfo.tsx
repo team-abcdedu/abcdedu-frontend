@@ -1,13 +1,11 @@
 import { UserInfo } from '@/types/user';
 
 export default function ProfileInfo({ user }: { user: UserInfo }) {
-  const bgColor = !user.imageUrl && 'bg-primary-300/5';
-
   return (
     <div className='flex flex-col gap-20'>
       <div className='flex items-center gap-16'>
         <div
-          className={`w-58 h-58 rounded-full overflow-hidden border-1 ${bgColor}`}
+          className={`w-58 h-58 rounded-full overflow-hidden border-1 bg-primary-300/5`}
         >
           {user.imageUrl && (
             <img
