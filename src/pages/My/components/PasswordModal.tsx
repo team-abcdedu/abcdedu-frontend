@@ -1,5 +1,6 @@
 import { X } from '@phosphor-icons/react';
 
+import FormErrorMessage from '@/components/FormErrorMessage';
 import Modal from '@/components/Modal';
 
 import usePasswordForm from '../hooks/usePasswordForm';
@@ -34,9 +35,11 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
             <h2 className='text-20 text-center font-semibold pt-12 mb-24'>
               비밀번호 변경
             </h2>
-            <div className='flex flex-col gap-20 mb-4 [&_span]:text-14'>
+            <div className='flex flex-col gap-20 mb-4'>
               <div className={fieldStyle}>
-                <span>새 비밀번호</span>
+                <label htmlFor='newPw' className='text-14'>
+                  새 비밀번호
+                </label>
                 <input
                   {...register('newPw', fieldRules.newPw)}
                   id='newPw'
@@ -45,13 +48,16 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
                   className={inputStyle}
                 />
                 {errors.newPw && (
-                  <span className='!text-12 mt-2 text-red-500'>
-                    {errors.newPw.message}
-                  </span>
+                  <FormErrorMessage
+                    fieldErrors={errors.newPw}
+                    className='mt-2'
+                  />
                 )}
               </div>
               <div className={fieldStyle}>
-                <span>새 비밀번호 확인</span>
+                <label htmlFor='confirmPw' className='text-14'>
+                  새 비밀번호 확인
+                </label>
                 <input
                   {...register('confirmPw', fieldRules.confirmPw)}
                   id='confirmPw'
@@ -60,9 +66,10 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
                   className={inputStyle}
                 />
                 {errors.confirmPw && (
-                  <span className='!text-12 mt-2 text-red-500'>
-                    {errors.confirmPw.message}
-                  </span>
+                  <FormErrorMessage
+                    fieldErrors={errors.confirmPw}
+                    className='mt-2'
+                  />
                 )}
               </div>
             </div>
