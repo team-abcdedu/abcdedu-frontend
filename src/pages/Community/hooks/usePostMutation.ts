@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { ApiError } from '@/libs/errors';
 import communityApi from '@/services/community';
 
-import { boardMetaData, Category } from '../constants/communityInfo';
-
 interface UsePostMutationProps {
   category: string;
   postId?: number;
@@ -17,7 +15,6 @@ export default function usePostMutation({
 }: UsePostMutationProps) {
   const queryClient = useQueryClient();
 
-  const boardName = boardMetaData[category as Category].name;
   const navigate = useNavigate();
 
   const handleAPIError = (error: Error) => {
@@ -29,7 +26,7 @@ export default function usePostMutation({
     mutationFn: (form: FormData) => communityApi.createPost(form),
     onSuccess: data => {
       queryClient.invalidateQueries({
-        queryKey: ['board', 'list', boardName],
+        queryKey: ['board', 'list', category],
       });
       navigate(`/community/${category}/${data}`);
     },
@@ -44,7 +41,7 @@ export default function usePostMutation({
       communityApi.updatePost(id, form),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['board', 'list', boardName],
+        queryKey: ['board', 'list', category],
       });
       if (postId) {
         queryClient.invalidateQueries({
@@ -61,7 +58,7 @@ export default function usePostMutation({
   const deletePost = useMutation({
     mutationFn: (id: number) => communityApi.deletePost(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['board', 'list', boardName] });
+      queryClient.invalidateQueries({ queryKey: ['board', 'list', category] });
       navigate(`/community/${category}`);
     },
     onError: error => {

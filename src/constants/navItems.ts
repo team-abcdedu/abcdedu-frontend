@@ -54,7 +54,7 @@ export const headerNavItems: NavItem[] = [
     text: '커뮤니티',
     list: [
       {
-        to: '/community/levelup',
+        to: '/community/rating',
         text: '등업 게시판',
       },
       {
@@ -66,7 +66,7 @@ export const headerNavItems: NavItem[] = [
         text: 'Q & A',
       },
       {
-        to: '/community/bulletin_board',
+        to: '/community/free',
         text: '자유게시판',
       },
       {

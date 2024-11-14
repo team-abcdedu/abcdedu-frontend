@@ -20,11 +20,11 @@ export const communityInfoMap: CommunityInfoMap = {
 };
 
 export const boardMetaData = {
-  bulletin_board: { name: 'free', label: '자유게시판' },
-  qna: { name: 'qna', label: 'Q & A' },
-  project: { name: 'project', label: 'ABCD 프로젝트' },
-  levelup: { name: 'rating', label: '등업 게시판' },
-  document: { name: 'document', label: '자료실' },
+  free: '자유게시판',
+  qna: 'Q & A',
+  project: 'ABCD 프로젝트',
+  rating: '등업 게시판',
+  document: '자료실',
 };
 
 export type Category = keyof typeof boardMetaData;

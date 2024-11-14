@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import communityApi from '@/services/community';
 import { Post } from '@/types/community';
 
-import { boardMetaData, Category } from '../constants/communityInfo';
+import { Category } from '../constants/communityInfo';
 
 import usePostMutation from './usePostMutation';
 
@@ -40,7 +40,6 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   });
 
   const { category, postId } = useParams();
-  const boardName = boardMetaData[category as Category].name;
   const { createPost, updatePost } = usePostMutation({
     category: category ?? '',
     postId: Number(postId),
@@ -92,7 +91,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
 
   const submitForm: SubmitHandler<IPostFormInput> = async data => {
     const formData = new FormData();
-    formData.append('boardName', boardName);
+    formData.append('boardName', category as Category);
     formData.append('title', data.title);
     formData.append('content', data.content);
     formData.append('secret', data.secret.toString());
