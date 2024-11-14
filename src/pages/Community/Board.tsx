@@ -17,7 +17,7 @@ export default function Board() {
   const { category } = useParams();
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
-  const { id: boardId, label } = boardMetaData[category as Category];
+  const label = boardMetaData[category as Category];
 
   const { reset } = useQueryErrorResetBoundary();
 
@@ -26,8 +26,12 @@ export default function Board() {
   }
 
   const isPostButtonVisible =
-    (category === 'levelup' && user && user.role === '새싹') ||
-    (category !== 'levelup' && user && user.role !== '새싹');
+    (category === 'rating' && user && user.role === '새싹') ||
+    (category === 'document' && user && user.role === '관리자') ||
+    (category !== 'rating' &&
+      category !== 'document' &&
+      user &&
+      user.role !== '새싹');
 
   return (
     <div className='flex flex-col text-center mt-20'>
@@ -50,7 +54,7 @@ export default function Board() {
         <PostFormModal isVisible={isVisible} onClose={toggleModal} />
       )}
       <ErrorBoundary onReset={reset}>
-        <List boardId={boardId} page={page} />
+        <List boardName={category} page={page} />
       </ErrorBoundary>
     </div>
   );
