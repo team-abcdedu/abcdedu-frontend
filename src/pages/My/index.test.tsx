@@ -33,7 +33,7 @@ vi.mock('@/hooks/useModal', () => ({
   default: vi.fn(),
 }));
 
-vitest.mock('./hooks/useGetProfile', () => ({
+vi.mock('./hooks/useGetProfile', () => ({
   default: vi.fn(),
 }));
 
