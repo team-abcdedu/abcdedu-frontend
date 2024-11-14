@@ -70,7 +70,7 @@ export const headerNavItems: NavItem[] = [
         text: '자유게시판',
       },
       {
-        to: '/community/reference_room',
+        to: '/community/document',
         text: '자료실',
       },
     ],

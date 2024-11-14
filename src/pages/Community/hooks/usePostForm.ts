@@ -40,7 +40,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
   });
 
   const { category, postId } = useParams();
-  const boardId = boardMetaData[category as Category].id;
+  const boardName = boardMetaData[category as Category].name;
   const { createPost, updatePost } = usePostMutation({
     category: category ?? '',
     postId: Number(postId),
@@ -92,7 +92,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
 
   const submitForm: SubmitHandler<IPostFormInput> = async data => {
     const formData = new FormData();
-    formData.append('boardId', boardId.toString());
+    formData.append('boardName', boardName);
     formData.append('title', data.title);
     formData.append('content', data.content);
     formData.append('secret', data.secret.toString());
