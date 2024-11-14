@@ -10,21 +10,15 @@ import communityApi from '@/services/community';
 interface UseGetCommentsProps {
   postId: number;
   page: number;
-  enabled: boolean;
 }
 
-export default function useGetComments({
-  postId,
-  page,
-  enabled,
-}: UseGetCommentsProps) {
+export default function useGetComments({ postId, page }: UseGetCommentsProps) {
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: ['comments', postId, `page-${page}`],
     queryFn: () => communityApi.getComments(postId, page),
     placeholderData: keepPreviousData,
-    enabled,
   });
 
   const list = data?.content || [];
