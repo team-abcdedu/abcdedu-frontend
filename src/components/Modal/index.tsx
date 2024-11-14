@@ -53,7 +53,7 @@ export default function Modal({
             <motion.div
               role='dialog'
               className={`fixed z-modal bg-white position-center rounded-md 
-                max-h-[calc(100dvh_-_16px)] flex flex-col ${getSizingStyle()} ${mobileFullStyle}`}
+                max-h-[calc(100dvh_-_16px)] flex flex-col ${getSizingStyle()} ${mobileFullStyle} shadow-modal`}
               onClick={e => e.stopPropagation()}
               initial='hidden'
               animate='visible'
