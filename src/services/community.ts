@@ -9,8 +9,8 @@ class CommunityApi {
     });
   }
 
-  static async getPosts(boardId: number, page: number) {
-    return get<PaginatedResponse<PostSummary>>(`/boards/${boardId}/posts`, {
+  static async getPosts(boardName: string, page: number) {
+    return get<PaginatedResponse<PostSummary>>(`/boards/${boardName}/posts`, {
       params: { page },
     });
   }

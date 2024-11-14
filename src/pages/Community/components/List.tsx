@@ -9,14 +9,14 @@ import useGetPosts from '../hooks/useGetPosts';
 
 interface ListProps {
   page: number;
-  boardId: number;
+  boardName: string;
 }
 
-export default function List({ page, boardId }: ListProps) {
+export default function List({ page, boardName }: ListProps) {
   const itemCountPerPage = 10;
   const user = useBoundStore(state => state.user);
 
-  const { isLoading, list, totalElements } = useGetPosts({ boardId, page });
+  const { isLoading, list, totalElements } = useGetPosts({ boardName, page });
 
   return (
     <>
