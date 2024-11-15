@@ -1,30 +1,26 @@
 import { StateCreator } from 'zustand';
 
-import { ClassData, SubClassData, SubClassIdMap } from '@/types/class';
+import { ClassData, SubClassIdMap } from '@/types/class';
 
 type State = {
   subClassIdMap: SubClassIdMap | Record<string, never>;
-  classData: ClassData | undefined;
-  subClassData: SubClassData | undefined;
+  classDataList: ClassData[];
 };
 
 type Actions = {
   setSubClassIdMap: (subClassIdMap: SubClassIdMap) => void;
-  setClassData: (classData: ClassData | undefined) => void;
-  setSubClassData: (subClassData: SubClassData | undefined) => void;
+  setClassDataList: (classDataList: ClassData[]) => void;
 };
 
 export type ClassSlice = State & Actions;
 
 const initialState: State = {
   subClassIdMap: {},
-  classData: undefined,
-  subClassData: undefined,
+  classDataList: [],
 };
 
 export const createClassSlice: StateCreator<ClassSlice> = set => ({
   ...initialState,
   setSubClassIdMap: subClassIdMap => set({ subClassIdMap }),
-  setClassData: classData => set({ classData }),
-  setSubClassData: subClassData => set({ subClassData }),
+  setClassDataList: classDataList => set({ classDataList }),
 });
