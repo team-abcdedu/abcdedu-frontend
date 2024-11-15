@@ -24,9 +24,11 @@ interface UserProfileForm {
 export default function useProfileForm({ user, onClose }: UserProfileForm) {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<IProfileFormInput>({
+    mode: 'onChange',
     defaultValues: {
       name: user.name,
       school: user.school ?? '',
@@ -38,6 +40,7 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
 
   const fieldRules: FieldRules<IProfileFormInput> = {
     name: {
+      required: '이름을 입력하세요.',
       maxLength: {
         value: 10,
         message: '이름은 최대 10자까지 입력할 수 있습니다.',
@@ -70,6 +73,7 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
       setCompressedImageFile(compressedFile);
     } catch (error) {
       console.error('이미지 압축 실패: ', error);
+      alert('이미지 압축에 실패했습니다.');
     }
   };
 
@@ -130,6 +134,7 @@ export default function useProfileForm({ user, onClose }: UserProfileForm) {
     fieldRules,
     errors,
     register,
+    reset,
     onSubmit,
   };
 }

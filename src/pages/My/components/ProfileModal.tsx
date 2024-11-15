@@ -22,6 +22,7 @@ export default function ProfileModal({
     handleFileChange,
     imagePreview,
     resetImageFile,
+    reset,
     errors,
     fieldRules,
     register,
@@ -33,6 +34,11 @@ export default function ProfileModal({
     resetImageFile();
   };
 
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
   return (
     <Modal isVisible={isVisible}>
       <Modal.Content>
@@ -40,7 +46,8 @@ export default function ProfileModal({
           <button
             type='button'
             className='absolute top-12 right-12'
-            onClick={onClose}
+            onClick={handleClose}
+            aria-label='닫기'
           >
             <X size={24} />
           </button>
@@ -114,7 +121,7 @@ export default function ProfileModal({
       </Modal.Content>
       <Modal.Actions direction='row'>
         <button
-          type='submit'
+          type='button'
           className='w-full h-45 px-24 text-15 
         text-primary-400 btn-white-pb font-semibold rounded-md'
           onClick={onClose}
