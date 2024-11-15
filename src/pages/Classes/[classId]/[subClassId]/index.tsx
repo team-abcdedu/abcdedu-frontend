@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
-import { useSubClassIdMap } from '@/components/ClassLayout';
 import MessageModal from '@/components/MessageModal';
 import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
 import useModal from '@/hooks/useModal';
@@ -20,7 +19,8 @@ function SubClass() {
   const textStyle = 'text-20 sm:text-22 md:text-25 font-semibold text-center';
 
   const { classId, subClassId } = useParams();
-  const subClassIdMap = useSubClassIdMap();
+  const subClassIdMap = useBoundStore(state => state.subClassIdMap);
+  // const { subClassIdMap } = useClassContext();
 
   const { isVisible, toggleModal } = useModal();
   const [modalMessage, setModalMessage] = useState('');

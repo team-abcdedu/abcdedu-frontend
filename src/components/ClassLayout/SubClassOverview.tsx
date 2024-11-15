@@ -1,27 +1,22 @@
-import { ClassData, SubClassData } from '@/types/class';
+import useClassAndSubClassData from '@/hooks/class/useClassAndSubClassData';
 
-interface SubClassOverviewProps {
-  viewData: ClassData | SubClassData;
-  classTitle: string;
-}
-
-function isClassData(data: ClassData | SubClassData): data is ClassData {
-  return (data as ClassData).subClasses !== undefined;
-}
-
-function SubClassOverview({ viewData, classTitle }: SubClassOverviewProps) {
+function SubClassOverview() {
   let title;
   let subTitle;
   let description;
 
-  if (isClassData(viewData)) {
-    title = `Class ${viewData.title}`;
-    subTitle = viewData.subTitle;
-    description = viewData.description;
+  const { classData, subClassData, isSubClassPage } = useClassAndSubClassData();
+
+  // 클래스 메인 페이지(ex. Class A)
+  if (!isSubClassPage) {
+    title = `Class ${classData?.title}`;
+    subTitle = classData?.subTitle;
+    description = classData?.description;
   } else {
-    title = `Class ${classTitle}-${viewData.orderNumber}`;
-    subTitle = viewData.title;
-    description = viewData.description;
+    // 서브클래스 페이지(ex. Class A-1)
+    title = `Class ${classData?.title}-${subClassData?.orderNumber}`;
+    subTitle = subClassData?.title;
+    description = subClassData?.description;
   }
 
   return (

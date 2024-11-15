@@ -18,7 +18,7 @@ function ClassList() {
     'text-primary-300',
   ];
 
-  const { data, isError, isLoading } = useGetClass();
+  const { classDataList, isError, isLoading } = useGetClass();
 
   if (isError || isLoading) {
     return null;
@@ -26,8 +26,8 @@ function ClassList() {
 
   return (
     <>
-      {data &&
-        data.map((classData, index) => {
+      {classDataList &&
+        classDataList.map((classData, index) => {
           return (
             <section
               key={classData.title}

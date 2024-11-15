@@ -1,9 +1,11 @@
-import { ClassData } from '@/types/class';
+import useClassAndSubClassData from '@/hooks/class/useClassAndSubClassData';
 
 import SubClassNavigationCard from './SubClassNavigationCard';
 
-function SubClassNavigationCardGroup({ classData }: { classData: ClassData }) {
-  const { title, subClasses } = classData || {};
+function SubClassNavigationCardGroup() {
+  const { classData } = useClassAndSubClassData();
+  const { title } = classData || {};
+
   const lineStyle = 'w-full h-4 bg-primary-300';
 
   return (
@@ -20,11 +22,7 @@ function SubClassNavigationCardGroup({ classData }: { classData: ClassData }) {
         <div className={lineStyle}></div>
       </div>
       <div className={'p-30'}>
-        <SubClassNavigationCard
-          classTitle={title}
-          subClasses={subClasses}
-          bgColor={'neutral'}
-        />
+        <SubClassNavigationCard bgColor={'neutral'} />
       </div>
     </>
   );

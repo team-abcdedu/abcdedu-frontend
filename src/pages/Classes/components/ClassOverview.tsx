@@ -2,7 +2,7 @@ import SubClassNavigationCard from '@/components/ClassLayout/SubClassNavigationC
 import { ClassData } from '@/types/class';
 
 function ClassOverview({ classData }: { classData: ClassData }) {
-  const { title, subTitle, description, subClasses } = classData;
+  const { title, subTitle, description } = classData;
 
   return (
     <div
@@ -14,11 +14,7 @@ function ClassOverview({ classData }: { classData: ClassData }) {
       <p className={'mt-5 mb-20 text-20 text-white'}>
         {subTitle ? `${subTitle} ` : ''} {description ? `: ${description}` : ''}
       </p>
-      <SubClassNavigationCard
-        classTitle={title}
-        subClasses={subClasses}
-        bgColor={'white'}
-      />
+      <SubClassNavigationCard bgColor={'white'} />
     </div>
   );
 }
