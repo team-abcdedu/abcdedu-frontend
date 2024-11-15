@@ -1,14 +1,14 @@
 import { ArrowRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-import useClassAndSubClassData from '@/hooks/class/useClassAndSubClassData';
+import { ClassData } from '@/types/class';
 
 interface SubClassNavCardProps {
   bgColor: 'neutral' | 'white';
+  classData: ClassData | undefined;
 }
 
-function SubClassNavigationCard({ bgColor }: SubClassNavCardProps) {
-  const { classData } = useClassAndSubClassData();
+function SubClassNavigationCard({ bgColor, classData }: SubClassNavCardProps) {
   const { title: classTitle, subClasses } = classData || {};
 
   const bgClass = bgColor === 'neutral' ? 'bg-neutral-100' : 'bg-white';

@@ -1,9 +1,14 @@
-import useClassAndSubClassData from '@/hooks/class/useClassAndSubClassData';
+import { ClassData } from '@/types/class';
 
 import SubClassNavigationCard from './SubClassNavigationCard';
 
-function SubClassNavigationCardGroup() {
-  const { classData } = useClassAndSubClassData();
+interface SubClassNavigationCardGroupProps {
+  classData: ClassData | undefined;
+}
+
+function SubClassNavigationCardGroup({
+  classData,
+}: SubClassNavigationCardGroupProps) {
   const { title } = classData || {};
 
   const lineStyle = 'w-full h-4 bg-primary-300';
@@ -22,7 +27,7 @@ function SubClassNavigationCardGroup() {
         <div className={lineStyle}></div>
       </div>
       <div className={'p-30'}>
-        <SubClassNavigationCard bgColor={'neutral'} />
+        <SubClassNavigationCard bgColor={'neutral'} classData={classData} />
       </div>
     </>
   );

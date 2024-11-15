@@ -1,11 +1,19 @@
-import useClassAndSubClassData from '@/hooks/class/useClassAndSubClassData';
+import { ClassData, SubClassData } from '@/types/class';
 
-function SubClassOverview() {
+interface SubClassOverviewProps {
+  classData: ClassData | undefined;
+  subClassData: SubClassData | undefined;
+  isSubClassPage: boolean;
+}
+
+function SubClassOverview({
+  classData,
+  subClassData,
+  isSubClassPage,
+}: SubClassOverviewProps) {
   let title;
   let subTitle;
   let description;
-
-  const { classData, subClassData, isSubClassPage } = useClassAndSubClassData();
 
   // 클래스 메인 페이지(ex. Class A)
   if (!isSubClassPage) {
