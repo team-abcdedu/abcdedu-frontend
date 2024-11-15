@@ -1,14 +1,21 @@
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, RenderOptions } from '@testing-library/react';
 import { PropsWithChildren } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { queryClient } from '@/libs/react-query';
-
 function RenderWithProviders({ children }: PropsWithChildren) {
+  const testQueryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
   return (
     <HelmetProvider>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={testQueryClient}>
+        {children}
+      </QueryClientProvider>
     </HelmetProvider>
   );
 }
