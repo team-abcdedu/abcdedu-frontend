@@ -29,6 +29,7 @@ export default function PasswordModal({ isVisible, onClose }: EditModalProps) {
               type='button'
               className='absolute top-12 right-12'
               onClick={handleClose}
+              aria-label='닫기'
             >
               <X size={24} />
             </button>
