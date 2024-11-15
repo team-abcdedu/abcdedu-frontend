@@ -1,12 +1,17 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import useBoundStore from '@/stores';
+import { ClassData } from '@/types/class';
+
+interface UseClassAndSubClassDataProps {
+  classDataList: ClassData[];
+}
 
 // 현재 경로에 해당하는 클래스, 서브클래스 데이터
-function useClassAndSubClassData() {
+function useClassAndSubClassData({
+  classDataList,
+}: UseClassAndSubClassDataProps) {
   const { classId, subClassId } = useParams();
-  const classDataList = useBoundStore(state => state.classDataList);
 
   const classData = useMemo(() => {
     return classDataList?.find(d => d.title === classId?.toUpperCase());
@@ -17,7 +22,7 @@ function useClassAndSubClassData() {
     );
   }, [classData, subClassId]);
 
-  const isSubClassPage = classId && subClassId;
+  const isSubClassPage = !!classId && !!subClassId;
 
   return { classData, subClassData, isSubClassPage };
 }
