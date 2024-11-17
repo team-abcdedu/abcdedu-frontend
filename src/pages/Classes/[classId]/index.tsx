@@ -1,7 +1,7 @@
 import { Outlet, useOutletContext } from 'react-router-dom';
 
 import Head from '@/components/Head';
-import useClassAndSubClassData from '@/hooks/class/useClassAndSubClassData';
+import useClassDataByParams from '@/hooks/class/useClassDataByParams';
 import useGetClass from '@/hooks/class/useGetClass';
 import { SubClassIdMap } from '@/types/class';
 
@@ -11,15 +11,16 @@ import SubClassOverview from '../components/SubClassOverview';
 function Class() {
   const { classDataList, subClassIdMap, isError, isLoading } = useGetClass();
 
-  const { classData, subClassData, isSubClassPage } = useClassAndSubClassData({
-    classDataList: classDataList || [],
-  });
+  const { currentPageClassData, currentPageSubClassData, isSubClassPage } =
+    useClassDataByParams({
+      classDataList: classDataList || [],
+    });
 
   if (isError || isLoading) {
     return null;
   }
 
-  if (!classData || (isSubClassPage && !subClassData)) {
+  if (!currentPageClassData || (isSubClassPage && !currentPageSubClassData)) {
     return null;
   }
 
@@ -27,18 +28,20 @@ function Class() {
     <>
       {/* 각 클래스 메인 페이지(ex. Class A 페이지)인 경우 subClassData 없음 */}
       <Head
-        title={`${subClassData ? subClassData.title : classData?.subTitle} | ABCDEdu`}
+        title={`${currentPageSubClassData ? currentPageSubClassData.title : currentPageClassData?.subTitle} | ABCDEdu`}
         description={
-          subClassData ? subClassData.description : classData?.description
+          currentPageSubClassData
+            ? currentPageSubClassData.description
+            : currentPageClassData?.description
         }
       />
       <SubClassOverview
-        classData={classData}
-        subClassData={subClassData}
+        classData={currentPageClassData}
+        subClassData={currentPageSubClassData}
         isSubClassPage={isSubClassPage}
       />
       <Outlet context={subClassIdMap satisfies SubClassIdMap} />
-      <SubClassNavigationCardGroup classData={classData} />
+      <SubClassNavigationCardGroup classData={currentPageClassData} />
     </>
   );
 }
