@@ -20,9 +20,10 @@ function useSubClassFileInfoList({
   // 관리자 페이지 내에서 호출 시
   if (subLectureId && !subClassIdMap) {
     resolvedSubLectureId = subLectureId;
+  } else {
+    resolvedSubLectureId =
+      subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`];
   }
-  resolvedSubLectureId =
-    subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`];
 
   const user = useBoundStore(state => state.user);
 
