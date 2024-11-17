@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import SubClassNavigationCard from '@/pages/Classes/components/SubClassNavigationCard';
+import SubClassNavigationCardGrid from '@/pages/Classes/components/SubClassNavigationCardGrid';
 import { ClassData } from '@/types/class';
 
 interface ClassOverviewProps {
@@ -50,7 +50,7 @@ function ClassOverview({ index, classData }: ClassOverviewProps) {
           {subTitle ? `${subTitle} ` : ''}{' '}
           {description ? `: ${description}` : ''}
         </p>
-        <SubClassNavigationCard bgColor={'white'} classData={classData} />
+        <SubClassNavigationCardGrid bgColor={'white'} classData={classData} />
       </div>
     </section>
   );
