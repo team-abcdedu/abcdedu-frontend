@@ -8,6 +8,8 @@ import MessageModal from '@/components/MessageModal';
 import useSubClassFileHandler from '@/hooks/class/useSubClassFileHandler';
 import useSubClassFileInfoList from '@/hooks/class/useSubClassFileInfoList';
 import useModal from '@/hooks/useModal';
+import { FileActionResult } from '@/types/class';
+import { convertS3ToPdfUrl } from '@/utils/convertS3ToPdfUrl';
 
 import ExamContent from '../../components/ExamContent';
 import SubClassFileItem from '../../components/SubClassFileItem';
@@ -31,14 +33,37 @@ function SubClass() {
     examPaperFileInfo,
   } = useSubClassFileInfoList({});
 
-  const { hasAccessToTheoryFile, handleClick: handleTheoryBtnClick } =
+  const { hasAccessToTheoryFile, handleClick: handleTheoryClick } =
     useSubClassFileHandler({ fileInfo: theoryFileInfo });
-  const { handleClick: handleDocumentBtnClick } = useSubClassFileHandler({
+  const { handleClick: handleDocumentClick } = useSubClassFileHandler({
     fileInfo: documentFileInfo,
   });
 
-  const isExamContentExist = !!examFileInfo || !!examPaperFileInfo;
+  const handleButtonClick = async (action: () => FileActionResult) => {
+    const { status, message, isNewWindowOpen, fileUrl } = action();
+    if (status === 'error' || status === 'loading') {
+      setModalMessage(message);
+      toggleModal();
+      return;
+    }
+    if (!fileUrl) {
+      setModalMessage('');
+      toggleModal();
+      return;
+    }
 
+    if (isNewWindowOpen) {
+      const pdfUrl = await convertS3ToPdfUrl(fileUrl);
+      window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      window.open(fileUrl, '_self', 'noopener,noreferrer');
+    }
+  };
+
+  const handleTheoryBtnClick = () => handleButtonClick(handleTheoryClick);
+  const handleDocumentBtnClick = () => handleButtonClick(handleDocumentClick);
+
+  const isExamContentExist = !!examFileInfo || !!examPaperFileInfo;
   const handleExamContentBtnClick = () => {
     if (!isExamContentExist) {
       setModalMessage('시험 파일이 없습니다.');
@@ -64,19 +89,13 @@ function SubClass() {
         }
       >
         {hasAccessToTheoryFile && theoryFileInfo && (
-          <SubClassFileItem
-            label={'이론'}
-            onClick={() => handleTheoryBtnClick(setModalMessage, toggleModal)}
-          >
+          <SubClassFileItem label={'이론'} onClick={handleTheoryBtnClick}>
             <Book className={iconStyle} />
           </SubClassFileItem>
         )}
 
         {documentFileInfo && (
-          <SubClassFileItem
-            label={'자료'}
-            onClick={() => handleDocumentBtnClick(setModalMessage, toggleModal)}
-          >
+          <SubClassFileItem label={'자료'} onClick={handleDocumentBtnClick}>
             <Paperclip className={iconStyle} />
           </SubClassFileItem>
         )}
@@ -92,8 +111,7 @@ function SubClass() {
         <ExamContent
           examFileInfo={examFileInfo}
           examPaperFileInfo={examPaperFileInfo}
-          setModalMessage={setModalMessage}
-          toggleModal={toggleModal}
+          handleButtonClick={handleButtonClick}
         />
       )}
 

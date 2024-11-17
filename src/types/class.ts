@@ -18,3 +18,10 @@ export type FileInfo = {
   assignmentType: string;
   assignmentFileId: number;
 };
+
+export type FileActionResult = {
+  status: 'error' | 'success' | 'loading';
+  message: string;
+  isNewWindowOpen?: boolean;
+  fileUrl?: string;
+};

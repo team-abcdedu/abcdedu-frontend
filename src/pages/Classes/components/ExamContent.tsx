@@ -1,28 +1,29 @@
 import useSubClassFileHandler from '@/hooks/class/useSubClassFileHandler';
-import { FileInfo } from '@/types/class';
+import { FileActionResult, FileInfo } from '@/types/class';
 
 interface ExamContentProps {
   examFileInfo: FileInfo | undefined;
   examPaperFileInfo: FileInfo | undefined;
-  setModalMessage: (message: string) => void;
-  toggleModal: () => void;
+  handleButtonClick: (action: () => FileActionResult) => Promise<void>;
 }
 
 function ExamContent({
   examFileInfo,
   examPaperFileInfo,
-  setModalMessage,
-  toggleModal,
+  handleButtonClick,
 }: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
-  const { handleClick: handleExamBtnClick } = useSubClassFileHandler({
+  const { handleClick: handleExamClick } = useSubClassFileHandler({
     fileInfo: examFileInfo,
   });
-  const { handleClick: handleExamPaperBtnClick } = useSubClassFileHandler({
+  const { handleClick: handleExamPaperClick } = useSubClassFileHandler({
     fileInfo: examPaperFileInfo,
   });
+
+  const handleExamBtnClick = () => handleButtonClick(handleExamClick);
+  const handleExamPaperBtnClick = () => handleButtonClick(handleExamPaperClick);
 
   return (
     <div className={'w-full pb-50 flex-col-center gap-30'}>
@@ -31,7 +32,7 @@ function ExamContent({
           <button
             type={'button'}
             className={buttonStyle}
-            onClick={() => handleExamBtnClick(setModalMessage, toggleModal)}
+            onClick={handleExamBtnClick}
           >
             문제 확인하기
           </button>
@@ -41,9 +42,7 @@ function ExamContent({
           <button
             type={'button'}
             className={buttonStyle}
-            onClick={() =>
-              handleExamPaperBtnClick(setModalMessage, toggleModal)
-            }
+            onClick={handleExamPaperBtnClick}
           >
             답안 제출 파일 다운로드
           </button>
