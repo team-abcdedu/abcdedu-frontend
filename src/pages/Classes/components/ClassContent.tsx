@@ -1,16 +1,16 @@
 import { ClassData, SubClassData } from '@/types/class';
 
-interface SubClassOverviewProps {
+interface ClassContentProps {
   classData: ClassData | undefined;
   subClassData: SubClassData | undefined;
   isSubClassPage: boolean;
 }
 
-function SubClassOverview({
+function ClassContent({
   classData,
   subClassData,
   isSubClassPage,
-}: SubClassOverviewProps) {
+}: ClassContentProps) {
   let title;
   let subTitle;
   let description;
@@ -51,4 +51,4 @@ function SubClassOverview({
   );
 }
 
-export default SubClassOverview;
+export default ClassContent;
