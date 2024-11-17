@@ -1,9 +1,9 @@
 import useSubClassFileHandler from '@/hooks/class/useSubClassFileHandler';
-import { FileData } from '@/types/class';
+import { FileInfo } from '@/types/class';
 
 interface ExamContentProps {
-  examFileInfo: FileData | undefined;
-  examPaperFileInfo: FileData | undefined;
+  examFileInfo: FileInfo | undefined;
+  examPaperFileInfo: FileInfo | undefined;
   setModalMessage: (message: string) => void;
   toggleModal: () => void;
 }

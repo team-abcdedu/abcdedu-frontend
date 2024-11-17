@@ -4,15 +4,15 @@ import { ApiError } from '@/libs/errors';
 import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
 import ClassApi from '@/services/class';
 import useBoundStore from '@/stores';
-import { FileData } from '@/types/class';
+import { FileInfo } from '@/types/class';
 import { getFileExtension } from '@/utils/getFileExtension';
 import { getFileName } from '@/utils/getFileName';
 
-interface UseFetchSubClassFileDataProps {
-  fileInfo: FileData | undefined;
+interface UseFetchSubClassFileInfoProps {
+  fileInfo: FileInfo | undefined;
 }
 
-function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileDataProps) {
+function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
   const user = useBoundStore(state => state.user);
   const { assignmentType: fileType, assignmentFileId: fileId } = fileInfo || {};
 
