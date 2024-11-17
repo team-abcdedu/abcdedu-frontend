@@ -8,7 +8,7 @@ import { SubClassIdMap } from '@/types/class';
 
 import ClassContent from '../components/ClassContent';
 
-function Class() {
+function ClassLayout() {
   const lineStyle = 'w-full h-4 bg-primary-300';
 
   const { classDataList, subClassIdMap, isError, isLoading } = useGetClass();
@@ -69,4 +69,4 @@ export function useSubClassIdMap() {
   return useOutletContext<SubClassIdMap>();
 }
 
-export default Class;
+export default ClassLayout;
