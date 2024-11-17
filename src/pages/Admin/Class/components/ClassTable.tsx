@@ -7,7 +7,7 @@ interface ClassTableProps {
 }
 
 function ClassTable({ handleRowClick }: ClassTableProps) {
-  const { data, isLoading, isError } = useGetClass();
+  const { classDataList, isLoading, isError } = useGetClass();
 
   const fieldValue = (column: keyof ClassData, row: ClassData) => {
     if (column === 'subClasses') {
@@ -44,19 +44,21 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
           </tr>
         )}
 
-        {data && data.length > 0 ? (
-          data.map(row => (
+        {classDataList && classDataList.length > 0 ? (
+          classDataList.map(classData => (
             <tr
-              key={row.title}
+              key={classData.title}
               className={'cursor-pointer hover:bg-neutral-200'}
-              onClick={() => handleRowClick({ ...row })}
+              onClick={() => handleRowClick({ ...classData })}
             >
               {tableColumns.class.map(column => (
                 <td
                   key={column}
                   className={'text-center px-10 overflow-hidden'}
                 >
-                  <div className={'truncate'}>{fieldValue(column, row)}</div>
+                  <div className={'truncate'}>
+                    {fieldValue(column, classData)}
+                  </div>
                 </td>
               ))}
             </tr>
