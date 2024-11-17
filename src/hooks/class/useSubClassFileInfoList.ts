@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useSubClassIdMap } from '@/pages/Classes/[classId]';
 import ClassApi from '@/services/class';
 import useBoundStore from '@/stores';
+import { FileInfo } from '@/types/class';
 
 interface UseSubClassFileInfoListProps {
   subLectureId?: number;
@@ -37,15 +38,25 @@ function useSubClassFileInfoList({
     enabled: !!resolvedSubLectureId,
   });
 
-  const findFileInfo = useMemo(
-    () => (type: string) => {
-      if (type === '이론' && user?.role !== '관리자') {
-        return undefined;
+  const findFileInfo = useMemo(() => {
+    const cache: { [key: string]: FileInfo | undefined } = {};
+
+    return (type: string) => {
+      if (cache[type]) {
+        return cache[type];
       }
-      return subClassFileInfoList?.find(file => file.assignmentType === type);
-    },
-    [subClassFileInfoList, user],
-  );
+
+      if (type === '이론' && user?.role !== '관리자') {
+        cache[type] = undefined;
+      } else {
+        cache[type] = subClassFileInfoList?.find(
+          file => file.assignmentType === type,
+        );
+      }
+
+      return cache[type];
+    };
+  }, [subClassFileInfoList, user]);
 
   return {
     subClassFileInfoList,
