@@ -1,7 +1,7 @@
 import Head from '@/components/Head';
 import useClassDataList from '@/hooks/class/useClassDataList';
-import ClassOverview from '@/pages/Classes/components/ClassOverview';
 
+import ClassOverview from './components/ClassOverview';
 import Hero from './components/Hero';
 import MediaContents from './components/MediaContents';
 

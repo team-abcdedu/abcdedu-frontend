@@ -8,8 +8,9 @@ import MessageModal from '@/components/MessageModal';
 import useSubClassFileHandler from '@/hooks/class/useSubClassFileHandler';
 import useSubClassFileInfoList from '@/hooks/class/useSubClassFileInfoList';
 import useModal from '@/hooks/useModal';
-import ExamContent from '@/pages/Classes/components/ExamContent';
-import SubClassFileItem from '@/pages/Classes/components/SubClassFileItem';
+
+import ExamContent from '../../components/ExamContent';
+import SubClassFileItem from '../../components/SubClassFileItem';
 
 function SubClass() {
   const iconStyle =

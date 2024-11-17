@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import SubClassNavigationCardGrid from '@/pages/Classes/components/SubClassNavigationCardGrid';
 import { ClassData } from '@/types/class';
+
+import SubClassNavigationCardGrid from './SubClassNavigationCardGrid';
 
 interface ClassOverviewProps {
   index: number;

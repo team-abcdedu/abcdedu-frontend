@@ -3,10 +3,10 @@ import { Outlet, useOutletContext } from 'react-router-dom';
 import Head from '@/components/Head';
 import useClassDataByParams from '@/hooks/class/useClassDataByParams';
 import useClassDataList from '@/hooks/class/useClassDataList';
-import SubClassNavigationCardGrid from '@/pages/Classes/components/SubClassNavigationCardGrid';
 import { SubClassIdMap } from '@/types/class';
 
 import ClassContent from '../components/ClassContent';
+import SubClassNavigationCardGrid from '../components/SubClassNavigationCardGrid';
 
 function ClassLayout() {
   const lineStyle = 'w-full h-4 bg-primary-300';
