@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 
 import { ClassData } from '@/types/class';
 
-interface SubClassNavCardProps {
+interface SubClassNavigationCardGridProps {
   bgColor: 'neutral' | 'white';
   classData: ClassData | undefined;
 }
 
-function SubClassNavigationCard({ bgColor, classData }: SubClassNavCardProps) {
+function SubClassNavigationCardGrid({
+  bgColor,
+  classData,
+}: SubClassNavigationCardGridProps) {
   const { title: classTitle, subClasses } = classData || {};
 
   const bgClass = bgColor === 'neutral' ? 'bg-neutral-100' : 'bg-white';
@@ -45,4 +48,4 @@ function SubClassNavigationCard({ bgColor, classData }: SubClassNavCardProps) {
   );
 }
 
-export default SubClassNavigationCard;
+export default SubClassNavigationCardGrid;
