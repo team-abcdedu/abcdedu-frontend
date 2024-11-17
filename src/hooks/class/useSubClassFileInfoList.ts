@@ -6,13 +6,13 @@ import { useSubClassIdMap } from '@/pages/Classes/[classId]';
 import ClassApi from '@/services/class';
 import useBoundStore from '@/stores';
 
-interface UseGetSubClassFileInfoList {
+interface UseSubClassFileInfoListProps {
   subLectureId?: number;
 }
 
-function useFetchSubClassFileList({
+function useSubClassFileInfoList({
   subLectureId,
-}: UseGetSubClassFileInfoList) {
+}: UseSubClassFileInfoListProps) {
   const { classId, subClassId } = useParams();
   const subClassIdMap = useSubClassIdMap();
 
@@ -65,4 +65,4 @@ function useFetchSubClassFileList({
   };
 }
 
-export default useFetchSubClassFileList;
+export default useSubClassFileInfoList;

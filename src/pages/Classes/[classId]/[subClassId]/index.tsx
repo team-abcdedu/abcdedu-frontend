@@ -5,8 +5,8 @@ import Book from '@/assets/icons/book.svg?react';
 import CheckToSlot from '@/assets/icons/check-to-slot.svg?react';
 import Paperclip from '@/assets/icons/paperclip.svg?react';
 import MessageModal from '@/components/MessageModal';
-import useFetchSubClassFileList from '@/hooks/class/useFetchSubClassFileList';
 import useSubClassFileHandler from '@/hooks/class/useSubClassFileHandler';
+import useSubClassFileInfoList from '@/hooks/class/useSubClassFileInfoList';
 import useModal from '@/hooks/useModal';
 import ExamContent from '@/pages/Classes/components/ExamContent';
 import SubClassFileItem from '@/pages/Classes/components/SubClassFileItem';
@@ -28,7 +28,7 @@ function SubClass() {
     documentFileInfo,
     examFileInfo,
     examPaperFileInfo,
-  } = useFetchSubClassFileList({});
+  } = useSubClassFileInfoList({});
 
   const { hasAccessToTheoryFile, handleClick: handleTheoryBtnClick } =
     useSubClassFileHandler({ fileInfo: theoryFileInfo });
