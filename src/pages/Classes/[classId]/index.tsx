@@ -2,7 +2,7 @@ import { Outlet, useOutletContext } from 'react-router-dom';
 
 import Head from '@/components/Head';
 import useClassDataByParams from '@/hooks/class/useClassDataByParams';
-import useGetClass from '@/hooks/class/useGetClass';
+import useClassDataList from '@/hooks/class/useClassDataList';
 import SubClassNavigationCardGrid from '@/pages/Classes/components/SubClassNavigationCardGrid';
 import { SubClassIdMap } from '@/types/class';
 
@@ -11,7 +11,8 @@ import ClassContent from '../components/ClassContent';
 function ClassLayout() {
   const lineStyle = 'w-full h-4 bg-primary-300';
 
-  const { classDataList, subClassIdMap, isError, isLoading } = useGetClass();
+  const { classDataList, subClassIdMap, isError, isLoading } =
+    useClassDataList();
 
   const { currentPageClassData, currentPageSubClassData, isSubClassPage } =
     useClassDataByParams({

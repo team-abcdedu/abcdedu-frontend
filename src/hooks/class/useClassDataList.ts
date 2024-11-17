@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import ClassApi from '@/services/class';
 import { ClassData, SubClassIdMap } from '@/types/class';
 
-function useGetClass() {
+function useClassDataList() {
   const {
     data: classDataList,
     isLoading,
@@ -33,4 +33,4 @@ function useGetClass() {
   };
 }
 
-export default useGetClass;
+export default useClassDataList;

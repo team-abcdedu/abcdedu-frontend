@@ -1,12 +1,12 @@
 import Head from '@/components/Head';
-import useGetClass from '@/hooks/class/useGetClass';
+import useClassDataList from '@/hooks/class/useClassDataList';
 import ClassOverview from '@/pages/Classes/components/ClassOverview';
 
 import Hero from './components/Hero';
 import MediaContents from './components/MediaContents';
 
 function Classes() {
-  const { classDataList } = useGetClass();
+  const { classDataList } = useClassDataList();
 
   return (
     <>
