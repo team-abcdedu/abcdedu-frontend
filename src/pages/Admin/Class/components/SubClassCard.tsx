@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 
 import useModal from '@/hooks/useModal';
 import FileUploadModal from '@/pages/Admin/Class/components/FileUploadModal';
 import { SubClassData } from '@/types/class';
 
 import FileList from './FileList';
+
+function InfoRow({ children, label }: PropsWithChildren<{ label: string }>) {
+  return (
+    <div className={'grid grid-cols-5 items-center'}>
+      <span className={'text-14 text-neutral-500'}>{label}</span>
+      {children}
+    </div>
+  );
+}
 
 interface SubClassCardProps {
   classTitle: string;
@@ -17,12 +26,8 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
   const { isVisible, toggleModal } = useModal();
 
   return (
-    <li
-      className={'w-full p-10 border-2 rounded-lg bg-white'}
-      key={subClass.subClassId}
-    >
-      <div className={'grid grid-cols-5 items-center'}>
-        <span className={'text-14 text-neutral-500'}>이름</span>
+    <li className={'w-full p-10 border-2 rounded-lg bg-white'}>
+      <InfoRow label={'이름'}>
         <p className={'col-span-2'}>
           {classTitle}-{subClass.orderNumber}
         </p>
@@ -33,17 +38,17 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
         >
           파일 업로드
         </button>
-      </div>
-      <div className={'grid grid-cols-5 items-center'}>
-        <span className={'text-14 text-neutral-500'}>주제</span>
+      </InfoRow>
+
+      <InfoRow label={'주제'}>
         <p className={'col-span-4'}>{subClass.title}</p>
-      </div>
-      <div className={'grid grid-cols-5 items-center'}>
-        <span className={'text-14 text-neutral-500'}>설명</span>
+      </InfoRow>
+
+      <InfoRow label={'설명'}>
         <p className={'col-span-4'}>{subClass.description}</p>
-      </div>
-      <div className={'grid grid-cols-5 items-center'}>
-        <span className={'text-14 text-neutral-500'}>파일</span>
+      </InfoRow>
+
+      <InfoRow label={'파일'}>
         <button
           type={'button'}
           className={
@@ -54,7 +59,7 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
           파일 목록 확인하기
         </button>
         {openFileList && <FileList subLectureId={subClass.subClassId} />}
-      </div>
+      </InfoRow>
 
       <FileUploadModal
         subClassId={subClass.subClassId}

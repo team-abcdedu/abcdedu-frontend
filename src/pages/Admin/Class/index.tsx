@@ -10,15 +10,14 @@ import ClassRegisterModal from './components/ClassRegisterModal';
 import SubClassRegisterModal from './components/SubClassRegisterModal';
 
 function Index() {
+  const buttonStyle = 'px-10 text-20 border-2 rounded-lg border-neutral-300';
+
   const [selectedClass, setSelectedClass] = useState<ClassData | null>(null);
   const { isVisible: isClassVisible, toggleModal: classToggle } = useModal();
   const { isVisible: isSubClassVisible, toggleModal: subClassToggle } =
     useModal();
-
   const { isVisible: isMessageVisible, toggleModal: messageToggle } =
     useModal();
-
-  const buttonStyle = 'px-10 text-20 border-2 rounded-lg border-neutral-300';
 
   const handleRowClick = (classData: ClassData) => {
     setSelectedClass(classData);
@@ -40,12 +39,6 @@ function Index() {
             <button className={`${buttonStyle}`} onClick={messageToggle}>
               서브 클래스 등록
             </button>
-            <MessageModal
-              isVisible={isMessageVisible}
-              onClose={messageToggle}
-              type={'error'}
-              message={'현재 사용할 수 없는 기능입니다.'}
-            />
 
             {selectedClass && (
               <button className={`${buttonStyle}`} onClick={handleBackClick}>
@@ -57,6 +50,13 @@ function Index() {
         {selectedClass && <ClassDetail classData={selectedClass} />}
         {!selectedClass && <ClassTable handleRowClick={handleRowClick} />}
       </div>
+
+      <MessageModal
+        isVisible={isMessageVisible}
+        onClose={messageToggle}
+        type={'error'}
+        message={'현재 사용할 수 없는 기능입니다.'}
+      />
       <ClassRegisterModal isVisible={isClassVisible} onClose={classToggle} />
       <SubClassRegisterModal
         isVisible={isSubClassVisible}

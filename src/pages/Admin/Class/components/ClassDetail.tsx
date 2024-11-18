@@ -28,11 +28,13 @@ function ClassDetail({ classData }: ClassDetailProps) {
         </div>
         <div
           className={
-            'w-full h-full grid grid-cols-12 items-center overflow-scroll'
+            'w-full h-full grid grid-cols-12 items-center overflow-hidden pt-5'
           }
         >
           <span className={'text-14 text-neutral-500'}>설명</span>
-          <span className={'col-span-11 h-full text-17 overflow-scroll'}>
+          <span
+            className={'col-span-11 h-auto max-h-50 text-17 overflow-y-auto'}
+          >
             {classData.description}
           </span>
         </div>
