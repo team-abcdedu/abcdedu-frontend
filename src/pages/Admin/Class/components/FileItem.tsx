@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
+import useSubClassFile from '@/hooks/class/useSubClassFile';
 import useFileUpdate from '@/pages/Admin/Class/hooks/useFileUpdate';
 import { FileInfo } from '@/types/class';
 
@@ -28,8 +28,8 @@ function FileItem({
 
   const [updateFileInputOpen, setUpdateFileInputOpen] = useState(false);
 
-  const { data: generalFile } = useGetSubClassFile({
-    assignmentFileId: fileId,
+  const { fileData } = useSubClassFile({
+    fileId,
   });
 
   const { register, fieldRules, errors, onSubmit, reset } = useFileUpdate({
@@ -42,7 +42,7 @@ function FileItem({
     if (updateFileInputOpen) reset();
   };
 
-  if (!generalFile) return null;
+  if (!fileData) return null;
 
   return (
     <div
@@ -52,7 +52,7 @@ function FileItem({
         <span>{fileType}</span>
       </div>
       <a
-        href={generalFile.filePresignedUrl}
+        href={fileData.filePresignedUrl}
         download
         className={'text-14 text-primary-300'}
       >

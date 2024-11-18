@@ -33,7 +33,7 @@ function SubClass() {
     examPaperFileInfo,
   } = useSubClassFileInfoList({});
 
-  const { hasAccessToTheoryFile, handleClick: handleTheoryClick } =
+  const { canAccessTheoryFile, handleClick: handleTheoryClick } =
     useSubClassFileHandler({ fileInfo: theoryFileInfo });
   const { handleClick: handleDocumentClick } = useSubClassFileHandler({
     fileInfo: documentFileInfo,
@@ -88,7 +88,7 @@ function SubClass() {
           'mt-0 mb-60 px-50 grid grid-cols-2 sm:flex-row-center gap-20 sm:gap-50'
         }
       >
-        {hasAccessToTheoryFile && theoryFileInfo && (
+        {canAccessTheoryFile && theoryFileInfo && (
           <SubClassFileItem label={'이론'} onClick={handleTheoryBtnClick}>
             <Book className={iconStyle} />
           </SubClassFileItem>
