@@ -1,39 +1,40 @@
 import { useState } from 'react';
 
 import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
-import FileItemDetails from '@/pages/Admin/Class/components/FileItemDetails';
 import useFileUpdate from '@/pages/Admin/Class/hooks/useFileUpdate';
+import { FileInfo } from '@/types/class';
 
 function FileItem({
   subLectureId,
-  assignmentType,
-  assignmentFileId,
+  fileInfo,
 }: {
   subLectureId: number;
-  assignmentType: string;
-  assignmentFileId: number;
+  fileInfo: FileInfo;
 }) {
+  const { assignmentType: fileType, assignmentFileId: fileId } = fileInfo;
+
   const fileTypeStyle = () => {
-    if (assignmentType === '이론') {
+    if (fileType === '이론') {
       return 'bg-green-50';
     }
-    if (assignmentType === '시험') {
+    if (fileType === '시험') {
       return 'bg-blue-50';
     }
-    if (assignmentType === '시험지') {
+    if (fileType === '시험지') {
       return 'bg-red-50';
     }
     return 'bg-yellow-50';
   };
+
   const [updateFileInputOpen, setUpdateFileInputOpen] = useState(false);
 
   const { data: generalFile } = useGetSubClassFile({
-    assignmentFileId,
+    assignmentFileId: fileId,
   });
 
   const { register, fieldRules, errors, onSubmit, reset } = useFileUpdate({
     subLectureId,
-    assignmentFileId,
+    assignmentFileId: fileId,
   });
 
   const handleOpenUpdateFileInput = () => {
@@ -47,10 +48,16 @@ function FileItem({
     <div
       className={`grid grid-cols-5 gap-10 p-5 rounded-md text-15 text-center ${fileTypeStyle()}`}
     >
-      <FileItemDetails
-        type={assignmentType}
-        url={generalFile.filePresignedUrl}
-      />
+      <div className={'flex items-center col-start-2'}>
+        <span>{fileType}</span>
+      </div>
+      <a
+        href={generalFile.filePresignedUrl}
+        download
+        className={'text-14 text-primary-300'}
+      >
+        다운로드
+      </a>
 
       <button
         type={'button'}
