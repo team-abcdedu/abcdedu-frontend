@@ -1,5 +1,5 @@
 import useClassDataList from '@/hooks/class/useClassDataList';
-import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
+import { classTableColumns } from '@/pages/Admin/constants';
 import { ClassData } from '@/types/class';
 
 interface ClassTableProps {
@@ -35,12 +35,12 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
         >
           <thead className={'bg-slate-300'}>
             <tr>
-              {tableColumns.class.map(column => (
+              {classTableColumns.columnList.map(column => (
                 <th
                   key={column}
                   className={`font-medium ${tableColStyle(column)}`}
                 >
-                  {tableColumnMap.class[column]}
+                  {classTableColumns.columnLabels[column]}
                 </th>
               ))}
             </tr>
@@ -76,7 +76,7 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
                   className={`cursor-pointer bg-slate-50 hover:bg-neutral-200`}
                   onClick={() => handleRowClick({ ...classData })}
                 >
-                  {tableColumns.class.map(column => (
+                  {classTableColumns.columnList.map(column => (
                     <td
                       key={column}
                       className={`text-center text-17 p-10 break-keep whitespace-pre-wrap ${tableColStyle(column)}`}
