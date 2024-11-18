@@ -63,6 +63,10 @@ body {
   .transition-2 {
     @apply transition duration-200;
   }
+
+  .scrollbar-gutter {
+    scrollbar-gutter: stable;
+  }
 }
 
 #modal {
