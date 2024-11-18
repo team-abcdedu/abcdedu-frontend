@@ -4,10 +4,7 @@ import userApi from '@/services/user';
 import { FieldRules } from '@/types';
 import { AuthFormProps } from '@/types/auth';
 
-interface IPasswordFormInput {
-  newPw: string;
-  confirmPw: string;
-}
+import { IPasswordFormInput } from '../types';
 
 export default function usePasswordForm({ onSuccess }: AuthFormProps) {
   const {

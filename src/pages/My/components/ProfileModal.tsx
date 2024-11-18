@@ -22,6 +22,7 @@ export default function ProfileModal({
     handleFileChange,
     imagePreview,
     resetImageFile,
+    reset,
     errors,
     fieldRules,
     register,
@@ -33,6 +34,11 @@ export default function ProfileModal({
     resetImageFile();
   };
 
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
   return (
     <Modal isVisible={isVisible}>
       <Modal.Content>
@@ -40,7 +46,8 @@ export default function ProfileModal({
           <button
             type='button'
             className='absolute top-12 right-12'
-            onClick={onClose}
+            onClick={handleClose}
+            aria-label='닫기'
           >
             <X size={24} />
           </button>
@@ -70,6 +77,7 @@ export default function ProfileModal({
                     />
                     <button
                       type='button'
+                      aria-label='프로필 이미지 삭제'
                       className='absolute top-4 right-4 rounded-full bg-white text-primary-400'
                       onClick={handleResetImage}
                     >
@@ -86,6 +94,7 @@ export default function ProfileModal({
                 type='file'
                 accept='image/*'
                 className='hidden'
+                data-testid='file-input'
               />
             </div>
             <div className={fieldStyle}>
@@ -114,10 +123,10 @@ export default function ProfileModal({
       </Modal.Content>
       <Modal.Actions direction='row'>
         <button
-          type='submit'
+          type='button'
           className='w-full h-45 px-24 text-15 
         text-primary-400 btn-white-pb font-semibold rounded-md'
-          onClick={onClose}
+          onClick={handleClose}
         >
           취소
         </button>
