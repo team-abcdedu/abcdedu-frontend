@@ -53,3 +53,10 @@ export interface TableColumnMap {
     createdAt: string;
   };
 }
+
+export interface AdminTableColumns<T> {
+  columnList: Array<keyof T>;
+  columnLabels: {
+    [key in keyof T]: string;
+  };
+}
