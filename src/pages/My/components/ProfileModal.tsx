@@ -77,6 +77,7 @@ export default function ProfileModal({
                     />
                     <button
                       type='button'
+                      aria-label='프로필 이미지 삭제'
                       className='absolute top-4 right-4 rounded-full bg-white text-primary-400'
                       onClick={handleResetImage}
                     >
@@ -93,6 +94,7 @@ export default function ProfileModal({
                 type='file'
                 accept='image/*'
                 className='hidden'
+                data-testid='file-input'
               />
             </div>
             <div className={fieldStyle}>
