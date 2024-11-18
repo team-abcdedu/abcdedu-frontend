@@ -41,11 +41,25 @@ const mockUseGetProfile = vi.mocked(useGetProfile);
 const mockUseModal = vi.mocked(useModal);
 const mockNavigate = vi.mocked(Navigate);
 
+const mockProfileResponse = (user?: UserInfo, isLoading = false) => {
+  mockUseGetProfile.mockReturnValueOnce({
+    user,
+    isLoading,
+  });
+};
+
+const mockModalReturnValue = (isVisible = false, toggleModal = vi.fn()) => {
+  mockUseModal.mockReturnValueOnce({
+    isVisible,
+    toggleModal,
+  });
+};
+
 describe('마이페이지', () => {
-  // useGetProfile, useModal 기본 return 값 설정
+  // useModal 기본 return 값 설정
   beforeEach(() => {
     mockUseGetProfile.mockReturnValue({
-      user: undefined,
+      user: mockUserInfo,
       isLoading: false,
     });
     mockUseModal.mockReturnValue({
@@ -55,11 +69,7 @@ describe('마이페이지', () => {
   });
 
   test('로딩중이라면 로딩 컴포넌트를 렌더링한다.', () => {
-    mockUseGetProfile.mockReturnValueOnce({
-      user: undefined,
-      isLoading: true,
-    });
-
+    mockProfileResponse(undefined, true);
     customRender(<MyPage />);
 
     const loadingElements = screen.getAllByRole('status');
@@ -67,21 +77,13 @@ describe('마이페이지', () => {
   });
 
   test('로딩중이 아니고 user가 없으면 홈으로 redirect한다.', () => {
-    mockUseGetProfile.mockReturnValueOnce({
-      user: undefined,
-      isLoading: false,
-    });
+    mockProfileResponse(undefined, false);
     customRender(<MyPage />);
 
     expect(mockNavigate).toHaveBeenCalledWith({ to: '/', replace: true }, {});
   });
 
   test('user가 존재하면 회원 정보를 렌더링한다.', async () => {
-    mockUseGetProfile.mockReturnValueOnce({
-      user: mockUserInfo,
-      isLoading: false,
-    });
-
     customRender(<MyPage />);
 
     // Skeleton이 없어야 한다.
@@ -103,23 +105,11 @@ describe('마이페이지', () => {
   });
 
   test('프로필 수정 버튼 클릭 시 toggleProfileModal이 실행되어야 한다.', () => {
-    mockUseGetProfile.mockReturnValueOnce({
-      user: mockUserInfo,
-      isLoading: false,
-    });
-
     const toggleProfileModal = vi.fn();
     const togglePwModal = vi.fn();
 
-    mockUseModal
-      .mockReturnValueOnce({
-        isVisible: false,
-        toggleModal: toggleProfileModal,
-      })
-      .mockReturnValueOnce({
-        isVisible: false,
-        toggleModal: togglePwModal,
-      });
+    mockModalReturnValue(false, toggleProfileModal);
+    mockModalReturnValue(false, togglePwModal);
 
     customRender(<MyPage />);
 
@@ -131,23 +121,11 @@ describe('마이페이지', () => {
   });
 
   test('비밀번호 변경 버튼 클릭 시 togglePwModal이 실행되어야 한다.', () => {
-    mockUseGetProfile.mockReturnValueOnce({
-      user: mockUserInfo,
-      isLoading: false,
-    });
-
     const toggleProfileModal = vi.fn();
     const togglePwModal = vi.fn();
 
-    mockUseModal
-      .mockReturnValueOnce({
-        isVisible: false,
-        toggleModal: toggleProfileModal,
-      })
-      .mockReturnValueOnce({
-        isVisible: false,
-        toggleModal: togglePwModal,
-      });
+    mockModalReturnValue(false, toggleProfileModal);
+    mockModalReturnValue(false, togglePwModal);
 
     customRender(<MyPage />);
 
