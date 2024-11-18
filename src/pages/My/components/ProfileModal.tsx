@@ -126,7 +126,7 @@ export default function ProfileModal({
           type='button'
           className='w-full h-45 px-24 text-15 
         text-primary-400 btn-white-pb font-semibold rounded-md'
-          onClick={onClose}
+          onClick={handleClose}
         >
           취소
         </button>
