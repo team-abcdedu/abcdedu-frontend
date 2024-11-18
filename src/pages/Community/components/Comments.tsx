@@ -11,26 +11,17 @@ import CommentForm from './CommentForm';
 
 interface CommentsProps {
   postId: number;
-  hasComments: boolean;
   commentAllow: boolean;
 }
 
-export default function Comments({
-  postId,
-  hasComments,
-  commentAllow,
-}: CommentsProps) {
+export default function Comments({ postId, commentAllow }: CommentsProps) {
   const user = useBoundStore(state => state.user);
   const scrollTargetRef = useRef<HTMLDivElement>(null);
 
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('comments_page')) || 1;
 
-  const { list, totalElements, isLoading } = useGetComments({
-    postId,
-    page,
-    enabled: hasComments,
-  });
+  const { list, totalElements, isLoading } = useGetComments({ postId, page });
 
   const isAdminRole = user?.role === '관리자';
 
