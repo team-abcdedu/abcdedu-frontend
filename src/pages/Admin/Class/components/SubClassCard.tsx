@@ -62,7 +62,7 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
       </InfoRow>
 
       <FileUploadModal
-        subClassId={subClass.subClassId}
+        subLectureId={subClass.subClassId}
         isVisible={isVisible}
         onClose={toggleModal}
       />
