@@ -5,6 +5,7 @@ import Layout from '@/components/Layout';
 import PrivateRoute from '@/components/PrivateRoute';
 
 const MyPage = lazy(() => import('@/pages/My'));
+const Leave = lazy(() => import('@/pages/My/Leave'));
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -18,6 +19,10 @@ export const privateRoutes: RouteObject[] = [
       {
         path: '/mypage',
         element: <MyPage />,
+      },
+      {
+        path: '/mypage/leave',
+        element: <Leave />,
       },
     ],
   },
