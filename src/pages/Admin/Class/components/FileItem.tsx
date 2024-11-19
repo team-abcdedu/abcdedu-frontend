@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 
+import Loader from '@/components/Loader';
 import useSubClassFile from '@/hooks/class/useSubClassFile';
-import useFileUpdate from '@/pages/Admin/Class/hooks/useFileUpdate';
+import useFileUpdateForm, {
+  IFileUpdateForm,
+} from '@/pages/Admin/Class/hooks/useFileUpdateForm';
+import useFileUpdateMutation from '@/pages/Admin/Class/hooks/useFileUpdateMutation';
 import { FileInfo } from '@/types/class';
 
 function FileItem({
@@ -32,14 +37,31 @@ function FileItem({
     fileId,
   });
 
-  const { register, fieldRules, errors, onSubmit, reset } = useFileUpdate({
-    subLectureId,
-    assignmentFileId: fileId,
-  });
+  const { register, errors, handleSubmit, fieldRules, reset } =
+    useFileUpdateForm();
+  const { mutation } = useFileUpdateMutation({ subLectureId, fileId });
 
   const handleOpenUpdateFileInput = () => {
     setUpdateFileInputOpen(prev => !prev);
     if (updateFileInputOpen) reset();
+  };
+
+  const onSubmit: SubmitHandler<IFileUpdateForm> = data => {
+    const result = window.confirm('파일을 수정하시겠습니까?');
+    if (result) {
+      mutation.mutate(
+        { fileId, file: data.file[0] },
+        {
+          onSuccess: () => {
+            alert('파일이 수정됐습니다.');
+            reset();
+          },
+          onError: error => {
+            alert(error.message || '파일 수정에 실패했습니다.');
+          },
+        },
+      );
+    }
   };
 
   if (!fileData) return null;
@@ -48,6 +70,7 @@ function FileItem({
     <div
       className={`grid grid-cols-5 gap-10 p-5 rounded-md text-15 text-center ${fileTypeStyle()}`}
     >
+      {mutation.isPending && <Loader />}
       <div className={'flex items-center col-start-2'}>
         <span>{fileType}</span>
       </div>
@@ -70,7 +93,7 @@ function FileItem({
       {updateFileInputOpen && (
         <form
           className={'row-start-2 col-span-4 col-start-2 flex gap-10 text-13'}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className={'flex flex-col'}>
             <input
@@ -79,6 +102,7 @@ function FileItem({
               type={'file'}
               className={'w-full bg-white'}
               accept={'.zip,.rar,.7z,.tar,.gz,.pdf,.hwp,.doc,.docx'}
+              disabled={mutation.isPending}
             />
             {errors.file && (
               <span className={'text-10 text-red-700'}>
@@ -90,6 +114,7 @@ function FileItem({
             className={
               'h-fit px-10 py-2 text-red-500 border-1 rounded-md border-red-300'
             }
+            disabled={mutation.isPending}
           >
             파일 수정
           </button>
