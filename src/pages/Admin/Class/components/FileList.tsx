@@ -21,13 +21,18 @@ function FileList({ subLectureId }: FileListProps) {
   if (subClassFileInfoList && subClassFileInfoList.length > 0) {
     return (
       <div className={'row-start-5 col-span-5 flex flex-col pt-5 gap-5'}>
-        {subClassFileInfoList.map(fileInfo => (
-          <FileItem
-            key={fileInfo.assignmentFileId}
-            subLectureId={subLectureId}
-            fileInfo={fileInfo}
-          />
-        ))}
+        {['이론', '자료', '시험', '시험지'].map(type => {
+          const findFileInfo = subClassFileInfoList.find(
+            fileInfo => fileInfo.assignmentType === type,
+          );
+          return findFileInfo ? (
+            <FileItem
+              key={findFileInfo.assignmentFileId}
+              subLectureId={subLectureId}
+              fileInfo={findFileInfo}
+            />
+          ) : null;
+        })}
       </div>
     );
   }
