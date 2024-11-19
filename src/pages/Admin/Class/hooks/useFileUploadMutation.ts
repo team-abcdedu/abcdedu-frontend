@@ -10,7 +10,7 @@ interface UseFileUploadProps {
 function useFileUploadMutation({ subLectureId }: UseFileUploadProps) {
   const mutation = useMutation({
     mutationFn: (data: { type: string; file: File }) =>
-      AdminClassApi.uploadGeneralFile({ ...data, subLectureId }),
+      AdminClassApi.uploadSubClassFile({ ...data, subLectureId }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['class', 'sub-class-file-list', subLectureId],
