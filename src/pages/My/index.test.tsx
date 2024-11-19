@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { Navigate } from 'react-router-dom';
+import { MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import customRender from '@/__test__/customRender';
 import useModal from '@/hooks/useModal';
@@ -41,6 +41,16 @@ const mockUseGetProfile = vi.mocked(useGetProfile);
 const mockUseModal = vi.mocked(useModal);
 const mockNavigate = vi.mocked(Navigate);
 
+const renderMyPage = () => {
+  customRender(
+    <MemoryRouter initialEntries={['/mypage']}>
+      <Routes>
+        <Route path='/mypage' element={<MyPage />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+};
+
 const mockProfileResponse = (user?: UserInfo, isLoading = false) => {
   mockUseGetProfile.mockReturnValueOnce({
     user,
@@ -70,7 +80,7 @@ describe('마이페이지', () => {
 
   test('로딩중이라면 로딩 컴포넌트를 렌더링한다.', () => {
     mockProfileResponse(undefined, true);
-    customRender(<MyPage />);
+    renderMyPage();
 
     const loadingElements = screen.getAllByRole('status');
     expect(loadingElements.length).toBeGreaterThan(0);
@@ -78,13 +88,13 @@ describe('마이페이지', () => {
 
   test('로딩중이 아니고 user가 없으면 홈으로 redirect한다.', () => {
     mockProfileResponse(undefined, false);
-    customRender(<MyPage />);
+    renderMyPage();
 
     expect(mockNavigate).toHaveBeenCalledWith({ to: '/', replace: true }, {});
   });
 
   test('user가 존재하면 회원 정보를 렌더링한다.', async () => {
-    customRender(<MyPage />);
+    renderMyPage();
 
     // Skeleton이 없어야 한다.
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
@@ -111,7 +121,7 @@ describe('마이페이지', () => {
     mockModalReturnValue(false, toggleProfileModal);
     mockModalReturnValue(false, togglePwModal);
 
-    customRender(<MyPage />);
+    renderMyPage();
 
     const editButton = screen.getByText('정보 수정하기');
     fireEvent.click(editButton);
@@ -127,7 +137,7 @@ describe('마이페이지', () => {
     mockModalReturnValue(false, toggleProfileModal);
     mockModalReturnValue(false, togglePwModal);
 
-    customRender(<MyPage />);
+    renderMyPage();
 
     const editButton = screen.getByText('비밀번호 변경');
     fireEvent.click(editButton);
