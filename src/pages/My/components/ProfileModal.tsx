@@ -132,7 +132,7 @@ export default function ProfileModal({
         </button>
         <button
           type='submit'
-          className='w-full h-45 px-24 bg-primary-300 text-15 
+          className='w-full h-45 px-24 bg-primary-400 text-15 
         text-white font-semibold rounded-md disabled:bg-primary-400/15'
           onClick={onSubmit}
           disabled={isSubmitButtonDisabled}

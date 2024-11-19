@@ -28,6 +28,10 @@ class AuthApi {
   static async logout() {
     return del('/auth/logout');
   }
+
+  static async deleteAccount() {
+    return del('/members');
+  }
 }
 
 export default AuthApi;

@@ -1,4 +1,5 @@
-import { Navigate } from 'react-router-dom';
+import { CaretRight } from '@phosphor-icons/react';
+import { Link, Navigate } from 'react-router-dom';
 
 import Head from '@/components/Head';
 import useModal from '@/hooks/useModal';
@@ -47,6 +48,10 @@ export default function MyPage() {
           비밀번호 변경
         </button>
       </div>
+      <Link to='leave' className='flex-row-center w-fit mt-12 text-neutral-500'>
+        <span>회원탈퇴</span>
+        <CaretRight size={14} />
+      </Link>
     </div>
   );
 }
