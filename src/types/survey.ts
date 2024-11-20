@@ -1,7 +1,7 @@
 export interface SurveySummary {
   id: number;
   title: string;
-  createAt: string;
+  createdAt: string;
   writerName: string;
 }
 
@@ -20,7 +20,7 @@ export interface SurveyQuestion {
   choices?: SurveyQuestionChoice[];
 }
 
-export type SurveyInfo = Omit<SurveySummary, 'id' | 'createAt'> & {
+export type SurveyInfo = Omit<SurveySummary, 'id' | 'createdAt'> & {
   description: string;
   questionGetResponses: SurveyQuestion[];
 };

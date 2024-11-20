@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
 import useGetHomeworkList from '@/hooks/homework/useGetHomeworkList';
 
-import { tableColumnMap, tableColumns } from '../../constants';
+import { homeworkTableColumns } from '../../constants';
 
 function HomeworkList() {
   const [searchParams] = useSearchParams();
@@ -26,9 +26,9 @@ function HomeworkList() {
       >
         <thead className={'bg-slate-300'}>
           <tr className={''}>
-            {tableColumns.homework.map(column => (
+            {homeworkTableColumns.columnList.map(column => (
               <th key={column} className={'font-medium'}>
-                {tableColumnMap.homework[column]}
+                {homeworkTableColumns.columnLabels[column]}
               </th>
             ))}
           </tr>
@@ -40,7 +40,7 @@ function HomeworkList() {
                 key={row.id}
                 className={'cursor-pointer hover:bg-neutral-200'}
               >
-                {tableColumns.homework.map(column => (
+                {homeworkTableColumns.columnList.map(column => (
                   <td key={column} className={'text-center'}>
                     {row[column]}
                   </td>

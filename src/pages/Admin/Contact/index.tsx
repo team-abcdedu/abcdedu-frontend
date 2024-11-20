@@ -5,7 +5,7 @@ import Pagination from '@/components/Pagination';
 import useModal from '@/hooks/useModal';
 import { ContactType } from '@/types/contact';
 
-import { contactTypeLabel, tableColumnMap, tableColumns } from '../constants';
+import { contactTableColumns, contactTypeLabel } from '../constants';
 
 import ContactDetailModal from './components/ContactDetailModal';
 import useGetContactList from './hooks/useGetContactList';
@@ -43,12 +43,12 @@ export default function ContactList() {
       <table className='w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'>
         <thead className={'bg-slate-300 text-center'}>
           <tr>
-            {tableColumns.contact.map(column => (
+            {contactTableColumns.columnList.map(column => (
               <th
                 key={column}
                 className={`font-medium ${tableColStyle(column)}`}
               >
-                {tableColumnMap.contact[column]}
+                {contactTableColumns.columnLabels[column]}
               </th>
             ))}
           </tr>
@@ -67,7 +67,7 @@ export default function ContactList() {
               className='text-center cursor-pointer hover:bg-gray-600/5'
               onClick={() => handleItemClick(item.contactId)}
             >
-              {tableColumns.contact.map(column => (
+              {contactTableColumns.columnList.map(column => (
                 <td key={column} className='truncate'>
                   {formatValue(column, item[column])}
                 </td>

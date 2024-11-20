@@ -1,7 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-
+import useSubClassFile from '@/hooks/class/useSubClassFile';
 import { ApiError } from '@/libs/errors';
-import ClassApi from '@/services/class';
 import useBoundStore from '@/stores';
 import { FileActionResult, FileInfo } from '@/types/class';
 import { getFileExtension } from '@/utils/getFileExtension';
@@ -15,28 +13,21 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
   const user = useBoundStore(state => state.user);
   const { assignmentType: fileType, assignmentFileId: fileId } = fileInfo || {};
 
-  const {
-    data: fileData,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ['class', 'sub-class-general-file', fileId],
-    queryFn: () => ClassApi.getSubClassFile(fileId || null),
-    enabled: !!fileId && (user?.role === '관리자' || user?.role === '학생'),
-  });
+  const { fileData, isLoading, isError, error } = useSubClassFile({ fileId });
 
   const isPdfFile =
     !!fileData &&
     getFileExtension(getFileName(fileData.filePresignedUrl)) === 'pdf';
-  const hasAccessToTheoryFile = user?.role === '관리자';
+
+  const canAccessFile = user?.role === '관리자' || user?.role === '학생';
+  const canAccessTheoryFile = user?.role === '관리자';
 
   const handleClick: () => FileActionResult = () => {
-    if (user?.role !== '관리자' && user?.role !== '학생') {
+    if (!canAccessFile) {
       return { status: 'error', message: '학생 이상만 이용 가능합니다.' };
     }
 
-    if (fileType === '이론' && user?.role !== '관리자') {
+    if (fileType === '이론' && !canAccessTheoryFile) {
       return { status: 'error', message: '관리자만 이용 가능합니다.' };
     }
 
@@ -61,7 +52,7 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
 
     const isNewWindowOpen =
       isPdfFile &&
-      ((fileType === '이론' && hasAccessToTheoryFile) || fileType === '시험');
+      ((fileType === '이론' && canAccessTheoryFile) || fileType === '시험');
 
     return {
       status: 'success',
@@ -71,7 +62,7 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
     };
   };
 
-  return { hasAccessToTheoryFile, handleClick };
+  return { canAccessTheoryFile, handleClick };
 }
 
 export default useSubClassFileHandler;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
-import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
+import { userTableColumns } from '@/pages/Admin/constants';
 import RoleUpdater from '@/pages/Admin/User/components/RoleUpdater';
 import SearchBar from '@/pages/Admin/User/components/SearchBar';
 import useCheckbox from '@/pages/Admin/User/hooks/useCheckbox';
@@ -94,7 +94,7 @@ function UserList() {
         >
           <thead className={'bg-slate-300'}>
             <tr className={''}>
-              {tableColumns.user.map(column => (
+              {userTableColumns.columnList.map(column => (
                 <th
                   key={column}
                   className={`font-medium ${tableColStyle(column)}`}
@@ -106,7 +106,7 @@ function UserList() {
                       onChange={checkAllBoxes}
                     />
                   ) : (
-                    tableColumnMap.user[column]
+                    userTableColumns.columnLabels[column]
                   )}
                 </th>
               ))}
@@ -130,7 +130,7 @@ function UserList() {
                     key={row.name + row.email}
                     className={'cursor-pointer hover:bg-neutral-200'}
                   >
-                    {tableColumns.user.map(column => (
+                    {userTableColumns.columnList.map(column => (
                       <td
                         key={column}
                         className={'text-center px-10 overflow-hidden'}

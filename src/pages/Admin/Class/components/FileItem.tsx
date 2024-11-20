@@ -1,7 +1,6 @@
-import { useState } from 'react';
-
-import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
-import useFileUpdate from '@/pages/Admin/Class/hooks/useFileUpdate';
+import useSubClassFile from '@/hooks/class/useSubClassFile';
+import useModal from '@/hooks/useModal';
+import FileUpdateModal from '@/pages/Admin/Class/components/FileUpdateModal';
 import { FileInfo } from '@/types/class';
 
 function FileItem({
@@ -26,23 +25,13 @@ function FileItem({
     return 'bg-yellow-50';
   };
 
-  const [updateFileInputOpen, setUpdateFileInputOpen] = useState(false);
-
-  const { data: generalFile } = useGetSubClassFile({
-    assignmentFileId: fileId,
+  const { fileData } = useSubClassFile({
+    fileId,
   });
 
-  const { register, fieldRules, errors, onSubmit, reset } = useFileUpdate({
-    subLectureId,
-    assignmentFileId: fileId,
-  });
+  const { isVisible, toggleModal } = useModal();
 
-  const handleOpenUpdateFileInput = () => {
-    setUpdateFileInputOpen(prev => !prev);
-    if (updateFileInputOpen) reset();
-  };
-
-  if (!generalFile) return null;
+  if (!fileData) return null;
 
   return (
     <div
@@ -52,7 +41,7 @@ function FileItem({
         <span>{fileType}</span>
       </div>
       <a
-        href={generalFile.filePresignedUrl}
+        href={fileData.filePresignedUrl}
         download
         className={'text-14 text-primary-300'}
       >
@@ -62,39 +51,18 @@ function FileItem({
       <button
         type={'button'}
         className={`text-14 text-center font-normal text-red-500`}
-        onClick={handleOpenUpdateFileInput}
+        onClick={toggleModal}
       >
-        {updateFileInputOpen ? '닫기' : '수정'}
+        파일 수정
       </button>
 
-      {updateFileInputOpen && (
-        <form
-          className={'row-start-2 col-span-4 col-start-2 flex gap-10 text-13'}
-          onSubmit={onSubmit}
-        >
-          <div className={'flex flex-col'}>
-            <input
-              {...register('file', fieldRules.file)}
-              id={'file'}
-              type={'file'}
-              className={'w-full bg-white'}
-              accept={'.zip,.rar,.7z,.tar,.gz,.pdf,.hwp,.doc,.docx'}
-            />
-            {errors.file && (
-              <span className={'text-10 text-red-700'}>
-                {errors.file.message}
-              </span>
-            )}
-          </div>
-          <button
-            className={
-              'h-fit px-10 py-2 text-red-500 border-1 rounded-md border-red-300'
-            }
-          >
-            파일 수정
-          </button>
-        </form>
-      )}
+      <FileUpdateModal
+        subLectureId={subLectureId}
+        fileType={fileType}
+        fileId={fileId}
+        isVisible={isVisible}
+        onClose={toggleModal}
+      />
     </div>
   );
 }
