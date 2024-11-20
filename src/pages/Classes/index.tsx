@@ -1,10 +1,13 @@
 import Head from '@/components/Head';
+import useClassDataList from '@/hooks/class/useClassDataList';
 
-import ClassList from './components/ClassList';
+import ClassOverview from './components/ClassOverview';
 import Hero from './components/Hero';
 import MediaContents from './components/MediaContents';
 
 function Classes() {
+  const { classDataList } = useClassDataList();
+
   return (
     <>
       <Head
@@ -13,7 +16,14 @@ function Classes() {
       />
       <Hero />
       <MediaContents />
-      <ClassList />
+      {classDataList &&
+        classDataList.map((classData, index) => (
+          <ClassOverview
+            key={classData.title}
+            index={index}
+            classData={classData}
+          />
+        ))}
     </>
   );
 }

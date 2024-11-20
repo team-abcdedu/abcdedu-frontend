@@ -1,5 +1,5 @@
-import useGetClass from '@/hooks/class/useGetClass';
-import { tableColumnMap, tableColumns } from '@/pages/Admin/constants';
+import useClassDataList from '@/hooks/class/useClassDataList';
+import { classTableColumns } from '@/pages/Admin/constants';
 import { ClassData } from '@/types/class';
 
 interface ClassTableProps {
@@ -7,67 +7,90 @@ interface ClassTableProps {
 }
 
 function ClassTable({ handleRowClick }: ClassTableProps) {
-  const { data, isLoading, isError } = useGetClass();
+  const { classDataList, isLoading, isError } = useClassDataList();
 
   const fieldValue = (column: keyof ClassData, row: ClassData) => {
     if (column === 'subClasses') {
       const subClasses = row[column];
       const subClassesTitle = subClasses.map(subClass => subClass.title);
-      return subClassesTitle.join(', ');
+      return subClassesTitle.join('\n');
     }
     return row[column];
   };
 
-  return (
-    <table
-      className={
-        'w-full table-fixed border-separate rounded-2xl overflow-hidden shadow-sm'
-      }
-    >
-      <thead className={'bg-slate-300'}>
-        <tr className={''}>
-          {tableColumns.class.map(column => (
-            <th key={column} className={'font-medium'}>
-              {tableColumnMap.class[column]}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {(isError || isLoading) && (
-          <tr className={'text-center'}>
-            <td colSpan={4}>
-              {isError
-                ? '데이터를 불러오는 중 문제가 발생했습니다.'
-                : '데이터를 불러오는 중입니다.'}
-            </td>
-          </tr>
-        )}
+  const tableColStyle = (col: string) => {
+    if (col === 'title') return ' w-[10%]';
+    if (col === 'subTitle') return ' w-[15%]';
+    if (col === 'description') return ' w-[45%]';
+    if (col === 'subClasses') return ' w-[30%]';
+  };
 
-        {data && data.length > 0 ? (
-          data.map(row => (
-            <tr
-              key={row.title}
-              className={'cursor-pointer hover:bg-neutral-200'}
-              onClick={() => handleRowClick({ ...row })}
-            >
-              {tableColumns.class.map(column => (
-                <td
+  return (
+    <div className={'w-full h-full flex-col-center gap-3 pb-5 overflow-hidden'}>
+      <div className={'w-full h-[8%] overflow-hidden scrollbar-gutter'}>
+        <table
+          className={
+            'w-full h-full border-separate border-spacing-x-2 rounded-t-2xl shadow-sm overflow-hidden'
+          }
+        >
+          <thead className={'bg-slate-300'}>
+            <tr>
+              {classTableColumns.columnList.map(column => (
+                <th
                   key={column}
-                  className={'text-center px-10 overflow-hidden'}
+                  className={`font-medium ${tableColStyle(column)}`}
                 >
-                  <div className={'truncate'}>{fieldValue(column, row)}</div>
-                </td>
+                  {classTableColumns.columnLabels[column]}
+                </th>
               ))}
             </tr>
-          ))
-        ) : (
-          <tr className={'text-center'}>
-            <td colSpan={4}>데이터가 없습니다.</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+          </thead>
+        </table>
+      </div>
+
+      <div
+        className={
+          'w-full h-full overflow-y-scroll scrollbar-gutter rounded-b-2xl shadow-sm'
+        }
+      >
+        <table
+          className={
+            'w-full h-full border-separate border-spacing-x-2 border-spacing-y-5'
+          }
+        >
+          <tbody className={'w-full h-full table-fixed'}>
+            {(isError || isLoading) && (
+              <tr className={'text-center'}>
+                <td colSpan={4}>
+                  {isError
+                    ? '데이터를 불러오는 중 문제가 발생했습니다.'
+                    : '데이터를 불러오는 중입니다.'}
+                </td>
+              </tr>
+            )}
+
+            {classDataList &&
+              classDataList.length > 0 &&
+              classDataList.map(classData => (
+                <tr
+                  key={classData.title}
+                  className={`cursor-pointer bg-slate-50 hover:bg-neutral-200`}
+                  onClick={() => handleRowClick({ ...classData })}
+                >
+                  {classTableColumns.columnList.map(column => (
+                    <td
+                      key={column}
+                      className={`text-center text-17 p-10 break-keep whitespace-pre-wrap ${tableColStyle(column)}`}
+                    >
+                      {fieldValue(column, classData)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 

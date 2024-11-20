@@ -1,4 +1,4 @@
-import useGetSubClassFileList from '@/hooks/class/useGetSubClassFileList';
+import useSubClassFileInfoList from '@/hooks/class/useSubClassFileInfoList';
 import FileItem from '@/pages/Admin/Class/components/FileItem';
 
 interface FileListProps {
@@ -6,7 +6,9 @@ interface FileListProps {
 }
 
 function FileList({ subLectureId }: FileListProps) {
-  const { data, isLoading, isError } = useGetSubClassFileList({ subLectureId });
+  const { subClassFileInfoList, isLoading, isError } = useSubClassFileInfoList({
+    subLectureId,
+  });
 
   if (isError || isLoading) {
     return (
@@ -16,17 +18,21 @@ function FileList({ subLectureId }: FileListProps) {
     );
   }
 
-  if (data && data.length > 0) {
+  if (subClassFileInfoList && subClassFileInfoList.length > 0) {
     return (
       <div className={'row-start-5 col-span-5 flex flex-col pt-5 gap-5'}>
-        {data.map(file => (
-          <FileItem
-            key={file.assignmentFileId}
-            subLectureId={subLectureId}
-            assignmentType={file.assignmentType}
-            assignmentFileId={file.assignmentFileId}
-          />
-        ))}
+        {['이론', '자료', '시험', '시험지'].map(type => {
+          const findFileInfo = subClassFileInfoList.find(
+            fileInfo => fileInfo.assignmentType === type,
+          );
+          return findFileInfo ? (
+            <FileItem
+              key={findFileInfo.assignmentFileId}
+              subLectureId={subLectureId}
+              fileInfo={findFileInfo}
+            />
+          ) : null;
+        })}
       </div>
     );
   }

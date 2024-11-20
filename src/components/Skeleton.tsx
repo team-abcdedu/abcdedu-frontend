@@ -19,5 +19,11 @@ export default function Skeleton({
     borderRadius: `${radius}px`,
   };
 
-  return <div className='animate-skeleton' style={{ ...size, ...style }} />;
+  return (
+    <div
+      className='animate-skeleton'
+      role='status'
+      style={{ ...size, ...style }}
+    />
+  );
 }

@@ -1,73 +1,51 @@
-import { useCallback } from 'react';
-
-import useGetSubClassFile from '@/hooks/class/useGetSubClassFile';
-import useGetPdfUrl from '@/pages/Classes/hooks/useGetPdfUrl';
-import { getFileName } from '@/utils/getFileName';
+import useSubClassFileHandler from '@/hooks/class/useSubClassFileHandler';
+import { FileActionResult, FileInfo } from '@/types/class';
 
 interface ExamContentProps {
-  examFileId: number | undefined;
-  examPaperFileId: number | undefined;
+  examFileInfo: FileInfo | undefined;
+  examPaperFileInfo: FileInfo | undefined;
+  handleButtonClick: (action: () => FileActionResult) => Promise<void>;
 }
 
-function ExamContent({ examFileId, examPaperFileId }: ExamContentProps) {
+function ExamContent({
+  examFileInfo,
+  examPaperFileInfo,
+  handleButtonClick,
+}: ExamContentProps) {
   const buttonStyle =
     'p-5 md:p-10 text-18 md:text-20 border-2 border-primary-300 rounded-lg hover:bg-primary-300 hover:text-white transition ease-in-out delay-50';
 
-  const { data: examFile } = useGetSubClassFile({
-    assignmentFileId: examFileId || null,
+  const { handleClick: handleExamClick } = useSubClassFileHandler({
+    fileInfo: examFileInfo,
+  });
+  const { handleClick: handleExamPaperClick } = useSubClassFileHandler({
+    fileInfo: examPaperFileInfo,
   });
 
-  const { data: examPaperFile } = useGetSubClassFile({
-    assignmentFileId: examPaperFileId || null,
-  });
-
-  const getFileExtension = useCallback((fileName: string | undefined) => {
-    return fileName?.split('.').pop();
-  }, []);
-
-  const { pdfUrl } = useGetPdfUrl({
-    s3Url: examFile?.filePresignedUrl,
-    enabled:
-      examFile &&
-      getFileExtension(getFileName(examFile?.filePresignedUrl)) === 'pdf',
-  });
-
-  const handleFileOpen = () => {
-    const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
-    if (newWindow) {
-      newWindow.opener = null;
-    }
-  };
-
-  if (!examFile) {
-    return null;
-  }
+  const handleExamBtnClick = () => handleButtonClick(handleExamClick);
+  const handleExamPaperBtnClick = () => handleButtonClick(handleExamPaperClick);
 
   return (
     <div className={'w-full pb-50 flex-col-center gap-30'}>
       <div className={'w-full flex-col-center sm:flex-row-center gap-30'}>
-        {getFileExtension(getFileName(examFile?.filePresignedUrl)) === 'pdf' ? (
+        {examFileInfo && (
           <button
             type={'button'}
             className={buttonStyle}
-            onClick={handleFileOpen}
+            onClick={handleExamBtnClick}
           >
             문제 확인하기
           </button>
-        ) : (
-          <a href={examFile?.filePresignedUrl} download className={buttonStyle}>
-            문제 확인하기
-          </a>
         )}
 
-        {examPaperFile && (
-          <a
-            href={examPaperFile.filePresignedUrl}
-            download
+        {examPaperFileInfo && (
+          <button
+            type={'button'}
             className={buttonStyle}
+            onClick={handleExamPaperBtnClick}
           >
             답안 제출 파일 다운로드
-          </a>
+          </button>
         )}
       </div>
     </div>

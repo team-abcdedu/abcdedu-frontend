@@ -19,7 +19,7 @@ class AdminClassApi {
     return post(`/lectures/${classId}`, { ...rest });
   }
 
-  static async uploadGeneralFile({
+  static async uploadSubClassFile({
     subLectureId,
     type,
     file,
@@ -42,52 +42,16 @@ class AdminClassApi {
     );
   }
 
-  static async updateGeneralFile({
-    assignmentFileId,
+  static async updateSubClassFile({
+    fileId,
     file,
   }: {
-    assignmentFileId: number;
+    fileId: number;
     file: File;
   }) {
     const formData = new FormData();
     formData.append('file', file);
-    return patch(`/lectures/file/${assignmentFileId}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-  }
-
-  static async uploadStudentFile({
-    assignmentFileId,
-    file,
-  }: {
-    assignmentFileId: number;
-    file: File;
-  }) {
-    const formData = new FormData();
-    formData.append('file', file);
-    return post(
-      `/lectures/assignment-file/${assignmentFileId}/answer`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
-    );
-  }
-
-  static async updateStudentFile({
-    assignmentAnswerFileId,
-    file,
-  }: {
-    assignmentAnswerFileId: number;
-    file: File;
-  }) {
-    const formData = new FormData();
-    formData.append('file', file);
-    return patch(`/lectures/answer-file/${assignmentAnswerFileId}`, formData, {
+    return patch(`/lectures/file/${fileId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -59,6 +59,9 @@ export default defineConfig(({ mode }) => {
       globals: true,
       environment: 'jsdom',
       setupFiles: './vitest.setup.ts',
+      coverage: {
+        reporter: ['text', 'html'],
+      },
     },
   };
 });

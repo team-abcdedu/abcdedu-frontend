@@ -8,3 +8,8 @@ export interface EditModalProps {
 export interface ProfileEditModalProps extends EditModalProps {
   user: UserInfo;
 }
+
+export interface IPasswordFormInput {
+  newPw: string;
+  confirmPw: string;
+}
