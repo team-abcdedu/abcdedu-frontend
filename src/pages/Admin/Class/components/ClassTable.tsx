@@ -69,7 +69,8 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
               </tr>
             )}
 
-            {classDataList && classDataList.length > 0 ? (
+            {classDataList &&
+              classDataList.length > 0 &&
               classDataList.map(classData => (
                 <tr
                   key={classData.title}
@@ -85,12 +86,7 @@ function ClassTable({ handleRowClick }: ClassTableProps) {
                     </td>
                   ))}
                 </tr>
-              ))
-            ) : (
-              <tr className={'text-center'}>
-                <td colSpan={4}>데이터가 없습니다.</td>
-              </tr>
-            )}
+              ))}
           </tbody>
         </table>
       </div>
