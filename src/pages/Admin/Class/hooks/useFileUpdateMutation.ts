@@ -4,12 +4,12 @@ import { queryClient } from '@/libs/react-query';
 import AdminClassApi from '@/services/admin/class';
 
 interface UseFileUpdateMutationProps {
-  subLectureId: number;
+  subClassId: number;
   fileId: number;
 }
 
 function useFileUpdateMutation({
-  subLectureId,
+  subClassId,
   fileId,
 }: UseFileUpdateMutationProps) {
   const mutation = useMutation({
@@ -20,7 +20,7 @@ function useFileUpdateMutation({
         queryKey: ['class', 'sub-class-general-file', fileId],
       });
       queryClient.invalidateQueries({
-        queryKey: ['class', 'sub-class-file-list', subLectureId],
+        queryKey: ['class', 'sub-class-file-list', subClassId],
       });
     },
   });

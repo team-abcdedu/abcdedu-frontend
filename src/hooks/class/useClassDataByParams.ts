@@ -9,18 +9,18 @@ interface UseClassDataByParamsProps {
 
 // 현재 경로에 해당하는 클래스, 서브클래스 데이터
 function useClassDataByParams({ classDataList }: UseClassDataByParamsProps) {
-  const { classId, subClassId } = useParams();
+  const { classId: classIdParam, subClassId: subClassIdParam } = useParams();
 
   const currentPageClassData = useMemo(() => {
-    return classDataList?.find(d => d.title === classId?.toUpperCase());
-  }, [classDataList, classId]);
+    return classDataList?.find(d => d.title === classIdParam?.toUpperCase());
+  }, [classDataList, classIdParam]);
   const currentPageSubClassData = useMemo(() => {
     return currentPageClassData?.subClasses.find(
-      d => d.orderNumber === Number(subClassId),
+      d => d.orderNumber === Number(subClassIdParam),
     );
-  }, [currentPageClassData, subClassId]);
+  }, [currentPageClassData, subClassIdParam]);
 
-  const isSubClassPage = !!classId && !!subClassId;
+  const isSubClassPage = !!classIdParam && !!subClassIdParam;
 
   return { currentPageClassData, currentPageSubClassData, isSubClassPage };
 }

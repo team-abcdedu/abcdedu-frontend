@@ -8,22 +8,20 @@ import useBoundStore from '@/stores';
 import { FileInfo } from '@/types/class';
 
 interface UseSubClassFileInfoListProps {
-  subLectureId?: number;
+  subClassId?: number;
 }
 
-function useSubClassFileInfoList({
-  subLectureId,
-}: UseSubClassFileInfoListProps) {
-  const { classId, subClassId } = useParams();
+function useSubClassFileInfoList({ subClassId }: UseSubClassFileInfoListProps) {
+  const { classId: classIdParam, subClassId: subClassIdParam } = useParams();
   const subClassIdMap = useSubClassIdMap();
 
-  let resolvedSubLectureId;
+  let resolvedSubClassId;
   // 관리자 페이지 내에서 호출 시
-  if (subLectureId && !subClassIdMap) {
-    resolvedSubLectureId = subLectureId;
+  if (subClassId && !subClassIdMap) {
+    resolvedSubClassId = subClassId;
   } else {
-    resolvedSubLectureId =
-      subClassIdMap[`${classId?.toUpperCase()}-${subClassId}`];
+    resolvedSubClassId =
+      subClassIdMap[`${classIdParam?.toUpperCase()}-${subClassIdParam}`];
   }
 
   const user = useBoundStore(state => state.user);
@@ -33,9 +31,9 @@ function useSubClassFileInfoList({
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['class', 'sub-class-file-list', resolvedSubLectureId],
-    queryFn: () => ClassApi.getSubClassFileList(resolvedSubLectureId),
-    enabled: !!resolvedSubLectureId,
+    queryKey: ['class', 'sub-class-file-list', resolvedSubClassId],
+    queryFn: () => ClassApi.getSubClassFileList(resolvedSubClassId),
+    enabled: !!resolvedSubClassId,
   });
 
   const findFileInfo = useMemo(() => {

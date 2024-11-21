@@ -4,16 +4,16 @@ import { queryClient } from '@/libs/react-query';
 import AdminClassApi from '@/services/admin/class';
 
 interface UseFileUploadProps {
-  subLectureId: number;
+  subClassId: number;
 }
 
-function useFileUploadMutation({ subLectureId }: UseFileUploadProps) {
+function useFileUploadMutation({ subClassId }: UseFileUploadProps) {
   const mutation = useMutation({
     mutationFn: (data: { type: string; file: File }) =>
-      AdminClassApi.uploadSubClassFile({ ...data, subLectureId }),
+      AdminClassApi.uploadSubClassFile({ ...data, subClassId }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['class', 'sub-class-file-list', subLectureId],
+        queryKey: ['class', 'sub-class-file-list', subClassId],
       });
     },
   });
