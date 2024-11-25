@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import useHomework from '@/hooks/homework/useHomework';
 import HomeworkFormBody from '@/pages/Homework/components/HomeworkFormBody';
-import HomeworkFormHeader from '@/pages/Homework/components/HomeworkFormHeader';
+import HomeworkInfoSection from '@/pages/Homework/components/HomeworkInfoSection';
 import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
 import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
 
@@ -44,7 +44,7 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
 
   return (
     <form className={'w-full h-full'} onSubmit={onSubmit}>
-      <HomeworkFormHeader
+      <HomeworkInfoSection
         title={homework.title}
         description={homework.description}
         additionalDescription={homework.additionalDescription}

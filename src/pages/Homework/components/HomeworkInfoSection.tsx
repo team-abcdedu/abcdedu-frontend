@@ -1,14 +1,14 @@
-interface HomeworkFormHeaderProps {
+interface HomeworkInfoSectionProps {
   title: string;
   description: string;
   additionalDescription: string;
 }
 
-function HomeworkFormHeader({
+function HomeworkInfoSection({
   title,
   description,
   additionalDescription,
-}: HomeworkFormHeaderProps) {
+}: HomeworkInfoSectionProps) {
   return (
     <div
       className={
@@ -30,4 +30,4 @@ function HomeworkFormHeader({
   );
 }
 
-export default HomeworkFormHeader;
+export default HomeworkInfoSection;
