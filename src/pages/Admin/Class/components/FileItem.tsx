@@ -4,10 +4,10 @@ import FileUpdateModal from '@/pages/Admin/Class/components/FileUpdateModal';
 import { FileInfo } from '@/types/class';
 
 function FileItem({
-  subLectureId,
+  subClassId,
   fileInfo,
 }: {
-  subLectureId: number;
+  subClassId: number;
   fileInfo: FileInfo;
 }) {
   const { assignmentType: fileType, assignmentFileId: fileId } = fileInfo;
@@ -57,7 +57,7 @@ function FileItem({
       </button>
 
       <FileUpdateModal
-        subLectureId={subLectureId}
+        subClassId={subClassId}
         fileType={fileType}
         fileId={fileId}
         isVisible={isVisible}
