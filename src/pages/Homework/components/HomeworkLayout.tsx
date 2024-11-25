@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import useHomework from '@/hooks/homework/useHomework';
 import HomeworkForm from '@/pages/Homework/components/HomeworkForm';
 import HomeworkInfoSection from '@/pages/Homework/components/HomeworkInfoSection';
 import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
-import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
 
 interface HomeworkLayoutProps {
   homeworkId: number;
@@ -13,14 +11,6 @@ interface HomeworkLayoutProps {
 
 function HomeworkLayout({ homeworkId }: HomeworkLayoutProps) {
   const { homework, isLoading } = useHomework({ homeworkId });
-
-  const { register, errors, reset, onSubmit, isPending } = useHomeworkForm({
-    homeworkId,
-  });
-
-  useEffect(() => {
-    reset();
-  }, [reset]);
 
   if (isLoading) {
     return <HomeworkLoading />;
@@ -43,7 +33,7 @@ function HomeworkLayout({ homeworkId }: HomeworkLayoutProps) {
   }
 
   return (
-    <form className={'w-full h-full'} onSubmit={onSubmit}>
+    <div className={'w-full h-full'}>
       <HomeworkInfoSection
         title={homework.title}
         description={homework.description}
@@ -51,12 +41,10 @@ function HomeworkLayout({ homeworkId }: HomeworkLayoutProps) {
       />
 
       <HomeworkForm
+        homeworkId={homeworkId}
         questions={homework.questionGetResponses}
-        register={register}
-        errors={errors}
-        isPending={isPending}
       />
-    </form>
+    </div>
   );
 }
 

@@ -1,7 +1,12 @@
-import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldError, SubmitHandler } from 'react-hook-form';
 
 import FormErrorMessage from '@/components/FormErrorMessage';
-import { IHomeworkForm } from '@/pages/Homework/hooks/useHomeworkForm';
+import Loader from '@/components/Loader';
+import { ApiError } from '@/libs/errors';
+import useHomeworkForm, {
+  IHomeworkForm,
+} from '@/pages/Homework/hooks/useHomeworkForm';
+import useHomeworkMutation from '@/pages/Homework/hooks/useHomeworkMutation';
 import { HomeworkQuestion } from '@/types/homework';
 
 function RedDot() {
@@ -13,25 +18,39 @@ function RedDot() {
 }
 
 interface HomeworkFormProps {
+  homeworkId: number;
   questions: HomeworkQuestion[];
-  register: UseFormRegister<IHomeworkForm>;
-  errors: FieldErrors<IHomeworkForm>;
-  isPending: boolean;
 }
 
-function HomeworkForm({
-  questions,
-  register,
-  errors,
-  isPending,
-}: HomeworkFormProps) {
+function HomeworkForm({ homeworkId, questions }: HomeworkFormProps) {
+  const { register, errors, reset, handleSubmit } = useHomeworkForm();
+  const { mutation } = useHomeworkMutation({ homeworkId });
+
+  const onSubmit: SubmitHandler<IHomeworkForm> = data => {
+    mutation.mutate(data, {
+      onSuccess: () => {
+        reset();
+        alert('과제가 제출되었습니다..');
+      },
+      onError: error => {
+        alert(
+          error instanceof ApiError
+            ? error.message
+            : '과제 제출 중 문제가 발생했습니다.',
+        );
+      },
+    });
+  };
+
   const formTextStyle = 'text-16 md:text-20 whitespace-pre-wrap';
 
   return (
     <div
       className={`w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100 ${formTextStyle}`}
     >
-      <div
+      {mutation.isPending && <Loader />}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
         className={'w-full min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}
       >
         <div className={`w-full ${formTextStyle} font-semibold`}>
@@ -89,11 +108,11 @@ function HomeworkForm({
 
         <button
           className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] text-white bg-primary-400`}
-          disabled={isPending}
+          disabled={mutation.isPending}
         >
           제출하기
         </button>
-      </div>
+      </form>
     </div>
   );
 }
