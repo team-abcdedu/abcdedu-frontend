@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import useGetHomework from '@/hooks/homework/useGetHomework';
+import useHomework from '@/hooks/homework/useHomework';
 import HomeworkFormBody from '@/pages/Homework/components/HomeworkFormBody';
 import HomeworkFormHeader from '@/pages/Homework/components/HomeworkFormHeader';
 import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
@@ -12,7 +12,7 @@ interface HomeworkFormProps {
 }
 
 function HomeworkForm({ homeworkId }: HomeworkFormProps) {
-  const { data: homework, isLoading } = useGetHomework({ homeworkId });
+  const { homework, isLoading } = useHomework({ homeworkId });
 
   const { register, errors, reset, onSubmit, isPending } = useHomeworkForm({
     homeworkId,
