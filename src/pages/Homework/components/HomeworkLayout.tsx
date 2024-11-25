@@ -7,11 +7,11 @@ import HomeworkInfoSection from '@/pages/Homework/components/HomeworkInfoSection
 import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
 import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
 
-interface HomeworkFormProps {
+interface HomeworkLayoutProps {
   homeworkId: number;
 }
 
-function HomeworkForm({ homeworkId }: HomeworkFormProps) {
+function HomeworkLayout({ homeworkId }: HomeworkLayoutProps) {
   const { homework, isLoading } = useHomework({ homeworkId });
 
   const { register, errors, reset, onSubmit, isPending } = useHomeworkForm({
@@ -60,4 +60,4 @@ function HomeworkForm({ homeworkId }: HomeworkFormProps) {
   );
 }
 
-export default HomeworkForm;
+export default HomeworkLayout;
