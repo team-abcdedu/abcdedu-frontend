@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import useHomework from '@/hooks/homework/useHomework';
-import HomeworkFormBody from '@/pages/Homework/components/HomeworkFormBody';
+import HomeworkForm from '@/pages/Homework/components/HomeworkForm';
 import HomeworkInfoSection from '@/pages/Homework/components/HomeworkInfoSection';
 import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
 import useHomeworkForm from '@/pages/Homework/hooks/useHomeworkForm';
@@ -50,7 +50,7 @@ function HomeworkLayout({ homeworkId }: HomeworkLayoutProps) {
         additionalDescription={homework.additionalDescription}
       />
 
-      <HomeworkFormBody
+      <HomeworkForm
         questions={homework.questionGetResponses}
         register={register}
         errors={errors}

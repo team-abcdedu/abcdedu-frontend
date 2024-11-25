@@ -12,19 +12,19 @@ function RedDot() {
   );
 }
 
-interface HomeworkFormBodyProps {
+interface HomeworkFormProps {
   questions: HomeworkQuestion[];
   register: UseFormRegister<IHomeworkForm>;
   errors: FieldErrors<IHomeworkForm>;
   isPending: boolean;
 }
 
-function HomeworkFormBody({
+function HomeworkForm({
   questions,
   register,
   errors,
   isPending,
-}: HomeworkFormBodyProps) {
+}: HomeworkFormProps) {
   const formTextStyle = 'text-16 md:text-20 whitespace-pre-wrap';
 
   return (
@@ -98,4 +98,4 @@ function HomeworkFormBody({
   );
 }
 
-export default HomeworkFormBody;
+export default HomeworkForm;
