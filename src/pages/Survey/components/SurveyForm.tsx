@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import useGetSurvey from '@/hooks/survey/useGetSurvey';
+import useSurvey from '@/hooks/survey/useSurvey';
 import SurveyFormBody from '@/pages/Survey/components/SurveyFormBody';
 import SurveyFormHeader from '@/pages/Survey/components/SurveyFormHeader';
 import SurveyLoading from '@/pages/Survey/components/SurveyLoading';
@@ -11,7 +11,7 @@ interface SurveyFormProps {
 }
 
 function SurveyForm({ surveyId }: SurveyFormProps) {
-  const { data: survey, isLoading } = useGetSurvey({ surveyId });
+  const { data: survey, isLoading } = useSurvey({ surveyId });
 
   const { register, errors, onSubmit, isPending } = useSurveyForm({
     surveyId,
