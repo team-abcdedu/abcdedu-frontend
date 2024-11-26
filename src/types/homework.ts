@@ -19,3 +19,8 @@ export type HomeworkInfo = Omit<HomeworkSummary, 'id'> & {
 export interface HomeworkAnswer {
   answer: string;
 }
+
+export interface HomeworkReplies {
+  questionHeaders: string[];
+  records: string[][];
+}
