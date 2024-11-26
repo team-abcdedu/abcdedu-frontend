@@ -13,10 +13,10 @@ function useHomeworkList({ page = 1, size = 10 }: UseHomeworkListProps) {
     queryFn: () => HomeworkApi.getHomeworkList({ page, size }),
   });
 
-  const list = data?.content || [];
+  const homeworkList = data?.content || [];
   const totalElements = data?.totalElements || 0;
 
-  return { list, totalElements, isLoading, isError };
+  return { homeworkList, totalElements, isLoading, isError };
 }
 
 export default useHomeworkList;
