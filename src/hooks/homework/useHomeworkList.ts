@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import HomeworkApi from '@/services/homework';
 
-interface UseGetHomeworksProps {
+interface UseHomeworkListProps {
   page: number;
   size?: number;
 }
 
-function useGetHomeworkList({ page = 1, size = 10 }: UseGetHomeworksProps) {
+function useHomeworkList({ page = 1, size = 10 }: UseHomeworkListProps) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['homework', 'list', `${page}-${size}`],
     queryFn: () => HomeworkApi.getHomeworkList({ page, size }),
@@ -19,4 +19,4 @@ function useGetHomeworkList({ page = 1, size = 10 }: UseGetHomeworksProps) {
   return { list, totalElements, isLoading, isError };
 }
 
-export default useGetHomeworkList;
+export default useHomeworkList;

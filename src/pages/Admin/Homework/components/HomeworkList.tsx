@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
-import useGetHomeworkList from '@/hooks/homework/useGetHomeworkList';
+import useHomeworkList from '@/hooks/homework/useHomeworkList';
 
 import { homeworkTableColumns } from '../../constants';
 
@@ -9,13 +9,9 @@ function HomeworkList() {
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
 
-  const { list, totalElements } = useGetHomeworkList({
+  const { list, totalElements } = useHomeworkList({
     page,
   });
-
-  // if (isError || isLoading) {
-  //   return <div>{isError ? '에러가 발생했습니다.' : '로딩 중입니다.'}</div>;
-  // }
 
   return (
     <div>
