@@ -1,9 +1,9 @@
-interface SurveyFormHeaderProps {
+interface SurveyInfoSectionProps {
   title: string;
   description: string;
 }
 
-function SurveyFormHeader({ title, description }: SurveyFormHeaderProps) {
+function SurveyInfoSection({ title, description }: SurveyInfoSectionProps) {
   const formTextStyle = 'text-16 md:text-20';
 
   return (
@@ -43,4 +43,4 @@ function SurveyFormHeader({ title, description }: SurveyFormHeaderProps) {
   );
 }
 
-export default SurveyFormHeader;
+export default SurveyInfoSection;
