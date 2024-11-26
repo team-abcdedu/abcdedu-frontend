@@ -64,26 +64,25 @@ function SurveyForm({ surveyId, questions }: SurveyFormProps) {
 
         <div className={'w-full mt-30 flex flex-col gap-40'}>
           {questions.map(question => (
-            <div key={question.orderNumber}>
-              <div
-                className={`w-full flex flex-col gap-20 ${formTextStyle} font-semibold`}
-              >
-                <span className={'whitespace-pre-wrap'}>
-                  {question.orderNumber}. {question.content}
-                  {question.isAnswerRequired && <RedDot />}
-                </span>
-                <div className={'w-full h-full pl-10'}>
-                  <SurveyFormItem question={question} register={register} />
-                  {errors?.[`${question.orderNumber}#${question.type}`] && (
-                    <FormErrorMessage
-                      fieldErrors={
-                        errors[
-                          `${question.orderNumber}#${question.type}`
-                        ] as FieldError
-                      }
-                    />
-                  )}
-                </div>
+            <div
+              key={question.orderNumber}
+              className={`w-full flex flex-col gap-20 ${formTextStyle} font-semibold`}
+            >
+              <span className={'whitespace-pre-wrap'}>
+                {question.orderNumber}. {question.content}
+                {question.isAnswerRequired && <RedDot />}
+              </span>
+              <div className={'w-full h-full pl-10'}>
+                <SurveyFormItem question={question} register={register} />
+                {errors?.[`${question.orderNumber}#${question.type}`] && (
+                  <FormErrorMessage
+                    fieldErrors={
+                      errors[
+                        `${question.orderNumber}#${question.type}`
+                      ] as FieldError
+                    }
+                  />
+                )}
               </div>
             </div>
           ))}
