@@ -23,7 +23,6 @@ export const boardMetaData = {
   free: '자유게시판',
   qna: 'Q & A',
   project: 'ABCD 프로젝트',
-  rating: '등업 게시판',
   document: '자료실',
 };
 

@@ -26,12 +26,8 @@ export default function Board() {
   }
 
   const isPostButtonVisible =
-    (category === 'rating' && user && user.role === '새싹') ||
     (category === 'document' && user && user.role === '관리자') ||
-    (category !== 'rating' &&
-      category !== 'document' &&
-      user &&
-      user.role !== '새싹');
+    (category !== 'document' && user && user.role !== '새싹');
 
   return (
     <div className='flex flex-col text-center mt-20'>
