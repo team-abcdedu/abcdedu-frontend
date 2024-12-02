@@ -12,10 +12,10 @@ export const communityInfoMap: CommunityInfoMap = {
     description: '무엇이든 물어보세요!',
     to: '/community/qna',
   },
-  bulletinBoard: {
+  free: {
     label: '자유게시판',
     description: '고교학점제 관련 정보를 공유해보아요!',
-    to: '/community/bulletin_board',
+    to: '/community/free',
   },
 };
 
