@@ -1,5 +1,4 @@
 import useSubClassFile from '@/hooks/class/useSubClassFile';
-import { ApiError } from '@/libs/errors';
 import useBoundStore from '@/stores';
 import { FileActionResult, FileInfo } from '@/types/class';
 import { getFileExtension } from '@/utils/getFileExtension';
@@ -39,10 +38,9 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
     }
 
     if (isError) {
-      const errorMsg =
-        error instanceof ApiError
-          ? error.message
-          : `${fileType} 파일을 불러오는 중 문제가 생겼습니다.`;
+      const errorMsg = error?.message
+        ? error.message
+        : `${fileType} 파일을 불러오는 중 문제가 생겼습니다.`;
       return { status: 'error', message: errorMsg };
     }
 
