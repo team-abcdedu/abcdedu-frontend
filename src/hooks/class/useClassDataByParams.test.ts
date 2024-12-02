@@ -52,12 +52,14 @@ const findMockSubClass = (classTitle: string, subClassOrderNumber: number) => {
   );
 };
 
+// mocking useParams
 const mockUseParams = (classId?: string, subClassId?: string) => {
   vi.doMock('react-router-dom', () => ({
     useParams: () => ({ classId, subClassId }),
   }));
 };
 
+// mocking useParams and render hook
 const setParamsAndRenderHook = async ({
   classId,
   subClassId,

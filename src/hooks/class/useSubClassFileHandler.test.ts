@@ -2,12 +2,14 @@ import { renderHook } from '@testing-library/react';
 
 import { ApiError } from '@/libs/errors';
 
+// mocking useBoundStore - user.role
 const setUser = (role: string | undefined) => {
   vi.doMock('@/stores', () => ({
     default: () => ({ role }),
   }));
 };
 
+// mocking useSubClassFile hook
 const mockUseSubClassFile = ({
   fileData = { filePresignedUrl: '', assignmentAnswerFileId: 0 },
   isLoading = false,
@@ -34,6 +36,7 @@ const mockHwpFileData = {
   assignmentAnswerFileId: 1,
 };
 
+// mocking user.role and useSubClassFile
 const setUserAndFile = (
   role: string | undefined,
   isPdfFile: boolean,
@@ -62,6 +65,7 @@ const setUserAndFile = (
   }
 };
 
+// dynamic import useSubClassFileHandler
 const importAndRenderHook = async (fileType: string) => {
   const { default: useSubClassFileHandler } = await import(
     './useSubClassFileHandler'
