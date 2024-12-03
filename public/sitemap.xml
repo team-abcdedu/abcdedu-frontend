@@ -133,11 +133,6 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://abcdedu.com/community/levelup</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
         <loc>https://abcdedu.com/community/project</loc>
         <lastmod>2024-10-01</lastmod>
         <changefreq>monthly</changefreq>
@@ -148,8 +143,13 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://abcdedu.com/community/bullentin_board</loc>
+        <loc>https://abcdedu.com/community/free</loc>
         <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc>https://abcdedu.com/community/document</loc>
+        <lastmod>2024-12-02</lastmod>
         <changefreq>monthly</changefreq>
     </url>
 
