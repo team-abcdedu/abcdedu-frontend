@@ -1,3 +1,10 @@
+export interface PostLinkData {
+  id: number;
+  title: string;
+  secret: boolean;
+  writerEmail: string;
+}
+
 export interface Post {
   title: string;
   writer: string;
@@ -9,6 +16,8 @@ export interface Post {
   commentAllow: boolean;
   commentCount: number;
   secret: boolean;
+  prev: PostLinkData | null;
+  next: PostLinkData | null;
 }
 
 export type PostSummary = Omit<Post, 'fileUrl' | 'content' | 'commentAllow'> & {
