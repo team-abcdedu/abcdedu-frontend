@@ -1,4 +1,4 @@
-export interface PostLinkData {
+export interface AdjacentPost {
   id: number;
   title: string;
   secret: boolean;
@@ -16,8 +16,8 @@ export interface Post {
   commentAllow: boolean;
   commentCount: number;
   secret: boolean;
-  prev: PostLinkData | null;
-  next: PostLinkData | null;
+  prev: AdjacentPost | null;
+  next: AdjacentPost | null;
 }
 
 export type PostSummary = Omit<Post, 'fileUrl' | 'content' | 'commentAllow'> & {
