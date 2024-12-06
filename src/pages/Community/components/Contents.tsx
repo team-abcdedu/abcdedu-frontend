@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import CommunityInfo from './CommunityInfo';
 
 export default function Contents() {
@@ -38,17 +36,6 @@ export default function Contents() {
       </p>
 
       <CommunityInfo />
-
-      <p className='text-xl text-gray-500 font-medium pt-80 pb-30 px-20 break-keep'>
-        아직 새싹 등급이신가요? <br />
-        학생 등급 이상 회원만 수업 자료를 다운받을 수 있습니다. <br />
-        게시물을 작성하고 새싹으로 등업하세요!
-      </p>
-      <Link to='/community/levelup'>
-        <button className='py-8 px-30 rounded-2xl bg-primary-300 text-white hover:opacity-80`'>
-          등업 게시판 바로가기
-        </button>
-      </Link>
     </section>
   );
 }

@@ -54,10 +54,6 @@ export const headerNavItems: NavItem[] = [
     text: '커뮤니티',
     list: [
       {
-        to: '/community/rating',
-        text: '등업 게시판',
-      },
-      {
         to: '/community/project',
         text: 'ABCD Project',
       },

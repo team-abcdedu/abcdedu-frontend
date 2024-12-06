@@ -7,7 +7,8 @@ interface Props {
   totalElements: number; // 전체 데이터 개수
   itemCountPerPage?: number; // 페이지 당 데이터 개수
   pageCount?: number; // 한 번에 보여줄 페이지 개수 (e.g. 5, 10 ...)
-  pageQueryKey?: string;
+  useQueryString?: boolean;
+  onPageChange?: (page: number) => void;
   scrollTarget?: React.RefObject<HTMLElement>; // 페이지 이동 시 스크롤 이동할 target
 }
 
@@ -16,7 +17,8 @@ export default function Pagination({
   totalElements,
   itemCountPerPage = 10,
   pageCount = 5,
-  pageQueryKey = 'page',
+  useQueryString = true,
+  onPageChange,
   scrollTarget,
 }: Props) {
   const [searchParams] = useSearchParams();
@@ -29,8 +31,17 @@ export default function Pagination({
 
   const getUrl = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set(pageQueryKey, page.toString());
+    if (useQueryString) params.set('page', page.toString());
     return `${pathname}?${params.toString()}`;
+  };
+
+  const handlePage = (nextPage: number) => {
+    if (onPageChange) onPageChange(nextPage);
+    if (scrollTarget && scrollTarget.current) {
+      scrollTarget.current.scrollIntoView();
+      return;
+    }
+    window.scrollTo(0, 0);
   };
 
   const pageNumberStyle = (isActive: boolean) =>
@@ -46,14 +57,6 @@ export default function Pagination({
     if (currentPage < start) setStart(prev => prev - pageCount);
   }, [currentPage, pageCount, start]);
 
-  const handlePage = () => {
-    if (scrollTarget && scrollTarget.current) {
-      scrollTarget.current.scrollIntoView();
-      return;
-    }
-    window.scrollTo(0, 0);
-  };
-
   if (totalPages <= 1) return null;
 
   return (
@@ -63,7 +66,7 @@ export default function Pagination({
           <Link
             className={moveLinkStyle}
             to={getUrl(start - 1)}
-            onClick={handlePage}
+            onClick={() => handlePage(start - 1)}
           >
             <CaretLeft size={20} />
             이전
@@ -79,7 +82,7 @@ export default function Pagination({
                       currentPage === start + i,
                     )}`}
                   to={getUrl(start + i)}
-                  onClick={handlePage}
+                  onClick={() => handlePage(start + i)}
                 >
                   {start + i}
                 </Link>
@@ -91,7 +94,7 @@ export default function Pagination({
           <Link
             className={moveLinkStyle}
             to={getUrl(start + pageCount)}
-            onClick={handlePage}
+            onClick={() => handlePage(start + pageCount)}
           >
             다음
             <CaretRight size={20} />

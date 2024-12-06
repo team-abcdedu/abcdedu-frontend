@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
 import Pagination from '@/components/Pagination';
 import useBoundStore from '@/stores';
@@ -18,8 +17,7 @@ export default function Comments({ postId, commentAllow }: CommentsProps) {
   const user = useBoundStore(state => state.user);
   const scrollTargetRef = useRef<HTMLDivElement>(null);
 
-  const [searchParams] = useSearchParams();
-  const page = Number(searchParams.get('comments_page')) || 1;
+  const [page, setPage] = useState(1);
 
   const { list, totalElements, isLoading } = useGetComments({ postId, page });
 
@@ -47,8 +45,9 @@ export default function Comments({ postId, commentAllow }: CommentsProps) {
         <Pagination
           currentPage={page}
           totalElements={totalElements}
-          pageQueryKey='comments_page'
           scrollTarget={scrollTargetRef}
+          useQueryString={false}
+          onPageChange={nextPage => setPage(nextPage)}
         />
       </div>
       {commentAllow && (

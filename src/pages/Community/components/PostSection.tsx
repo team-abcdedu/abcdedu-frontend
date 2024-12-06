@@ -72,7 +72,7 @@ export default function PostSection({
         </div>
       </div>
       <hr className='border-1 border-gray-300 w-full' />
-      <p className='px-20 my-100'>{post?.content}</p>
+      <p className='px-20 my-80 whitespace-pre-wrap'>{post?.content}</p>
       <hr className='border-1 border-gray-300 w-full' />
     </section>
   );

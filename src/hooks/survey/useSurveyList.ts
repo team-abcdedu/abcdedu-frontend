@@ -1,22 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { ApiError } from '@/libs/errors';
 import SurveyApi from '@/services/survey';
 
-interface UseGetSurveyListProps {
+interface UseSurveyListProps {
   page: number;
   size?: number;
   sortBy?: string;
   sortDirection?: 'asc' | 'desc';
 }
 
-function useGetSurveyList({
+function useSurveyList({
   page,
   size = 10,
   sortBy = '',
   sortDirection = 'desc',
-}: UseGetSurveyListProps) {
-  const { data, isError, isLoading, error } = useQuery({
+}: UseSurveyListProps) {
+  const { data, isError, isLoading } = useQuery({
     queryKey: [
       'survey',
       'list',
@@ -29,18 +28,15 @@ function useGetSurveyList({
       SurveyApi.getSurveyList({ page, size, sortBy, sortDirection }),
   });
 
-  const list = data?.content || [];
+  const surveyList = data?.content || [];
   const totalElements = data?.totalElements || 0;
 
-  const errorStatus = error instanceof ApiError ? error.status : null;
-
   return {
-    list,
+    surveyList,
     totalElements,
     isError,
     isLoading,
-    errorStatus,
   };
 }
 
-export default useGetSurveyList;
+export default useSurveyList;

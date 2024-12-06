@@ -7,9 +7,9 @@ class ClassApi {
   }
 
   static async getSubClassFileList(
-    subLectureId: number,
+    subClassId: number,
   ): Promise<{ assignmentType: string; assignmentFileId: number }[]> {
-    return get(`/lectures/sub-lecture/${subLectureId}`);
+    return get(`/lectures/sub-lecture/${subClassId}`);
   }
 
   static async getSubClassFile(

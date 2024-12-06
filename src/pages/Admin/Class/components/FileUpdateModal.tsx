@@ -9,7 +9,7 @@ import useFileUpdateForm, {
 import useFileUpdateMutation from '@/pages/Admin/Class/hooks/useFileUpdateMutation';
 
 interface FileUpdateModalProps {
-  subLectureId: number;
+  subClassId: number;
   fileType: string;
   fileId: number;
   isVisible: boolean;
@@ -17,7 +17,7 @@ interface FileUpdateModalProps {
 }
 
 function FileUpdateModal({
-  subLectureId,
+  subClassId,
   fileType,
   fileId,
   isVisible,
@@ -25,7 +25,7 @@ function FileUpdateModal({
 }: FileUpdateModalProps) {
   const { register, errors, handleSubmit, fieldRules, reset } =
     useFileUpdateForm();
-  const { mutation } = useFileUpdateMutation({ subLectureId, fileId });
+  const { mutation } = useFileUpdateMutation({ subClassId, fileId });
 
   const onSubmit: SubmitHandler<IFileUpdateForm> = data => {
     const result = window.confirm('파일을 수정하시겠습니까?');
