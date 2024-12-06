@@ -9,6 +9,7 @@ import useGetPost from '../hooks/useGetPost';
 
 import Comments from './Comments';
 import PostFormModal from './PostFormModal';
+import PostNavigation from './PostNavigation';
 import PostSection from './PostSection';
 
 interface PostProps {
@@ -51,6 +52,13 @@ export default function Post({ postId, category }: PostProps) {
         <ErrorBoundary onReset={reset}>
           <Comments postId={Number(postId)} commentAllow={post.commentAllow} />
         </ErrorBoundary>
+      )}
+      {post && (
+        <PostNavigation
+          category={category}
+          prevPost={post.prev}
+          nextPost={post.next}
+        />
       )}
     </>
   );

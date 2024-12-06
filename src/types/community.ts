@@ -1,3 +1,10 @@
+export interface AdjacentPost {
+  id: number;
+  title: string;
+  secret: boolean;
+  writerEmail: string;
+}
+
 export interface Post {
   title: string;
   writer: string;
@@ -9,6 +16,8 @@ export interface Post {
   commentAllow: boolean;
   commentCount: number;
   secret: boolean;
+  prev: AdjacentPost | null;
+  next: AdjacentPost | null;
 }
 
 export type PostSummary = Omit<Post, 'fileUrl' | 'content' | 'commentAllow'> & {
