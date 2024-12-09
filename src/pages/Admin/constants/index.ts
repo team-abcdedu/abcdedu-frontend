@@ -26,11 +26,11 @@ export const homeworkTableColumns: AdminTableColumns<HomeworkSummary> = {
 };
 
 export const surveyTableColumns: AdminTableColumns<SurveySummary> = {
-  columnList: ['id', 'createdAt', 'title', 'writerName'],
+  columnList: ['id', 'title', 'createdAt', 'writerName'],
   columnLabels: {
     id: 'ID',
-    createdAt: '제출일',
     title: '제목',
+    createdAt: '제출일',
     writerName: '작성자',
   },
 };

@@ -29,3 +29,8 @@ export interface SurveyAnswer {
   answer: string;
   type: SurveyQuestionType;
 }
+
+export interface SurveyReplies {
+  questionHeaders: string[];
+  records: string[][];
+}

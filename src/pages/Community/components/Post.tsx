@@ -8,8 +8,8 @@ import useBoundStore from '@/stores';
 import useGetPost from '../hooks/useGetPost';
 
 import Comments from './Comments';
-import LevelUpButton from './LevelUpButton';
 import PostFormModal from './PostFormModal';
+import PostNavigation from './PostNavigation';
 import PostSection from './PostSection';
 
 interface PostProps {
@@ -26,9 +26,6 @@ export default function Post({ postId, category }: PostProps) {
 
   const user = useBoundStore(state => state.user);
   const isAdminRole = user?.role === '관리자';
-
-  // 등업 게시판 & 관리자 권한일 경우에만 등업시키기 버튼 렌더링
-  const isLevelUpButtonVisible = isAdminRole && category === 'levelup';
 
   return (
     <>
@@ -51,11 +48,17 @@ export default function Post({ postId, category }: PostProps) {
           />
         </>
       )}
-      {isLevelUpButtonVisible && <LevelUpButton postId={Number(postId)} />}
       {post && (
         <ErrorBoundary onReset={reset}>
           <Comments postId={Number(postId)} commentAllow={post.commentAllow} />
         </ErrorBoundary>
+      )}
+      {post && (
+        <PostNavigation
+          category={category}
+          prevPost={post.prev}
+          nextPost={post.next}
+        />
       )}
     </>
   );

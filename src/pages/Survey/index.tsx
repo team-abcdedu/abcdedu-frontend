@@ -4,7 +4,7 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import AccessError from '@/components/ErrorBoundary/AccessError';
 import Head from '@/components/Head';
 import { ApiError } from '@/libs/errors';
-import SurveyForm from '@/pages/Survey/components/SurveyForm';
+import SurveyLayout from '@/pages/Survey/components/SurveyLayout';
 import useBoundStore from '@/stores';
 
 function Survey() {
@@ -31,7 +31,7 @@ function Survey() {
         }
         onReset={reset}
       >
-        <SurveyForm surveyId={1} />
+        <SurveyLayout surveyId={1} />
       </ErrorBoundary>
     </div>
   );

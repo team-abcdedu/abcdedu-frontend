@@ -9,18 +9,18 @@ import useFileUploadForm, {
 import useFileUploadMutation from '@/pages/Admin/Class/hooks/useFileUploadMutation';
 
 interface FileEditorModalProps {
-  subLectureId: number;
+  subClassId: number;
   isVisible: boolean;
   onClose: () => void;
 }
 
 function FileUploadModal({
-  subLectureId,
+  subClassId,
   isVisible,
   onClose,
 }: FileEditorModalProps) {
   const { mutation } = useFileUploadMutation({
-    subLectureId,
+    subClassId,
   });
 
   const { register, errors, handleSubmit, reset, fieldRules } =

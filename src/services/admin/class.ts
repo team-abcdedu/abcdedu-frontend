@@ -20,11 +20,11 @@ class AdminClassApi {
   }
 
   static async uploadSubClassFile({
-    subLectureId,
+    subClassId,
     type,
     file,
   }: {
-    subLectureId: number;
+    subClassId: number;
     type: string;
     file: File;
   }) {
@@ -32,7 +32,7 @@ class AdminClassApi {
     formData.append('file', file);
 
     return post(
-      `/lectures/sub-lecture/${subLectureId}/file?assignmentType=${type}`,
+      `/lectures/sub-lecture/${subClassId}/file?assignmentType=${type}`,
       formData,
       {
         headers: {
