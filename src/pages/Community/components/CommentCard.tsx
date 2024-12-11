@@ -1,4 +1,6 @@
+import { DownloadSimple } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Comment } from '@/types/community';
 import { formatDate } from '@/utils/formatDate';
@@ -52,13 +54,24 @@ export default function CommentCard({
       {isEditMode ? (
         <CommentForm
           postId={postId}
-          commentId={comment.commentId}
           mode='edit'
-          defaultValue={comment.content}
+          comment={comment}
           toggleEditMode={toggleEditMode}
         />
       ) : (
-        <p>{comment.content}</p>
+        <>
+          <p>{comment.content}</p>
+          {comment.fileUrl && (
+            <Link
+              className='flex justify-between items-center mt-12 mb-4 p-12 
+              bg-primary-300/5 text-primary-300 text-14 rounded-lg w-130'
+              to={comment.fileUrl}
+            >
+              파일 다운받기
+              <DownloadSimple className='mt-1 block text-gray-600' size={17} />
+            </Link>
+          )}
+        </>
       )}
     </div>
   );

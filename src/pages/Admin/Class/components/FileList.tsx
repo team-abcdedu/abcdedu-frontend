@@ -2,12 +2,12 @@ import useSubClassFileInfoList from '@/hooks/class/useSubClassFileInfoList';
 import FileItem from '@/pages/Admin/Class/components/FileItem';
 
 interface FileListProps {
-  subLectureId: number;
+  subClassId: number;
 }
 
-function FileList({ subLectureId }: FileListProps) {
+function FileList({ subClassId }: FileListProps) {
   const { subClassFileInfoList, isLoading, isError } = useSubClassFileInfoList({
-    subLectureId,
+    subClassId,
   });
 
   if (isError || isLoading) {
@@ -28,7 +28,7 @@ function FileList({ subLectureId }: FileListProps) {
           return findFileInfo ? (
             <FileItem
               key={findFileInfo.assignmentFileId}
-              subLectureId={subLectureId}
+              subClassId={subClassId}
               fileInfo={findFileInfo}
             />
           ) : null;

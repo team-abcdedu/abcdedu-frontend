@@ -1,5 +1,4 @@
 import useSubClassFile from '@/hooks/class/useSubClassFile';
-import { ApiError } from '@/libs/errors';
 import useBoundStore from '@/stores';
 import { FileActionResult, FileInfo } from '@/types/class';
 import { getFileExtension } from '@/utils/getFileExtension';
@@ -15,9 +14,9 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
 
   const { fileData, isLoading, isError, error } = useSubClassFile({ fileId });
 
-  const isPdfFile =
-    !!fileData &&
-    getFileExtension(getFileName(fileData.filePresignedUrl)) === 'pdf';
+  const isPdfFile = fileData?.filePresignedUrl
+    ? getFileExtension(getFileName(fileData.filePresignedUrl)) === 'pdf'
+    : false;
 
   const canAccessFile = user?.role === '관리자' || user?.role === '학생';
   const canAccessTheoryFile = user?.role === '관리자';
@@ -39,10 +38,9 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
     }
 
     if (isError) {
-      const errorMsg =
-        error instanceof ApiError
-          ? error.message
-          : `${fileType} 파일을 불러오는 중 문제가 생겼습니다.`;
+      const errorMsg = error?.message
+        ? error.message
+        : `${fileType} 파일을 불러오는 중 문제가 생겼습니다.`;
       return { status: 'error', message: errorMsg };
     }
 

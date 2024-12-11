@@ -19,9 +19,7 @@ export default function useGetPosts({ boardName, page }: UseGetPostsProps) {
     queryKey: ['board', 'list', boardName, `page-${page}`],
     queryFn: () => communityApi.getPosts(boardName, page),
     placeholderData: keepPreviousData,
-    enabled: ['free', 'project', 'qna', 'rating', 'document'].includes(
-      boardName,
-    ),
+    enabled: ['free', 'project', 'qna', 'document'].includes(boardName),
   });
 
   const list = data?.content || [];

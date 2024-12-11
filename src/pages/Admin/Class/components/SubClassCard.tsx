@@ -58,11 +58,11 @@ function SubClassCard({ classTitle, subClass }: SubClassCardProps) {
         >
           파일 목록 확인하기
         </button>
-        {openFileList && <FileList subLectureId={subClass.subClassId} />}
+        {openFileList && <FileList subClassId={subClass.subClassId} />}
       </InfoRow>
 
       <FileUploadModal
-        subLectureId={subClass.subClassId}
+        subClassId={subClass.subClassId}
         isVisible={isVisible}
         onClose={toggleModal}
       />
