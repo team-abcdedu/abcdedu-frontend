@@ -29,5 +29,6 @@ export interface Comment {
   writerName: string;
   writerEmail: string;
   content: string;
+  fileUrl: string | null;
   createdAt: string;
 }
