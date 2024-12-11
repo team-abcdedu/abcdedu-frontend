@@ -12,13 +12,15 @@ export async function compressImage(
   quality: number = 0.8,
 ): Promise<File> {
   return new Promise((resolve, reject) => {
+    const newFileName = file.name.replace(/\.[^/.]+$/, '.webp');
+
     new Compressor(file, {
       quality,
       mimeType: 'image/webp',
       maxWidth: 880,
       maxHeight: 620,
       success(result) {
-        const webPFile = new File([result], file.name, {
+        const webPFile = new File([result], newFileName, {
           type: 'image/webp',
         });
         resolve(webPFile);
