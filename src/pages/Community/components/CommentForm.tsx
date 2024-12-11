@@ -2,7 +2,7 @@ import { PencilSimpleLine, Plus, Trash } from '@phosphor-icons/react';
 
 import { Comment } from '@/types/community';
 
-import useCommmentForm from '../hooks/useCommentForm';
+import useCommentForm from '../hooks/useCommentForm';
 
 interface CommentForm {
   comment?: Comment;
@@ -27,7 +27,7 @@ export default function CommentForm({
     handleClose,
     fileName,
     onSubmit,
-  } = useCommmentForm({ postId, comment, toggleEditMode });
+  } = useCommentForm({ postId, comment, toggleEditMode });
 
   return (
     <form onSubmit={onSubmit} className={`${mode === 'edit' && 'pr-14'} mt-8`}>
