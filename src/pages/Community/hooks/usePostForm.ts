@@ -16,14 +16,14 @@ interface IPostFormInput {
   commentAllow: boolean;
 }
 
-interface usePostFormProps {
+interface UsePostFormProps {
   post?: Post;
   onSuccess: () => void;
 }
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
-export default function usePostForm({ post, onSuccess }: usePostFormProps) {
+export default function usePostForm({ post, onSuccess }: UsePostFormProps) {
   const {
     register,
     setValue,
@@ -71,7 +71,7 @@ export default function usePostForm({ post, onSuccess }: usePostFormProps) {
     if (!inputFile) return;
 
     if (inputFile.size > MAX_FILE_SIZE) {
-      alert('첨부파일은 20MB를 초과할 수 없습니다.');
+      alert('첨부파일은 100MB를 초과할 수 없습니다.');
       e.target.value = '';
       return;
     }
