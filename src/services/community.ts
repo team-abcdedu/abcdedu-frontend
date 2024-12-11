@@ -41,12 +41,16 @@ class CommunityApi {
     });
   }
 
-  static async createComment(postId: number, content: string) {
-    return post(`/posts/${postId}/comments`, { content });
+  static async createComment(postId: number, form: FormData) {
+    return post(`/posts/${postId}/comments`, form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
   }
 
-  static async updateComment(commentId: number, content: string) {
-    return patch(`/comments/${commentId}`, { content });
+  static async updateComment(commentId: number, form: FormData) {
+    return patch(`/comments/${commentId}`, form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
   }
 
   static async deleteComment(postId: number, commentId: number) {
