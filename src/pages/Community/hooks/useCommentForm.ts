@@ -84,11 +84,11 @@ export default function useCommmentForm({
 
     // 댓글 수정
     if (comment) {
-      const postUpdateData = {
+      const commentUpdateData = {
         commentId: Number(comment.commentId),
         form: formData,
       };
-      updateComment.mutate(postUpdateData, {
+      updateComment.mutate(commentUpdateData, {
         onSuccess: () => {
           if (toggleEditMode) toggleEditMode();
           reset();
