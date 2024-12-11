@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Comment } from '@/types/community';
+import { convertURLtoFile } from '@/utils/convertURLtoFile';
+import { getFileExtension } from '@/utils/getFileExtension';
 import { getFileName } from '@/utils/getFileName';
 
 import useCommentMutation from './useCommentMutation';
@@ -18,7 +20,7 @@ interface UseCommmentFormProps {
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
-export default function useCommmentForm({
+export default function useCommentForm({
   postId,
   comment,
   toggleEditMode,
@@ -77,10 +79,23 @@ export default function useCommmentForm({
     setFileName('');
   };
 
+  const getCurrentFile = async () => {
+    if (file) return file;
+    if (comment?.fileUrl) {
+      const ext = getFileExtension(getFileName(comment.fileUrl));
+      return convertURLtoFile(comment.fileUrl, `comment-file.${ext}`, {
+        headers: { 'Cache-Control': 'no-cache' },
+      });
+    }
+    return null;
+  };
+
   const submitForm: SubmitHandler<ICommentFormInput> = async data => {
     const formData = new FormData();
     formData.append('content', data.content);
-    formData.append('file', file ?? '');
+
+    const currentFile = await getCurrentFile();
+    if (currentFile) formData.append('file', currentFile);
 
     // 댓글 수정
     if (comment) {
