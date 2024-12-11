@@ -39,7 +39,7 @@ interface PostNavigationProps {
 
 function PostNavigation({ category, prevPost, nextPost }: PostNavigationProps) {
   return (
-    <div className={'flex flex-col gap-10'}>
+    <div className={'flex flex-col gap-10 mt-60'}>
       <hr className='border-1 border-gray-300 w-full mt-20' />
       {nextPost && (
         <PostNavLink type={'다음'} category={category} postInfo={nextPost} />

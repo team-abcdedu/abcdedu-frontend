@@ -14,9 +14,9 @@ function useSubClassFileHandler({ fileInfo }: UseFetchSubClassFileInfoProps) {
 
   const { fileData, isLoading, isError, error } = useSubClassFile({ fileId });
 
-  const isPdfFile =
-    !!fileData &&
-    getFileExtension(getFileName(fileData.filePresignedUrl)) === 'pdf';
+  const isPdfFile = fileData?.filePresignedUrl
+    ? getFileExtension(getFileName(fileData.filePresignedUrl)) === 'pdf'
+    : false;
 
   const canAccessFile = user?.role === '관리자' || user?.role === '학생';
   const canAccessTheoryFile = user?.role === '관리자';
