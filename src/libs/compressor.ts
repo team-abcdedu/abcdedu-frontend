@@ -20,10 +20,8 @@ export async function compressImage(
       maxWidth: 880,
       maxHeight: 620,
       success(result) {
-        const webPFile = new File([result], newFileName, {
-          type: 'image/webp',
-        });
-        resolve(webPFile);
+        const compressedFile = new File([result], newFileName);
+        resolve(compressedFile);
       },
       error(err: Error) {
         console.error(err.message);
