@@ -39,7 +39,12 @@ export default function ContactModal({
   return (
     <Modal size='lg' isVisible={isVisible}>
       <Modal.Header>
-        <button type='button' className='block ml-auto' onClick={handleClose}>
+        <button
+          type='button'
+          aria-label='닫기'
+          className='block ml-auto'
+          onClick={handleClose}
+        >
           <X size={24} />
         </button>
       </Modal.Header>

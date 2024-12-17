@@ -6,30 +6,24 @@ export default function useCommentMutation({ postId }: { postId: number }) {
   const queryClient = useQueryClient();
 
   const createComment = useMutation({
-    mutationFn: (content: string) =>
-      communityApi.createComment(postId, content),
+    mutationFn: (form: FormData) => communityApi.createComment(postId, form),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
     onError: error => {
-      alert('오류가 발생했습니다.');
+      alert('댓글 작성 중 오류가 발생했습니다.');
       console.log(error);
     },
   });
 
   const updateComment = useMutation({
-    mutationFn: ({
-      commentId,
-      content,
-    }: {
-      commentId: number;
-      content: string;
-    }) => communityApi.updateComment(commentId, content),
+    mutationFn: ({ commentId, form }: { commentId: number; form: FormData }) =>
+      communityApi.updateComment(commentId, form),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
     onError: error => {
-      alert('오류가 발생했습니다.');
+      alert('댓글 수정 중 오류가 발생했습니다.');
       console.log(error);
     },
   });
@@ -41,7 +35,7 @@ export default function useCommentMutation({ postId }: { postId: number }) {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
     onError: error => {
-      alert('오류가 발생했습니다.');
+      alert('댓글 삭제 중 오류가 발생했습니다.');
       console.log(error);
     },
   });
