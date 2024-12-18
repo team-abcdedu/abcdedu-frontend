@@ -16,12 +16,16 @@ export const classTableColumns: AdminTableColumns<ClassData> = {
   },
 };
 
-export const homeworkTableColumns: AdminTableColumns<HomeworkSummary> = {
-  columnList: ['id', 'title', 'description'],
+export const homeworkTableColumns: AdminTableColumns<
+  HomeworkSummary & { repliesDownload: string }
+> = {
+  columnList: ['id', 'title', 'writer', 'updatedDate', 'repliesDownload'],
   columnLabels: {
     id: 'ID',
     title: '제목',
-    description: '설명',
+    writer: '작성자',
+    updatedDate: '최종 수정일',
+    repliesDownload: '응답 다운로드',
   },
 };
 
