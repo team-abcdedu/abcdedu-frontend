@@ -1,5 +1,5 @@
 import { get, post, put } from '@/libs/api';
-import { HomeworkReplies } from '@/types/homework';
+import { HomeworkSummary } from '@/types/homework';
 
 class AdminHomeworkApi {
   static async createHomework() {
@@ -10,8 +10,25 @@ class AdminHomeworkApi {
     return put(`/admin/homeworks/${homeworkId}`);
   }
 
-  static async getHomeworkReplies({ homeworkId }: { homeworkId: number }) {
-    return get<HomeworkReplies>(`/admin/homeworks/${homeworkId}/replies`);
+  static async getHomeworkList({ page, size }: { page: number; size: number }) {
+    // return get<PaginatedResponse<HomeworkSummary>>(
+    //   `/admin/homeworks?page=${page}&size=${size}`,
+    // );
+    return get<HomeworkSummary[]>(`/admin/homeworks?page=${page}&size=${size}`);
+  }
+
+  static async getHomeworkRepliesExcel({
+    homeworkId,
+    fromDate,
+    toDate,
+  }: {
+    homeworkId: number;
+    fromDate: string;
+    toDate: string;
+  }) {
+    return get(`/admin/homeworks/replies/excel`, {
+      params: { homeworkId, fromDate, toDate },
+    });
   }
 }
 
