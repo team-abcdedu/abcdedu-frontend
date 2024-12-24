@@ -13,11 +13,8 @@ function useHomeworkList({ page = 1, size = 10 }: UseHomeworkListProps) {
     queryFn: () => AdminHomeworkApi.getHomeworkList({ page, size }),
   });
 
-  // const homeworkList = data?.content || [];
-  // const totalElements = data?.totalElements || 0;
-
-  const homeworkList = data;
-  const totalElements = data?.length || 0;
+  const homeworkList = data?.content || [];
+  const totalElements = data?.totalElements || 0;
 
   return { homeworkList, totalElements, isLoading, isError };
 }
