@@ -87,9 +87,10 @@ instance.interceptors.request.use(async config => {
 // Response interceptor
 instance.interceptors.response.use(
   response => {
-    const { result } = response.data;
-
-    return result;
+    if (response.data.result) {
+      return response.data.result;
+    }
+    return response.data;
   },
   async error => {
     if (!error.response) {
