@@ -2,32 +2,33 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
-import useHomework from '@/hooks/homework/useHomework';
+import useHomeworkList from '@/hooks/homework/useHomeworkList';
 import useModal from '@/hooks/useModal';
-import HomeworkRepliesViewModal from '@/pages/Admin/Homework/components/HomeworkRepliesViewModal';
+import RepliesDownloadModal from '@/pages/Admin/Homework/components/RepliesDownloadModal';
+import { HomeworkSummary } from '@/types/homework';
+import { formatDate } from '@/utils/formatDate';
 
 import { homeworkTableColumns } from '../../constants';
 
 function HomeworkTable() {
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
-  const { isVisible, toggleModal } = useModal();
+  const { isVisible: downloadVisible, toggleModal: downloadToggle } =
+    useModal();
   const [selectedHomeworkId, setSelectedHomeworkId] = useState<number | null>(
     null,
   );
 
-  const { homework, isLoading, isError } = useHomework({ homeworkId: 1 });
-  const homeworkList = [{ ...homework, id: 1 }];
-
-  const handleClickRow = (homeworkId: number) => {
-    setSelectedHomeworkId(homeworkId);
-    toggleModal();
-  };
+  const { homeworkList, totalElements, isError, isLoading } = useHomeworkList({
+    page,
+  });
 
   const tableColStyle = (col: string) => {
-    if (col === 'id') return ' w-[15%]';
+    if (col === 'id') return ' w-[10%]';
     if (col === 'title') return ' w-[35%]';
-    if (col === 'description') return ' w-[50%]';
+    if (col === 'writer') return ' w-[15%]';
+    if (col === 'updatedDate') return ' w-[20%]';
+    if (col === 'repliesDownload') return ' w-[15%]';
   };
 
   const tableStatusMessages = () => {
@@ -40,6 +41,32 @@ function HomeworkTable() {
     if (!isLoading && homeworkList.length === 0) {
       return '데이터가 없습니다.';
     }
+  };
+
+  const formatValue = (
+    row: HomeworkSummary,
+    column: keyof HomeworkSummary | 'repliesDownload',
+  ) => {
+    if (column === 'repliesDownload') {
+      const handleClick = () => {
+        setSelectedHomeworkId(row.id);
+        downloadToggle();
+      };
+
+      return (
+        <button
+          type={'button'}
+          className={'py-5 px-10 border-1 rounded border-black'}
+          onClick={handleClick}
+        >
+          다운로드
+        </button>
+      );
+    }
+    if (column === 'updatedDate') {
+      return formatDate(row[column], true);
+    }
+    return row[column];
   };
 
   return (
@@ -66,7 +93,7 @@ function HomeworkTable() {
             isLoading ||
             (!isLoading && homeworkList.length === 0)) && (
             <tr className={'text-center py-5'}>
-              <td colSpan={4}>{tableStatusMessages()}</td>
+              <td colSpan={5}>{tableStatusMessages()}</td>
             </tr>
           )}
 
@@ -74,24 +101,26 @@ function HomeworkTable() {
             homeworkList.map(row => (
               <tr
                 key={row.id}
-                className={'cursor-pointer hover:bg-neutral-200'}
-                onClick={() => handleClickRow(row.id)}
+                className={'hover:bg-neutral-200'}
+                // onClick={() => handleClickRow(row.id)}
               >
                 {homeworkTableColumns.columnList.map(column => (
                   <td key={column} className={'text-center py-5 truncate'}>
-                    {row[column]}
+                    {formatValue(row, column)}
                   </td>
                 ))}
               </tr>
             ))}
         </tbody>
       </table>
-      <Pagination currentPage={page} totalElements={1} />
-      <HomeworkRepliesViewModal
-        homeworkId={selectedHomeworkId}
-        isVisible={isVisible}
-        onClose={toggleModal}
-      />
+      <Pagination currentPage={page} totalElements={totalElements} />
+      {selectedHomeworkId && (
+        <RepliesDownloadModal
+          homeworkId={selectedHomeworkId}
+          isVisible={downloadVisible}
+          onClose={downloadToggle}
+        />
+      )}
     </>
   );
 }
