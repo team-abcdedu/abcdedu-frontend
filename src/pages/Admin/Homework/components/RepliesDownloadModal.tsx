@@ -47,6 +47,7 @@ function RepliesDownloadModal({
         type='button'
         className='absolute top-12 right-12'
         onClick={modalClose}
+        aria-label={'close-modal'}
       >
         <X size={20} />
       </button>
