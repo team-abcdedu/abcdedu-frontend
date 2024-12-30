@@ -77,7 +77,7 @@ function HomeworkTable() {
         }
       >
         <thead className={'bg-slate-300'}>
-          <tr className={''}>
+          <tr>
             {homeworkTableColumns.columnList.map(column => (
               <th
                 key={column}
@@ -99,11 +99,7 @@ function HomeworkTable() {
 
           {homeworkList &&
             homeworkList.map(row => (
-              <tr
-                key={row.id}
-                className={'hover:bg-neutral-200'}
-                // onClick={() => handleClickRow(row.id)}
-              >
+              <tr key={row.id} className={'hover:bg-neutral-200'}>
                 {homeworkTableColumns.columnList.map(column => (
                   <td key={column} className={'text-center py-5 truncate'}>
                     {formatValue(row, column)}
