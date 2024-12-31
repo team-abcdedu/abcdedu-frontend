@@ -2,8 +2,8 @@ import { get, post } from '@/libs/api';
 import { HomeworkAnswer, HomeworkInfo } from '@/types/homework';
 
 class HomeworkApi {
-  static async getHomework({ homeworkId }: { homeworkId: number }) {
-    return get<HomeworkInfo>(`/homeworks/${homeworkId}`);
+  static async getHomework() {
+    return get<HomeworkInfo>(`/homeworks`);
   }
 
   static async postHomework({
