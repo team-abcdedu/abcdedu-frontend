@@ -13,25 +13,30 @@ function useRepliesDownloadForm() {
     handleSubmit,
     reset,
     watch,
-    trigger,
     formState: { errors },
-  } = useForm<IRepliesDownloadForm>();
+  } = useForm<IRepliesDownloadForm>({ mode: 'onChange' });
 
   const fieldRules: FieldRules<IRepliesDownloadForm> = {
     fromDate: {
       required: '날짜를 입력해주세요',
-      onChange: () => trigger(),
     },
     toDate: {
       required: '날짜를 입력해주세요',
       validate: value => {
         const fromDate = watch('fromDate');
-        if (fromDate && new Date(value) < new Date(fromDate)) {
-          return '종료 날짜는 시작 날짜 이후이어야 합니다.';
+        if (fromDate) {
+          const fromDateObj = new Date(fromDate);
+          const toDateObj = new Date(value);
+
+          fromDateObj.setHours(0, 0, 0, 0);
+          toDateObj.setHours(0, 0, 0, 0);
+
+          if (toDateObj < fromDateObj) {
+            return '종료 날짜는 시작 날짜 이후이어야 합니다.';
+          }
         }
         return true;
       },
-      onChange: () => trigger(),
     },
   };
 
