@@ -13,6 +13,7 @@ export interface HomeworkQuestion {
 }
 
 export interface HomeworkInfo {
+  homeworkId: number;
   title: string;
   description: string;
   additionalDescription: string;
