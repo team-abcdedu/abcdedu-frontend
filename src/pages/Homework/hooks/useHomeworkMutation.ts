@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { IHomeworkForm } from '@/pages/Homework/hooks/useHomeworkForm';
 import HomeworkApi from '@/services/homework';
+import { IHomeworkForm } from '@/types/homework';
 
 interface UseHomeworkMutationProps {
   homeworkId: number;
