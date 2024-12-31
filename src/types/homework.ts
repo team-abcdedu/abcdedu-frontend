@@ -24,7 +24,6 @@ export interface HomeworkAnswer {
   answer: string;
 }
 
-export interface HomeworkReplies {
-  questionHeaders: string[];
-  records: string[][];
+export interface IHomeworkForm {
+  [key: string]: string;
 }
