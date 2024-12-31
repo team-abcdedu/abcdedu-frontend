@@ -4,9 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
 import useHomeworkList from '@/hooks/homework/useHomeworkList';
 import useModal from '@/hooks/useModal';
+import HomeworkFormatValue from '@/pages/Admin/Homework/components/HomeworkFormatValue';
 import RepliesDownloadModal from '@/pages/Admin/Homework/components/RepliesDownloadModal';
-import { HomeworkSummary } from '@/types/homework';
-import { formatDate } from '@/utils/formatDate';
 
 import { homeworkTableColumns } from '../../constants';
 
@@ -15,7 +14,7 @@ function HomeworkTable() {
   const page = Number(searchParams.get('page')) || 1;
   const { isVisible: downloadVisible, toggleModal: downloadToggle } =
     useModal();
-  const [selectedHomeworkId, setSelectedHomeworkId] = useState<number | null>(
+  const [downloadHomeworkId, setDownloadHomeworkId] = useState<number | null>(
     null,
   );
 
@@ -24,10 +23,11 @@ function HomeworkTable() {
   });
 
   const tableColStyle = (col: string) => {
+    if (col === 'representative') return ' w-[15%]';
     if (col === 'id') return ' w-[10%]';
     if (col === 'title') return ' w-[35%]';
-    if (col === 'writer') return ' w-[15%]';
-    if (col === 'updatedDate') return ' w-[20%]';
+    if (col === 'writer') return ' w-[10%]';
+    if (col === 'updatedDate') return ' w-[15%]';
     if (col === 'repliesDownload') return ' w-[15%]';
   };
 
@@ -41,32 +41,6 @@ function HomeworkTable() {
     if (!isLoading && homeworkList.length === 0) {
       return '데이터가 없습니다.';
     }
-  };
-
-  const formatValue = (
-    row: HomeworkSummary,
-    column: keyof HomeworkSummary | 'repliesDownload',
-  ) => {
-    if (column === 'repliesDownload') {
-      const handleClick = () => {
-        setSelectedHomeworkId(row.id);
-        downloadToggle();
-      };
-
-      return (
-        <button
-          type={'button'}
-          className={'py-5 px-10 border-1 rounded border-black'}
-          onClick={handleClick}
-        >
-          다운로드
-        </button>
-      );
-    }
-    if (column === 'updatedDate') {
-      return formatDate(row[column], true);
-    }
-    return row[column];
   };
 
   return (
@@ -102,7 +76,12 @@ function HomeworkTable() {
               <tr key={row.id} className={'hover:bg-neutral-200'}>
                 {homeworkTableColumns.columnList.map(column => (
                   <td key={column} className={'text-center py-5 truncate'}>
-                    {formatValue(row, column)}
+                    {HomeworkFormatValue({
+                      row,
+                      column,
+                      setDownloadHomeworkId,
+                      downloadToggle,
+                    })}
                   </td>
                 ))}
               </tr>
@@ -110,9 +89,9 @@ function HomeworkTable() {
         </tbody>
       </table>
       <Pagination currentPage={page} totalElements={totalElements} />
-      {selectedHomeworkId && (
+      {downloadHomeworkId && (
         <RepliesDownloadModal
-          homeworkId={selectedHomeworkId}
+          homeworkId={downloadHomeworkId}
           isVisible={downloadVisible}
           onClose={downloadToggle}
         />
