@@ -1,30 +1,20 @@
-import { FieldError, SubmitHandler } from 'react-hook-form';
+import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
 import FormErrorMessage from '@/components/FormErrorMessage';
 import Loader from '@/components/Loader';
+import RequiredMark from '@/components/RequiredMark';
 import { ApiError } from '@/libs/errors';
-import useHomeworkForm, {
-  IHomeworkForm,
-} from '@/pages/Homework/hooks/useHomeworkForm';
 import useHomeworkMutation from '@/pages/Homework/hooks/useHomeworkMutation';
-import { HomeworkQuestion } from '@/types/homework';
+import { HomeworkInfo, IHomeworkForm } from '@/types/homework';
 
-function RedDot() {
-  return (
-    <span className={'font-bold text-red-500'} aria-label={'필수 항목'}>
-      &nbsp;*
-    </span>
-  );
-}
-
-interface HomeworkFormProps {
-  homeworkId: number;
-  questions: HomeworkQuestion[];
-}
-
-function HomeworkForm({ homeworkId, questions }: HomeworkFormProps) {
-  const { register, errors, reset, handleSubmit } = useHomeworkForm();
-  const { mutation } = useHomeworkMutation({ homeworkId });
+function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IHomeworkForm>({ mode: 'onSubmit' });
+  const { mutation } = useHomeworkMutation({ homeworkId: homework.homeworkId });
 
   const onSubmit: SubmitHandler<IHomeworkForm> = data => {
     mutation.mutate(data, {
@@ -54,11 +44,11 @@ function HomeworkForm({ homeworkId, questions }: HomeworkFormProps) {
         className={'w-full min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}
       >
         <div className={`w-full ${formTextStyle} font-semibold`}>
-          <RedDot /> 표시는 필수 입력 항목입니다.
+          <RequiredMark /> 표시는 필수 입력 항목입니다.
         </div>
 
         <div className={'py-30 flex flex-col gap-40'}>
-          {questions.map(question => (
+          {homework.questionGetResponses.map(question => (
             <label
               key={question.orderNumber}
               htmlFor={`question-${question.orderNumber}`}
@@ -67,7 +57,7 @@ function HomeworkForm({ homeworkId, questions }: HomeworkFormProps) {
               <div className={`w-full flex flex-col gap-20`}>
                 <div className={'font-semibold'}>
                   {question.orderNumber}. {question.content}{' '}
-                  {question.isAnswerRequired && <RedDot />}
+                  {question.isAnswerRequired && <RequiredMark />}
                 </div>
                 <div className={'flex flex-col gap-10 font-light'}>
                   {question.additionalContent.split('\n').map(line => (
