@@ -35,6 +35,10 @@ class AdminHomeworkApi {
       responseType: 'blob',
     });
   }
+
+  static async setRepresentativeHomework(homeworkId: number) {
+    return post('/admin/homeworks/representative', { homeworkId });
+  }
 }
 
 export default AdminHomeworkApi;
