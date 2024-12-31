@@ -1,49 +1,38 @@
-import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
-import useHomework from '@/hooks/homework/useHomework';
 import HomeworkForm from '@/pages/Homework/components/HomeworkForm';
-import HomeworkInfoSection from '@/pages/Homework/components/HomeworkInfoSection';
-import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
+import HomeworkApi from '@/services/homework';
 
-interface HomeworkLayoutProps {
-  homeworkId: number;
-}
-
-function HomeworkLayout({ homeworkId }: HomeworkLayoutProps) {
-  const { homework, isLoading } = useHomework({ homeworkId });
-
-  if (isLoading) {
-    return <HomeworkLoading />;
-  }
+function HomeworkLayout() {
+  const { data: homework } = useQuery({
+    queryKey: ['homework'],
+    queryFn: () => HomeworkApi.getHomework(),
+  });
 
   if (!homework) {
-    return (
-      <div className='flex-col-center h-[500px] gap-10 py-120'>
-        <p className='text-center'>과제 정보가 없습니다.</p>
-        <Link
-          to={'/'}
-          className={
-            'px-12 py-6 bg-primary-400 rounded-[20px] text-14 text-white'
-          }
-        >
-          홈으로
-        </Link>
-      </div>
-    );
+    return null;
   }
 
   return (
     <div className={'w-full h-full'}>
-      <HomeworkInfoSection
-        title={homework.title}
-        description={homework.description}
-        additionalDescription={homework.additionalDescription}
-      />
-
-      <HomeworkForm
-        homeworkId={homeworkId}
-        questions={homework.questionGetResponses}
-      />
+      <div
+        className={
+          'w-full min-h-[600px] px-30 flex-col-center gap-40 text-center break-keep'
+        }
+      >
+        <h1 className={'w-full'}>
+          <div className={'text-30 md:text-50 font-bold text-primary-300'}>
+            {homework.title}
+          </div>
+        </h1>
+        <h2 className={`w-full text-18 md:text-22 font-semibold`}>
+          {homework.description}
+        </h2>
+        <p className={`w-full text-16 md:text-20 whitespace-pre-wrap`}>
+          {homework.additionalDescription}
+        </p>
+      </div>
+      <HomeworkForm homework={homework} />
     </div>
   );
 }
