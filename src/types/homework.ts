@@ -3,6 +3,7 @@ export interface HomeworkSummary {
   title: string;
   updatedDate: string;
   writer: string;
+  isRepresentative: boolean;
 }
 
 export interface HomeworkQuestion {
