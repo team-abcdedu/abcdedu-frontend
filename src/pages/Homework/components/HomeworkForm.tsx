@@ -4,8 +4,9 @@ import FormErrorMessage from '@/components/FormErrorMessage';
 import Loader from '@/components/Loader';
 import RequiredMark from '@/components/RequiredMark';
 import { ApiError } from '@/libs/errors';
-import useHomeworkMutation from '@/pages/Homework/hooks/useHomeworkMutation';
 import { HomeworkInfo, IHomeworkForm } from '@/types/homework';
+
+import useHomeworkMutation from '../hooks/useHomeworkMutation';
 
 function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
   const {

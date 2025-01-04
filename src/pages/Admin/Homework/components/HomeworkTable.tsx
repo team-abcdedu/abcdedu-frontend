@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
-import useHomeworkList from '@/hooks/homework/useHomeworkList';
 import useModal from '@/hooks/useModal';
-import HomeworkFormatValue from '@/pages/Admin/Homework/components/HomeworkFormatValue';
-import RepliesDownloadModal from '@/pages/Admin/Homework/components/RepliesDownloadModal';
 
 import { homeworkTableColumns } from '../../constants';
+import useHomeworkList from '../hooks/useHomeworkList';
+
+import HomeworkFormatValue from './HomeworkFormatValue';
+import RepliesDownloadModal from './RepliesDownloadModal';
 
 function HomeworkTable() {
   const [searchParams] = useSearchParams();

@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { IRepliesDownloadForm } from '@/pages/Admin/Homework/hooks/useRepliesDownloadForm';
 import AdminHomeworkApi from '@/services/admin/homework';
+
+import { IRepliesDownloadForm } from './useRepliesDownloadForm';
 
 interface UseRepliesDownloadProps {
   homeworkId: number;
