@@ -17,10 +17,10 @@ export const classTableColumns: AdminTableColumns<ClassData> = {
 };
 
 export const homeworkTableColumns: AdminTableColumns<
-  HomeworkSummary & { repliesDownload: string; representative: string }
+  HomeworkSummary & { repliesDownload: string }
 > = {
   columnList: [
-    'representative',
+    'isRepresentative',
     'id',
     'title',
     'writer',
@@ -28,7 +28,7 @@ export const homeworkTableColumns: AdminTableColumns<
     'repliesDownload',
   ],
   columnLabels: {
-    representative: '대표과제',
+    isRepresentative: '대표과제',
     id: 'ID',
     title: '제목',
     writer: '작성자',
