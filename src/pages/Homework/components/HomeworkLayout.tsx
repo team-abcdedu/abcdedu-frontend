@@ -8,7 +8,7 @@ import HomeworkForm from './HomeworkForm';
 function HomeworkLayout() {
   const { data: homework } = useQuery({
     queryKey: ['homework'],
-    queryFn: () => HomeworkApi.getHomework(),
+    queryFn: () => HomeworkApi.getRepresentativeHomework(),
   });
 
   if (!homework) {

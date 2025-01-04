@@ -2,7 +2,7 @@ import { get, post } from '@/libs/api';
 import { HomeworkAnswer, HomeworkInfo } from '@/types/homework';
 
 class HomeworkApi {
-  static async getHomework() {
+  static async getRepresentativeHomework() {
     return get<HomeworkInfo>(`/homeworks`);
   }
 
