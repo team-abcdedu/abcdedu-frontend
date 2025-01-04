@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { queryClient } from '@/libs/react-query';
 import AdminHomeworkApi from '@/services/admin/homework';
 import { HomeworkSummary } from '@/types/homework';
 import { formatDate } from '@/utils/formatDate';
 
 interface FormatValueProps {
   row: HomeworkSummary;
-  column: keyof HomeworkSummary | 'repliesDownload' | 'representative';
+  column: keyof HomeworkSummary | 'repliesDownload';
   setDownloadHomeworkId: Dispatch<SetStateAction<number | null>>;
   downloadToggle: () => void;
 }
@@ -22,7 +23,6 @@ function HomeworkFormatValue({
       setDownloadHomeworkId(row.id);
       downloadToggle();
     };
-
     return (
       <button
         type={'button'}
@@ -33,11 +33,26 @@ function HomeworkFormatValue({
       </button>
     );
   }
-  if (column === 'representative') {
+
+  if (column === 'isRepresentative') {
     const handleClick = async () => {
-      await AdminHomeworkApi.setRepresentativeHomework(row.id);
+      const result = window.confirm('대표과제로 선택합니다.');
+      if (result) {
+        try {
+          await AdminHomeworkApi.setRepresentativeHomework(row.id);
+          alert('대표과제로 선택되었습니다.');
+          await queryClient.invalidateQueries({
+            queryKey: ['homework', 'list'],
+          });
+        } catch (err) {
+          alert('에러가 발생하였습니다.\n잠시 후 다시 시도해주세요.');
+        }
+      }
     };
-    // 대표 과제인 경우 check 표시
+
+    if (row.isRepresentative) {
+      return <span>대표</span>;
+    }
     return (
       <button
         type={'button'}
