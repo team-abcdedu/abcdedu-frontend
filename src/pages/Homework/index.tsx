@@ -1,10 +1,12 @@
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
 import AccessError from '@/components/ErrorBoundary/AccessError';
 import Head from '@/components/Head';
 import { ApiError } from '@/libs/errors';
-import HomeworkForm from '@/pages/Homework/components/HomeworkForm';
+import HomeworkLayout from '@/pages/Homework/components/HomeworkLayout';
+import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
 import useBoundStore from '@/stores';
 
 function Homework() {
@@ -31,7 +33,9 @@ function Homework() {
         }
         onReset={reset}
       >
-        <HomeworkForm homeworkId={1} />
+        <Suspense fallback={<HomeworkLoading />}>
+          <HomeworkLayout />
+        </Suspense>
       </ErrorBoundary>
     </div>
   );

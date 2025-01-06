@@ -1,7 +1,9 @@
 export interface HomeworkSummary {
   id: number;
   title: string;
-  description: string;
+  updatedDate: string;
+  writer: string;
+  isRepresentative: boolean;
 }
 
 export interface HomeworkQuestion {
@@ -11,11 +13,18 @@ export interface HomeworkQuestion {
   isAnswerRequired: boolean;
 }
 
-export type HomeworkInfo = Omit<HomeworkSummary, 'id'> & {
+export interface HomeworkInfo {
+  homeworkId: number;
+  title: string;
+  description: string;
   additionalDescription: string;
   questionGetResponses: HomeworkQuestion[];
-};
+}
 
 export interface HomeworkAnswer {
   answer: string;
+}
+
+export interface IHomeworkForm {
+  [key: string]: string;
 }
