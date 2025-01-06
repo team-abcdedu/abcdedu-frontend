@@ -28,9 +28,6 @@ function useRepliesDownloadForm() {
           const fromDateObj = new Date(fromDate);
           const toDateObj = new Date(value);
 
-          fromDateObj.setHours(0, 0, 0, 0);
-          toDateObj.setHours(0, 0, 0, 0);
-
           if (toDateObj < fromDateObj) {
             return '종료 날짜는 시작 날짜 이후이어야 합니다.';
           }
