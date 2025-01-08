@@ -1,61 +1,24 @@
-import { useState } from 'react';
-
-import MessageModal from '@/components/MessageModal';
-import useModal from '@/hooks/useModal';
-import HomeworkList from '@/pages/Admin/Homework/components/HomeworkList';
-
-import FormBuilder from '../components/FormBuilder';
+// import useModal from '@/hooks/useModal';
+// import CreateHomeworkModal from '@/pages/Admin/Homework/components/CreateHomeworkModal';
+import HomeworkTable from '@/pages/Admin/Homework/components/HomeworkTable';
 
 function Homework() {
-  const [mode, setMode] = useState<'list' | 'register'>('list');
-
-  const { isVisible, toggleModal } = useModal();
-
-  const handleAssignmentRegister = () => {
-    setMode(mode === 'list' ? 'register' : 'list');
-  };
+  // 과제 생성 개발중
+  // const { isVisible, toggleModal } = useModal();
 
   return (
     <div className={'w-full h-full flex flex-col gap-20'}>
       <div className={'w-full flex justify-between pr-50'}>
-        <h1 className={'text-30 font-semibold'}>
-          {mode === 'list' ? '과제 관리' : '과제 등록'}
-        </h1>
-        <button
-          className={'px-10 text-20 border-2 rounded-lg border-neutral-300'}
-          onClick={handleAssignmentRegister}
-        >
-          {mode === 'list' ? '과제 등록' : '과제 관리'}
-        </button>
+        <h1 className={'text-30 font-semibold'}>과제 관리</h1>
+        {/* <button */}
+        {/*  className={'px-10 text-20 border-2 rounded-lg border-neutral-300'} */}
+        {/*  onClick={toggleModal} */}
+        {/* > */}
+        {/*  과제 생성 */}
+        {/* </button> */}
       </div>
-
-      <div className={'w-full h-[calc(100%_-_50px)] overflow-hidden'}>
-        {mode === 'list' ? (
-          <HomeworkList />
-        ) : (
-          <FormBuilder formName={'create-homework-form'} />
-        )}
-      </div>
-
-      {mode === 'register' && (
-        <button
-          className={
-            'h-40 px-20 text-20 border-2 rounded-lg border-neutral-300'
-          }
-          form={'create-homework-form'}
-          onClick={toggleModal}
-          type={'button'}
-        >
-          등록하기
-        </button>
-      )}
-
-      <MessageModal
-        isVisible={isVisible}
-        onClose={toggleModal}
-        type={'error'}
-        message={'현재 사용할 수 없는 기능입니다.'}
-      />
+      <HomeworkTable />
+      {/* <CreateHomeworkModal isVisible={isVisible} onClose={toggleModal} /> */}
     </div>
   );
 }

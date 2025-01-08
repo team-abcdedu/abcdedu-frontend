@@ -1,14 +1,6 @@
-interface HomeworkFormHeaderProps {
-  title: string;
-  description: string;
-  additionalDescription: string;
-}
+import { HomeworkInfo } from '@/types/homework';
 
-function HomeworkFormHeader({
-  title,
-  description,
-  additionalDescription,
-}: HomeworkFormHeaderProps) {
+function HomeworkDescription({ homework }: { homework: HomeworkInfo }) {
   return (
     <div
       className={
@@ -17,17 +9,17 @@ function HomeworkFormHeader({
     >
       <h1 className={'w-full'}>
         <div className={'text-30 md:text-50 font-bold text-primary-300'}>
-          {title}
+          {homework.title}
         </div>
       </h1>
       <h2 className={`w-full text-18 md:text-22 font-semibold`}>
-        {description}
+        {homework.description}
       </h2>
       <p className={`w-full text-16 md:text-20 whitespace-pre-wrap`}>
-        {additionalDescription}
+        {homework.additionalDescription}
       </p>
     </div>
   );
 }
 
-export default HomeworkFormHeader;
+export default HomeworkDescription;
