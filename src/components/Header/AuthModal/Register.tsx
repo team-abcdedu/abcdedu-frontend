@@ -1,12 +1,8 @@
-import FormErrorMessage from '@/components/FormErrorMessage';
+import FormErrorMessage from '@/components/Form/FormErrorMessage';
+import RequiredMark from '@/components/Form/RequiredMark';
 import Modal from '@/components/Modal';
 import useRegisterForm from '@/hooks/auth/useRegisterForm';
 import useBoundStore from '@/stores';
-
-// 필수 항목 *
-function RequiredAsterisk() {
-  return <span className='text-red-500'>*</span>;
-}
 
 export default function Register() {
   const fieldStyle = 'flex flex-col gap-4 [&>label]:text-14';
@@ -27,7 +23,7 @@ export default function Register() {
           <div className='flex flex-col gap-12'>
             <div className={fieldStyle}>
               <label htmlFor='name'>
-                이름 <RequiredAsterisk />
+                이름 <RequiredMark />
               </label>
               <input
                 {...register('name', fieldRules.name)}
@@ -74,7 +70,7 @@ export default function Register() {
             </div>
             <div className={fieldStyle}>
               <label htmlFor='password'>
-                비밀번호 <RequiredAsterisk />
+                비밀번호 <RequiredMark />
               </label>
               <input
                 {...register('password', fieldRules.password)}
@@ -90,7 +86,7 @@ export default function Register() {
             </div>
             <div className={fieldStyle}>
               <label htmlFor='confirmPw'>
-                비밀번호 확인 <RequiredAsterisk />
+                비밀번호 확인 <RequiredMark />
               </label>
               <input
                 {...register('confirmPw', fieldRules.confirmPw)}
