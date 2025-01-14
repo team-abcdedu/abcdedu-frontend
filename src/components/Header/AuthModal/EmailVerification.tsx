@@ -1,4 +1,4 @@
-import FormErrorMessage from '@/components/FormErrorMessage';
+import FormErrorMessage from '@/components/Form/FormErrorMessage';
 import MessageModal from '@/components/MessageModal';
 import Modal from '@/components/Modal';
 import Timer from '@/components/Timer';

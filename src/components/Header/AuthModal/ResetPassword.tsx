@@ -1,4 +1,4 @@
-import FormErrorMessage from '@/components/FormErrorMessage';
+import FormErrorMessage from '@/components/Form/FormErrorMessage';
 import Modal from '@/components/Modal';
 import useResetPassword from '@/hooks/auth/useResetPassword';
 import useBoundStore from '@/stores';

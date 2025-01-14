@@ -1,8 +1,8 @@
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
-import FormErrorMessage from '@/components/FormErrorMessage';
+import FormErrorMessage from '@/components/Form/FormErrorMessage';
+import RequiredMark from '@/components/Form/RequiredMark';
 import Loader from '@/components/Loader';
-import RequiredMark from '@/components/RequiredMark';
 import { ApiError } from '@/libs/errors';
 import { HomeworkInfo, IHomeworkForm } from '@/types/homework';
 

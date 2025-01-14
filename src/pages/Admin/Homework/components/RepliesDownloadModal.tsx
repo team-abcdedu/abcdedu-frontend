@@ -1,6 +1,6 @@
 import { X } from '@phosphor-icons/react';
 
-import FormErrorMessage from '@/components/FormErrorMessage';
+import FormErrorMessage from '@/components/Form/FormErrorMessage';
 import Modal from '@/components/Modal';
 
 import useRepliesDownload from '../hooks/useRepliesDownload';

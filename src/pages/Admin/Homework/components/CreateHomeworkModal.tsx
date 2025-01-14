@@ -7,8 +7,8 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 
+import RequiredMark from '@/components/Form/RequiredMark';
 import Modal from '@/components/Modal';
-import RequiredMark from '@/components/RequiredMark';
 import { HomeworkQuestion } from '@/types/homework';
 
 interface CreateHomeworkModalProps {

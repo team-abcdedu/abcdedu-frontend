@@ -1,7 +1,7 @@
 import { FieldError, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import FormErrorMessage from '@/components/FormErrorMessage';
+import FormErrorMessage from '@/components/Form/FormErrorMessage';
 import Loader from '@/components/Loader';
 import { ApiError } from '@/libs/errors';
 import SurveyFormItem from '@/pages/Survey/components/SurveyFormItem';
