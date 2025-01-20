@@ -41,6 +41,28 @@ function HomeworkQuestions({
     }
   }, [curDivIdx]);
 
+  const appendQuestion = (index: number) => {
+    if (fields.length === index + 1) {
+      append({
+        content: '',
+        isAnswerRequired: false,
+        additionalContent: '',
+      });
+    } else {
+      insert(index + 1, {
+        content: '',
+        isAnswerRequired: false,
+        additionalContent: '',
+      });
+    }
+    setCurDivIdx(index + 1);
+  };
+
+  const removeQuestion = (index: number) => {
+    remove(index);
+    setCurDivIdx(index);
+  };
+
   return (
     <div className={'py-30 flex flex-col gap-40'}>
       {fields.map((item, index) => {
@@ -96,36 +118,19 @@ function HomeworkQuestions({
                 className={'accent-red-500 scale-150'}
               />
             </div>
+
             <div className={`w-full flex-row-center text-white`}>
               {fields.length > 1 && (
                 <button
                   className={'border-1 w-1/3 p-10 bg-primary-100'}
-                  onClick={() => {
-                    remove(index);
-                    setCurDivIdx(index);
-                  }}
+                  onClick={() => removeQuestion(index)}
                 >
                   {index + 1}번 질문 삭제
                 </button>
               )}
               <button
                 className={'border-1 w-1/3 p-10 bg-primary-200'}
-                onClick={() => {
-                  if (fields.length === index + 1) {
-                    append({
-                      content: '',
-                      isAnswerRequired: false,
-                      additionalContent: '',
-                    });
-                  } else {
-                    insert(index + 1, {
-                      content: '',
-                      isAnswerRequired: false,
-                      additionalContent: '',
-                    });
-                  }
-                  setCurDivIdx(index + 1);
-                }}
+                onClick={() => appendQuestion(index)}
               >
                 질문 추가
               </button>
