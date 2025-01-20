@@ -16,7 +16,7 @@ function HomeworkLayout() {
   }
 
   return (
-    <div className={'w-full h-full'}>
+    <div className={'w-full h-full break-keep whitespace-pre-wrap'}>
       <HomeworkDescription homework={homework} />
       <HomeworkForm homework={homework} />
     </div>

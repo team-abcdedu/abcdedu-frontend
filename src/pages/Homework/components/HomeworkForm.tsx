@@ -1,4 +1,5 @@
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
+import { v4 as uuidV4 } from 'uuid';
 
 import FormErrorMessage from '@/components/FormErrorMessage';
 import Loader from '@/components/Loader';
@@ -33,7 +34,7 @@ function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
     });
   };
 
-  const formTextStyle = 'text-16 md:text-20 whitespace-pre-wrap';
+  const formTextStyle = 'text-16 md:text-20';
 
   return (
     <div
@@ -44,7 +45,7 @@ function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
         onSubmit={handleSubmit(onSubmit)}
         className={'w-full min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}
       >
-        <div className={`w-full ${formTextStyle} font-semibold`}>
+        <div className={`w-full font-semibold`}>
           <RequiredMark /> 표시는 필수 입력 항목입니다.
         </div>
 
@@ -56,13 +57,14 @@ function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
               className={'w-full flex flex-col gap-30'}
             >
               <div className={`w-full flex flex-col gap-20`}>
-                <div className={'font-semibold'}>
-                  {question.orderNumber}. {question.content}{' '}
+                <p className={'font-semibold'}>
+                  <span>{question.orderNumber}. </span>
+                  {question.content}{' '}
                   {question.isAnswerRequired && <RequiredMark />}
-                </div>
+                </p>
                 <div className={'flex flex-col gap-10 font-light'}>
                   {question.additionalContent.split('\n').map(line => (
-                    <p key={line} className={'indent-[10px] break-keep'}>
+                    <p key={uuidV4()} className={'indent-[10px]'}>
                       {line}
                     </p>
                   ))}
@@ -91,7 +93,7 @@ function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
 
         <div className={`w-full flex flex-col gap-20`}>
           <div className={'font-semibold'}>[토론 및 발표]</div>
-          <p className={'indent-[10px] font-light whitespace-pre-wrap'}>
+          <p className={'indent-[10px] font-light'}>
             위에서 적은 내용을 친구들과 공유하고 토론해보자. 그리고 생각을
             가다듬고 정리해서 자신 있게 발표해보자.
           </p>

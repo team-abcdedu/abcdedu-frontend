@@ -4,7 +4,7 @@ function HomeworkDescription({ homework }: { homework: HomeworkInfo }) {
   return (
     <div
       className={
-        'w-full min-h-[600px] px-30 flex-col-center gap-40 text-center break-keep'
+        'w-full min-h-[600px] px-30 flex-col-center gap-40 text-center'
       }
     >
       <h1 className={'w-full'}>
@@ -15,7 +15,7 @@ function HomeworkDescription({ homework }: { homework: HomeworkInfo }) {
       <h2 className={`w-full text-18 md:text-22 font-semibold`}>
         {homework.description}
       </h2>
-      <p className={`w-full text-16 md:text-20 whitespace-pre-wrap`}>
+      <p className={`w-full text-16 md:text-20`}>
         {homework.additionalDescription}
       </p>
     </div>
