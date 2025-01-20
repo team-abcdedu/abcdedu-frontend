@@ -1,48 +1,30 @@
-import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
+import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { v4 as uuidV4 } from 'uuid';
 
 import FormErrorMessage from '@/components/FormErrorMessage';
-import Loader from '@/components/Loader';
 import RequiredMark from '@/components/RequiredMark';
-import { ApiError } from '@/libs/errors';
 import { HomeworkInfo, IHomeworkForm } from '@/types/homework';
 
-import useHomeworkMutation from '../hooks/useHomeworkMutation';
+interface HomeworkFormMainProps {
+  homework: HomeworkInfo | undefined;
+  register: UseFormRegister<IHomeworkForm>;
+  errors: FieldErrors<IHomeworkForm>;
+  submitPending: boolean;
+}
 
-function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<IHomeworkForm>({ mode: 'onSubmit' });
-  const { mutation } = useHomeworkMutation({ homeworkId: homework.homeworkId });
-
-  const onSubmit: SubmitHandler<IHomeworkForm> = data => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        reset();
-        alert('과제가 제출되었습니다..');
-      },
-      onError: error => {
-        alert(
-          error instanceof ApiError
-            ? error.message
-            : '과제 제출 중 문제가 발생했습니다.',
-        );
-      },
-    });
-  };
-
+function HomeworkFormMain({
+  homework,
+  register,
+  errors,
+  submitPending,
+}: HomeworkFormMainProps) {
   const formTextStyle = 'text-16 md:text-20';
 
   return (
     <div
       className={`w-full h-max mb-[40px] py-[70px] px-[50px] md:py-[100px] md:px-[170px] flex-col-center gap-70 self-center bg-neutral-100 ${formTextStyle}`}
     >
-      {mutation.isPending && <Loader />}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
+      <div
         className={'w-full min-w-[140px] md:min-w-[700px] flex flex-col gap-20'}
       >
         <div className={`w-full font-semibold`}>
@@ -50,7 +32,7 @@ function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
         </div>
 
         <div className={'py-30 flex flex-col gap-40'}>
-          {homework.questionGetResponses.map(question => (
+          {homework?.questionGetResponses.map(question => (
             <label
               key={question.orderNumber}
               htmlFor={`question-${question.orderNumber}`}
@@ -98,16 +80,16 @@ function HomeworkForm({ homework }: { homework: HomeworkInfo }) {
             가다듬고 정리해서 자신 있게 발표해보자.
           </p>
         </div>
-
         <button
+          type={'submit'}
           className={`min-w-[150px] min-h-[50px] mt-30 self-center rounded-[10px] text-white bg-primary-400`}
-          disabled={mutation.isPending}
+          disabled={submitPending}
         >
           제출하기
         </button>
-      </form>
+      </div>
     </div>
   );
 }
 
-export default HomeworkForm;
+export default HomeworkFormMain;
