@@ -2,9 +2,8 @@ import { X } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
+import HomeworkForm from '@/components/HomeworkForm';
 import Modal from '@/components/Modal';
-import HomeworkDescription from '@/pages/Homework/components/HomeworkDescription';
-import HomeworkForm from '@/pages/Homework/components/HomeworkForm';
 
 import useCreateHomeworkForm, {
   ICreateHomeworkFormValues,
@@ -80,8 +79,10 @@ function CreateHomeworkModal({ isVisible, onClose }: CreateHomeworkModalProps) {
           </form>
 
           <div className={`${modeStyle('preview')} w-full h-full`}>
-            <HomeworkDescription homework={getPreviewHomework()} />
-            <HomeworkForm homework={getPreviewHomework()} />
+            <HomeworkForm
+              mode={'admin-preview'}
+              previewHomework={getPreviewHomework()}
+            />
           </div>
         </div>
       </Modal.Content>
