@@ -1,6 +1,6 @@
 import Skeleton from '@/components/Skeleton';
 
-function HomeworkLoading() {
+function HomeworkFormLoading() {
   return (
     <>
       {/* md 기준 */}
@@ -29,4 +29,4 @@ function HomeworkLoading() {
   );
 }
 
-export default HomeworkLoading;
+export default HomeworkFormLoading;

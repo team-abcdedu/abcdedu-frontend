@@ -4,9 +4,9 @@ import { Suspense } from 'react';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import AccessError from '@/components/ErrorBoundary/AccessError';
 import Head from '@/components/Head';
+import HomeworkForm from '@/components/HomeworkForm';
 import { ApiError } from '@/libs/errors';
-import HomeworkLayout from '@/pages/Homework/components/HomeworkLayout';
-import HomeworkLoading from '@/pages/Homework/components/HomeworkLoading';
+import HomeworkFormLoading from '@/pages/Homework/components/HomeworkFormLoading';
 import useBoundStore from '@/stores';
 
 function Homework() {
@@ -33,8 +33,8 @@ function Homework() {
         }
         onReset={reset}
       >
-        <Suspense fallback={<HomeworkLoading />}>
-          <HomeworkLayout />
+        <Suspense fallback={<HomeworkFormLoading />}>
+          <HomeworkForm mode={'user-submit'} />
         </Suspense>
       </ErrorBoundary>
     </div>
