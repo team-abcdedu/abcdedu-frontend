@@ -29,12 +29,13 @@ function HomeworkQuestions({
     name: 'questions',
   });
 
-  const divArrayRef = useRef<HTMLDivElement[]>([]);
+  // 질문 추가, 삭제 시 해당 질문 div 로 스크롤 이동하기 위한 배열 ref
+  const questionDivArrayRef = useRef<HTMLDivElement[]>([]);
   const [curDivIdx, setCurDivIdx] = useState<number>(0);
 
   useEffect(() => {
-    if (divArrayRef.current.length > 1) {
-      divArrayRef.current[curDivIdx].scrollIntoView({
+    if (questionDivArrayRef.current.length > 1) {
+      questionDivArrayRef.current[curDivIdx].scrollIntoView({
         block: 'center',
         behavior: 'smooth',
       });
@@ -72,7 +73,7 @@ function HomeworkQuestions({
             className={'w-full flex flex-col gap-30'}
             ref={ref => {
               if (ref) {
-                divArrayRef.current[index] = ref;
+                questionDivArrayRef.current[index] = ref;
               }
             }}
             tabIndex={index}
