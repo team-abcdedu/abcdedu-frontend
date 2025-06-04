@@ -9,7 +9,7 @@ export default function AboutUs() {
     <div className='flex-col-center'>
       <div className='w-full sm:h-[900px] h-[528px] flex-col-center sm:gap-60 gap-40 '>
         <h2 className='text-40 text-center font-extrabold leading-[1.3] tracking-tight max-sm:text-28'>
-          60+ 학교가 선택한 <br /> 신뢰받는 국내 최고 커리큘럼
+          60+ 학교가 선택한 <br /> 신뢰받는 국내 최고 커리큘럼!
         </h2>
         <p
           className='w-full max-w-[1193px] text-center px-2 sm:text-15 text-9 bg-gradient-to-r 
