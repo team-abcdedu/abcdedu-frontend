@@ -58,3 +58,9 @@
   | `style` | 코드 의미에 영향을 주지 않는 변경 사항을 추가할 때 사용, 가독성 관련 (e.g. 줄 바꿈) |
 
 <br/>
+### Dev 기능
+
+- React Query Devtools를 이용한 상태 디버깅 지원
+- MSW(Mock Service Worker)를 통한 API 모킹 기능
+- Sentry를 이용한 오류 로깅 및 추적
+- 새로운 개발 전용 엔드포인트 `GET /dev/features` 제공
