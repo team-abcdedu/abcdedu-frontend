@@ -33,7 +33,7 @@ function SurveyForm({ surveyId, questions }: SurveyFormProps) {
       onSuccess: () => {
         reset();
         alert('설문이 제출되었습니다.');
-        navigate('/survey');
+        navigate('/surveys');
       },
       onError: error => {
         alert(

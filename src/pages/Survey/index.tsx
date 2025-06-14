@@ -1,4 +1,5 @@
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
 import AccessError from '@/components/ErrorBoundary/AccessError';
@@ -9,6 +10,7 @@ import useBoundStore from '@/stores';
 
 function Survey() {
   const { reset } = useQueryErrorResetBoundary();
+  const { surveyId } = useParams();
   const user = useBoundStore(state => state.user);
 
   if (!user) {
@@ -31,7 +33,7 @@ function Survey() {
         }
         onReset={reset}
       >
-        <SurveyLayout surveyId={1} />
+        <SurveyLayout surveyId={Number(surveyId) || 1} />
       </ErrorBoundary>
     </div>
   );
